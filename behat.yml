@@ -1,0 +1,16 @@
+default:
+  formatter:
+    name: pretty
+  extensions:
+    Behat\Symfony2Extension\Extension:
+      mink_driver: true
+      kernel:
+        env: test
+        debug: true
+    Behat\MinkExtension\Extension:
+      base_url: '/'
+      default_session: symfony2
+      javascript_session: selenium
+      selenium:
+        host: 33.33.33.1
+        port: 4444
