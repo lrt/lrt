@@ -1,0 +1,58 @@
+{% extends '::admin.html.twig' %}
+
+{% block body %}
+
+<h1>Article list</h1>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Contenu</th>
+            <th>Statut</th>
+            <th>Visibilité</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for entity in entities %}
+        <tr>
+            <td><img width="100" height="55" src="{{ asset('bundles/site/images/no_picture.png') }}" alt=""></td>
+            <td>
+                <div class="space_half">
+                    <img src="{{ asset('bundles/site/images/page.png') }}" alt="Prévisualiser" title="Prévisualiser" class="preview">
+                    <a class="title_preview" title="Modifier" href="{{ path('article_edit', { 'id': entity.id }) }}">{{ entity.id }} - <b>{{ entity.title }}</b></a>
+                </div>
+                {{ entity.content | truncate(100) }}
+                ( posté par  <a title="" href="#">{{ entity.user }}</a> )
+            </td>
+            <td>{{ entity.status }}</td>
+            <td>
+            {% if entity.isPublic == 1 %}
+                Public
+            {% else %}
+                Privé
+            {% endif %}
+            </td>
+            <td>
+                <ul>
+                    <li>
+                        <a href="{{ path('article_show', { 'id': entity.id }) }}">
+                            <button class="btn btn-small btn-primary" type="button">Voir</button>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ path('article_edit', { 'id': entity.id }) }}">
+                            <button class="btn btn-small btn-primary" type="button">Modifier</button>
+                        </a>
+                    </li>
+                </ul>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+<a href="{{ path('article_new') }}"><button class="btn" type="button">Ajouter un article</button></a>
+
+{% endblock %}

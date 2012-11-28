@@ -1,0 +1,52 @@
+{% extends '::admin.html.twig' %}
+
+{% block body %}
+
+<h1>Article creation</h1>
+
+<form action="{{ path('article_create') }}" method="post" {{ form_enctype(form) }} class="form-horizontal">
+    <div class="control-group">
+        {{ form_label(form.title, null, {'label': 'Titre', 'label_attr': {'class': 'control-label'}}) }}
+        <div class="controls">
+        {{ form_widget(form.title) }}
+        </div>
+    </div>
+    <div class="control-group">
+        {{ form_label(form.content, null, {'label': 'Texte', 'label_attr': {'class': 'control-label'}}) }}
+        <div class="controls">
+            {{ form_widget(form.content, { 'attr': {'placeholder': 'titre'} }) }}
+        </div>
+    </div>
+    <div class="control-group">
+        {{ form_label(form.status, null, {'label': 'Statut', 'label_attr': {'class': 'control-label'}}) }}
+        <div class="controls">
+            {{ form_widget(form.status) }}
+        </div>
+    </div>
+    <div class="control-group">
+        {{ form_label(form.isPublic, null, {'label': 'Visible', 'label_attr': {'class': 'control-label'}}) }}
+        <div class="controls">
+            {{ form_widget(form.isPublic) }}
+        </div>
+    </div>
+    <div class="control-group">
+        {{ form_label(form.category, null, {'label': 'Catégorie', 'label_attr': {'class': 'control-label'}}) }}
+        <div class="controls">
+            {{ form_widget(form.category) }}
+        </div>
+    </div>
+    {{ form_rest(form) }}
+    <p>
+        <button type="submit" class="btn btn-primary">Ajouter</button>
+    </p>
+</form>
+
+<ul class="record_actions">
+    <li>
+        <a href="{{ path('article') }}">
+            Back to the list
+        </a>
+    </li>
+</ul>
+
+{% endblock %}

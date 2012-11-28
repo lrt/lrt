@@ -2,12 +2,49 @@
 <html>
     <head>
         <meta charset="UTF-8" />
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
+        <meta name="description" content="description de la page"/>
+        <meta name="keywords" content="mots-clé1, mots-clé2, ..."/>
+        <meta name="robots" content="index,follow" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>{% block title %}{{ sitename }}{% endblock %}</title>
+        {% block stylesheets %}
+        <link rel="stylesheet" href="{{ asset('bundles/site/css/common.css') }}" type="text/css" />
+        {% endblock %}
+        <!--[if lt IE 9]> <script src="{{ asset('bundles/site/js/html5.js') }}"></script> <![endif]-->
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
     <body>
-        {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
+        <div id="fb-root"></div>
+        <div id="wrapper">
+            <!-- Header -->
+            <header>
+                <hgroup>
+                    <h1><a title="Accueil" href="">Longchamp Roller Team</a></h1>
+                </hgroup>
+                <!-- Navigation -->
+                <nav role="navigation">
+                    <ul>
+                        <li><a title="Association" href="">Association</a></li>
+                        <li><a title="Photos" href="">Photos</a></li>
+                        <li><a title="Videos" href="">Vidéos</a></li>
+                        <li><a title="Contact" href="">Contact</a></li>
+                    </ul>
+                </nav>
+                <!-- End  Navigation -->
+            </header>
+            <!-- End Header  -->
+            {% block featured %}{% endblock %}
+
+            <div id="container">
+                <div id="content" class="column">
+                {% block body %}{% endblock %}
+                </div>
+            </div>
+        </div>
+        {% block javascripts %}
+        <script type="text/javascript" src="{{ asset('bundles/site/js/jquery.min.js') }}"></script>
+        <script type="text/javascript" src="http://connect.facebook.net/en_US/all.js#xfbml=1&appId=296297797115446"></script>
+        <script type="text/javascript" src="{{ asset('bundles/site/js/plugins/lazyload/jquery.lazyload.min.js') }}"></script>
+        {% endblock %}
     </body>
 </html>

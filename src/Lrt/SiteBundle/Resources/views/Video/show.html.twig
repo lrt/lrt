@@ -1,0 +1,57 @@
+<h1>Video</h1>
+
+<table class="record_properties">
+    <tbody>
+        <tr>
+            <th>Id</th>
+            <td>{{ entity.id }}</td>
+        </tr>
+        <tr>
+            <th>Title</th>
+            <td>{{ entity.title }}</td>
+        </tr>
+        <tr>
+            <th>Description</th>
+            <td>{{ entity.description }}</td>
+        </tr>
+        <tr>
+            <th>Vimeoid</th>
+            <td>{{ entity.vimeoId }}</td>
+        </tr>
+        <tr>
+            <th>Isautoplay</th>
+            <td>{{ entity.isAutoPlay }}</td>
+        </tr>
+        <tr>
+            <th>Ispublished</th>
+            <td>{{ entity.isPublished }}</td>
+        </tr>
+        <tr>
+            <th>Ispublic</th>
+            <td>{{ entity.isPublic }}</td>
+        </tr>
+        <tr>
+            <th>Ishighlighted</th>
+            <td>{{ entity.isHighlighted }}</td>
+        </tr>
+    </tbody>
+</table>
+
+<ul class="record_actions">
+    <li>
+        <a href="{{ path('video') }}">
+            Back to the list
+        </a>
+    </li>
+    <li>
+        <a href="{{ path('video_edit', { 'id': entity.id }) }}">
+            Edit
+        </a>
+    </li>
+    <li>
+        <form action="{{ path('video_delete', { 'id': entity.id }) }}" method="post">
+            {{ form_widget(delete_form) }}
+            <button type="submit">Delete</button>
+        </form>
+    </li>
+</ul>

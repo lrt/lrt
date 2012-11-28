@@ -1,0 +1,54 @@
+{% extends '::admin.html.twig' %}
+
+{% block body %}
+<h1>User list</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Nom</th>
+            <th>Type</th>
+            <th>Mail</th>
+            <th>Statut</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for entity in entities %}
+        <tr>
+            <td><a href="{{ path('user_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+            <td>{{ entity.firstName }} {{ entity.lastName }}</td>
+            <td>
+                {% for role in entity.roles %}
+                    {% if role != 'ROLE_USER' %}
+                    {{ role | lower | replace({'role_':''}) }}
+                    {% endif %}
+                {% endfor %}
+            </td>
+            <td>{{ entity.email }}</td>
+            <td></td>
+            <td>
+                <ul>
+                    <li>
+                        <a href="{{ path('user_show', { 'id': entity.id }) }}">show</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('user_edit', { 'id': entity.id }) }}">edit</a>
+                    </li>
+                </ul>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+<ul>
+    <li>
+        <a href="{{ path('user_new') }}">
+            Creer un nouvel utilisateur
+        </a>
+    </li>
+</ul>
+{% endblock %}
+

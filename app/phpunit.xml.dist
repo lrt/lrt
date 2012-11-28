@@ -32,10 +32,20 @@
             <exclude>
                 <directory>../src/*/*Bundle/Resources</directory>
                 <directory>../src/*/*Bundle/Tests</directory>
+                <directory>../src/*/*Bundle/DependencyInjection</directory>
                 <directory>../src/*/Bundle/*Bundle/Resources</directory>
                 <directory>../src/*/Bundle/*Bundle/Tests</directory>
+                <directory>../src/*/*Bundle/DataFixtures</directory>
             </exclude>
         </whitelist>
     </filter>
-
+    <logging>
+        <log type="coverage-html" target="../build/logs/coverage" title="LRT"
+             charset="UTF-8" yui="true" highlight="true"
+             lowUpperBound="35" highLowerBound="70"/>
+        <log type="coverage-clover" target="../build/logs/coverage/clover.xml"/>
+        <log type="junit" target="../build/logs/phpunit.xml"
+             logIncompleteSkipped="false"/>
+        <log type="testdox-html" target="../build/logs/testdox.html"/>
+    </logging>
 </phpunit>

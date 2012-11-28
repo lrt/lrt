@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<project name="GGO" basedir="." default="ci">
+<project name="LRT" basedir="." default="ci">
     <property name="builddir" value="${ws}build" />
     <target name="clean">
         <delete dir="${builddir}" />
@@ -9,7 +9,6 @@
         <mkdir dir="${builddir}" />
         <mkdir dir="${builddir}/logs" />
         <mkdir dir="${builddir}/logs/coverage" />
-        <mkdir dir="${builddir}/logs/features" />
         <mkdir dir="${builddir}/docs" />
         <phingcall target="updateDatabase" />
     </target>
