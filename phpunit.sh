@@ -1,6 +1,3 @@
-php app/console doctrine:schema:drop -n --force --env=test
-php app/console doctrine:schema:create -n --env=test
-php app/console doctrine:schema:update --force --env=test
-php app/console doctrine:fixtures:load --env=test -n
+./reset_bdd.sh --env=test
 
-phpunit -c app | cat | grep -v Xdebug
+phpunit -c app $1 $2 $3 $4 | cat 
