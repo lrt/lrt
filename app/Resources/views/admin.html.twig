@@ -35,12 +35,13 @@
             <a class="brand" href="#">Longchamp Roller Team</a>
             <div class="nav-collapse collapse">
                 <p class="navbar-text pull-right">
-                    Logged in as <a href="#" class="navbar-link">Username</a>
+                    <a href="#" class="navbar-link">Username</a>
                 </p>
                 <ul class="nav">
                     <li class="active"><a href="#">Accueil</a></li>
-                    <li><a href="#">Article</a></li>
-                    <li><a href="#">Video</a></li>
+                    <li><a href="{{ path('article') }}">Article</a></li>
+                    <li><a href="{{ path('video') }}">Video</a></li>
+                    <li><a href="{{ path('user') }}">Utilisateurs</a></li>
                 </ul>
             </div><!--/.nav-collapse -->
         </div>
@@ -50,7 +51,7 @@
     <div class="row-fluid">
         <div class="span3">
             <button class="btn btn btn-danger" type="button">Ajouter un article</button>
-        </div><!--/span-->
+        </div>
         <div class="span9">
             <div class="row-fluid">
             {% block body %}{% endblock %}

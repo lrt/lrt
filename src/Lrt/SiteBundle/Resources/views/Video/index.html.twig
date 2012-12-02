@@ -1,34 +1,30 @@
 {% extends '::admin.html.twig' %}
 
 {% block body %}
-
 <h1>Video list</h1>
 
-<table class="table table-bordered">
+<table class="table table-striped">
     <thead>
         <tr>
             <th>Id</th>
             <th>Title</th>
             <th>Description</th>
-            <th>Vimeoid</th>
-            <th>Isautoplay</th>
-            <th>Ispublished</th>
-            <th>Ispublic</th>
-            <th>Ishighlighted</th>
+            <th>Liens Vidéo</th>
+            <th>Status</th>
+            <th>Visibilité</th>
             <th>Actions</th>
         </tr>
     </thead>
     <tbody>
     {% for entity in entities %}
         <tr>
+            <td><img width="100" height="55" src="{{ asset('bundles/site/images/no_picture.png') }}" alt=""></td>
             <td><a href="{{ path('video_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
             <td>{{ entity.title }}</td>
             <td>{{ entity.description }}</td>
             <td>{{ entity.vimeoId }}</td>
-            <td>{{ entity.isAutoPlay }}</td>
             <td>{{ entity.isPublished }}</td>
             <td>{{ entity.isPublic }}</td>
-            <td>{{ entity.isHighlighted }}</td>
             <td>
                 <ul>
                     <li>
@@ -45,5 +41,4 @@
 </table>
 
 <a href="{{ path('video_new') }}"><button class="btn" type="button">Ajouter une vidéo</button></a>
-
 {% endblock %}

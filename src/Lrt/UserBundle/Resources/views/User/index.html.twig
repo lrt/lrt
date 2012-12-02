@@ -1,7 +1,7 @@
 {% extends '::admin.html.twig' %}
 
 {% block body %}
-<h1>User list</h1>
+<h1>Liste des utilisateurs</h1>
 
 <table class="table">
     <thead>
@@ -27,14 +27,24 @@
                 {% endfor %}
             </td>
             <td>{{ entity.email }}</td>
-            <td></td>
+            <td>
+                {% if entity.isEnabled == 1 %}
+                    Activé
+                {% else %}
+                    Non activé
+                {% endif %}
+            </td>
             <td>
                 <ul>
                     <li>
-                        <a href="{{ path('user_show', { 'id': entity.id }) }}">show</a>
+                        <a href="{{ path('user_show', { 'id': entity.id }) }}">
+                            <button class="btn btn-small btn-primary" type="button">Voir</button>
+                        </a>
                     </li>
                     <li>
-                        <a href="{{ path('user_edit', { 'id': entity.id }) }}">edit</a>
+                        <a href="{{ path('user_edit', { 'id': entity.id }) }}">
+                            <button class="btn btn-small btn-primary" type="button">Modifier son compte</button>
+                        </a>
                     </li>
                 </ul>
             </td>
@@ -45,7 +55,7 @@
 
 <ul>
     <li>
-        <a href="{{ path('user_new') }}">
+        <a href="{{ path('user_new') }}" class="btn btn-small btn-primary">
             Creer un nouvel utilisateur
         </a>
     </li>

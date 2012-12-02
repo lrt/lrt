@@ -15,7 +15,7 @@
 	
     <target name="ci" depends="prepare" >
         <phingcall target="phpunit-cover" />
-        <phingcall target="codesniffer" />    
+        <phingcall target="codesniffer" />
         <phingcall target="pmd" />
         <phingcall target="cpd" />
         <phingcall target="pdepend" />
@@ -27,7 +27,7 @@
         <exec command="php app/console doctrine:database:create -n --env=test"/>
         <exec command="php app/console doctrine:schema:update --force --env=test"/>
         <exec command="php app/console doctrine:schema:update --force"/>
-         <exec command="php app/console doctrine:fixtures:load --env=test -n"/>
+        <exec command="php app/console doctrine:fixtures:load --env=test -n"/>
     </target>
     <target name="phpunit-cover">      
         <exec command="phpunit -c app" dir="${ws}"/>

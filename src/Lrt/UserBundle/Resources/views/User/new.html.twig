@@ -1,3 +1,6 @@
+{% extends '::admin.html.twig' %}
+
+{% block body %}
 <h1>User creation</h1>
 
 <form action="{{ path('user_create') }}" method="post" {{ form_enctype(form) }}>
@@ -14,3 +17,4 @@
         </a>
     </li>
 </ul>
+{% endblock %}
