@@ -2,56 +2,72 @@
 
 {% block body %}
 
-<h1>Article list</h1>
-
-<table class="table table-striped">
-    <thead>
-        <tr>
-            <th>#</th>
-            <th>Contenu</th>
-            <th>Statut</th>
-            <th>Visibilité</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-    {% for entity in entities %}
-        <tr>
-            <td><img width="100" height="55" src="{{ asset('bundles/site/images/no_picture.png') }}" alt=""></td>
-            <td>
-                <div class="space_half">
-                    <img src="{{ asset('bundles/site/images/page.png') }}" alt="Prévisualiser" title="Prévisualiser" class="preview">
-                    <a class="title_preview" title="Modifier" href="{{ path('article_edit', { 'id': entity.id }) }}">{{ entity.id }} - <b>{{ entity.title }}</b></a>
-                </div>
-                {{ entity.content | truncate(100) }}
-                ( posté par  <a title="" href="#">{{ entity.user }}</a> )
-            </td>
-            <td></td>
-            <td>
-            {% if entity.isPublic == 1 %}
-                Public
-            {% else %}
-                Privé
-            {% endif %}
-            </td>
-            <td>
-                <ul>
-                    <li>
-                        <a href="{{ path('article_show', { 'id': entity.id }) }}">
-                            <button class="btn btn-small btn-primary" type="button">Voir</button>
+<div class="box">
+    <h4 class="box-header round-top">
+        Gestion des articles
+        <a class="box-btn" title="close">
+            <i class="icon-remove"></i>
+        </a>
+        <a class="box-btn" title="toggle">
+            <i class="icon-minus"></i>
+        </a>
+        <a class="box-btn" title="#box-config-modal" data-toggle="modal" title="config">
+            <i class="icon-cog"></i>
+        </a>
+    </h4>
+    <div class="box-container-toggle">
+        <div class="box-content">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Contenu</th>
+                    <th>Statut</th>
+                    <th>Visibilité</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for entity in entities %}
+                <tr>
+                    <td><img width="100" height="55" src="{{ asset('bundles/site/images/no_picture.png') }}" alt=""></td>
+                    <td>
+                        <div class="space_half">
+                            <img src="{{ asset('bundles/site/images/page.png') }}" alt="Prévisualiser" title="Prévisualiser" class="preview">
+                            <a class="title_preview" title="Modifier" href="{{ path('article_edit', { 'id': entity.id }) }}">{{ entity.id }} - <b>{{ entity.title }}</b></a>
+                        </div>
+                        {{ entity.content | truncate(50) }}
+                        ( posté par  <a title="" href="#">{{ entity.user }}</a> )
+                    </td>
+                    <td></td>
+                    <td>
+                        {% if entity.isPublic == 1 %}
+                        Public
+                        {% else %}
+                        Privé
+                        {% endif %}
+                    </td>
+                    <td>
+                        <a href="{{ path('article_show', { 'id': entity.id }) }}" class="btn btn-small btn-success">
+                            <i class="icon-zoom-in icon-white"></i>
+                            Voir
                         </a>
-                    </li>
-                    <li>
-                        <a href="{{ path('article_edit', { 'id': entity.id }) }}">
-                            <button class="btn btn-small btn-primary" type="button">Modifier</button>
+                        <a href="{{ path('article_edit', { 'id': entity.id }) }}" class="btn btn-small btn-info">
+                            <i class="icon-edit icon-white"></i>
+                            Modifier
                         </a>
-                    </li>
-                </ul>
-            </td>
-        </tr>
-    {% endfor %}
-    </tbody>
-</table>
+                        <a href="{{ path('article_edit', { 'id': entity.id }) }}" class="btn btn-small btn-danger">
+                            <i class="icon-trash icon-white"></i>
+                            Supprimer
+                        </a>
+                    </td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
 
 <a href="{{ path('article_new') }}"><button class="btn" type="button">Ajouter un article</button></a>
 

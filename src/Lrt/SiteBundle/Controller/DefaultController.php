@@ -16,7 +16,7 @@ class DefaultController extends Controller
     public $em;
 
     /**
-     * @Route("/")
+     * @Route("/", name="home")
      * @Template()
      */
     public function indexAction()

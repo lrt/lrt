@@ -1,64 +1,67 @@
 {% extends '::admin.html.twig' %}
 
 {% block body %}
-<h1>Liste des utilisateurs</h1>
-
-<table class="table">
-    <thead>
-        <tr>
-            <th>Id</th>
-            <th>Nom</th>
-            <th>Type</th>
-            <th>Mail</th>
-            <th>Statut</th>
-            <th>Action</th>
-        </tr>
-    </thead>
-    <tbody>
-    {% for entity in entities %}
-        <tr>
-            <td><a href="{{ path('user_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
-            <td>{{ entity.firstName }} {{ entity.lastName }}</td>
-            <td>
-                {% for role in entity.roles %}
-                    {% if role != 'ROLE_USER' %}
-                    {{ role | lower | replace({'role_':''}) }}
-                    {% endif %}
-                {% endfor %}
-            </td>
-            <td>{{ entity.email }}</td>
-            <td>
-                {% if entity.isEnabled == 1 %}
-                    Activé
-                {% else %}
-                    Non activé
-                {% endif %}
-            </td>
-            <td>
-                <ul>
-                    <li>
-                        <a href="{{ path('user_show', { 'id': entity.id }) }}">
-                            <button class="btn btn-small btn-primary" type="button">Voir</button>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{{ path('user_edit', { 'id': entity.id }) }}">
-                            <button class="btn btn-small btn-primary" type="button">Modifier son compte</button>
-                        </a>
-                    </li>
-                </ul>
-            </td>
-        </tr>
-    {% endfor %}
-    </tbody>
-</table>
-
-<ul>
-    <li>
-        <a href="{{ path('user_new') }}" class="btn btn-small btn-primary">
-            Creer un nouvel utilisateur
+<div class="box">
+    <h4 class="box-header round-top">
+        Gestion des utilisateurs
+        <a class="box-btn" title="close">
+            <i class="icon-remove"></i>
         </a>
-    </li>
-</ul>
+        <a class="box-btn" title="toggle">
+            <i class="icon-minus"></i>
+        </a>
+        <a class="box-btn" title="#box-config-modal" data-toggle="modal" title="config">
+            <i class="icon-cog"></i>
+        </a>
+    </h4>
+    <div class="box-container-toggle">
+        <div class="box-content">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Nom</th>
+                        <th>Role</th>
+                        <th>Statut</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for entity in entities %}
+                    <tr>
+                        <td>{{ entity.firstName }} {{ entity.lastName }}</td>
+                        <td>
+                            {% for role in entity.roles %}
+                                {% if role != 'ROLE_USER' %}
+                                {{ role | lower | replace({'role_':''}) }}
+                                {% endif %}
+                            {% endfor %}
+                        </td>
+                        <td>
+                            {% if entity.isEnabled == 1 %}
+                                Activé
+                            {% else %}
+                                Non activé
+                            {% endif %}
+                        </td>
+                        <td>
+                            <a href="{{ path('user_show', { 'id': entity.id }) }}" class="btn btn-small btn-success">
+                                <i class="icon-zoom-in icon-white"></i>
+                                Voir
+                            </a>
+                            <a href="{{ path('user_edit', { 'id': entity.id }) }}" class="btn btn-small btn-info">
+                                <i class="icon-edit icon-white"></i>
+                                Modifier
+                            </a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<a href="{{ path('user_new') }}" class="btn btn-small btn-primary">
+    Creer un nouvel utilisateur
+</a>
 {% endblock %}
 

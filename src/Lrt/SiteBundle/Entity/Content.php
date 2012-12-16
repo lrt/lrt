@@ -2,6 +2,7 @@
 
 namespace Lrt\SiteBundle\Entity;
 
+use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -37,6 +38,7 @@ class Content
     protected $content;
 
     /**
+     * @Gedmo\Slug(fields={"title"})
      * @ORM\Column(type="string")
      * @Assert\NotBlank()
      */
@@ -71,8 +73,6 @@ class Content
     public function setTitle($title)
     {
         $this->title = $title;
-
-        $this->setSlug($this->title);
     }
 
     /**
@@ -113,7 +113,7 @@ class Content
      */
     public function setSlug($slug)
     {
-        return $this->slug = Util::newSlug($slug);
+        return $this->slug = $slug;
     }
 
     /**
