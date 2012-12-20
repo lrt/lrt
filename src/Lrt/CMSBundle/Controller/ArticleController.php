@@ -1,6 +1,6 @@
 <?php
 
-namespace Lrt\SiteBundle\Controller;
+namespace Lrt\CMSBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -10,9 +10,9 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpFoundation\Response;
 use JMS\DiExtraBundle\Annotation as DI;
 use JMS\SecurityExtraBundle\Annotation\Secure;
-use Lrt\SiteBundle\Entity\Article;
-use Lrt\SiteBundle\Form\ArticleHandler;
-use Lrt\SiteBundle\Form\Type\ArticleType;
+use Lrt\CMSBundle\Entity\Article;
+use Lrt\CMSBundle\Form\ArticleHandler;
+use Lrt\CMSBundle\Form\Type\ArticleType;
 
 /**
  * Article controller.
@@ -21,6 +21,7 @@ use Lrt\SiteBundle\Form\Type\ArticleType;
  */
 class ArticleController extends Controller
 {
+
     /** @DI\Inject("security.context") */
     public $sc;
 
@@ -35,7 +36,7 @@ class ArticleController extends Controller
      */
     public function indexAction()
     {
-        $entities = $this->em->getRepository('SiteBundle:Article')->findAll();
+        $entities = $this->em->getRepository('CMSBundle:Article')->findAll();
 
         return array('entities' => $entities);
     }
@@ -48,7 +49,7 @@ class ArticleController extends Controller
      */
     public function showAction($id)
     {
-        $entity = $this->em->getRepository('SiteBundle:Article')->find($id);
+        $entity = $this->em->getRepository('CMSBundle:Article')->find($id);
 
         if (!$entity) {
 
@@ -120,7 +121,7 @@ class ArticleController extends Controller
      */
     public function editAction($id)
     {
-        $entity = $this->em->getRepository('SiteBundle:Article')->find($id);
+        $entity = $this->em->getRepository('CMSBundle:Article')->find($id);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Article entity.');
@@ -145,7 +146,7 @@ class ArticleController extends Controller
      */
     public function updateAction(Request $request, $id)
     {
-        $entity = $this->em->getRepository('SiteBundle:Article')->find($id);
+        $entity = $this->em->getRepository('CMSBundle:Article')->find($id);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Article entity.');
@@ -182,7 +183,7 @@ class ArticleController extends Controller
 
         if ($form->isValid()) {
 
-            $entity = $this->em->getRepository('SiteBundle:Article')->find($id);
+            $entity = $this->em->getRepository('CMSBundle:Article')->find($id);
 
             if (!$entity) {
                 throw $this->createNotFoundException('Unable to find Article entity.');

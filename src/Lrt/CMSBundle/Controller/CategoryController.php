@@ -1,14 +1,14 @@
 <?php
 
-namespace Lrt\SiteBundle\Controller;
+namespace Lrt\CMSBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Lrt\SiteBundle\Entity\Category;
-use Lrt\SiteBundle\Form\Type\CategoryType;
+use Lrt\CMSBundle\Entity\Category;
+use Lrt\CMSBundle\Form\Type\CategoryType;
 
 /**
  * Category controller.
@@ -17,6 +17,7 @@ use Lrt\SiteBundle\Form\Type\CategoryType;
  */
 class CategoryController extends Controller
 {
+
     /**
      * Lists all Category entities.
      *
@@ -27,7 +28,7 @@ class CategoryController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('SiteBundle:Category')->findAll();
+        $entities = $em->getRepository('CMSBundle:Category')->findAll();
 
         return array(
             'entities' => $entities,
@@ -44,7 +45,7 @@ class CategoryController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('SiteBundle:Category')->find($id);
+        $entity = $em->getRepository('CMSBundle:Category')->find($id);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Category entity.');
@@ -112,7 +113,7 @@ class CategoryController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('SiteBundle:Category')->find($id);
+        $entity = $em->getRepository('CMSBundle:Category')->find($id);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Category entity.');
@@ -139,7 +140,7 @@ class CategoryController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('SiteBundle:Category')->find($id);
+        $entity = $em->getRepository('CMSBundle:Category')->find($id);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Category entity.');
@@ -176,7 +177,7 @@ class CategoryController extends Controller
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $entity = $em->getRepository('SiteBundle:Category')->find($id);
+            $entity = $em->getRepository('CMSBundle:Category')->find($id);
 
             if (!$entity) {
                 throw $this->createNotFoundException('Unable to find Category entity.');

@@ -5,7 +5,7 @@ namespace Lrt\SiteBundle\DataFixtures\ORM;
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
-use Lrt\SiteBundle\Entity\Category;
+use Lrt\CMSBundle\Entity\Category;
 
 class LoadArticleCategoryData extends AbstractFixture implements OrderedFixtureInterface
 {

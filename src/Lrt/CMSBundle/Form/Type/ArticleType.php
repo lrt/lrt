@@ -1,6 +1,6 @@
 <?php
 
-namespace Lrt\SiteBundle\Form\Type;
+namespace Lrt\CMSBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -24,7 +24,7 @@ class ArticleType extends AbstractType
                 'choices' => $statusArticleEnum->getData()))
             ->add('isPublic')
             ->add('category','entity', array(
-                'class'=>'Lrt\SiteBundle\Entity\Category',
+                'class'=>'Lrt\CMSBundle\Entity\Category',
                 'property'=>'name',
                 'label' => 'Rubrique :'))
         ;
@@ -33,7 +33,7 @@ class ArticleType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Lrt\SiteBundle\Entity\Article'
+            'data_class' => 'Lrt\CMSBundle\Entity\Article'
         ));
     }
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace Lrt\SiteBundle\Form;
+namespace Lrt\CMSBundle\Form;
 
 use Symfony\Component\Form\Form;
 use Symfony\Component\HttpFoundation\Request;

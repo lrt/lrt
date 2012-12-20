@@ -1,6 +1,6 @@
 <?php
 
-namespace Lrt\SiteBundle\Entity;
+namespace Lrt\CMSBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -8,11 +8,12 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ORM\Entity(repositoryClass="Lrt\SiteBundle\Repository\CategoryRepository")
+ * @ORM\Entity(repositoryClass="Lrt\CMSBundle\Repository\CategoryRepository")
  * @ORM\Table(name="article_cat")
  * @UniqueEntity(fields="name", message="Une catégorie existe déjà avec ce nom.")
  */
-class Category {
+class Category
+{
 
     /**
      * @ORM\GeneratedValue

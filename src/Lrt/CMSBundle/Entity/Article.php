@@ -1,21 +1,20 @@
 <?php
 
-namespace Lrt\SiteBundle\Entity;
+namespace Lrt\CMSBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
-use Lrt\UserBundle\Entity\User;
-use Lrt\SiteBundle\Entity\Category;
+use Lrt\CMSBundle\Entity\Category;
 
 /**
- * @ORM\Entity(repositoryClass="Lrt\SiteBundle\Repository\ArticleRepository")
+ * @ORM\Entity(repositoryClass="Lrt\CMSBundle\Repository\ArticleRepository")
  * @ORM\HasLifecycleCallbacks()
  * @UniqueEntity(fields="title", message="Un article existe déjà avec ce titre.")
  */
 class Article extends Content
 {
+
     /**
      * @ORM\Column(type="integer")
      * @Assert\NotBlank()

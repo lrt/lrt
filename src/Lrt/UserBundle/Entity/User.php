@@ -5,7 +5,7 @@ namespace Lrt\UserBundle\Entity;
 use FOS\UserBundle\Entity\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
-use Lrt\SiteBundle\Entity\Content;
+use Lrt\CMSBundle\Entity\Content;
 
 /**
  * @ORM\Entity(repositoryClass="Lrt\UserBundle\Repository\UserRepository")
@@ -38,7 +38,7 @@ class User extends BaseUser
     protected $plainPassword;
 
     /**
-     * @ORM\OneToMany(targetEntity="\Lrt\SiteBundle\Entity\Content", mappedBy="user")
+     * @ORM\OneToMany(targetEntity="\Lrt\CMSBundle\Entity\Content", mappedBy="user")
      */
     protected $content;
 

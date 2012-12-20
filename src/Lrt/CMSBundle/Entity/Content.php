@@ -1,12 +1,11 @@
 <?php
 
-namespace Lrt\SiteBundle\Entity;
+namespace Lrt\CMSBundle\Entity;
 
 use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
-use Lrt\Common\Classes\Util;
 use Lrt\UserBundle\Entity\User;
 
 /**

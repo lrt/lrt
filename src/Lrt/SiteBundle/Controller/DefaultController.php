@@ -21,7 +21,7 @@ class DefaultController extends Controller
      */
     public function indexAction()
     {
-        $articles = $this->em->getRepository('SiteBundle:Article')->getLatestArticles(5);
+        $articles = $this->em->getRepository('CMSBundle:Article')->getLatestArticles(5);
 
         return array('articles' => $articles);
     }

@@ -1,3 +1,8 @@
+cms:
+    resource: "@CMSBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
 notification:
     resource: "@NotificationBundle/Controller/"
     type:     annotation

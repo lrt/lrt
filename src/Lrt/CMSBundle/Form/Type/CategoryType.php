@@ -1,6 +1,6 @@
 <?php
 
-namespace Lrt\SiteBundle\Form\Type;
+namespace Lrt\CMSBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -18,7 +18,7 @@ class CategoryType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Lrt\SiteBundle\Entity\Category'
+            'data_class' => 'Lrt\CMSBundle\Entity\Category'
         ));
     }
 

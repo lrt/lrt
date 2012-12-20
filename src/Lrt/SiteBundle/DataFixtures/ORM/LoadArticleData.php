@@ -5,7 +5,7 @@ namespace Lrt\SiteBundle\DataFixtures\ORM;
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
-use Lrt\SiteBundle\Entity\Article;
+use Lrt\CMSBundle\Entity\Article;
 use Lrt\SiteBundle\Enum\StatusArticleEnum;
 
 class LoadArticleData extends AbstractFixture implements OrderedFixtureInterface
