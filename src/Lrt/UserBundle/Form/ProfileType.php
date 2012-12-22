@@ -1,28 +1,36 @@
 <?php
 
-namespace Lrt\CMSBundle\Form\Type;
+/**
+ * User: alex
+ * Date: 22/12/12
+ */
+namespace Lrt\UserBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class CategoryType extends AbstractType
+class ProfileType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name', 'text');
+            ->add('username')
+            ->add('email')
+            ->add('firstName')
+            ->add('lastName')
+        ;
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Lrt\CMSBundle\Entity\Category'
+            'data_class' => 'Lrt\UserBundle\Entity\User'
         ));
     }
 
     public function getName()
     {
-        return 'lrt_sitebundle_categorytype';
+        return 'lrt_userbundle_profiletype';
     }
 }

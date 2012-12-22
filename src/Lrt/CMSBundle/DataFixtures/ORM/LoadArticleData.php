@@ -1,6 +1,6 @@
 <?php
 
-namespace Lrt\SiteBundle\DataFixtures\ORM;
+namespace Lrt\CMSBundle\DataFixtures\ORM;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\Common\DataFixtures\AbstractFixture;

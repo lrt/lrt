@@ -1,6 +1,6 @@
 <?php
 
-namespace Lrt\CMSBundle\Tests\Controller;
+namespace Lrt\AdminBundle\Tests\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
@@ -10,6 +10,8 @@ class DefaultControllerTest extends WebTestCase
     {
         $client = static::createClient();
 
-        $crawler = $client->request('GET', '/article');
+        $crawler = $client->request('GET', '/dashboard');
+
+        $this->assertTrue($crawler->filter('html:contains("Dashboard")')->count() > 0);
     }
 }

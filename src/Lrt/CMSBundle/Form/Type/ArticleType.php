@@ -14,20 +14,14 @@ class ArticleType extends AbstractType
         $statusArticleEnum = new StatusArticleEnum();
 
         $builder
-            ->add('title', 'text', array(
-            'attr' => array(
-                'class' => 'monPlaceholder',
-            )))
-            ->add('content', 'textarea', array('required' => true))
-            ->add('status', 'choice', array(
-                'label' => 'Status',
-                'choices' => $statusArticleEnum->getData()))
-            ->add('isPublic')
-            ->add('category','entity', array(
-                'class'=>'Lrt\CMSBundle\Entity\Category',
-                'property'=>'name',
-                'label' => 'Rubrique :'))
-        ;
+            ->add('title', 'text', array('label' => 'Titre', 'attr' => array('class' => 'monPlaceholder',)))
+            ->add('content', 'textarea', array('label' => 'Contenu', 'required' => true))
+            ->add('status', 'choice', array('label' => 'Status','choices' => $statusArticleEnum->getData()))
+            ->add('isPublic', null, array('label' => 'Publique'))
+            ->add('category', 'entity', array(
+            'class' => 'Lrt\CMSBundle\Entity\Category',
+            'property' => 'name',
+            'label' => 'Rubrique :'));
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)

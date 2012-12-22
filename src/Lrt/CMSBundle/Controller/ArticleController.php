@@ -36,9 +36,9 @@ class ArticleController extends Controller
      */
     public function indexAction()
     {
-        $entities = $this->em->getRepository('CMSBundle:Article')->findAll();
+        $articles = $this->em->getRepository('CMSBundle:Article')->findAll();
 
-        return array('entities' => $entities);
+        return array('entities' => $articles);
     }
 
     /**
@@ -49,16 +49,16 @@ class ArticleController extends Controller
      */
     public function showAction($id)
     {
-        $entity = $this->em->getRepository('CMSBundle:Article')->find($id);
+        $article = $this->em->getRepository('CMSBundle:Article')->find($id);
 
-        if (!$entity) {
+        if (!$article) {
 
             return new Response('NOT FOUND', 404);
         }
 
         //$deleteForm = $this->createDeleteForm($id);
 
-        return array('entity' => $entity);
+        return array('entity' => $article);
     }
 
     /**
@@ -69,12 +69,12 @@ class ArticleController extends Controller
      */
     public function newAction()
     {
-        $entity = new Article();
+        $article = new Article();
 
-        $form   = $this->createForm(new ArticleType(), $entity);
+        $form   = $this->createForm(new ArticleType(), $article);
 
         return array(
-            'entity' => $entity,
+            'entity' => $article,
             'form'   => $form->createView(),
         );
     }
