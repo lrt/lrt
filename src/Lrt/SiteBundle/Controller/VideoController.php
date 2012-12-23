@@ -14,6 +14,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use JMS\DiExtraBundle\Annotation as DI;
+use JMS\SecurityExtraBundle\Annotation\Secure;
 use Lrt\SiteBundle\Entity\Video;
 use Lrt\SiteBundle\Form\Type\VideoType;
 
@@ -24,6 +26,10 @@ use Lrt\SiteBundle\Form\Type\VideoType;
  */
 class VideoController extends Controller
 {
+
+    /** @DI\Inject("doctrine.orm.entity_manager") */
+    public $em;
+
     /**
      * Lists all Video entities.
      *
@@ -32,9 +38,7 @@ class VideoController extends Controller
      */
     public function indexAction()
     {
-        $em = $this->getDoctrine()->getManager();
-
-        $entities = $em->getRepository('SiteBundle:Video')->findAll();
+        $entities = $this->em->getRepository('SiteBundle:Video')->findAll();
 
         return array(
             'entities' => $entities,
@@ -49,9 +53,7 @@ class VideoController extends Controller
      */
     public function showAction($id)
     {
-        $em = $this->getDoctrine()->getManager();
-
-        $entity = $em->getRepository('SiteBundle:Video')->find($id);
+        $entity = $this->em->getRepository('SiteBundle:Video')->find($id);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Video entity.');
@@ -96,9 +98,8 @@ class VideoController extends Controller
         $form->bind($request);
 
         if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($entity);
-            $em->flush();
+            $this->em->persist($entity);
+            $this->em->flush();
 
             return $this->redirect($this->generateUrl('video_show', array('id' => $entity->getId())));
         }
@@ -117,9 +118,7 @@ class VideoController extends Controller
      */
     public function editAction($id)
     {
-        $em = $this->getDoctrine()->getManager();
-
-        $entity = $em->getRepository('SiteBundle:Video')->find($id);
+        $entity = $this->em->getRepository('SiteBundle:Video')->find($id);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Video entity.');
@@ -144,9 +143,7 @@ class VideoController extends Controller
      */
     public function updateAction(Request $request, $id)
     {
-        $em = $this->getDoctrine()->getManager();
-
-        $entity = $em->getRepository('SiteBundle:Video')->find($id);
+        $entity = $this->em->getRepository('SiteBundle:Video')->find($id);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Video entity.');
@@ -157,8 +154,8 @@ class VideoController extends Controller
         $editForm->bind($request);
 
         if ($editForm->isValid()) {
-            $em->persist($entity);
-            $em->flush();
+            $this->em->persist($entity);
+            $this->em->flush();
 
             return $this->redirect($this->generateUrl('video_edit', array('id' => $id)));
         }
@@ -182,15 +179,14 @@ class VideoController extends Controller
         $form->bind($request);
 
         if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $entity = $em->getRepository('SiteBundle:Video')->find($id);
+            $entity = $this->em->getRepository('SiteBundle:Video')->find($id);
 
             if (!$entity) {
                 throw $this->createNotFoundException('Unable to find Video entity.');
             }
 
-            $em->remove($entity);
-            $em->flush();
+            $this->em->remove($entity);
+            $this->em->flush();
         }
 
         return $this->redirect($this->generateUrl('video'));
