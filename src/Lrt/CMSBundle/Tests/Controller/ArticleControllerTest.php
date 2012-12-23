@@ -58,4 +58,16 @@ class ArticleControllerTest extends WebTestCase
         $client->request('GET', '/article/99999999/show');
         $this->assertEquals(404, $client->getResponse()->getStatusCode());
     }
+
+    /**
+     * @test
+     * @testdox L'article que l'on veut afficher existe alors on retourne 200.
+     * @group article
+     */
+    public function showWithknownArticleReturns200()
+    {
+        $client = static::createClient();
+        $client->request('GET', '/article/1/show');
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+    }
 }

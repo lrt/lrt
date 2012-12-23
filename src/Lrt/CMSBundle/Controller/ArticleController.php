@@ -45,7 +45,7 @@ class ArticleController extends Controller
      * Finds and displays a Article entity.
      *
      * @Route("/{id}/show", name="article_show")
-     * @Template("SiteBundle:Article:show.html.twig")
+     * @Template("CMSBundle:Article:show.html.twig")
      */
     public function showAction($id)
     {
@@ -55,8 +55,6 @@ class ArticleController extends Controller
 
             return new Response('NOT FOUND', 404);
         }
-
-        //$deleteForm = $this->createDeleteForm($id);
 
         return array('entity' => $article);
     }
@@ -84,9 +82,9 @@ class ArticleController extends Controller
      *
      * @Route("/create", name="article_create")
      * @Method("POST")
-     * @Template("SiteBundle:Article:new.html.twig")
+     * @Template("CMSBundle:Article:new.html.twig")
      */
-    public function createAction(Request $request)
+    public function createAction()
     {
         $user = $this->sc->getToken()->getUser();
 
@@ -142,7 +140,7 @@ class ArticleController extends Controller
      *
      * @Route("/{id}/update", name="article_update")
      * @Method("POST")
-     * @Template("SiteBundle:Article:edit.html.twig")
+     * @Template("CMSBundle:Article:edit.html.twig")
      */
     public function updateAction(Request $request, $id)
     {

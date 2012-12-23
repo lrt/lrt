@@ -41,9 +41,9 @@ This CodeSniffer standard does not yet enforce the following:
 
     <!-- We provide our own subclass of PEAR's ClassComment and FunctionComment sniff, but these will do: -->
     <rule ref="PEAR.Commenting.InlineComment"/>
-	 <rule ref="PEAR.Commenting.FileComment"/>
-	 <rule ref="PEAR.Commenting.FunctionComment"/>
-	 <rule ref="PEAR.Commenting.ClassComment"/>
+    <rule ref="PEAR.Commenting.FileComment"/>
+    <rule ref="PEAR.Commenting.FunctionComment"/>
+    <rule ref="PEAR.Commenting.ClassComment"/>
     <!-- Import Zend coding standard (which in turn imports PEAR) -->
     <rule ref="Zend">
         <!-- but exclude their code analyzer -->
@@ -76,15 +76,15 @@ This CodeSniffer standard does not yet enforce the following:
         <severity>0</severity>
     </rule>
 
-   <!-- <rule ref="Symfony2.Commenting.FunctionComment.MissingParamComment">
-        <severity>0</severity>
-    </rule>
+    <!-- <rule ref="Symfony2.Commenting.FunctionComment.MissingParamComment">
+         <severity>0</severity>
+     </rule>
 
-    <rule ref="Symfony2.Commenting.FunctionComment.SpacingBeforeTags">
-        <severity>0</severity>
-    </rule>
+     <rule ref="Symfony2.Commenting.FunctionComment.SpacingBeforeTags">
+         <severity>0</severity>
+     </rule>
 
-    <rule ref="Symfony2.Commenting.ClassComment.SpacingBeforeTags">
-        <message>There should always be a description, followed by a blank line, before the tags of a class comment.</message>
-    </rule>-->
+     <rule ref="Symfony2.Commenting.ClassComment.SpacingBeforeTags">
+         <message>There should always be a description, followed by a blank line, before the tags of a class comment.</message>
+     </rule>-->
 </ruleset>

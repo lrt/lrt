@@ -18,6 +18,8 @@ class ArticleFilterType extends AbstractType
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $builder
+            ->add('title', 'text', array('label' => 'Titre', 'attr' => array('class' => 'monPlaceholder')));
     }
 
     public function getName()

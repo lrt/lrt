@@ -10,7 +10,7 @@ class UserRepository extends EntityRepository
     /**
      * Filtre sur la liste des utilisateurs
      */
-    public function filter($login = '', $nom = '', $type = 'tous', $email = '')
+    public function filter($login = '', $nom = '', $role = 'tous', $email = '')
     {
 
         $em = $this->getEntityManager();
@@ -26,6 +26,10 @@ class UserRepository extends EntityRepository
             $queryStr.= ' AND u.lastName LIKE :nom ';
         }
 
+        if ($role !== null && $role !== '') {
+            $queryStr.= ' AND u.roles LIKE :role ';
+        }
+
         if ($email != null && $email != '') {
             $queryStr.= ' AND u.email LIKE :email ';
         }
@@ -39,6 +43,10 @@ class UserRepository extends EntityRepository
 
         if ($nom != null && $nom != '') {
             $query->setParameter('nom', '%'.$nom.'%');
+        }
+
+        if ($role !== null && $role !== '') {
+            $query->setParameter('role', '%'.$role.'%');
         }
 
         if ($email != null && $email != '') {
