@@ -1,5 +1,10 @@
 {% extends '::admin.html.twig' %}
 
+{% block stylesheets %}
+{{ parent() }}
+<link rel="stylesheet" href="{{ asset('bundles/admin/css/colorbox/colorbox.css') }}" />
+{% endblock %}
+
 {% block body %}
 
 <div class="box">
@@ -68,6 +73,8 @@
         </div>
     </div>
 </div>
+
+<div id="box">test</div>
 
 <a href="{{ path('article_new') }}"><button class="btn" type="button">Ajouter un article</button></a>
 

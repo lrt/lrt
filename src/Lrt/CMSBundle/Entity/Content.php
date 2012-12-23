@@ -38,8 +38,7 @@ class Content
 
     /**
      * @Gedmo\Slug(fields={"title"})
-     * @ORM\Column(type="string")
-     * @Assert\NotBlank()
+     * @ORM\Column(type="string", nullable=true)
      */
     protected $slug;
 

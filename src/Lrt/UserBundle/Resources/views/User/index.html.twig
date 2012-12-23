@@ -16,10 +16,25 @@
     </h4>
     <div class="box-container-toggle">
         <div class="box-content">
-            <table class="table">
+            <div id="filtres">
+                <div id="titreFiltres">
+                    <h4>filtres</h4>
+                </div>
+                <div id="contentFiltres">
+                    <form action="{{ path('user') }}" method="get" class="form-inline">
+                        {{ form_label(form.login) }} {{ form_widget(form.login) }} {{ form_label(form.nom) }} {{ form_widget(form.nom) }} <br><br>
+                        {{ form_label(form.email) }} {{ form_widget(form.email) }} {{ form_label(form.type) }} {{ form_widget(form.type) }}
+                        {{ form_rest(form) }}
+                        <input type="submit" value="afficher">
+                    </form>
+                </div>
+            </div>
+            <hr>
+            <table class="table table-striped">
                 <thead>
                     <tr>
                         <th>Nom</th>
+                        <th>Email</th>
                         <th>Role</th>
                         <th>Statut</th>
                         <th>Action</th>
@@ -28,7 +43,12 @@
                 <tbody>
                 {% for entity in entities %}
                     <tr>
-                        <td>{{ entity.firstName }} {{ entity.lastName }}</td>
+                        <td>
+                            <a href="{{ path('user_show', { 'id': entity.id }) }}">
+                            {{ entity.firstName }} {{ entity.lastName }}
+                            </a>
+                        </td>
+                        <td>{{ entity.email }}</td>
                         <td>
                             {% for role in entity.roles %}
                                 {% if role != 'ROLE_USER' %}
@@ -44,16 +64,14 @@
                             {% endif %}
                         </td>
                         <td>
-                            <a href="{{ path('user_show', { 'id': entity.id }) }}" class="btn btn-small btn-success">
-                                <i class="icon-zoom-in icon-white"></i>
-                                Voir
-                            </a>
                             <a href="{{ path('user_edit', { 'id': entity.id }) }}" class="btn btn-small btn-info">
                                 <i class="icon-edit icon-white"></i>
-                                Modifier
+                                Modifier le compte
                             </a>
                         </td>
                     </tr>
+                {%  else %}
+                    <tr><td>Aucun utilisateur trouvée.</td></tr>
                 {% endfor %}
                 </tbody>
             </table>

@@ -92,9 +92,9 @@ class Category
     /**
      * Remove categories
      *
-     * @param \Lrt\SiteBundle\Entity\Category $categories
+     * @param \Lrt\CMSBundle\Entity\Category $categories
      */
-    public function removeCategory(\Lrt\SiteBundle\Entity\Category $categories)
+    public function removeCategory(\Lrt\CMSBundle\Entity\Category $categories)
     {
         $this->categories->removeElement($categories);
     }

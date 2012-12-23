@@ -1,20 +1,20 @@
 {% extends '::admin.html.twig' %}
 
 {% block body %}
-<h1>User creation</h1>
+<h3 class="heading">User creation</h3>
 
 <form action="{{ path('user_create') }}" method="post" {{ form_enctype(form) }}>
-    {{ form_widget(form) }}
+    {{ form_label(form.username) }}
+    {{ form_widget(form.username) }}
+    {{ form_label(form.firstName) }}
+    {{ form_widget(form.firstName) }}
+    {{ form_label(form.lastName) }}
+    {{ form_widget(form.lastName) }}
+    {{ form_label(form.email) }}
+    {{ form_widget(form.email) }}
+    {{ form_rest(form) }}
     <p>
-        <button type="submit">Create</button>
+        <button type="submit">Valider</button>
     </p>
 </form>
-
-<ul class="record_actions">
-    <li>
-        <a href="{{ path('user') }}">
-            Back to the list
-        </a>
-    </li>
-</ul>
 {% endblock %}

@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Response;
 use JMS\DiExtraBundle\Annotation as DI;
 use JMS\SecurityExtraBundle\Annotation\Secure;
 use Lrt\CMSBundle\Entity\Article;
-use Lrt\CMSBundle\Form\ArticleHandler;
+use Lrt\CMSBundle\Form\Handler\ArticleHandler;
 use Lrt\CMSBundle\Form\Type\ArticleType;
 
 /**
@@ -108,7 +108,7 @@ class ArticleController extends Controller
 
         } else {
 
-           return new \Symfony\Component\BrowserKit\Response('Vous devez être connecté', 404);
+           return new Response('Vous devez être connecté', 404);
 
         }
     }

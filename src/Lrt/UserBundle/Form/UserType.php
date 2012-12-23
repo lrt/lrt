@@ -8,18 +8,23 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class UserType extends AbstractType
 {
+
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('username')
-            ->add('email')
-            ->add('enabled', null, array('required' => false))
-            ->add('password')
-            ->add('locked', null, array('required' => false))
-            ->add('roles')
-            ->add('credentialsExpired', null, array('required' => false))
-            ->add('firstName')
-            ->add('lastName')
+            ->add('firstName', null, array('label' => 'Prénom','attr' => array('class' => 'span4')))
+            ->add('lastName', null, array('label' => 'Nom','attr' => array('class' => 'span4')))
+            ->add('username', null, array('label' => 'Login','attr' => array('class' => 'span4')))
+            ->add('email', 'email', array('label' => 'Email','attr' => array('class' => 'span4')))
+            ->add('plainPassword', 'repeated', array(
+                'type' => 'password',
+                'invalid_message' => 'Les mots de passe ne sont pas identique.',
+                'options' => array('attr' => array('class' => 'password-field')),
+                'required' => true,
+                'first_options' => array('label' => 'Mot de passe'),
+                'second_options' => array('label' => 'Confirmez votre mot de passe'),
+                'attr' => array('class' => 'span4')
+            ))
         ;
     }
 

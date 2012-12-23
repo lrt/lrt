@@ -29,12 +29,18 @@ class UserController extends Controller
      * @Route("/", name="user")
      * @Template()
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
-        $entities = $this->em->getRepository('UserBundle:User')->findAll();
+        $form = $this->createForm($this->container->get('users.form.userFilterType'), array());
+
+        $form->bindRequest($request);
+        $data = $form->getData();
+
+        $users =  $this->em->getRepository('UserBundle:User')->filter($data['login'], $data['nom'], $data['type'], $data['email']);
 
         return array(
-            'entities' => $entities,
+            'entities' => $users,
+            'form' => $form->createView(),
         );
     }
 

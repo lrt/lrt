@@ -13,20 +13,29 @@ use JMS\DiExtraBundle\Annotation as DI;
  */
 class UserFilterType extends AbstractType
 {
+    /** @DI\Inject("translator") */
+    public $tr;
+
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('type', 'choice', array(
-            'required' => false,
-            'choices' => array(
-                '' => 'tous',
-                'ROLE_ADMIN' => 'Administrateur',
-            ),
-        ));
+        $builder->add('login', null, array('required' => false, 'label' => $this->tr->trans('users.form.login')))
+                ->add('nom', null, array('required' => false, 'label' => $this->tr->trans('users.form.nom')))
+                ->add('type', 'choice', array(
+                    'label' => $this->tr->trans('users.form.type'),
+                    'required' => false,
+                    'choices' => array(
+                        '' => 'tous',
+                        'ROLE_ADMIN' => 'Administrateur',
+                    ),
+                ))
+                ->add('email', null, array(
+                    'required' => false,
+                    'label' => $this->tr->trans('users.form.email')));
     }
 
     public function getName()
     {
-        return 'lrt_userbundle_userfiltertype';
+        return 'userbundle_userfiltertype';
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)

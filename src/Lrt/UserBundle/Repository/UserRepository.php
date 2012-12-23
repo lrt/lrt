@@ -7,4 +7,44 @@ use Doctrine\ORM\EntityRepository;
 class UserRepository extends EntityRepository
 {
 
+    /**
+     * Filtre sur la liste des utilisateurs
+     */
+    public function filter($login = '', $nom = '', $type = 'tous', $email = '')
+    {
+
+        $em = $this->getEntityManager();
+
+        $queryStr = 'SELECT u FROM UserBundle:User u
+                    WHERE 1 = 1 ';
+
+        if ($login != null && $login != '') {
+            $queryStr.= ' AND u.username LIKE :login ';
+        }
+
+        if ($nom != null && $nom != '') {
+            $queryStr.= ' AND u.lastName LIKE :nom ';
+        }
+
+        if ($email != null && $email != '') {
+            $queryStr.= ' AND u.email LIKE :email ';
+        }
+
+        $query = $em->createQuery($queryStr);
+
+
+        if ($login != null && $login != '') {
+            $query->setParameter('login', '%'.$login.'%');
+        }
+
+        if ($nom != null && $nom != '') {
+            $query->setParameter('nom', '%'.$nom.'%');
+        }
+
+        if ($email != null && $email != '') {
+            $query->setParameter('email', '%'.$email.'%');
+        }
+
+        return $query->getResult();
+    }
 }

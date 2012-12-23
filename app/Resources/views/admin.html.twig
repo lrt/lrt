@@ -7,17 +7,9 @@
     <meta name="description" content="Site web du Longchamp Roller Team">
     {% block stylesheets %}
     <link rel="stylesheet" href="{{ asset('bundles/site/css/bootstrap.css') }}" type="text/css" media="screen" />
+    <link rel="stylesheet" href="{{ asset('bundles/admin/css/dark.css') }}" type="text/css" media="screen" />
     <link rel="stylesheet" href="{{ asset('bundles/site/css/default.css') }}" type="text/css" media="screen" />
     <link rel="stylesheet" href="{{ asset('bundles/site/css/simplenso.css') }}" type="text/css" media="screen" />
-    <style type="text/css">
-        body {
-            padding-top: 60px;
-            padding-bottom: 40px;
-        }
-        .sidebar-nav {
-            padding: 9px 0;
-        }
-    </style>
     {% endblock %}
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
@@ -33,13 +25,13 @@
             <div class="container-fluid">
                 <a class="brand" href="#">
                     <i class="icon-home icon-white"></i>
-                    Longchamp Roller Team
+                    {{ sitename }}
                 </a>
                 <ul class="nav user_menu pull-right">
                     <li class="divider-vertical hidden-phone hidden-tablet"></li>
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown">
-                            <i class="icon-user icon-white"></i>
+                            <img src="{{ asset('bundles/admin/img/user_avatar.png') }}" alt="" class="user_avatar">
                             John Doe
                             <b class="caret"></b>
                         </a>
@@ -55,12 +47,11 @@
                     <li class="dropdown">
                         <a href="#" data-toggle="dropdown" class="dropdown-toggle">
                             <i class="icon-folder-close icon-white"></i>
-                            Content
+                            Contenu
                             <b class="caret"></b>
                         </a>
                         <ul class="dropdown-menu">
                             <li><a href="{{ path('article') }}">Articles</a></li>
-                            <li><a href="#">Newsletters</a></li>
                         </ul>
                     </li>
                     <li class="dropdown">
@@ -70,8 +61,7 @@
                             <b class="caret"></b>
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a href="#">Membre(s)</a></li>
-                            <li><a href="#">Groups</a></li>
+                            <li><a href="{{ path('user') }}">Membre(s)</a></li>
                         </ul>
                     </li>
                     <li class="dropdown">
@@ -107,39 +97,23 @@
     </header>
     <div id="contentwrapper">
         <div class="main_content">
-            <div class="container-fluid">
-                <div class="row-fluid">
-                    <div class="span2">
-                        <div class="sidebar-nav">
-                            <div class="well" style="padding: 8px 0;">
-                                <ul class="nav nav-list">
-                                    <li class="nav-header">Main</li>
-                                    <li><a href="#"><i class="icon-home"></i> Dashboard</a></li>
-                                    <li><a href="{{ path('article_new')}}"><i class="icon-edit"></i> Add Blog Post</a></li>
-                                    <li class="active"><a href="{{ path('user') }}"><i class="icon-user"></i> Utilisateur(s)</a></li>
-                                    <!--<li><a href="comments.html"><i class="icon-comment"></i> Comments</a></li>
-                                    <li><a href="gallery.html"><i class="icon-picture"></i> Gallery</a></li>
-                                    <li><a href="calendar.html"><i class="icon-calendar"></i> Calendrier</a></li>-->
-                                </ul>
-                            </div>
-                        </div>
+            <div class="row-fluid">
+                <div class="span2"></div>
+                <div class="span10">
+                    <div>
+                        <ul class="breadcrumb">
+                            <li class="first">
+                                <i class="icon-home"></i>
+                                <a href="{{ path('dashboard') }}">Tableau de bord</a> <span class="divider">/</span>
+                            </li>
+                            <li>
+                                <a href="#">Utilisateurs</a> <span class="divider">/</span>
+                            </li>
+                            <li class="active">Liste</li>
+                        </ul>
                     </div>
-                    <div class="span10">
-                        <div>
-                            <ul class="breadcrumb">
-                                <li class="first">
-                                    <i class="icon-home"></i>
-                                    <a href="#">Dashboard</a> <span class="divider">/</span>
-                                </li>
-                                <li>
-                                    <a href="#">Members</a> <span class="divider">/</span>
-                                </li>
-                                <li class="active">List</li>
-                            </ul>
-                        </div>
-                        <div class="row-fluid">
-                        {% block body %}{% endblock %}
-                        </div>
+                    <div class="row-fluid">
+                    {% block body %}{% endblock %}
                     </div>
                 </div>
             </div>
@@ -151,6 +125,7 @@
 <script src="{{ asset('bundles/site/js/jquery.min.js') }}"></script>
 <script src="{{ asset('bundles/site/js/bootstrap.min.js') }}"></script>
 <script src="{{ asset('bundles/site/js/admin/simplenso.js') }}"></script>
+<script src="{{ asset('bundles/admin/js/colorbox/jquery.colorbox.min.js') }}"></script>
 {% endblock %}
 </body>
 </html>

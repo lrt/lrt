@@ -1,7 +1,7 @@
 {% extends '::admin.html.twig' %}
 
 {% block body %}
-<h1>Article creation</h1>
+<h1>Ajouter un article</h1>
 
 <form action="{{ path('article_create') }}" method="post" {{ form_enctype(form) }} class="form-horizontal">
     <div class="control-group">
@@ -48,7 +48,7 @@
 <ul class="record_actions">
     <li>
         <a href="{{ path('article') }}">
-            Back to the list
+            Retour à la liste
         </a>
     </li>
 </ul>

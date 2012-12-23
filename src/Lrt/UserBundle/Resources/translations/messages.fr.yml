@@ -1,0 +1,10 @@
+users:
+    no_user_found: "Aucun utilisateur ne correspond à ces critères."
+    form:
+      status: "Statut :"
+      login: "Login :"
+      nom: "Nom :"
+      email: "Email :"
+      type: "Type :"
+
+        
