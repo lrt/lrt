@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * @category Entity
+ * @author   Alexandre Seiller <alexandre.seiller92@gmail.com>
+ * @license  http://www.gnu.org/copyleft/gpl.html GNU General Public License
+ * @link     http://longchamp-roller-team.com
+ */
+
 namespace Lrt\CMSBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
@@ -11,7 +18,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Entity
  * @ORM\Table(name="article_cat")
  * @UniqueEntity(fields="name", message="Une catégorie existe déjà avec ce nom.")
- */
+ **/
 class Category
 {
 

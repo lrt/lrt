@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * @category Entity
+ * @author   Alexandre Seiller <alexandre.seiller92@gmail.com>
+ * @license  http://www.gnu.org/copyleft/gpl.html GNU General Public License
+ * @link     http://longchamp-roller-team.com
+ */
+
 namespace Lrt\SiteBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
