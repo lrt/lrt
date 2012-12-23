@@ -15,6 +15,19 @@ class ArticleControllerTest extends LrtWebTestCase
 
     /**
      * @test
+     * @testdox Accès à la liste des articles
+     * @group article
+     */
+    public function listArticle()
+    {
+        $client = static::createClient();
+        $this->login($client,'alexandre');
+        $client->request('GET', '/article');
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+    }
+
+    /**
+     * @test
      * @testdox Modifier un article dont les données seraient valide
      * @group cat
      */

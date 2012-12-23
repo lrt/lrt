@@ -39,6 +39,7 @@ class ArticleController extends Controller
      * Lists all Article entities.
      *
      * @Route("/", name="article")
+     * @Secure(roles="ROLE_ADMIN")
      * @Template()
      */
     public function indexAction()

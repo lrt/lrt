@@ -9,11 +9,24 @@
 
 namespace Lrt\CMSBundle\Tests\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use Lrt\SiteBundle\Tests\Controller\LrtWebTestCase;
 
 
-class CategoryControllerTest extends WebTestCase
+class CategoryControllerTest extends LrtWebTestCase
 {
+
+    /**
+     * @test
+     * @testdox Accès à la liste des catégories
+     * @group cat
+     */
+    public function listCategory()
+    {
+        $client = static::createClient();
+        $this->login($client,'alexandre');
+        $client->request('GET', '/category');
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+    }
 
     /**
      * @test

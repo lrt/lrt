@@ -29,9 +29,14 @@ class EnquiryController extends Controller
      * @Route("/", name="contact")
      * @Template()
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
+        $form = $this->createForm($this->container->get('form.enquiryType'), array());
 
+        $form->bindRequest($request);
+        $data = $form->getData();
+
+        return array('form' => $form->createView());
     }
 
 }

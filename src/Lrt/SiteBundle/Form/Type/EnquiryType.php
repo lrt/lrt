@@ -11,7 +11,12 @@ namespace Lrt\SiteBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use JMS\DiExtraBundle\Annotation\Service;
+use JMS\DiExtraBundle\Annotation as DI;
 
+/**
+ * @Service("form.enquiryType")
+ */
 class EnquiryType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
