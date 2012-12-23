@@ -81,7 +81,7 @@ class CategoryController extends Controller
      *
      * @Route("/create", name="category_create")
      * @Method("POST")
-     * @Template("SiteBundle:Category:new.html.twig")
+     * @Template("CMSBundle:Category:new.html.twig")
      */
     public function createAction(Request $request)
     {
@@ -134,7 +134,7 @@ class CategoryController extends Controller
      *
      * @Route("/{id}/update", name="category_update")
      * @Method("POST")
-     * @Template("SiteBundle:Category:edit.html.twig")
+     * @Template("CMSBundle:Category:edit.html.twig")
      */
     public function updateAction(Request $request, $id)
     {

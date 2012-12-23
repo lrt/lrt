@@ -8,11 +8,6 @@ cms:
     type:     annotation
     prefix:   /
 
-notification:
-    resource: "@NotificationBundle/Controller/"
-    type:     annotation
-    prefix:   /
-
 _home:
     pattern:  /
     defaults: { _controller: SiteBundle:Default:index }

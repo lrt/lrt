@@ -28,7 +28,7 @@ class CategoryControllerTest extends WebTestCase
 
         $crawler = $client->submit($form);
 
-        $this->assertTrue($crawler->filter('html:contains("test")')->count() > 0);
+        $this->assertTrue($crawler->filter('td:contains("test")')->count() > 0);
     }
 
     /**
