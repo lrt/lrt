@@ -24,6 +24,7 @@
     <target name="updateDatabase">
         <exec command="chmod -R g+w app/cache"/>
         <exec command="chmod -R a+x vendor"/>
+        <exec command="php app/console cache:clear --env=test --no-debug"/>
         <exec command="php app/console doctrine:database:drop -n --force"/>
         <exec command="php app/console doctrine:database:create -n --env=test"/>
         <exec command="php app/console doctrine:schema:update --force --env=test"/>
