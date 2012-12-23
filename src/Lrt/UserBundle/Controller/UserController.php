@@ -65,11 +65,8 @@ class UserController extends Controller
             throw $this->createNotFoundException('Unable to find User entity.');
         }
 
-        $deleteForm = $this->createDeleteForm($id);
-
         return array(
             'entity'      => $entity,
-            'delete_form' => $deleteForm->createView(),
         );
     }
 
@@ -132,12 +129,10 @@ class UserController extends Controller
         }
 
         $editForm = $this->createForm(new UserType(), $entity);
-        $deleteForm = $this->createDeleteForm($id);
 
         return array(
             'entity'      => $entity,
             'edit_form'   => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
         );
     }
 
@@ -156,7 +151,6 @@ class UserController extends Controller
             throw $this->createNotFoundException('Unable to find User entity.');
         }
 
-        $deleteForm = $this->createDeleteForm($id);
         $editForm = $this->createForm(new UserType(), $entity);
         $editForm->bind($request);
 
@@ -170,7 +164,6 @@ class UserController extends Controller
         return array(
             'entity'      => $entity,
             'edit_form'   => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
         );
     }
 
@@ -180,7 +173,7 @@ class UserController extends Controller
      * @Route("/{id}/delete", name="user_delete")
      * @Method("POST")
      */
-    public function deleteAction(Request $request, $id)
+    /*public function deleteAction(Request $request, $id)
     {
         $form = $this->createDeleteForm($id);
         $form->bind($request);
@@ -197,13 +190,13 @@ class UserController extends Controller
         }
 
         return $this->redirect($this->generateUrl('user'));
-    }
+    }*/
 
-    private function createDeleteForm($id)
+    /*private function createDeleteForm($id)
     {
         return $this->createFormBuilder(array('id' => $id))
             ->add('id', 'hidden')
             ->getForm()
         ;
-    }
+    }*/
 }

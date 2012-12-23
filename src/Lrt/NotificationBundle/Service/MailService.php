@@ -30,20 +30,24 @@ class MailService
             return false;
         }
 
-        $mail = \Swift_Message::newInstance();
+        if ($sender != null) {
 
-        $mail
+            $mail = \Swift_Message::newInstance();
 
-            ->setFrom($sender)
-            ->setTo($receiver)
-            ->setSubject($subject)
-            ->setBody($body)
-            ->setContentType('text/html');
+            $mail
+
+                ->setFrom($sender)
+                ->setTo($receiver)
+                ->setSubject($subject)
+                ->setBody($body)
+                ->setContentType('text/html');
 
 
-        $this->mailer->send($mail);
+            $this->mailer->send($mail);
 
-        return true;
+            return true;
+        }
+        return false;
     }
 
 }

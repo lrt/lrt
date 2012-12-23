@@ -32,8 +32,7 @@ class Content
     protected $id;
 
     /**
-     * @ORM\Column(type="string", unique=true)
-     * @Assert\MinLength(10)
+     * @ORM\Column(type="string")
      */
     protected $title;
 

@@ -17,26 +17,6 @@ class CategoryControllerTest extends WebTestCase
 
     /**
      * @test
-     * @testdox Création d'une nouvelle catégorie après avoir appuyer sur "valider" on renvoie un message.
-     * @group cat
-     */
-    public function addCategory()
-    {
-        $client = static::createClient();
-
-        $crawler = $client->request('GET', '/category/new');
-
-        $form = $crawler->selectButton('Create')->form(array(
-            'lrt_cmsbundle_categorytype[name]' => 'test22',
-        ));
-
-        $crawler = $client->submit($form);
-
-        $this->assertTrue($crawler->filter('td:contains("test22")')->count() > 0);
-    }
-
-    /**
-     * @test
      * @testdox Modifier une catégorie via un id qui n'existe pas
      * @group cat
      */

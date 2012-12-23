@@ -133,12 +133,10 @@ class ArticleController extends Controller
         }
 
         $editForm = $this->createForm(new ArticleType(), $entity);
-        $deleteForm = $this->createDeleteForm($id);
 
         return array(
             'entity'      => $entity,
             'edit_form'   => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
         );
     }
 
@@ -157,7 +155,6 @@ class ArticleController extends Controller
             throw $this->createNotFoundException('Unable to find Article entity.');
         }
 
-        $deleteForm = $this->createDeleteForm($id);
         $editForm = $this->createForm(new ArticleType(), $entity);
 
         $formHandler = new ArticleHandler($editForm, $this->getRequest(), $this->em);
@@ -171,7 +168,6 @@ class ArticleController extends Controller
         return array(
             'entity'      => $entity,
             'edit_form'   => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
         );
     }
 
