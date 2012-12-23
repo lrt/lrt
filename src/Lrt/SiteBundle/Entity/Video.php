@@ -6,7 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
- * @ORM\Entity(repositoryClass="Lrt\SiteBundle\Repository\VideoRepository")
+ * @ORM\Entity
  * @ORM\Table(name="video")
  * @ORM\HasLifecycleCallbacks()
  */

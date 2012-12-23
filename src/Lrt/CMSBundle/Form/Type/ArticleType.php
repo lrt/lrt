@@ -33,6 +33,6 @@ class ArticleType extends AbstractType
 
     public function getName()
     {
-        return 'lrt_sitebundle_articletype';
+        return 'lrt_cmsbundle_articletype';
     }
 }

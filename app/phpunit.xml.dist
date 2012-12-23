@@ -36,6 +36,8 @@
                 <directory>../src/*/Bundle/*Bundle/Resources</directory>
                 <directory>../src/*/Bundle/*Bundle/Tests</directory>
                 <directory>../src/*/*Bundle/DataFixtures</directory>
+                <directory>../src/*/*Bundle/Features</directory>
+                <directory>../src/*/*Bundle/Twig</directory>
             </exclude>
         </whitelist>
     </filter>

@@ -26,14 +26,6 @@ class NotificationService
     public $mailService;
 
     /**
-     *
-     */
-    public function notification()
-    {
-
-    }
-
-    /**
      * Envoie un mail à tous les utilisateurs
      */
     protected function sendNotificationByMail()

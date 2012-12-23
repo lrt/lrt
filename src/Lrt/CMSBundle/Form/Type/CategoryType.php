@@ -23,6 +23,6 @@ class CategoryType extends AbstractType
 
     public function getName()
     {
-        return 'lrt_sitebundle_categorytype';
+        return 'lrt_cmsbundle_categorytype';
     }
 }

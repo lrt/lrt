@@ -23,11 +23,11 @@ class ArticleControllerTest extends WebTestCase
         $crawler = $client->request('GET', '/article/new');
 
         $form = $crawler->selectButton('Ajouter')->form(array(
-            'lrt_sitebundle_articletype[title]' => 154682,
-            'lrt_sitebundle_articletype[content]' => 'Test de contenu',
-            'lrt_sitebundle_articletype[status]' => 'IMMEDIATE',
-            'lrt_sitebundle_articletype[isPublic]' => 1,
-            'lrt_sitebundle_articletype[category]' => 17,
+            'lrt_cmsbundle_articletype[title]' => 154682,
+            'lrt_cmsbundle_articletype[content]' => 'Test de contenu',
+            'lrt_cmsbundle_articletype[status]' => 'IMMEDIATE',
+            'lrt_cmsbundle_articletype[isPublic]' => 1,
+            'lrt_cmsbundle_articletype[category]' => 1,
         ));
 
         $crawler = $client->submit($form);
