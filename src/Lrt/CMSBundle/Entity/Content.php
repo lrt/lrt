@@ -13,7 +13,7 @@ use Lrt\UserBundle\Entity\User;
  * @ORM\Table(name="content")
  * @ORM\InheritanceType("SINGLE_TABLE")
  * @ORM\DiscriminatorColumn(name="type", type="string")
- * @ORM\DiscriminatorMap({"article" = "Article", "page" = "Page"})
+ * @ORM\DiscriminatorMap({"article" = "Article"})
  */
 class Content
 {

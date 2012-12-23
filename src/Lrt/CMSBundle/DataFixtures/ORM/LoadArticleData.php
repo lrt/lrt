@@ -12,26 +12,28 @@ class LoadArticleData extends AbstractFixture implements OrderedFixtureInterface
 {
     public function load(ObjectManager $manager)
     {
-        $this->manager = $manager;
 
-        $statusArticleEnum = new StatusArticleEnum();
-        $statusArticle = array_keys($statusArticleEnum->getData());
+        $this->manager = $manager;
 
         $user = $this->getReference('alexandre1');
         $category = $this->getReference('category1');
 
-        $this->newArticle($category,'Article 1',$statusArticle,$user);
-        $this->newArticle($category,'Article 2',$statusArticle,$user);
-        $this->newArticle($category,'Article 3',$statusArticle,$user);
-        $this->newArticle($category,'Article 4',$statusArticle,$user);
-        $this->newArticle($category,'Article 5',$statusArticle,$user);
-        $this->newArticle($category,'Article 6',$statusArticle,$user);
-        $this->newArticle($category,'Article 7',$statusArticle,$user);
-        $this->newArticle($category,'Article 8',$statusArticle,$user);
+        $this->newArticle($category,'Article 1',$user);
+        $this->newArticle($category,'Article 2',$user);
+        $this->newArticle($category,'Article 3',$user);
+        $this->newArticle($category,'Article 4',$user);
+        $this->newArticle($category,'Article 5',$user);
+        $this->newArticle($category,'Article 6',$user);
+        $this->newArticle($category,'Article 7',$user);
+        $this->newArticle($category,'Article 8',$user);
     }
 
-    protected function newArticle($category, $title, $statusArticle, $user)
+    protected function newArticle($category,$title,$user)
     {
+
+        $statusArticleEnum = new StatusArticleEnum();
+        $statusArticle = array_keys($statusArticleEnum->getData());
+
         $article = new Article();
         $article->setCategory($category);
         $article->setTitle($title);

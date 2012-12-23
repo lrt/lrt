@@ -45,6 +45,32 @@ class CategoryControllerTest extends WebTestCase
 
     /**
      * @test
+     * @testdox Modifier une catégorie dont les données seraient valide
+     * @group cat
+     */
+    public function editCategoryValid()
+    {
+        $client = static::createClient();
+        $this->em = $client->getContainer()->get('doctrine')->getEntityManager();
+
+        $categoryRepository = $this->em->getRepository('CMSBundle:Category');
+        $category = $categoryRepository->findOneBy(array('name' => 'Autres'));
+
+        $crawler = $client->request('GET', '/category/'.$category->getId().'/edit');
+
+        $form = $crawler->selectButton('Edit')->form(array(
+            'lrt_cmsbundle_categorytype[name]' => 'Nouveauté',
+        ));
+
+        $crawler = $client->submit($form);
+
+        $test = $categoryRepository->findOneBy(array('name' => 'Nouveauté'));
+
+        $this->assertNotEmpty($test);
+    }
+
+    /**
+     * @test
      * @testdox La catégorie que l'on veut afficher n'existe pas alors on retourne 404.
      * @group cat
      */

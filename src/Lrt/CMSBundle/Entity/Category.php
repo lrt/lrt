@@ -8,7 +8,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ORM\Entity(repositoryClass="Lrt\CMSBundle\Repository\CategoryRepository")
+ * @ORM\Entity
  * @ORM\Table(name="article_cat")
  * @UniqueEntity(fields="name", message="Une catégorie existe déjà avec ce nom.")
  */

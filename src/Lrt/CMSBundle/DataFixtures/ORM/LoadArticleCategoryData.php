@@ -17,29 +17,25 @@ class LoadArticleCategoryData extends AbstractFixture implements OrderedFixtureI
      */
     public function load(ObjectManager $manager)
     {
-        $category1 = new Category();
-        $category1->setName("Actualités");
 
-        $category2 = new Category();
-        $category2->setName("Association");
+        $this->manager = $manager;
 
-        $category3 = new Category();
-        $category3->setName("Compétition");
+        $this->createCategory('Actualités','category1');
+        $this->createCategory('Association','category2');
+        $this->createCategory('Compétition','category3');
+        $this->createCategory('Autres','category4');
+    }
 
-        $category4 = new Category();
-        $category4->setName("Autres");
+    protected  function createCategory($name,$reference)
+    {
 
-        $manager->persist($category1);
-        $manager->persist($category2);
-        $manager->persist($category3);
-        $manager->persist($category4);
+        $category = new Category();
+        $category->setName($name);
 
-        $this->addReference('category1',$category1);
-        $this->addReference('category2',$category2);
-        $this->addReference('category3',$category3);
-        $this->addReference('category4',$category4);
+        $this->addReference($reference,$category);
 
-        $manager->flush();
+        $this->manager->persist($category);
+        $this->manager->flush();
     }
 
     /**
