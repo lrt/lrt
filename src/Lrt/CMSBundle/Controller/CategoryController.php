@@ -1,12 +1,5 @@
 <?php
 
-/**
- * @category Controller
- * @author   Alexandre Seiller <alexandre.seiller92@gmail.com>
- * @license  http://www.gnu.org/copyleft/gpl.html GNU General Public License
- * @link     http://longchamp-roller-team.com
- */
-
 namespace Lrt\CMSBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
@@ -19,6 +12,11 @@ use Lrt\CMSBundle\Form\Type\CategoryType;
 
 /**
  * Category controller.
+ *
+ * @category Controller
+ * @author   Alexandre Seiller <alexandre.seiller92@gmail.com>
+ * @license  http://www.gnu.org/copyleft/gpl.html GNU General Public License
+ * @link     http://longchamp-roller-team.com
  *
  * @Route("/category")
  */
