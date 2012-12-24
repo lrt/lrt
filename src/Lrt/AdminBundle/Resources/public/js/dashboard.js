@@ -1,6 +1,9 @@
 /* [ ---- Gebo Admin Panel - dashboard ---- ] */
 
 	$(document).ready(function() {
+
+        $(".scroll").mCustomScrollbar();
+
 		//* calendar
 		gebo_calendar.init();
 		//* resize elements on window resize
@@ -26,8 +29,8 @@
 			var calendar = $('#calendar').fullCalendar({
 				header: {
 					left: 'prev,next',
-					center: 'title,today',
-					right: 'month,agendaWeek,agendaDay'
+					center: 'title',
+					right: ''
 				},
 				buttonText: {
 					prev: '<i class="icon-chevron-left cal_prev" />',

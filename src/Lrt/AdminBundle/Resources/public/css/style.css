@@ -874,3 +874,11 @@
         -webkit-box-shadow: 0px 1px 0px rgba(255,255,255,0.3);
         box-shadow: 0px 1px 0px rgba(255,255,255,0.3);
     }
+
+    .dr {
+        height: 5px;
+        margin: 0px 0px 20px;
+        width: 100%;
+        clear: left;
+        background: url("../img/divider.png") left center repeat-x;
+    }

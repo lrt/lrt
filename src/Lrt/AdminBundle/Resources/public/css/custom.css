@@ -1,0 +1,64 @@
+/*Widget USERS*/
+.users .item {
+    clear: both;
+    border-bottom: 1px solid #E4E8ED;
+    padding: 8px 10px;
+    position: relative;
+    cursor: pointer;
+}
+.users .item .image {
+    position: absolute;
+    left: 10px;
+    top: 8px;
+}
+.users .item {
+     cursor: pointer;
+ }
+.users .item img {
+    width: auto	9;
+    height: auto;
+    max-width: 100%;
+    vertical-align: middle;
+    border: 0;
+    -ms-interpolation-mode: bicubic;
+}
+.users .item .info {
+    padding-left: 42px;
+    line-height: 32px;
+}
+.users .item .info .controls {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    opacity: 0.5;
+}
+.users .item .info a {
+    font-size: 11px;
+    color: #005580;
+    font-weight: bold;
+}
+.block.news .item {
+    border-bottom: 1px solid #E4E8ED;
+    border-top: 1px solid white;
+    position: relative;
+    padding-bottom: 5px;
+}
+.block.news .item > a {
+    font-size: 12px;
+    font-weight: bold;
+}
+.block.news .item > p {
+    font-size: 11px;
+    color: #333;
+    margin: 0px 10px;
+}
+.block.news .item > span.date {
+    font-size: 11px;
+    color: #999;
+}
+.block.news .item .controls {
+    position: absolute;
+    right: 5px;
+    bottom: 5px;
+    opacity: 0.5;
+}
