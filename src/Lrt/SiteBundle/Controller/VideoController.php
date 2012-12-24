@@ -59,8 +59,6 @@ class VideoController extends Controller
             throw $this->createNotFoundException('Unable to find Video entity.');
         }
 
-        $deleteForm = $this->createDeleteForm($id);
-
         return array(
             'entity'      => $entity,
             'delete_form' => $deleteForm->createView(),
@@ -125,12 +123,10 @@ class VideoController extends Controller
         }
 
         $editForm = $this->createForm(new VideoType(), $entity);
-        $deleteForm = $this->createDeleteForm($id);
 
         return array(
             'entity'      => $entity,
             'edit_form'   => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
         );
     }
 
@@ -149,7 +145,6 @@ class VideoController extends Controller
             throw $this->createNotFoundException('Unable to find Video entity.');
         }
 
-        $deleteForm = $this->createDeleteForm($id);
         $editForm = $this->createForm(new VideoType(), $entity);
         $editForm->bind($request);
 
@@ -163,7 +158,6 @@ class VideoController extends Controller
         return array(
             'entity'      => $entity,
             'edit_form'   => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
         );
     }
 
