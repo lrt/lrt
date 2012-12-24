@@ -1,5 +1,108 @@
 {% extends '::admin.html.twig' %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('bundles/admin/css/plugins/fullcalendar/fullcalendar_gebo.css') }}" />
+{% endblock %}
+
 {% block body %}
-Dashboard
+<div class="row-fluid">
+    <div class="span12">
+        <ul class="dshb_icoNav clearfix">
+            <li>
+                <a href="javascript:void(0)" style="background-image: url({{ asset('bundles/admin/img/gCons/multi-agents.png') }})">
+                    <span class="label label-info">+10</span> Utilisateurs
+                </a>
+            </li>
+            <li>
+                <a href="javascript:void(0)" style="background-image: url({{ asset('bundles/admin/img/gCons/chat-.png') }})">
+                    Messages
+                </a>
+            </li>
+            <li>
+                <a href="javascript:void(0)" style="background-image: url({{ asset('bundles/admin/img/gCons/edit.png') }})">
+                    Ajouter un article
+                </a>
+            </li>
+            <li>
+                <a href="javascript:void(0)" style="background-image: url({{ asset('bundles/admin/img/gCons/add-item.png') }})">
+                    Ajouter une page
+                </a>
+            </li>
+            <li>
+                <a href="javascript:void(0)" style="background-image: url({{ asset('bundles/admin/img/gCons/configuration.png') }})">
+                    Configuration
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>
+<div class="row-fluid">
+    <div class="span4">
+        <div class="box">
+            <h4 class="box-header round-top">
+                Gestion des utilisateurs
+                <a class="box-btn" title="close">
+                    <i class="icon-remove"></i>
+                </a>
+                <a class="box-btn" title="toggle">
+                    <i class="icon-minus"></i>
+                </a>
+                <a class="box-btn" title="#box-config-modal" data-toggle="modal">
+                    <i class="icon-cog"></i>
+                </a>
+            </h4>
+            <div class="box-container-toggle">
+                <div class="box-content">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="span4">
+        <div class="box">
+            <h4 class="box-header round-top">
+                Derniers articles
+                <a class="box-btn" title="close">
+                    <i class="icon-remove"></i>
+                </a>
+                <a class="box-btn" title="toggle">
+                    <i class="icon-minus"></i>
+                </a>
+                <a class="box-btn" title="#box-config-modal" data-toggle="modal">
+                    <i class="icon-cog"></i>
+                </a>
+            </h4>
+            <div class="box-container-toggle">
+                <div class="box-content">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="span4">
+        <div class="box">
+            <h4 class="box-header round-top">
+                Derniers inscrits
+                <a class="box-btn" title="close">
+                    <i class="icon-remove"></i>
+                </a>
+                <a class="box-btn" title="toggle">
+                    <i class="icon-minus"></i>
+                </a>
+                <a class="box-btn" title="#box-config-modal" data-toggle="modal">
+                    <i class="icon-cog"></i>
+                </a>
+            </h4>
+            <div class="box-container-toggle">
+                <div class="box-content">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('bundles/admin/js/plugins/fullcalendar/fullcalendar.min.js') }}"></script>
+    <script src="{{ asset('bundles/admin/js/dashboard.js') }}"></script>
 {% endblock %}
