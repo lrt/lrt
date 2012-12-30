@@ -36,6 +36,7 @@ class CategoryControllerTest extends LrtWebTestCase
     public function editInvalidCategory()
     {
         $client = static::createClient();
+        $this->login($client,'alexandre');
         $client->request('GET', '/category/99999999/edit');
         $this->assertEquals(404, $client->getResponse()->getStatusCode());
     }
@@ -48,6 +49,7 @@ class CategoryControllerTest extends LrtWebTestCase
     public function editCategoryValid()
     {
         $client = static::createClient();
+        $this->login($client,'alexandre');
         $this->em = $client->getContainer()->get('doctrine')->getEntityManager();
 
         $categoryRepository = $this->em->getRepository('CMSBundle:Category');
@@ -74,6 +76,7 @@ class CategoryControllerTest extends LrtWebTestCase
     public function showWithUnknownCategoryReturns404()
     {
         $client = static::createClient();
+        $this->login($client,'alexandre');
         $client->request('GET', '/category/99999999/show');
         $this->assertEquals(404, $client->getResponse()->getStatusCode());
     }
@@ -86,6 +89,7 @@ class CategoryControllerTest extends LrtWebTestCase
     public function showWithknownCategoryReturns404()
     {
         $client = static::createClient();
+        $this->login($client,'alexandre');
         $client->request('GET', '/category/1/show');
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
     }

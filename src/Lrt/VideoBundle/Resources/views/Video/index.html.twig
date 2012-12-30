@@ -1,0 +1,64 @@
+{% extends '::admin.html.twig' %}
+
+{% block body %}
+<h1>Video list</h1>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Vidéo</th>
+            <th>Liens Vidéo</th>
+            <th>Status</th>
+            <th>Visibilité</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for entity in entities %}
+        <tr>
+            <td><img width="100" height="55" src="{{ asset('bundles/site/images/no_picture.png') }}" alt=""></td>
+            <td>
+                <div class="space_half">
+                    <img src="{{ asset('bundles/site/images/page.png') }}" alt="Prévisualiser" title="Prévisualiser" class="preview">
+                    <a class="title_preview" title="Modifier" href="{{ path('video_edit', { 'id': entity.id }) }}">{{ entity.id }} - <b>{{ entity.title }}</b></a>
+                </div>
+                {{ entity.description | truncate(50) }}
+                ( posté par  <a title="" href="#">{{ entity.user }}</a> )
+            </td>
+            <td>{{ entity.vimeoId }}</td>
+            <td>
+                {% if entity.isPublished == 1 %}
+                    Publié
+                {% else %}
+                    Non publié
+                {% endif %}
+            </td>
+            <td>
+                {% if entity.isPublic == 1 %}
+                    Public
+                {% else %}
+                    Privé
+                {% endif %}
+            </td>
+            <td>
+                <a href="{{ path('video_show', { 'id': entity.id }) }}" class="btn btn-small btn-success">
+                    <i class="icon-zoom-in icon-white"></i>
+                    Voir
+                </a>
+                <a href="{{ path('video_edit', { 'id': entity.id }) }}" class="btn btn-small btn-info">
+                    <i class="icon-edit icon-white"></i>
+                    Modifier
+                </a>
+                <a href="{{ path('video_edit', { 'id': entity.id }) }}" class="btn btn-small btn-danger">
+                    <i class="icon-trash icon-white"></i>
+                    Supprimer
+                </a>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+<a href="{{ path('video_new') }}"><button class="btn" type="button">Ajouter une vidéo</button></a>
+{% endblock %}

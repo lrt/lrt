@@ -28,6 +28,8 @@ class AppKernel extends Kernel
             new Lrt\NotificationBundle\NotificationBundle(),
             new Lrt\CMSBundle\CMSBundle(),
             new Lrt\AdminBundle\AdminBundle(),
+            new Lrt\VideoBundle\VideoBundle(),
+            new Lrt\TeamBundle\TeamBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

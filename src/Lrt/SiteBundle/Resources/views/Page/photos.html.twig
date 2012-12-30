@@ -1,0 +1,23 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+    <div id="galleria"></div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('bundles/site/js/galleria-1.2.8.min.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('bundles/site/js/galleria/plugins/picasa/galleria.picasa.min.js') }}"></script>
+    <script type="text/javascript">
+        Galleria.loadTheme('{{ asset('bundles/site/js/galleria/themes/azur/galleria.azur.min.js') }}');
+        //VERSION PICASA
+        $('#galleria').galleria({
+            height: 562,
+            width: 1000,
+            picasa: 'user:103763082660586563222', // 'galleriajs' is the username and 'Demo' is the album ID
+            picasaOptions: {
+                sort: 'date-posted-asc'
+            }
+        });
+    </script>
+{% endblock%}

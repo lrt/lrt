@@ -32,4 +32,18 @@ class DefaultController extends Controller
 
         return array('articles' => $articles);
     }
+
+    /**
+     * @Route("/information/{page}", name="show_page")
+     * @Template()
+     */
+    public function showAction($page)
+    {
+        $template = sprintf("SiteBundle:Page:%s.html.twig", $page);
+
+        $response = $this->render($template);
+        $response->setSharedMaxAge(600);
+
+        return $response;
+    }
 }

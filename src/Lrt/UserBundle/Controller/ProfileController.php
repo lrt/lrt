@@ -22,7 +22,7 @@ use Lrt\UserBundle\Form\UserType;
 /**
  * Profile controller.
  *
- * @Route("/profile")
+ * @Route("/myProfile")
  */
 class ProfileController extends Controller
 {
@@ -31,7 +31,7 @@ class ProfileController extends Controller
     public $em;
 
     /**
-     * @Route("/myprofile/{id}", name="user_profile")
+     * @Route("/{id}", name="user_profile")
      * @Template()
      */
     public function myProfileAction($id)
@@ -42,6 +42,6 @@ class ProfileController extends Controller
             throw $this->createNotFoundException('Unable to find User entity.');
         }
 
-        return $this->render('UserBundle:Profile:myProfile.html.twig');
+        return $this->render('UserBundle:Profile:myProfile.html.twig', array('profile' => $user));
     }
 }

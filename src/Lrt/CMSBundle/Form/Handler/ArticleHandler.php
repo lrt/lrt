@@ -42,5 +42,3 @@ class ArticleHandler {
         $this->em->flush();
     }
 }
-
-?>

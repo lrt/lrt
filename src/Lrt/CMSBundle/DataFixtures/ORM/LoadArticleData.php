@@ -6,7 +6,7 @@ use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Lrt\CMSBundle\Entity\Article;
-use Lrt\SiteBundle\Enum\StatusArticleEnum;
+use Lrt\CMSBundle\Entity\Content;
 
 class LoadArticleData extends AbstractFixture implements OrderedFixtureInterface
 {
@@ -31,14 +31,11 @@ class LoadArticleData extends AbstractFixture implements OrderedFixtureInterface
     protected function newArticle($category,$title,$user)
     {
 
-        $statusArticleEnum = new StatusArticleEnum();
-        $statusArticle = array_keys($statusArticleEnum->getData());
-
         $article = new Article();
         $article->setCategory($category);
         $article->setTitle($title);
         $article->setContent('is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.');
-        $article->setStatus($statusArticle[rand(0, 1)]);
+        $article->setStatus(Content::IMMEDIATE);
         $article->setIsPublic(1);
         $article->setUser($user);
 

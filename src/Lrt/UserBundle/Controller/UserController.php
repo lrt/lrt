@@ -19,11 +19,7 @@ use JMS\SecurityExtraBundle\Annotation\Secure;
 use Lrt\UserBundle\Entity\User;
 use Lrt\UserBundle\Form\UserType;
 
-/**
- * User controller.
- *
- * @Route("/user")
- */
+
 class UserController extends Controller
 {
 

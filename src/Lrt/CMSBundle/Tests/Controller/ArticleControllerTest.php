@@ -34,6 +34,7 @@ class ArticleControllerTest extends LrtWebTestCase
     public function editArticleValid()
     {
         $client = static::createClient();
+        $this->login($client,'alexandre');
         $this->em = $client->getContainer()->get('doctrine')->getEntityManager();
 
         $articleRepository = $this->em->getRepository('CMSBundle:Article');
@@ -60,6 +61,7 @@ class ArticleControllerTest extends LrtWebTestCase
     public function editInvalidArticle()
     {
         $client = static::createClient();
+        $this->login($client,'alexandre');
         $client->request('GET', '/article/99999999/edit');
         $this->assertEquals(404, $client->getResponse()->getStatusCode());
     }
@@ -72,6 +74,7 @@ class ArticleControllerTest extends LrtWebTestCase
     public function showWithUnknownArticleReturns404()
     {
         $client = static::createClient();
+        $this->login($client,'alexandre');
         $client->request('GET', '/article/99999999/show');
         $this->assertEquals(404, $client->getResponse()->getStatusCode());
     }
@@ -84,6 +87,7 @@ class ArticleControllerTest extends LrtWebTestCase
     public function showWithknownArticleReturns200()
     {
         $client = static::createClient();
+        $this->login($client,'alexandre');
         $client->request('GET', '/article/1/show');
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
     }

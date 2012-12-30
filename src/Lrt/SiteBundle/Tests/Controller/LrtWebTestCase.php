@@ -37,7 +37,6 @@ abstract class LrtWebTestCase extends WebTestCase
     protected function fixturesLoad($em)
     {
         $loader = new \Doctrine\Common\DataFixtures\Loader();
-        $loader->loadFromDirectory('src/Lrt/SiteBundle/DataFixtures/ORM/');
         $loader->loadFromDirectory('src/Lrt/UserBundle/DataFixtures/ORM/');
         $purger = new ORMPurger();
         $executor = new ORMExecutor($em, $purger);

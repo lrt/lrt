@@ -7,6 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use JMS\SecurityExtraBundle\Annotation\Secure;
 use Lrt\CMSBundle\Entity\Category;
 use Lrt\CMSBundle\Form\Type\CategoryType;
 
@@ -65,6 +66,7 @@ class CategoryController extends Controller
      * Displays a form to create a new Category entity.
      *
      * @Route("/new", name="category_new")
+     * @Secure(roles="ROLE_ADMIN")
      * @Template()
      */
     public function newAction()
@@ -82,6 +84,7 @@ class CategoryController extends Controller
      * Creates a new Category entity.
      *
      * @Route("/create", name="category_create")
+     * @Secure(roles="ROLE_ADMIN")
      * @Method("POST")
      * @Template("CMSBundle:Category:new.html.twig")
      */
@@ -109,6 +112,7 @@ class CategoryController extends Controller
      * Displays a form to edit an existing Category entity.
      *
      * @Route("/{id}/edit", name="category_edit")
+     * @Secure(roles="ROLE_ADMIN")
      * @Template()
      */
     public function editAction($id)
@@ -133,6 +137,7 @@ class CategoryController extends Controller
      * Edits an existing Category entity.
      *
      * @Route("/{id}/update", name="category_update")
+     * @Secure(roles="ROLE_ADMIN")
      * @Method("POST")
      * @Template("CMSBundle:Category:edit.html.twig")
      */
@@ -166,6 +171,7 @@ class CategoryController extends Controller
      * Deletes a Category entity.
      *
      * @Route("/{id}/delete", name="category_delete")
+     * @Secure(roles="ROLE_ADMIN")
      * @Method("POST")
      */
     public function deleteAction(Request $request, $id)

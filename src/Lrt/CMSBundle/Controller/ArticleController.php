@@ -71,6 +71,7 @@ class ArticleController extends Controller
      * Displays a form to create a new Article entity.
      *
      * @Route("/new", name="article_new")
+     * @Secure(roles="ROLE_ADMIN")
      * @Template()
      */
     public function newAction()
@@ -89,6 +90,7 @@ class ArticleController extends Controller
      * Creates a new Article entity.
      *
      * @Route("/create", name="article_create")
+     * @Secure(roles="ROLE_ADMIN")
      * @Method("POST")
      * @Template("CMSBundle:Article:new.html.twig")
      */
@@ -123,6 +125,7 @@ class ArticleController extends Controller
      * Displays a form to edit an existing Article entity.
      *
      * @Route("/{id}/edit", name="article_edit")
+     * @Secure(roles="ROLE_ADMIN")
      * @Template()
      */
     public function editAction($id)
@@ -145,6 +148,7 @@ class ArticleController extends Controller
      * Edits an existing Article entity.
      *
      * @Route("/{id}/update", name="article_update")
+     * @Secure(roles="ROLE_ADMIN")
      * @Method("POST")
      * @Template("CMSBundle:Article:edit.html.twig")
      */
@@ -176,6 +180,7 @@ class ArticleController extends Controller
      * Deletes a Article entity.
      *
      * @Route("/{id}/delete", name="article_delete")
+     * @Secure(roles="ROLE_ADMIN")
      * @Method("POST")
      */
     public function deleteAction(Request $request, $id)

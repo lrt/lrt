@@ -10,7 +10,7 @@
     <div class="span12">
         <ul class="dshb_icoNav clearfix">
             <li>
-                <a href="javascript:void(0)" style="background-image: url({{ asset('bundles/admin/img/gCons/multi-agents.png') }})">
+                <a href="{{ path('user') }}" style="background-image: url({{ asset('bundles/admin/img/gCons/multi-agents.png') }})">
                     <span class="label label-info">+10</span> Utilisateurs
                 </a>
             </li>
@@ -20,7 +20,7 @@
                 </a>
             </li>
             <li>
-                <a href="javascript:void(0)" style="background-image: url({{ asset('bundles/admin/img/gCons/edit.png') }})">
+                <a href="{{ path('article_new') }}" style="background-image: url({{ asset('bundles/admin/img/gCons/edit.png') }})">
                     Ajouter un article
                 </a>
             </li>
@@ -76,51 +76,17 @@
                 <div class="box-content">
                     <div class="block news scrollBox">
                         <div class="scroll" style="height: 270px;">
-                            <div class="item">
-                                <a href="#">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</a>
-                                <p>Phasellus ut diam quis dolor mollis tristique. Suspendisse vestibulum convallis felis vitae facilisis. Praesent eu nisi vestibulum erat lacinia sollicitudin. Cras nec risus dolor, ut tristique neque. Donec mauris sapien, pellentesque at porta id, varius eu tellus.</p>
-                                <span class="date">02.11.2012 14:23</span>
-                                <div class="controls">
-                                    <a href="#" class="icon-pencil tip" title="Edit"></a>
-                                    <a href="#" class="icon-trash tip" title="Remove"></a>
+                            {%  for a in articles %}
+                                <div class="item">
+                                    <a href="{{ path('article_show', { 'id': a.id }) }}">{{ a.title }}</a>
+                                    <p>{{ a.content }}</p>
+                                    <span class="date">02.11.2012 14:23</span>
+                                    <div class="controls">
+                                        <a href="#" class="icon-pencil tip" title="Modifier"></a>
+                                        <a href="#" class="icon-trash tip" title="Supprimer"></a>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="item">
-                                <a href="#">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</a>
-                                <p>Phasellus ut diam quis dolor mollis tristique. Suspendisse vestibulum convallis felis vitae facilisis. Praesent eu nisi vestibulum erat lacinia sollicitudin. Cras nec risus dolor, ut tristique neque. Donec mauris sapien, pellentesque at porta id, varius eu tellus.</p>
-                                <span class="date">02.11.2012 14:23</span>
-                                <div class="controls">
-                                    <a href="#" class="icon-pencil tip" title="Edit"></a>
-                                    <a href="#" class="icon-trash tip" title="Remove"></a>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <a href="#">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</a>
-                                <p>Phasellus ut diam quis dolor mollis tristique. Suspendisse vestibulum convallis felis vitae facilisis. Praesent eu nisi vestibulum erat lacinia sollicitudin. Cras nec risus dolor, ut tristique neque. Donec mauris sapien, pellentesque at porta id, varius eu tellus.</p>
-                                <span class="date">02.11.2012 14:23</span>
-                                <div class="controls">
-                                    <a href="#" class="icon-pencil tip" title="Edit"></a>
-                                    <a href="#" class="icon-trash tip" title="Remove"></a>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <a href="#">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</a>
-                                <p>Phasellus ut diam quis dolor mollis tristique. Suspendisse vestibulum convallis felis vitae facilisis. Praesent eu nisi vestibulum erat lacinia sollicitudin. Cras nec risus dolor, ut tristique neque. Donec mauris sapien, pellentesque at porta id, varius eu tellus.</p>
-                                <span class="date">02.11.2012 14:23</span>
-                                <div class="controls">
-                                    <a href="#" class="icon-pencil tip" title="Edit"></a>
-                                    <a href="#" class="icon-trash tip" title="Remove"></a>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <a href="#">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</a>
-                                <p>Phasellus ut diam quis dolor mollis tristique. Suspendisse vestibulum convallis felis vitae facilisis. Praesent eu nisi vestibulum erat lacinia sollicitudin. Cras nec risus dolor, ut tristique neque. Donec mauris sapien, pellentesque at porta id, varius eu tellus.</p>
-                                <span class="date">02.11.2012 14:23</span>
-                                <div class="controls">
-                                    <a href="#" class="icon-pencil tip" title="Edit"></a>
-                                    <a href="#" class="icon-trash tip" title="Remove"></a>
-                                </div>
-                            </div>
+                            {%  endfor %}
                         </div>
                     </div>
                 </div>
@@ -145,106 +111,22 @@
                 <div class="box-content">
                     <div class="block users scrollBox">
                         <div class="scroll" style="height: 270px;">
-                            <div class="item clearfix">
-                                <div class="image"><a href="#"><img src="{{ asset('bundles/admin/img/aqvatarius_s.jpg') }}" width="32"/></a></div>
-                                <div class="info">
-                                    <a href="#" class="name">Aqvatarius</a>
-                                    <div class="controls">
-                                        <a href="#" class="icon-ok"></a>
-                                        <a href="#" class="icon-remove"></a>
+                            {%  for u in users %}
+                                <div class="item clearfix">
+                                    <div class="image">
+                                        <a href="#">
+                                            <img src="{{ asset('bundles/admin/img/aqvatarius_s.jpg') }}" width="32"/>
+                                        </a>
+                                    </div>
+                                    <div class="info">
+                                        <a href="{{ path('user_show', { 'id': u.id }) }}" class="name">{{ u.username }}</a>
+                                        <div class="controls">
+                                            <a href="#" title="Valider" class="icon-ok"></a>
+                                            <a href="#" title="Refuser" class="icon-remove"></a>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="item clearfix">
-                                <div class="image"><a href="#"><img src="{{ asset('bundles/admin/img/aqvatarius_s.jpg') }}" width="32"/></a></div>
-                                <div class="info">
-                                    <a href="#" class="name">Aqvatarius</a>
-                                    <div class="controls">
-                                        <a href="#" class="icon-ok"></a>
-                                        <a href="#" class="icon-remove"></a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item clearfix">
-                                <div class="image"><a href="#"><img src="{{ asset('bundles/admin/img/aqvatarius_s.jpg') }}" width="32"/></a></div>
-                                <div class="info">
-                                    <a href="#" class="name">Aqvatarius</a>
-                                    <div class="controls">
-                                        <a href="#" class="icon-ok"></a>
-                                        <a href="#" class="icon-remove"></a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item clearfix">
-                                <div class="image"><a href="#"><img src="{{ asset('bundles/admin/img/aqvatarius_s.jpg') }}" width="32"/></a></div>
-                                <div class="info">
-                                    <a href="#" class="name">Aqvatarius</a>
-                                    <div class="controls">
-                                        <a href="#" class="icon-ok"></a>
-                                        <a href="#" class="icon-remove"></a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item clearfix">
-                                <div class="image"><a href="#"><img src="{{ asset('bundles/admin/img/aqvatarius_s.jpg') }}" width="32"/></a></div>
-                                <div class="info">
-                                    <a href="#" class="name">Aqvatarius</a>
-                                    <div class="controls">
-                                        <a href="#" class="icon-ok"></a>
-                                        <a href="#" class="icon-remove"></a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item clearfix">
-                                <div class="image"><a href="#"><img src="{{ asset('bundles/admin/img/aqvatarius_s.jpg') }}" width="32"/></a></div>
-                                <div class="info">
-                                    <a href="#" class="name">Aqvatarius</a>
-                                    <div class="controls">
-                                        <a href="#" class="icon-ok"></a>
-                                        <a href="#" class="icon-remove"></a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item clearfix">
-                                <div class="image"><a href="#"><img src="{{ asset('bundles/admin/img/aqvatarius_s.jpg') }}" width="32"/></a></div>
-                                <div class="info">
-                                    <a href="#" class="name">Aqvatarius</a>
-                                    <div class="controls">
-                                        <a href="#" class="icon-ok"></a>
-                                        <a href="#" class="icon-remove"></a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item clearfix">
-                                <div class="image"><a href="#"><img src="{{ asset('bundles/admin/img/aqvatarius_s.jpg') }}" width="32"/></a></div>
-                                <div class="info">
-                                    <a href="#" class="name">Aqvatarius</a>
-                                    <div class="controls">
-                                        <a href="#" class="icon-ok"></a>
-                                        <a href="#" class="icon-remove"></a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item clearfix">
-                                <div class="image"><a href="#"><img src="{{ asset('bundles/admin/img/aqvatarius_s.jpg') }}" width="32"/></a></div>
-                                <div class="info">
-                                    <a href="#" class="name">Aqvatarius</a>
-                                    <div class="controls">
-                                        <a href="#" class="icon-ok"></a>
-                                        <a href="#" class="icon-remove"></a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item clearfix">
-                                <div class="image"><a href="#"><img src="{{ asset('bundles/admin/img/aqvatarius_s.jpg') }}" width="32"/></a></div>
-                                <div class="info">
-                                    <a href="#" class="name">Aqvatarius</a>
-                                    <div class="controls">
-                                        <a href="#" class="icon-ok"></a>
-                                        <a href="#" class="icon-remove"></a>
-                                    </div>
-                                </div>
-                            </div>
+                            {%  endfor %}
                         </div>
                     </div>
                 </div>

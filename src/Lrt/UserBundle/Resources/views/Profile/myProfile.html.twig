@@ -1,5 +1,56 @@
 {% extends '::admin.html.twig' %}
 
 {% block body %}
-    Profile
+    <div class="span6">
+        <div class="row-fuild">
+            <div class="span3">
+                <div class="ucard">
+                    <h4>Test</h4>
+                    <div class="image">
+                        <a href="#">
+                            <img src="" class="img-polaroid">
+                        </a>
+                    </div>
+                    <ul class="control">
+                        <li>
+                            <i class="icon-pencil"></i>
+                            <a href="#">Edit</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="span9">
+                <div class="block-fluid ucard">
+                    <div class="info">
+                        <ul class="rows">
+                            <li class="heading">Informations</li>
+                            <li>
+                                <div class="title">Prénom :</div>
+                                <div class="text">{{ profile.firstName }}</div>
+                            </li>
+                            <li>
+                                <div class="title">Nom:</div>
+                                <div class="text">{{ profile.lastName }}</div>
+                            </li>
+                            <li>
+                                <div class="title">Email:</div>
+                                <div class="text">{{ profile.email }}</div>
+                            </li>
+                            <li>
+                                <div class="title">Gender:</div>
+                                <div class="text">Male</div>
+                            </li>
+                            <li>
+                                <div class="title">Age:</div>
+                                <div class="text">23</div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="span6">
+        <div class="row-fuild"></div>
+    </div>
 {% endblock %}

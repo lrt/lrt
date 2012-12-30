@@ -21,7 +21,7 @@
 <section id="entries">
     {% for a in articles %}
     <article class="post" id="post-{{ a.id }}">
-        <span class="post_categorie"><a href="">{{ a.category_name }}</a></span><span class="post_date"></span>
+        <span class="post_categorie"><a href="">{{ a.category_name }}</a></span><span class="post_date">16.12.2012 - 11:15</span>
         <h1><a href="{{ path('article_show', { 'id': a.id, 'slug': a.slug }) }}" title="{{ a.title }}">{{ a.title }}</a></h1>
         <aside class="post_image">
             <a href="{{ path('article_show', { 'id': a.id, 'slug': a.slug }) }}" title="{{ a.title }}">

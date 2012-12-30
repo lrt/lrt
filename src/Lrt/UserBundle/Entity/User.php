@@ -2,6 +2,7 @@
 
 /**
  * @category Entity
+ * @package
  * @author   Alexandre Seiller <alexandre.seiller92@gmail.com>
  * @license  http://www.gnu.org/copyleft/gpl.html GNU General Public License
  * @link     http://longchamp-roller-team.com
@@ -16,7 +17,7 @@ use Lrt\CMSBundle\Entity\Content;
 
 /**
  * @ORM\Entity(repositoryClass="Lrt\UserBundle\Repository\UserRepository")
- * @ORM\Table(name="fos_user")
+ * @ORM\Table(name="membre")
  */
 class User extends BaseUser
 {
@@ -50,9 +51,15 @@ class User extends BaseUser
     protected $content;
 
     /**
-     * @ORM\OneToMany(targetEntity="\Lrt\SiteBundle\Entity\Video", mappedBy="user")
+     * @ORM\OneToMany(targetEntity="\Lrt\VideoBundle\Entity\Video", mappedBy="user")
      */
     protected $videos;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="\Lrt\TeamBundle\Entity\Team")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    protected $team;
 
     public function __construct()
     {
@@ -145,10 +152,10 @@ class User extends BaseUser
     /**
      * Add videos
      *
-     * @param \Lrt\SiteBundle\Entity\Video $videos
+     * @param \Lrt\VideoBundle\Entity\Video $videos
      * @return void
      */
-    public function addVideo(\Lrt\SiteBundle\Entity\Video $videos)
+    public function addVideo(\Lrt\VideoBundle\Entity\Video $videos)
     {
         $this->videos[] = $videos;
     }
@@ -171,5 +178,47 @@ class User extends BaseUser
         }
     }
 
-}
 
+    /**
+     * Remove content
+     *
+     * @param Lrt\CMSBundle\Entity\Content $content
+     */
+    public function removeContent(\Lrt\CMSBundle\Entity\Content $content)
+    {
+        $this->content->removeElement($content);
+    }
+
+    /**
+     * Remove videos
+     *
+     * @param Lrt\VideoBundle\Entity\Video $videos
+     */
+    public function removeVideo(\Lrt\VideoBundle\Entity\Video $videos)
+    {
+        $this->videos->removeElement($videos);
+    }
+
+    /**
+     * Set team
+     *
+     * @param Lrt\TeamBundle\Entity\Team $team
+     * @return User
+     */
+    public function setTeam(\Lrt\TeamBundle\Entity\Team $team = null)
+    {
+        $this->team = $team;
+    
+        return $this;
+    }
+
+    /**
+     * Get team
+     *
+     * @return Lrt\TeamBundle\Entity\Team 
+     */
+    public function getTeam()
+    {
+        return $this->team;
+    }
+}
