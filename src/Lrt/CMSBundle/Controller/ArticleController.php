@@ -96,6 +96,7 @@ class ArticleController extends Controller
      */
     public function createAction()
     {
+
         $user = $this->sc->getToken()->getUser();
 
         if(is_object($user)) {
@@ -130,18 +131,26 @@ class ArticleController extends Controller
      */
     public function editAction($id)
     {
-        $entity = $this->em->getRepository('CMSBundle:Article')->find($id);
 
-        if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Article entity.');
+        $user = $this->sc->getToken()->getUser();
+
+        if(is_object($user)) {
+
+            $entity = $this->em->getRepository('CMSBundle:Article')->find($id);
+
+            if (!$entity) {
+                throw $this->createNotFoundException('Unable to find Article entity.');
+            }
+
+            $editForm = $this->createForm(new ArticleType(), $entity);
+
+            return array(
+                'entity'      => $entity,
+                'edit_form'   => $editForm->createView(),
+            );
+        } else {
+            return new Response('Vous devez être connecté', 404);
         }
-
-        $editForm = $this->createForm(new ArticleType(), $entity);
-
-        return array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
-        );
     }
 
     /**
@@ -154,26 +163,33 @@ class ArticleController extends Controller
      */
     public function updateAction(Request $request, $id)
     {
-        $entity = $this->em->getRepository('CMSBundle:Article')->find($id);
 
-        if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Article entity.');
+        $user = $this->sc->getToken()->getUser();
+
+        if(is_object($user)) {
+            $entity = $this->em->getRepository('CMSBundle:Article')->find($id);
+
+            if (!$entity) {
+                throw $this->createNotFoundException('Unable to find Article entity.');
+            }
+
+            $editForm = $this->createForm(new ArticleType(), $entity);
+
+            $formHandler = new ArticleHandler($editForm, $this->getRequest(), $this->em);
+
+            if($formHandler->process()) {
+
+                return $this->redirect($this->generateUrl('article_edit', array('id' => $id)));
+
+            }
+
+            return array(
+                'entity'      => $entity,
+                'edit_form'   => $editForm->createView(),
+            );
+        } else {
+            return new Response('Vous devez être connecté', 404);
         }
-
-        $editForm = $this->createForm(new ArticleType(), $entity);
-
-        $formHandler = new ArticleHandler($editForm, $this->getRequest(), $this->em);
-
-        if($formHandler->process()) {
-
-            return $this->redirect($this->generateUrl('article_edit', array('id' => $id)));
-
-        }
-
-        return array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
-        );
     }
 
     /**
@@ -185,22 +201,29 @@ class ArticleController extends Controller
      */
     public function deleteAction(Request $request, $id)
     {
-        $form = $this->createDeleteForm($id);
-        $form->bind($request);
 
-        if ($form->isValid()) {
+        $user = $this->sc->getToken()->getUser();
 
-            $entity = $this->em->getRepository('CMSBundle:Article')->find($id);
+        if(is_object($user)) {
+            $form = $this->createDeleteForm($id);
+            $form->bind($request);
 
-            if (!$entity) {
-                throw $this->createNotFoundException('Unable to find Article entity.');
+            if ($form->isValid()) {
+
+                $entity = $this->em->getRepository('CMSBundle:Article')->find($id);
+
+                if (!$entity) {
+                    throw $this->createNotFoundException('Unable to find Article entity.');
+                }
+
+                $this->em->remove($entity);
+                $this->em->flush();
             }
 
-            $this->em->remove($entity);
-            $this->em->flush();
+            return $this->redirect($this->generateUrl('article'));
+        } else {
+            return new Response('Vous devez être connecté', 404);
         }
-
-        return $this->redirect($this->generateUrl('article'));
     }
 
     private function createDeleteForm($id)

@@ -6,7 +6,7 @@ use Doctrine\ORM\EntityRepository;
 
 class ArticleRepository extends EntityRepository
 {
-    public function getLatestArticles($limit)
+    public function getLatestArticles($limit = 5)
     {
         $qb = $this->createQueryBuilder('a')
             ->select('a.id, a.title, a.content, a.slug, c.name as category_name')

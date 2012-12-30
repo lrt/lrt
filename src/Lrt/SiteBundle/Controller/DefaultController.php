@@ -12,6 +12,7 @@ namespace Lrt\SiteBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Symfony\Component\HttpFoundation\Response;
 use JMS\DiExtraBundle\Annotation as DI;
 
 class DefaultController extends Controller
@@ -41,9 +42,12 @@ class DefaultController extends Controller
     {
         $template = sprintf("SiteBundle:Page:%s.html.twig", $page);
 
-        $response = $this->render($template);
-        $response->setSharedMaxAge(600);
-
-        return $response;
+        try {
+            $response = $this->render($template);
+            $response->setSharedMaxAge(600);
+            return $response;
+        } catch (\Exception $e) {
+            return new Response("Aucune page ne correspond à votre demande.", 404);
+        }
     }
 }

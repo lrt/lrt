@@ -22,4 +22,28 @@ class DefaultControllerTest extends LrtWebTestCase
         $client->request('GET', '/');
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
     }
+
+    /**
+     * @test
+     * @testdox Voir une page statique existante
+     * @group home
+     */
+    public function showPageExistsReturn200()
+    {
+        $client = static::createClient();
+        $client->request('GET', '/information/association');
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+    }
+
+    /**
+     * @test
+     * @testdox Voir une page statique non existante
+     * @group home
+     */
+    public function showPageNotExistsReturn404()
+    {
+        $client = static::createClient();
+        $client->request('GET', '/information/test');
+        $this->assertEquals(404, $client->getResponse()->getStatusCode());
+    }
 }

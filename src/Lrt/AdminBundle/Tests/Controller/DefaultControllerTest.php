@@ -2,16 +2,15 @@
 
 namespace Lrt\AdminBundle\Tests\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use Lrt\SiteBundle\Tests\Controller\LrtWebTestCase;
 
-class DefaultControllerTest extends WebTestCase
+class DefaultControllerTest extends LrtWebTestCase
 {
     public function testIndex()
     {
         $client = static::createClient();
-
+        $this->login($client,'alexandre');
         $crawler = $client->request('GET', '/dashboard');
-
-        $this->assertTrue($crawler->filter('html:contains("Dashboard")')->count() > 0);
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
     }
 }

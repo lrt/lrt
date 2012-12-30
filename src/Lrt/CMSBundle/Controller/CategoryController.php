@@ -7,6 +7,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Symfony\Component\HttpFoundation\Response;
+use JMS\DiExtraBundle\Annotation as DI;
 use JMS\SecurityExtraBundle\Annotation\Secure;
 use Lrt\CMSBundle\Entity\Category;
 use Lrt\CMSBundle\Form\Type\CategoryType;
@@ -23,6 +25,9 @@ use Lrt\CMSBundle\Form\Type\CategoryType;
  */
 class CategoryController extends Controller
 {
+
+    /** @DI\Inject("security.context") */
+    public $sc;
 
     /**
      * Lists all Category entities.
@@ -71,13 +76,20 @@ class CategoryController extends Controller
      */
     public function newAction()
     {
-        $entity = new Category();
-        $form   = $this->createForm(new CategoryType(), $entity);
 
-        return array(
-            'entity' => $entity,
-            'form'   => $form->createView(),
-        );
+        $user = $this->sc->getToken()->getUser();
+
+        if(is_object($user)) {
+            $entity = new Category();
+            $form   = $this->createForm(new CategoryType(), $entity);
+
+            return array(
+                'entity' => $entity,
+                'form'   => $form->createView(),
+            );
+        }  else {
+            return new Response('Vous devez être connecté', 404);
+        }
     }
 
     /**
@@ -90,22 +102,29 @@ class CategoryController extends Controller
      */
     public function createAction(Request $request)
     {
-        $entity  = new Category();
-        $form = $this->createForm(new CategoryType(), $entity);
-        $form->bind($request);
 
-        if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($entity);
-            $em->flush();
+        $user = $this->sc->getToken()->getUser();
 
-            return $this->redirect($this->generateUrl('category_show', array('id' => $entity->getId())));
+        if(is_object($user)) {
+            $entity  = new Category();
+            $form = $this->createForm(new CategoryType(), $entity);
+            $form->bind($request);
+
+            if ($form->isValid()) {
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($entity);
+                $em->flush();
+
+                return $this->redirect($this->generateUrl('category_show', array('id' => $entity->getId())));
+            }
+
+            return array(
+                'entity' => $entity,
+                'form'   => $form->createView(),
+            );
+        } else {
+            return new Response('Vous devez être connecté', 404);
         }
-
-        return array(
-            'entity' => $entity,
-            'form'   => $form->createView(),
-        );
     }
 
     /**
@@ -117,20 +136,28 @@ class CategoryController extends Controller
      */
     public function editAction($id)
     {
-        $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('CMSBundle:Category')->find($id);
+        $user = $this->sc->getToken()->getUser();
 
-        if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Category entity.');
+        if(is_object($user)) {
+
+            $em = $this->getDoctrine()->getManager();
+
+            $entity = $em->getRepository('CMSBundle:Category')->find($id);
+
+            if (!$entity) {
+                throw $this->createNotFoundException('Unable to find Category entity.');
+            }
+
+            $editForm = $this->createForm(new CategoryType(), $entity);
+
+            return array(
+                'entity'      => $entity,
+                'edit_form'   => $editForm->createView(),
+            );
+        } else {
+            return new Response('Vous devez être connecté', 404);
         }
-
-        $editForm = $this->createForm(new CategoryType(), $entity);
-
-        return array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
-        );
     }
 
     /**
@@ -143,28 +170,35 @@ class CategoryController extends Controller
      */
     public function updateAction(Request $request, $id)
     {
-        $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('CMSBundle:Category')->find($id);
+        $user = $this->sc->getToken()->getUser();
 
-        if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Category entity.');
+        if(is_object($user)) {
+            $em = $this->getDoctrine()->getManager();
+
+            $entity = $em->getRepository('CMSBundle:Category')->find($id);
+
+            if (!$entity) {
+                throw $this->createNotFoundException('Unable to find Category entity.');
+            }
+
+            $editForm = $this->createForm(new CategoryType(), $entity);
+            $editForm->bind($request);
+
+            if ($editForm->isValid()) {
+                $em->persist($entity);
+                $em->flush();
+
+                return $this->redirect($this->generateUrl('category_edit', array('id' => $id)));
+            }
+
+            return array(
+                'entity'      => $entity,
+                'edit_form'   => $editForm->createView(),
+            );
+        } else {
+            return new Response('Vous devez être connecté', 404);
         }
-
-        $editForm = $this->createForm(new CategoryType(), $entity);
-        $editForm->bind($request);
-
-        if ($editForm->isValid()) {
-            $em->persist($entity);
-            $em->flush();
-
-            return $this->redirect($this->generateUrl('category_edit', array('id' => $id)));
-        }
-
-        return array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
-        );
     }
 
     /**
@@ -176,22 +210,29 @@ class CategoryController extends Controller
      */
     public function deleteAction(Request $request, $id)
     {
-        $form = $this->createDeleteForm($id);
-        $form->bind($request);
 
-        if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $entity = $em->getRepository('CMSBundle:Category')->find($id);
+        $user = $this->sc->getToken()->getUser();
 
-            if (!$entity) {
-                throw $this->createNotFoundException('Unable to find Category entity.');
+        if(is_object($user)) {
+            $form = $this->createDeleteForm($id);
+            $form->bind($request);
+
+            if ($form->isValid()) {
+                $em = $this->getDoctrine()->getManager();
+                $entity = $em->getRepository('CMSBundle:Category')->find($id);
+
+                if (!$entity) {
+                    throw $this->createNotFoundException('Unable to find Category entity.');
+                }
+
+                $em->remove($entity);
+                $em->flush();
             }
 
-            $em->remove($entity);
-            $em->flush();
+            return $this->redirect($this->generateUrl('category'));
+        } else {
+            return new Response('Vous devez être connecté', 404);
         }
-
-        return $this->redirect($this->generateUrl('category'));
     }
 
     private function createDeleteForm($id)

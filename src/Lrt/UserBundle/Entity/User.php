@@ -129,6 +129,16 @@ class User extends BaseUser
     }
 
     /**
+     * Get fullName
+     *
+     * @return string
+     */
+    public function getFullName()
+    {
+        $this->firstName.' '.$this->lastName;
+    }
+
+    /**
      * Add content
      *
      * @param \Lrt\UserBundle\Entity\Content $content

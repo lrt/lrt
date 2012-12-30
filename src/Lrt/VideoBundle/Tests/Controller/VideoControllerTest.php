@@ -21,7 +21,7 @@ class VideoControllerTest extends LrtWebTestCase
     public function editInvalidVideo()
     {
         $client = static::createClient();
-        $this->login($client,'alexandre');
+        $this->login($client, array('user' => 'alexandre'));
         $client->request('GET', '/video/99999999/edit');
         $this->assertEquals(404, $client->getResponse()->getStatusCode());
     }

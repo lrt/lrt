@@ -14,8 +14,7 @@ abstract class LrtWebTestCase extends WebTestCase
      * Do login for user
      *
      * @param Client $client
-     * @param $user
-     * @internal param \Lrt\SiteBundle\Tests\Controller\type $role
+     * @param type $role
      * @return Client
      */
     protected function login(Client $client, $user)

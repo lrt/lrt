@@ -14,6 +14,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Symfony\Component\HttpFoundation\Response;
 use JMS\DiExtraBundle\Annotation as DI;
 use JMS\SecurityExtraBundle\Annotation\Secure;
 use Lrt\VideoBundle\Entity\Video;
@@ -27,6 +28,9 @@ use Lrt\VideoBundle\Form\Type\VideoType;
  */
 class VideoController extends Controller
 {
+
+    /** @DI\Inject("security.context") */
+    public $sc;
 
     /** @DI\Inject("doctrine.orm.entity_manager") */
     public $em;
@@ -117,18 +121,25 @@ class VideoController extends Controller
      */
     public function editAction($id)
     {
-        $entity = $this->em->getRepository('VideoBundle:Video')->find($id);
 
-        if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Video entity.');
+        $user = $this->sc->getToken()->getUser();
+
+        if(is_object($user)) {
+            $entity = $this->em->getRepository('VideoBundle:Video')->find($id);
+
+            if (!$entity) {
+                throw $this->createNotFoundException('Unable to find Video entity.');
+            }
+
+            $editForm = $this->createForm(new VideoType(), $entity);
+
+            return array(
+                'entity'      => $entity,
+                'edit_form'   => $editForm->createView(),
+            );
+        } else {
+            return new Response('Vous devez être connecté', 404);
         }
-
-        $editForm = $this->createForm(new VideoType(), $entity);
-
-        return array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
-        );
     }
 
     /**
@@ -141,26 +152,33 @@ class VideoController extends Controller
      */
     public function updateAction(Request $request, $id)
     {
-        $entity = $this->em->getRepository('VideoBundle:Video')->find($id);
 
-        if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Video entity.');
+        $user = $this->sc->getToken()->getUser();
+
+        if(is_object($user)) {
+            $entity = $this->em->getRepository('VideoBundle:Video')->find($id);
+
+            if (!$entity) {
+                throw $this->createNotFoundException('Unable to find Video entity.');
+            }
+
+            $editForm = $this->createForm(new VideoType(), $entity);
+            $editForm->bind($request);
+
+            if ($editForm->isValid()) {
+                $this->em->persist($entity);
+                $this->em->flush();
+
+                return $this->redirect($this->generateUrl('video_edit', array('id' => $id)));
+            }
+
+            return array(
+                'entity'      => $entity,
+                'edit_form'   => $editForm->createView(),
+            );
+        } else {
+            return new Response('Vous devez être connecté', 404);
         }
-
-        $editForm = $this->createForm(new VideoType(), $entity);
-        $editForm->bind($request);
-
-        if ($editForm->isValid()) {
-            $this->em->persist($entity);
-            $this->em->flush();
-
-            return $this->redirect($this->generateUrl('video_edit', array('id' => $id)));
-        }
-
-        return array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
-        );
     }
 
     /**

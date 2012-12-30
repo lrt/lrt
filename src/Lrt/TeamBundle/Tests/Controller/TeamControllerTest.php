@@ -6,7 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class TeamControllerTest extends WebTestCase
 {
-    /*
+
     public function testCompleteScenario()
     {
         // Create a new client to browse the application
@@ -19,8 +19,7 @@ class TeamControllerTest extends WebTestCase
 
         // Fill in the form and submit it
         $form = $crawler->selectButton('Create')->form(array(
-            'lrt_teambundle_teamtype[field_name]'  => 'Test',
-            // ... other fields to fill
+            'lrt_teambundle_teamtype[name]'  => 'Test',
         ));
 
         $client->submit($form);
@@ -33,8 +32,7 @@ class TeamControllerTest extends WebTestCase
         $crawler = $client->click($crawler->selectLink('Edit')->link());
 
         $form = $crawler->selectButton('Edit')->form(array(
-            'lrt_teambundle_teamtype[field_name]'  => 'Foo',
-            // ... other fields to fill
+            'lrt_teambundle_teamtype[name]'  => 'Foo',
         ));
 
         $client->submit($form);
@@ -50,6 +48,4 @@ class TeamControllerTest extends WebTestCase
         // Check the entity has been delete on the list
         $this->assertNotRegExp('/Foo/', $client->getResponse()->getContent());
     }
-
-    */
 }
