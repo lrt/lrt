@@ -1,55 +1,59 @@
-{% extends '::admin.html.twig' %}
+{% extends 'AdminBundle:Themes:box.html.twig' %}
 
-{% block body %}
-<h1>Ajouter un article</h1>
+{% block box_title %}
+   Ajouter un article
+{% endblock %}
 
-<form action="{{ path('article_create') }}" method="post" {{ form_enctype(form) }} class="form-horizontal">
-    <div class="control-group">
-        {{ form_label(form.title, null, {'label': 'Titre', 'label_attr': {'class': 'control-label'}}) }}
-        <div class="controls">
-        {{ form_widget(form.title) }}
-        {{ form_errors(form.title) }}
+{% block box_content %}
+    <form action="{{ path('article_create') }}" method="post" {{ form_enctype(form) }} class="form-horizontal">
+        <div class="control-group">
+            {{ form_label(form.title, null, {'label': 'Titre', 'label_attr': {'class': 'control-label'}}) }}
+            <div class="controls">
+                {{ form_widget(form.title) }}
+                {{ form_errors(form.title) }}
+            </div>
         </div>
-    </div>
-    <div class="control-group">
-        {{ form_label(form.content, null, {'label': 'Texte', 'label_attr': {'class': 'control-label'}}) }}
-        <div class="controls">
-            {{ form_widget(form.content, { 'attr': {'placeholder': 'titre'} }) }}
-            {{ form_errors(form.content) }}
+        <div class="control-group">
+            {{ form_label(form.content, null, {'label': 'Texte', 'label_attr': {'class': 'control-label'}}) }}
+            <div class="controls">
+                {{ form_widget(form.content, { 'attr': {'placeholder': 'titre'} }) }}
+                {{ form_errors(form.content) }}
+            </div>
         </div>
-    </div>
-    <div class="control-group">
-        {{ form_label(form.status, null, {'label': 'Statut', 'label_attr': {'class': 'control-label'}}) }}
-        <div class="controls">
-            {{ form_widget(form.status) }}
-            {{ form_errors(form.status) }}
+        <div class="control-group">
+            {{ form_label(form.status, null, {'label': 'Statut', 'label_attr': {'class': 'control-label'}}) }}
+            <div class="controls">
+                {{ form_widget(form.status) }}
+                {{ form_errors(form.status) }}
+            </div>
         </div>
-    </div>
-    <div class="control-group">
-        {{ form_label(form.isPublic, null, {'label': 'Visible', 'label_attr': {'class': 'control-label'}}) }}
-        <div class="controls">
-            {{ form_widget(form.isPublic) }}
-            {{ form_errors(form.isPublic) }}
+        <div class="control-group">
+            {{ form_label(form.isPublic, null, {'label': 'Visible', 'label_attr': {'class': 'control-label'}}) }}
+            <div class="controls">
+                {{ form_widget(form.isPublic) }}
+                {{ form_errors(form.isPublic) }}
+            </div>
         </div>
-    </div>
-    <div class="control-group">
-        {{ form_label(form.category, null, {'label': 'Catégorie', 'label_attr': {'class': 'control-label'}}) }}
-        <div class="controls">
-            {{ form_widget(form.category) }}
-            {{ form_errors(form.category) }}
+        <div class="control-group">
+            {{ form_label(form.category, null, {'label': 'Catégorie', 'label_attr': {'class': 'control-label'}}) }}
+            <div class="controls">
+                {{ form_widget(form.category) }}
+                {{ form_errors(form.category) }}
+            </div>
         </div>
-    </div>
-    {{ form_rest(form) }}
-    <p>
-        <input type="submit" value="Ajouter" class="btn btn-primary" />
-    </p>
-</form>
+        {{ form_rest(form) }}
+        <p>
+            <input type="submit" value="Ajouter" class="btn btn-primary" />
+        </p>
+    </form>
+{% endblock %}
 
-<ul class="record_actions">
-    <li>
-        <a href="{{ path('article') }}">
-            Retour à la liste
-        </a>
-    </li>
-</ul>
+{% block box_button %}
+    <ul class="record_actions">
+        <li>
+            <a href="{{ path('article') }}">
+                Retour à la liste
+            </a>
+        </li>
+    </ul>
 {% endblock %}

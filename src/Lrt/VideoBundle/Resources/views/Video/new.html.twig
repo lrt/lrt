@@ -1,20 +1,24 @@
-{% extends '::admin.html.twig' %}
+{% extends 'AdminBundle:Themes:box.html.twig' %}
 
-{% block body %}
-<h1>Video creation</h1>
+{% block box_title %}
+    Ajouter une vidéo
+{% endblock %}
 
-<form action="{{ path('video_create') }}" method="post" {{ form_enctype(form) }}>
-    {{ form_widget(form) }}
-    <p>
-        <button type="submit">Create</button>
-    </p>
-</form>
+{% block box_content %}
+    <form action="{{ path('video_create') }}" method="post" {{ form_enctype(form) }}>
+        {{ form_widget(form) }}
+        <p>
+            <button type="submit">Create</button>
+        </p>
+    </form>
+{% endblock %}
 
-<ul class="record_actions">
-    <li>
-        <a href="{{ path('video') }}">
-            Back to the list
-        </a>
-    </li>
-</ul>
+{% block box_button %}
+    <ul class="record_actions">
+        <li>
+            <a href="{{ path('video') }}">
+                Back to the list
+            </a>
+        </li>
+    </ul>
 {% endblock %}

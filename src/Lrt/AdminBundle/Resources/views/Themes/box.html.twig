@@ -1,0 +1,24 @@
+{% extends '::admin.html.twig' %}
+
+{% block body %}
+<div class="box">
+    <h4 class="box-header round-top">
+        {% block box_title %}{% endblock %}
+        <a class="box-btn" title="close">
+            <i class="icon-remove"></i>
+        </a>
+        <a class="box-btn" title="toggle">
+            <i class="icon-minus"></i>
+        </a>
+        <a class="box-btn" title="#box-config-modal" data-toggle="modal" title="config">
+            <i class="icon-cog"></i>
+        </a>
+    </h4>
+    <div class="box-container-toggle">
+        <div class="box-content">
+            {% block box_content %}{% endblock %}
+        </div>
+    </div>
+</div>
+{% block box_button %}{% endblock %}
+{% endblock %}

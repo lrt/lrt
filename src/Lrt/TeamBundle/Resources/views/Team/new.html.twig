@@ -1,16 +1,26 @@
-<h1>Team creation</h1>
+{% extends 'AdminBundle:Themes:box.html.twig' %}
 
-<form action="{{ path('team_create') }}" method="post" {{ form_enctype(form) }}>
-    {{ form_widget(form) }}
-    <p>
-        <button type="submit">Create</button>
-    </p>
-</form>
+{% block box_title %}
+    Ajouter une équipe
+{% endblock %}
 
-<ul class="record_actions">
-    <li>
-        <a href="{{ path('team') }}">
-            Back to the list
-        </a>
-    </li>
-</ul>
+{% block box_content %}
+    <form action="{{ path('team_create') }}" method="post" {{ form_enctype(form) }}>
+        {{ form_widget(form) }}
+        <p>
+            <button type="submit">Create</button>
+        </p>
+    </form>
+{% endblock %}
+
+{% block box_button %}
+    <ul class="record_actions">
+        <li>
+            <a href="{{ path('team') }}">
+                Back to the list
+            </a>
+        </li>
+    </ul>
+{% endblock %}
+
+

@@ -1,22 +1,30 @@
-<h1>Team edit</h1>
+{% extends 'AdminBundle:Themes:box.html.twig' %}
 
-<form action="{{ path('team_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>
-    {{ form_widget(edit_form) }}
-    <p>
-        <button type="submit">Edit</button>
-    </p>
-</form>
+{% block box_title %}
+    Modifier l'équipe
+{% endblock %}
 
-<ul class="record_actions">
-    <li>
-        <a href="{{ path('team') }}">
-            Back to the list
-        </a>
-    </li>
-    <li>
-        <form action="{{ path('team_delete', { 'id': entity.id }) }}" method="post">
-            {{ form_widget(delete_form) }}
-            <button type="submit">Delete</button>
-        </form>
-    </li>
-</ul>
+{% block box_content %}
+    <form action="{{ path('team_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>
+        {{ form_widget(edit_form) }}
+        <p>
+            <button type="submit">Valider</button>
+        </p>
+    </form>
+{% endblock %}
+
+{% block box_button %}
+    <ul class="record_actions">
+        <li>
+            <a href="{{ path('team') }}">
+                Back to the list
+            </a>
+        </li>
+        <li>
+            <form action="{{ path('team_delete', { 'id': entity.id }) }}" method="post">
+                {{ form_widget(delete_form) }}
+                <button type="submit">Supprimer</button>
+            </form>
+        </li>
+    </ul>
+{% endblock %}

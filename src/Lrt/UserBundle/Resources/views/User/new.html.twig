@@ -1,20 +1,30 @@
 {% extends '::admin.html.twig' %}
 
 {% block body %}
-<h3 class="heading">User creation</h3>
-
-<form action="{{ path('user_create') }}" method="post" {{ form_enctype(form) }}>
-    {{ form_label(form.username) }}
-    {{ form_widget(form.username) }}
-    {{ form_label(form.firstName) }}
-    {{ form_widget(form.firstName) }}
-    {{ form_label(form.lastName) }}
-    {{ form_widget(form.lastName) }}
-    {{ form_label(form.email) }}
-    {{ form_widget(form.email) }}
-    {{ form_rest(form) }}
-    <p>
-        <button type="submit">Valider</button>
-    </p>
-</form>
+<div class="box">
+    <h4 class="box-header round-top">
+        Ajouter un utilisateur
+    </h4>
+    <div class="box-container-toggle">
+        <div class="box-content">
+            <form action="{{ path('user_create') }}" method="post" {{ form_enctype(form) }}>
+                {{ form_label(form.username) }}
+                {{ form_widget(form.username) }}
+                {{ form_label(form.firstName) }}
+                {{ form_widget(form.firstName) }}
+                {{ form_label(form.lastName) }}
+                {{ form_widget(form.lastName) }}
+                {{ form_label(form.email) }}
+                {{ form_widget(form.email) }}
+                {{ form_rest(form) }}
+                <p>
+                    <button type="submit">Valider</button>
+                </p>
+            </form>
+        </div>
+    </div>
+</div>
+<a href="{{ path('user') }}" class="btn btn-small btn-primary">
+    Retour à la liste
+</a>
 {% endblock %}

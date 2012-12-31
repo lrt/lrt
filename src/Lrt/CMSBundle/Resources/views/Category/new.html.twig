@@ -1,20 +1,24 @@
-{% extends '::admin.html.twig' %}
+{% extends 'AdminBundle:Themes:box.html.twig' %}
 
-{% block body %}
-<h1>Category creation</h1>
+{% block box_title %}
+    Ajouter une catégorie
+{% endblock %}
 
-<form action="{{ path('category_create') }}" method="post" {{ form_enctype(form) }}>
-    {{ form_widget(form) }}
-    <p>
-        <button type="submit">Create</button>
-    </p>
-</form>
+{% block box_content %}
+    <form action="{{ path('category_create') }}" method="post" {{ form_enctype(form) }}>
+        {{ form_widget(form) }}
+        <p>
+            <button type="submit">Create</button>
+        </p>
+    </form>
+{% endblock %}
 
-<ul class="record_actions">
-    <li>
-        <a href="{{ path('category') }}">
-            Back to the list
-        </a>
-    </li>
-</ul>
+{% block box_button %}
+    <ul class="record_actions">
+        <li>
+            <a href="{{ path('category') }}">
+                Back to the list
+            </a>
+        </li>
+    </ul>
 {% endblock %}

@@ -1,20 +1,24 @@
-{% extends '::admin.html.twig' %}
+{% extends 'AdminBundle:Themes:box.html.twig' %}
 
-{% block body %}
-<h1>Video edit</h1>
+{% block box_title %}
+    Modifier la vidéo
+{% endblock %}
 
-<form action="{{ path('video_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>
-    {{ form_widget(edit_form) }}
-    <p>
-        <button type="submit">Edit</button>
-    </p>
-</form>
+{% block box_content %}
+    <form action="{{ path('video_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>
+        {{ form_widget(edit_form) }}
+        <p>
+            <button type="submit">Edit</button>
+        </p>
+    </form>
+{% endblock %}
 
-<ul class="record_actions">
-    <li>
-        <a href="{{ path('video') }}">
-            Back to the list
-        </a>
-    </li>
-</ul>
+{% block box_button %}
+    <ul class="record_actions">
+        <li>
+            <a href="{{ path('video') }}">
+                Back to the list
+            </a>
+        </li>
+    </ul>
 {% endblock %}
