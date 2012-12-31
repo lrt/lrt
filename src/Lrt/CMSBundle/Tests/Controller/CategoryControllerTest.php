@@ -30,6 +30,30 @@ class CategoryControllerTest extends LrtWebTestCase
 
     /**
      * @test
+     * @testdox Création d'une nouvelle catégorie après avoir appuyer sur "valider" on renvoie un message.
+     * @group cat
+     */
+    public function addCategory()
+    {
+        $client = static::createClient();
+        $this->login($client, array('user' => 'alexandre'));
+        $crawler = $client->request('GET', '/category/new');
+
+        $form = $crawler->selectButton('Create')->form(array(
+            'lrt_cmsbundle_categorytype[name]' => 'Nouvelle catégorie',
+        ));
+
+        $crawler = $client->submit($form);
+
+        $this->em = $client->getContainer()->get('doctrine')->getEntityManager();
+
+        $categoryRepository = $this->em->getRepository('CMSBundle:Category');
+        $category = $categoryRepository->findOneBy(array('name' => 'Nouvelle catégorie'));
+        $this->assertNotEmpty($category);
+    }
+
+    /**
+     * @test
      * @testdox Modifier une catégorie via un id qui n'existe pas
      * @group cat
      */
