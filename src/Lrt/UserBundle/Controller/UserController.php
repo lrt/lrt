@@ -162,37 +162,4 @@ class UserController extends Controller
             'edit_form'   => $editForm->createView(),
         );
     }
-
-    /**
-     * Deletes a User entity.
-     *
-     * @Route("/{id}/delete", name="user_delete")
-     * @Method("POST")
-     */
-    /*public function deleteAction(Request $request, $id)
-    {
-        $form = $this->createDeleteForm($id);
-        $form->bind($request);
-
-        if ($form->isValid()) {
-            $entity = $this->em->getRepository('UserBundle:User')->find($id);
-
-            if (!$entity) {
-                throw $this->createNotFoundException('Unable to find User entity.');
-            }
-
-            $this->em->remove($entity);
-            $this->em->flush();
-        }
-
-        return $this->redirect($this->generateUrl('user'));
-    }*/
-
-    /*private function createDeleteForm($id)
-    {
-        return $this->createFormBuilder(array('id' => $id))
-            ->add('id', 'hidden')
-            ->getForm()
-        ;
-    }*/
 }

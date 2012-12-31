@@ -40,7 +40,7 @@
                             <li><a href="{{ path('user_profile', { 'id': app.user.id }) }}">Profile</a></li>
                             <li><a href="#">Settings</a></li>
                             <li class="divider"></li>
-                            <li><a href="#">Déconnexion</a></li>
+                            <li><a href="{{ path('fos_user_security_logout') }}">Déconnexion</a></li>
                         </ul>
                     </li>
                     {%  endif %}
