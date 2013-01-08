@@ -16,6 +16,7 @@ Contexte: Je suis un utilisateur qui veut ajouter une vidéo
 
 @new_video
 Scénario: Je voudrais ajouter une vidéo
+    Et montrer la dernière réponse
     Et je presse "Ajouter une vidéo"
     Lorsque je remplis le texte suivant:
             | lrt_videobundle_videotype_title          | Video Behat    |
