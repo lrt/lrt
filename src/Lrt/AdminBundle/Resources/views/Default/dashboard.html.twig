@@ -41,7 +41,7 @@
     <div class="span4">
         <div class="box">
             <h4 class="box-header round-top">
-                Widget
+                Dernières vidéos
                 <a class="box-btn" title="close">
                     <i class="icon-remove"></i>
                 </a>
@@ -54,6 +54,26 @@
             </h4>
             <div class="box-container-toggle">
                 <div class="box-content">
+                    <div class="block users scrollBox">
+                        <div class="scroll" style="height: 270px;">
+                            {%  for v in videos %}
+                                <div class="item clearfix">
+                                    <div class="image">
+                                        <a href="#">
+                                            <img src="{{ asset('bundles/admin/img/aqvatarius_s.jpg') }}" width="32"/>
+                                        </a>
+                                    </div>
+                                    <div class="info">
+                                        <a href="{{ path('video_show', { 'id': v.id }) }}" class="name">{{ v.title }}</a>
+                                        <div class="controls">
+                                            <a href="#" title="Valider" class="icon-ok"></a>
+                                            <a href="#" title="Refuser" class="icon-remove"></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            {%  endfor %}
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

@@ -1,1 +1,1 @@
-/Applications/Firefox.app $1
+open -a /Applications/Firefox.app $1
