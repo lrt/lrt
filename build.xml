@@ -11,9 +11,14 @@
         <mkdir dir="${builddir}/logs/coverage" />
         <mkdir dir="${builddir}/logs/features" />
         <mkdir dir="${builddir}/docs" />
+        <phingcall target="bundles" />
         <phingcall target="updateDatabase" />
     </target>
 	
+    <target name="bundles">
+        <mkdir dir="${builddir}/logs/features/UserBundle" />
+    </target>    
+        
     <target name="ci" depends="prepare" >
         <phingcall target="phpunit-cover" />
         <phingcall target="codesniffer" />

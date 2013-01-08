@@ -10,11 +10,11 @@ Scénario: Je recherche tous les utilisateurs à valider
     Alors je suis sur la page d'accueil
     Et je ne devrais pas voir "Exception detected!"
     Soit je suis "Admin"
-    Et je suis "Utilisateurs"
+    Et je suis "Liste"
     Alors je devrais voir "Gestion des utilisateurs"
 
     Lorsque je remplis le texte suivant:
         | Login |  alexandre  |
     Et je presse "afficher"
-    Alors je devrais voir les lignes suivantes dans le tableau "records_list" :
-        | alexandre seiller | * | admin | * | * |
+    Alors je devrais voir les lignes suivantes dans le tableau "tListeUsers" :
+        | alexandre | * | alexandre.seiller@longchamp-roller-team.com | admin | * | * |

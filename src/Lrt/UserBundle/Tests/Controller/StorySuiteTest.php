@@ -37,14 +37,14 @@ class StorySuiteTest extends WebTestCase
     {
         $input = new ArrayInput(array(
             '--format' => 'junit,html',
-            '--out' => 'build/logs/features,build/logs/features/index.html',
+            '--out' => 'build/logs/features/UserBundle/,build/logs/features/UserBundle/index.html',
             'features' => '@UserBundle'
         ));
         $output = new ConsoleOutput();
         $app = new BehatApplication('DEV');
         $app->setAutoExit(false);
         $result = $app->run($input, $output);
-        $this->assertEquals(0, $result, 'Au moins un des scénarios Behat ne passe pas dans UserBundle !');
+        $this->assertEquals(0, $result, 'Au moins un des scénarios Behat ne passe pas dans UserBundle, pour plus d\'info allez dans build/logs/features/UserBundle/ !');
     }
 
 }
