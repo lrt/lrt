@@ -11,10 +11,9 @@ namespace Lrt\CMSBundle\Tests\Controller;
 
 use Lrt\SiteBundle\Tests\Controller\LrtWebTestCase;
 
-
 class CategoryControllerTest extends LrtWebTestCase
 {
-
+    
     /**
      * @test
      * @testdox Accès à la liste des catégories
@@ -22,10 +21,9 @@ class CategoryControllerTest extends LrtWebTestCase
      */
     public function listCategory()
     {
-        $client = static::createClient();
-        $this->login($client, array('user' => 'alexandre'));
-        $client->request('GET', '/category');
-        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+        $this->login($this->client, array('user' => 'alexandre'));
+        $this->client->request('GET', '/category');
+        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
     }
 
     /**
@@ -35,17 +33,14 @@ class CategoryControllerTest extends LrtWebTestCase
      */
     public function addCategory()
     {
-        $client = static::createClient();
-        $this->login($client, array('user' => 'alexandre'));
-        $crawler = $client->request('GET', '/category/new');
+        $this->login($this->client, array('user' => 'alexandre'));
+        $crawler = $this->client->request('GET', '/category/new');
 
         $form = $crawler->selectButton('Create')->form(array(
             'lrt_cmsbundle_categorytype[name]' => 'Nouvelle catégorie',
         ));
 
-        $crawler = $client->submit($form);
-
-        $this->em = $client->getContainer()->get('doctrine')->getEntityManager();
+        $crawler = $this->client->submit($form);
 
         $categoryRepository = $this->em->getRepository('CMSBundle:Category');
         $category = $categoryRepository->findOneBy(array('name' => 'Nouvelle catégorie'));
@@ -59,33 +54,30 @@ class CategoryControllerTest extends LrtWebTestCase
      */
     public function editInvalidCategory()
     {
-        $client = static::createClient();
-        $this->login($client, array('user' => 'alexandre'));
-        $client->request('GET', '/category/99999999/edit');
-        $this->assertEquals(404, $client->getResponse()->getStatusCode());
+        $this->login($this->client, array('user' => 'alexandre'));
+        $this->client->request('GET', '/category/99999999/edit');
+        $this->assertEquals(404, $this->client->getResponse()->getStatusCode());
     }
 
     /**
      * @test
      * @testdox Modifier une catégorie dont les données seraient valide
-     * @group cat
+     * @group ko
      */
     public function editCategoryValid()
     {
-        $client = static::createClient();
-        $this->login($client, array('user' => 'alexandre'));
-        $this->em = $client->getContainer()->get('doctrine')->getEntityManager();
+        $this->login($this->client, array('user' => 'alexandre'));
 
         $categoryRepository = $this->em->getRepository('CMSBundle:Category');
         $category = $categoryRepository->findOneBy(array('name' => 'Autres'));
-
-        $crawler = $client->request('GET', '/category/'.$category->getId().'/edit');
+                
+        $crawler = $this->client->request('GET', '/category/'.$category->getId().'/edit');
 
         $form = $crawler->selectButton('Edit')->form(array(
             'lrt_cmsbundle_categorytype[name]' => 'Nouveauté',
         ));
 
-        $crawler = $client->submit($form);
+        $crawler = $this->client->submit($form);
 
         $test = $categoryRepository->findOneBy(array('name' => 'Nouveauté'));
 
@@ -99,10 +91,9 @@ class CategoryControllerTest extends LrtWebTestCase
      */
     public function showWithUnknownCategoryReturns404()
     {
-        $client = static::createClient();
-        $this->login($client, array('user' => 'alexandre'));
-        $client->request('GET', '/category/99999999/show');
-        $this->assertEquals(404, $client->getResponse()->getStatusCode());
+        $this->login($this->client, array('user' => 'alexandre'));
+        $this->client->request('GET', '/category/99999999/show');
+        $this->assertEquals(404, $this->client->getResponse()->getStatusCode());
     }
 
     /**
@@ -112,9 +103,25 @@ class CategoryControllerTest extends LrtWebTestCase
      */
     public function showWithknownCategoryReturns404()
     {
-        $client = static::createClient();
-        $this->login($client, array('user' => 'alexandre'));
-        $client->request('GET', '/category/1/show');
-        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+        $this->login($this->client, array('user' => 'alexandre'));
+        $this->client->request('GET', '/category/1/show');
+        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+    }
+    
+    /**
+    * @test
+    * @testdox Supprimer une catégorie
+    * @group ko
+    */
+    public function deleteCategoryReturns200()
+    {
+        $this->login($this->client, array('user' => 'alexandre'));
+        $this->client->request('GET', '/category');
+        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+
+        $categoryRepository = $this->em->getRepository('CMSBundle:Category');
+        $category = $categoryRepository->findOneBy(array('name' => 'Nouvelle catégorie'));
+
+        $crawler = $this->client->request('POST', '/category/'.$category->getId().'/delete');
     }
 }

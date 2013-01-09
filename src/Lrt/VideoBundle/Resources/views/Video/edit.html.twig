@@ -1,7 +1,14 @@
 {% extends 'AdminBundle:Themes:box.html.twig' %}
 
+{% block breadcrumb %}
+<li>
+    <a href="{{ path('video') }}">Vidéos</a> <span class="divider">/</span>
+</li>
+<li class="active">Modifier la vidéo {{ entity.title }}</li>
+{% endblock %}
+
 {% block box_title %}
-    Modifier la vidéo
+    Modifier la vidéo "{{ entity.title }}"
 {% endblock %}
 
 {% block box_content %}

@@ -1,22 +1,37 @@
 {% extends 'AdminBundle:Themes:box.html.twig' %}
 
+{% block breadcrumb %}
+<li>
+    <a href="{{ path('article') }}">Articles</a> <span class="divider">/</span>
+</li>
+<li class="active">Ajouter un article</li>
+{% endblock %}
+
 {% block box_title %}
    Ajouter un article
 {% endblock %}
 
 {% block box_content %}
+<div class="row-fluid">
     <form action="{{ path('article_create') }}" method="post" {{ form_enctype(form) }} class="form-horizontal">
         <div class="control-group">
             {{ form_label(form.title, null, {'label': 'Titre', 'label_attr': {'class': 'control-label'}}) }}
             <div class="controls">
-                {{ form_widget(form.title) }}
+                {{ form_widget(form.title, { 'attr': {'class': 'span12'} }) }}
                 {{ form_errors(form.title) }}
+            </div>
+        </div>
+        <div class="control-group">
+            {{ form_label(form.category, null, {'label': 'Catégorie', 'label_attr': {'class': 'control-label'}}) }}
+            <div class="controls">
+                {{ form_widget(form.category) }}
+                {{ form_errors(form.category) }}
             </div>
         </div>
         <div class="control-group">
             {{ form_label(form.content, null, {'label': 'Texte', 'label_attr': {'class': 'control-label'}}) }}
             <div class="controls">
-                {{ form_widget(form.content, { 'attr': {'placeholder': 'titre'} }) }}
+                {{ form_widget(form.content) }}
                 {{ form_errors(form.content) }}
             </div>
         </div>
@@ -34,26 +49,24 @@
                 {{ form_errors(form.isPublic) }}
             </div>
         </div>
-        <div class="control-group">
-            {{ form_label(form.category, null, {'label': 'Catégorie', 'label_attr': {'class': 'control-label'}}) }}
-            <div class="controls">
-                {{ form_widget(form.category) }}
-                {{ form_errors(form.category) }}
-            </div>
-        </div>
         {{ form_rest(form) }}
-        <p>
-            <input type="submit" value="Ajouter" class="btn btn-primary" />
-        </p>
-    </form>
-{% endblock %}
-
-{% block box_button %}
-    <ul class="record_actions">
-        <li>
-            <a href="{{ path('article') }}">
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Ajouter</button> 
+            <a href="{{ path('article') }}" class="btn">
                 Retour à la liste
             </a>
-        </li>
-    </ul>
+        </div>
+    </form>
+</div>
 {% endblock %}
+   
+{% block javascripts %} 
+   {{ parent() }}
+   <script type="text/javascript" src="{{ asset('bundles/cms/js/plugins/ckeditor/ckeditor.js') }}"></script>
+   <script type="text/javascript">
+   //<![CDATA[
+    var editor = CKEDITOR.replace( 'lrt_cmsbundle_articletype[content]' );
+   //]]>
+   </script>    
+{% endblock %}   
+   

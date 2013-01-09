@@ -20,10 +20,9 @@ class ArticleControllerTest extends LrtWebTestCase
      */
     public function listArticle()
     {
-        $client = static::createClient();
-        $this->login($client, array('user' => 'alexandre'));
-        $client->request('GET', '/article');
-        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+        $this->login($this->client, array('user' => 'alexandre'));
+        $this->client->request('GET', '/article');
+        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
     }
 
     /**
@@ -33,9 +32,8 @@ class ArticleControllerTest extends LrtWebTestCase
      */
     public function addArticle()
     {
-        $client = static::createClient();
-        $this->login($client, array('user' => 'alexandre'));
-        $crawler = $client->request('GET', '/article/new');
+        $this->login($this->client, array('user' => 'alexandre'));
+        $crawler = $this->client->request('GET', '/article/new');
 
         $form = $crawler->selectButton('Ajouter')->form(array(
             'lrt_cmsbundle_articletype[title]' => 'Nouvelle article du site',
@@ -45,9 +43,7 @@ class ArticleControllerTest extends LrtWebTestCase
             'lrt_cmsbundle_articletype[category]' => 1,
         ));
 
-        $crawler = $client->submit($form);
-
-        $this->em = $client->getContainer()->get('doctrine')->getEntityManager();
+        $crawler = $this->client->submit($form);
 
         $articleRepository = $this->em->getRepository('CMSBundle:Article');
         $article = $articleRepository->findOneBy(array('title' => 'Nouvelle article du site'));
@@ -57,24 +53,23 @@ class ArticleControllerTest extends LrtWebTestCase
     /**
      * @test
      * @testdox Modifier un article dont les données seraient valide
-     * @group cat
+     * @group article
      */
     public function editArticleValid()
     {
-        $client = static::createClient();
-        $this->login($client, array('user' => 'alexandre'));
-        $this->em = $client->getContainer()->get('doctrine')->getEntityManager();
+        $this->login($this->client, array('user' => 'alexandre'));
+        $this->em = $this->client->getContainer()->get('doctrine')->getEntityManager();
 
         $articleRepository = $this->em->getRepository('CMSBundle:Article');
         $article = $articleRepository->findOneBy(array('title' => 'Article 1'));
 
-        $crawler = $client->request('GET', '/article/'.$article->getId().'/edit');
+        $crawler = $this->client->request('GET', '/article/'.$article->getId().'/edit');
 
         $form = $crawler->selectButton('Edit')->form(array(
             'lrt_cmsbundle_articletype[title]' => 'Nouveau Site',
         ));
 
-        $crawler = $client->submit($form);
+        $crawler = $this->client->submit($form);
 
         $test = $articleRepository->findOneBy(array('title' => 'Nouveau Site'));
 
@@ -88,11 +83,10 @@ class ArticleControllerTest extends LrtWebTestCase
      */
     public function editInvalidArticle()
     {
-        $client = static::createClient();
-        $this->login($client, array('user' => 'alexandre'));
-        $this->assertEquals(200, $client->getResponse()->getStatusCode());
-        $client->request('GET', '/article/99999999/edit');
-        $this->assertEquals(404, $client->getResponse()->getStatusCode());
+        $this->login($this->client, array('user' => 'alexandre'));
+        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+        $this->client->request('GET', '/article/99999999/edit');
+        $this->assertEquals(404, $this->client->getResponse()->getStatusCode());
     }
 
     /**
@@ -102,10 +96,9 @@ class ArticleControllerTest extends LrtWebTestCase
      */
     public function showWithUnknownArticleReturns404()
     {
-        $client = static::createClient();
-        $this->login($client, array('user' => 'alexandre'));
-        $client->request('GET', '/article/99999999/show');
-        $this->assertEquals(404, $client->getResponse()->getStatusCode());
+        $this->login($this->client, array('user' => 'alexandre'));
+        $this->client->request('GET', '/article/99999999/show');
+        $this->assertEquals(404, $this->client->getResponse()->getStatusCode());
     }
 
     /**
@@ -115,10 +108,9 @@ class ArticleControllerTest extends LrtWebTestCase
      */
     public function showWithknownArticleReturns200()
     {
-        $client = static::createClient();
-        $this->login($client, array('user' => 'alexandre'));
-        $client->request('GET', '/article/1/show');
-        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+        $this->login($this->client, array('user' => 'alexandre'));
+        $this->client->request('GET', '/article/1/show');
+        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
     }
 
     /**
@@ -128,15 +120,13 @@ class ArticleControllerTest extends LrtWebTestCase
      */
     public function deleteArticleReturns200()
     {
-        $client = static::createClient();
-        $this->login($client, array('user' => 'alexandre'));
-        $client->request('GET', '/article');
-        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+        $this->login($this->client, array('user' => 'alexandre'));
+        $this->client->request('GET', '/article');
+        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
 
-        $this->em = $client->getContainer()->get('doctrine')->getEntityManager();
         $articleRepository = $this->em->getRepository('CMSBundle:Article');
         $article = $articleRepository->findOneBy(array('title' => 'Nouvelle article du site'));
 
-        $crawler = $client->request('POST', '/article/'.$article->getId().'/delete');
+        $crawler = $this->client->request('POST', '/article/'.$article->getId().'/delete');
     }
 }

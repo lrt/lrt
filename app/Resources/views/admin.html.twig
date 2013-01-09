@@ -32,15 +32,50 @@
                     {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown">
-                            <img src="{{ asset('bundles/admin/img/user_avatar.png') }}" alt="" class="user_avatar">
-                            {{ app.user.firstName }}
+                            <span class="icon-user icon-white"></span>
+                            Mon Compte
+                            <span class="label label-important">2</span>
                             <b class="caret"></b>
                         </a>
-                        <ul class="dropdown-menu">
-                            <li><a href="{{ path('user_profile', { 'id': app.user.id }) }}">Profile</a></li>
-                            <li><a href="#">Settings</a></li>
+                        <ul class="dropdown-menu dropdown-user-info">
+                            <li class="menu-account-info visible-desktop">
+                                <div class="row-fluid">
+                                    <div class="span1">&nbsp;</div>
+                                    <div class="span4"><img src="{{ asset('bundles/admin/img/no_picture.png') }}"></div>
+                                    <div class="span1">&nbsp;</div>
+                                    <div class="span6">
+                                        <h3>{{ app.user.firstName }}</h3>
+                                        <span class="badge badge-success">0</span> vidéo
+                                        <br>
+                                    </div>
+                                </div>
+                                <div class="row-fluid">
+                                    <div class="span6 center">
+                                        <a class="btn btn-primary btn-small" href="#">
+                                            <span class="icon-edit icon-white"></span> 
+                                            Modifier mon profil
+                                        </a>
+                                    </div>
+                                    <div class="span6 center">
+                                        <a class="btn btn-danger btn-small" href="#">
+                                            <span class="icon-off icon-white"></span> 
+                                            Se deconnecter
+                                        </a>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <a href="{{ path('user_profile', { 'id': app.user.id }) }}"><span class="icon-user"></span> Mon profil</a>
+                            </li>
+                            <li>
+                                <a href="#"><span class="icon-film"></span> Mes vidéos</a>
+                            </li>
+                            <li>
+                                <a href="#"><span class="icon-book"></span> Mes articles</a>
+                            </li>
                             <li class="divider"></li>
-                            <li><a href="{{ path('fos_user_security_logout') }}">Déconnexion</a></li>
+                            <li><a href="#"><span class="icon-envelope"></span> Mes messages <span class="label label-important">2</span></a></li>
+                            <li><a href="#"><span class="icon-pencil"></span> Nouveau message</a></li>
                         </ul>
                     </li>
                     {%  endif %}
@@ -105,7 +140,15 @@
             <div class="row-fluid">
                 <div class="span2"></div>
                 <div class="span10">
-                    {%  include 'AdminBundle:Themes:breadcrumb.html.twig' %}
+                    <div>
+                        <ul class="breadcrumb">
+                            <li class="first">
+                                <i class="icon-home"></i>
+                                <a href="{{ path('dashboard') }}">Tableau de bord</a> <span class="divider">/</span>
+                            </li>
+                            {% block breadcrumb %}{% endblock %}
+                        </ul>
+                    </div>
                     <div class="row-fluid">
                     {% block body %}{% endblock %}
                     </div>

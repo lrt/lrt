@@ -1,9 +1,16 @@
 {% extends '::admin.html.twig' %}
 
+{% block breadcrumb %}
+<li>
+    <a href="{{ path('user') }}">Utilisateurs</a> <span class="divider">/</span>
+</li>
+<li class="active">Modifier l'utilisateur "{{ entity.username }}"</li>
+{% endblock %}
+
 {% block body %}
 <div class="box">
     <h4 class="box-header round-top">
-        Modifier l'utilisateur
+        Modifier l'utilisateur "{{ entity.username }}"
     </h4>
     <div class="box-container-toggle">
         <div class="box-content">

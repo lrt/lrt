@@ -1,5 +1,12 @@
 {% extends '::admin.html.twig' %}
 
+{% block breadcrumb %}
+<li>
+    <a href="{{ path('user') }}">Utilisateurs</a> <span class="divider">/</span>
+</li>
+<li class="active">Ajouter un utilisateur</li>
+{% endblock %}
+
 {% block body %}
 <div class="box">
     <h4 class="box-header round-top">
@@ -7,24 +14,45 @@
     </h4>
     <div class="box-container-toggle">
         <div class="box-content">
-            <form action="{{ path('user_create') }}" method="post" {{ form_enctype(form) }}>
-                {{ form_label(form.username) }}
-                {{ form_widget(form.username) }}
-                {{ form_label(form.firstName) }}
-                {{ form_widget(form.firstName) }}
-                {{ form_label(form.lastName) }}
-                {{ form_widget(form.lastName) }}
-                {{ form_label(form.email) }}
-                {{ form_widget(form.email) }}
+            <form action="{{ path('user_create') }}" method="post" {{ form_enctype(form) }} class="form-horizontal">
+                <div class="control-group">
+                    {{ form_label(form.username, null, {'label_attr': {'class': 'control-label'}}) }}
+                    <div class="controls">
+                        {{ form_widget(form.username) }}
+                    </div>
+                </div>
+                <div class="control-group">
+                    {{ form_label(form.firstName, null, {'label_attr': {'class': 'control-label'}}) }}
+                    <div class="controls">
+                        {{ form_widget(form.firstName) }}
+                    </div>
+                </div>
+                <div class="control-group">
+                    {{ form_label(form.lastName, null, {'label_attr': {'class': 'control-label'}}) }}
+                    <div class="controls">
+                        {{ form_widget(form.lastName) }}
+                    </div>
+                </div>
+                <div class="control-group">
+                    {{ form_label(form.email, null, {'label_attr': {'class': 'control-label'}}) }}
+                    <div class="controls">
+                        {{ form_widget(form.email) }}
+                    </div>
+                </div>
+                <div class="control-group">
+                    <div class="controls">
+                        {{ form_widget(form.plainPassword) }}
+                    </div>
+                </div>
                 {{ form_rest(form) }}
-                <p>
-                    <button type="submit">Valider</button>
-                </p>
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary">Valider</button> 
+                    <a href="{{ path('user') }}" class="btn">
+                        Retour à la liste
+                    </a>
+		</div>
             </form>
         </div>
     </div>
 </div>
-<a href="{{ path('user') }}" class="btn btn-small btn-primary">
-    Retour à la liste
-</a>
 {% endblock %}

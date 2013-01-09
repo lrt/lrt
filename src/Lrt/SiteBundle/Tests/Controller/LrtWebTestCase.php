@@ -9,7 +9,20 @@ use Doctrine\Common\DataFixtures\Purger\ORMPurger;
 
 abstract class LrtWebTestCase extends WebTestCase
 {
+    
+    /**
+     * @var \Symfony\Bundle\FrameworkBundle\Client;
+     */
+    protected $client;
+    protected $em;
 
+    protected function setup()
+    {
+        $this->client = static::createClient(array('environment' => 'test'));
+        $this->client->followRedirects();
+        $this->em = $this->client->getContainer()->get('doctrine')->getEntityManager();
+    }
+    
     /**
      * Do login for user
      *

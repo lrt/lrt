@@ -1,3 +1,21 @@
+/**/
+.menu-account-info {
+    background-color: #EDEDED;
+    border-bottom: 1px solid #CCC;
+    color: #333;
+    margin-bottom: 10px;
+    padding: 10px;
+}
+
+.dropdown-user-info {
+    width: 330px;
+}
+
+.menu-account-info a.btn {
+    color: white;
+    font-weight: normal;
+}
+
 /*Widget USERS*/
 .users .item {
     clear: both;

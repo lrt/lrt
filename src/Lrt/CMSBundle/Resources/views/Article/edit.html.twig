@@ -1,54 +1,59 @@
 {% extends 'AdminBundle:Themes:box.html.twig' %}
 
+{% block breadcrumb %}
+<li>
+    <a href="{{ path('article') }}">Articles</a> <span class="divider">/</span>
+</li>
+<li class="active">Modifier l'article {{ entity.title }}</li>
+{% endblock %}
+
 {% block box_title %}
-    Modifier l'équipe
+    Modifier l'article "{{ entity.title }}"
 {% endblock %}
 
 {% block box_content %}
-    <form action="{{ path('team_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>
-        {{ form_widget(edit_form) }}
-        <p>
-            <button type="submit">Valider</button>
-        </p>
-    </form>
-{% endblock %}
-
-{% block box_button %}
-    <ul class="record_actions">
-        <li>
-            <a href="{{ path('team') }}">
-                Back to the list
+    <form action="{{ path('article_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }} class="form-horizontal">
+        <div class="control-group">
+            {{ form_label(edit_form.title, null, {'label': 'Titre', 'label_attr': {'class': 'control-label'}}) }}
+            <div class="controls">
+                {{ form_widget(edit_form.title) }}
+                {{ form_errors(edit_form.title) }}
+            </div>
+        </div>
+        <div class="control-group">
+            {{ form_label(edit_form.content, null, {'label': 'Texte', 'label_attr': {'class': 'control-label'}}) }}
+            <div class="controls">
+                {{ form_widget(edit_form.content, { 'attr': {'placeholder': 'titre', 'rows': '20'} }) }}
+                {{ form_errors(edit_form.content) }}
+            </div>
+        </div>
+        <div class="control-group">
+            {{ form_label(edit_form.status, null, {'label': 'Statut', 'label_attr': {'class': 'control-label'}}) }}
+            <div class="controls">
+                {{ form_widget(edit_form.status) }}
+                {{ form_errors(edit_form.status) }}
+            </div>
+        </div>
+        <div class="control-group">
+            {{ form_label(edit_form.isPublic, null, {'label': 'Visible', 'label_attr': {'class': 'control-label'}}) }}
+            <div class="controls">
+                {{ form_widget(edit_form.isPublic) }}
+                {{ form_errors(edit_form.isPublic) }}
+            </div>
+        </div>
+        <div class="control-group">
+            {{ form_label(edit_form.category, null, {'label': 'Catégorie', 'label_attr': {'class': 'control-label'}}) }}
+            <div class="controls">
+                {{ form_widget(edit_form.category) }}
+                {{ form_errors(edit_form.category) }}
+            </div>
+        </div>
+        {{ form_rest(edit_form) }}
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Valider</button> 
+            <a href="{{ path('article') }}" class="btn">
+                Retour à la liste
             </a>
-        </li>
-        <li>
-            <form action="{{ path('team_delete', { 'id': entity.id }) }}" method="post">
-                {{ form_widget(delete_form) }}
-                <button type="submit">Supprimer</button>
-            </form>
-        </li>
-    </ul>
-{% endblock %}
-
-
-
-
-
-
-{% block body %}
-<h1>Modifier l'article</h1>
-
-<form action="{{ path('article_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>
-    {{ form_widget(edit_form) }}
-    <p>
-        <button type="submit">Edit</button>
-    </p>
-</form>
-
-<ul class="record_actions">
-    <li>
-        <a href="{{ path('article') }}">
-            Retour à la liste
-        </a>
-    </li>
-</ul>
+        </div>
+    </form>
 {% endblock %}

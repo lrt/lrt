@@ -1,9 +1,17 @@
 {% extends '::admin.html.twig' %}
 
+{% block breadcrumb %}
+<li>
+    <a href="{{ path('user') }}">Utilisateurs</a> <span class="divider">/</span>
+</li>
+<li class="active">Liste</li>
+{% endblock %}
+
 {% block body %}
 <div class="box">
     <h4 class="box-header round-top">
-        Gestion des utilisateurs
+        <i class="icon-user"></i>
+        Liste des utilisateurs
         <a class="box-btn" title="close">
             <i class="icon-remove"></i>
         </a>
@@ -57,9 +65,9 @@
                         </td>
                         <td>
                             {% if entity.isEnabled == 1 %}
-                                Activé
+                                <span class="label label-success">Activé</span>
                             {% else %}
-                                Non activé
+                                <span class="label label-important">Non activé</span>
                             {% endif %}
                         </td>
                         <td>

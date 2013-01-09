@@ -16,8 +16,7 @@ Contexte: Je suis un utilisateur qui veut ajouter une vidéo
 
 @new_video
 Scénario: Je voudrais ajouter une vidéo
-    Et montrer la dernière réponse
-    Et je presse "Ajouter une vidéo"
+    Et je suis "Ajouter une vidéo"
     Lorsque je remplis le texte suivant:
             | lrt_videobundle_videotype_title          | Video Behat    |
             | lrt_videobundle_videotype_description    | Video ajouté par Behat  |
@@ -25,6 +24,9 @@ Scénario: Je voudrais ajouter une vidéo
             | lrt_videobundle_videotype_isAutoPlay     | 0            |
             | lrt_videobundle_videotype_isPublished    | 0            |
             | lrt_videobundle_videotype_isPublic       | 0            |
-    Et je presse "Create"
+    Et je presse "Valider"
     Alors je devrais voir "Description"
     Alors je devrais voir "Video ajouté par Behat"
+    Et je suis "Retour à la liste"
+    Alors je devrais voir les lignes suivantes dans le tableau "tListeVideos" :
+        | * | * | 50012660 | Non publié | * | * |
