@@ -76,14 +76,6 @@ class Content
         $this->setUpdated(new \DateTime());
     }
 
-    /**
-     * @ORM\preUpdate
-     */
-    public function setUpdatedValue()
-    {
-        $this->setUpdated(new \DateTime());
-    }
-
     public function whoAmI()
     {
         return get_class($this);
