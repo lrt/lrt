@@ -18,8 +18,8 @@ class VideoType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('title')
-            ->add('description')
+            ->add('title', null, array('required' => false, 'label' => 'Titre :'))
+            ->add('description', null, array('required' => false, 'label' => 'Description :'))
             ->add('vimeoId')
             ->add('isAutoPlay')
             ->add('isPublished')

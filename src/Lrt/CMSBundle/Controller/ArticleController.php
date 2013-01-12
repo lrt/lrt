@@ -28,12 +28,17 @@ use Lrt\CMSBundle\Form\Type\ArticleType;
  */
 class ArticleController extends Controller
 {
-
     /** @DI\Inject("security.context") */
     public $sc;
 
     /** @DI\Inject("doctrine.orm.entity_manager") */
     public $em;
+
+    /** @DI\Inject("form.cms.article.filter.type") */
+    public $articleFilter;
+
+    /** @DI\Inject("form.cms.article.type") */
+    public $am;
 
     /**
      * Lists all Article entities.
@@ -42,11 +47,21 @@ class ArticleController extends Controller
      * @Secure(roles="ROLE_ADMIN")
      * @Template()
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
-        $articles = $this->em->getRepository('CMSBundle:Article')->findAll();
+        $form = $this->createForm($this->articleFilter, array());
+        $form->bind($request);
+        $data = $form->getData();
 
-        return array('entities' => $articles);
+        if($form->isValid()) {
+
+            $articles = $this->em->getRepository('CMSBundle:Article')->filter($data['title'], $data['status'], $data['isPublic'], $data['category']);
+
+            return array('entities' => $articles,'form' => $form->createView(), 'nb' => count($articles));
+
+        } else {
+            return $this->redirect($this->generateUrl('article'));
+        }
     }
 
     /**
@@ -60,8 +75,7 @@ class ArticleController extends Controller
         $article = $this->em->getRepository('CMSBundle:Article')->find($id);
 
         if (!$article) {
-
-            return new Response('NOT FOUND', 404);
+            throw $this->createNotFoundException('Aucun article ne correspond à vos critères.');
         }
 
         return array('entity' => $article);
@@ -78,7 +92,7 @@ class ArticleController extends Controller
     {
         $article = new Article();
 
-        $form   = $this->createForm(new ArticleType(), $article);
+        $form = $this->createForm(new ArticleType(), $article);
 
         return array(
             'entity' => $article,
@@ -96,16 +110,14 @@ class ArticleController extends Controller
      */
     public function createAction()
     {
+        $user = $this->sc->getToken()->isAuthenticated();
 
-        $user = $this->sc->getToken()->getUser();
-
-        if(is_object($user)) {
+        if($user) {
 
             $article  = new Article();
             $article->setUser($user);
 
-            $form = $this->createForm(new ArticleType(), $article);
-
+            $form = $this->createForm($this->am, $article);
             $formHandler = new ArticleHandler($form, $this->getRequest(), $this->em);
 
             if($formHandler->process()) {
@@ -116,9 +128,7 @@ class ArticleController extends Controller
             return array('entity' => $article,'form' => $form->createView());
 
         } else {
-
-           return new Response('Vous devez être connecté', 404);
-
+            throw $this->createNotFoundException('Vous devez être connecté pour accèder à cette page.');
         }
     }
 
@@ -131,10 +141,9 @@ class ArticleController extends Controller
      */
     public function editAction($id)
     {
+        $user = $this->sc->getToken()->isAuthenticated();
 
-        $user = $this->sc->getToken()->getUser();
-
-        if(is_object($user)) {
+        if($user) {
 
             $entity = $this->em->getRepository('CMSBundle:Article')->find($id);
 
@@ -149,7 +158,7 @@ class ArticleController extends Controller
                 'edit_form'   => $editForm->createView(),
             );
         } else {
-            return new Response('Vous devez être connecté', 404);
+            throw $this->createNotFoundException('Vous devez être connecté pour accèder à cette page.');
         }
     }
 
@@ -163,32 +172,28 @@ class ArticleController extends Controller
      */
     public function updateAction(Request $request, $id)
     {
+        $user = $this->sc->getToken()->isAuthenticated();
 
-        $user = $this->sc->getToken()->getUser();
+        if($user) {
+            $article = $this->em->getRepository('CMSBundle:Article')->find($id);
 
-        if(is_object($user)) {
-            $entity = $this->em->getRepository('CMSBundle:Article')->find($id);
-
-            if (!$entity) {
-                throw $this->createNotFoundException('Unable to find Article entity.');
+            if (!$article) {
+                throw $this->createNotFoundException('Aucun article ne correspond à votre demande.');
             }
 
-            $editForm = $this->createForm(new ArticleType(), $entity);
-
-            $formHandler = new ArticleHandler($editForm, $this->getRequest(), $this->em);
+            $form = $this->createForm($this->am, $article);
+            $formHandler = new ArticleHandler($form, $this->getRequest(), $this->em);
 
             if($formHandler->process()) {
-
                 return $this->redirect($this->generateUrl('article_edit', array('id' => $id)));
-
             }
 
             return array(
-                'entity'      => $entity,
-                'edit_form'   => $editForm->createView(),
+                'entity' => $article,
+                'edit_form' => $form->createView(),
             );
         } else {
-            return new Response('Vous devez être connecté', 404);
+            throw $this->createNotFoundException('Vous devez être connecté pour accèder à cette page.');
         }
     }
 
@@ -201,10 +206,9 @@ class ArticleController extends Controller
      */
     public function deleteAction(Request $request, $id)
     {
+        $user = $this->sc->getToken()->isAuthenticated();
 
-        $user = $this->sc->getToken()->getUser();
-
-        if(is_object($user)) {
+        if($user) {
             $form = $this->createDeleteForm($id);
             $form->bind($request);
 
@@ -222,7 +226,7 @@ class ArticleController extends Controller
 
             return $this->redirect($this->generateUrl('article'));
         } else {
-            return new Response('Vous devez être connecté', 404);
+            throw $this->createNotFoundException('Vous devez être connecté pour accèder à cette page.');
         }
     }
 

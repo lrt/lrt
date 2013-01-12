@@ -25,9 +25,10 @@ class DefaultController extends Controller
         $users = $this->em->getRepository('UserBundle:User')->findAll();
         $videos = $this->em->getRepository('VideoBundle:Video')->findAll();
 
-        return array('articles' => $articles,
-                     'users' => $users,
-                     'videos' => $videos
-                    );
+        return array(
+            'articles' => $articles,
+            'users' => $users,
+            'videos' => $videos
+        );
     }
 }

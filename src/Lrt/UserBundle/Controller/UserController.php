@@ -39,11 +39,12 @@ class UserController extends Controller
         $form->bindRequest($request);
         $data = $form->getData();
 
-        $users =  $this->em->getRepository('UserBundle:User')->filter($data['login'], $data['nom'], $data['type'], $data['email']);
+        $users = $this->em->getRepository('UserBundle:User')->filter($data['login'], $data['nom'], $data['type'], $data['email'], $data['status']);
 
         return array(
             'entities' => $users,
             'form' => $form->createView(),
+            'nb' => count($users)
         );
     }
 

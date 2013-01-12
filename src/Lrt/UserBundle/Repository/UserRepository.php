@@ -17,11 +17,8 @@ class UserRepository extends EntityRepository
     /**
      * Filtre sur la liste des utilisateurs
      */
-    public function filter($login = '', $nom = '', $role = 'tous', $email = '')
-    {
-
-        $em = $this->getEntityManager();
-
+    public function filter($login = '', $nom = '', $role = '', $email = '', $status = '')
+    {        
         $queryStr = 'SELECT u FROM UserBundle:User u
                     WHERE 1 = 1 ';
 
@@ -40,8 +37,12 @@ class UserRepository extends EntityRepository
         if ($email != null && $email != '') {
             $queryStr.= ' AND u.email LIKE :email ';
         }
+        
+        if ($status != null && $status != '') {
+            $queryStr.= ' AND u.enabled = :status ';
+        }
 
-        $query = $em->createQuery($queryStr);
+        $query = $this->getEntityManager()->createQuery($queryStr);
 
 
         if ($login != null && $login != '') {
@@ -58,6 +59,10 @@ class UserRepository extends EntityRepository
 
         if ($email != null && $email != '') {
             $query->setParameter('email', '%'.$email.'%');
+        }
+        
+        if ($status != null && $status != '') {
+            $query->setParameter('status', $status);
         }
 
         return $query->getResult();

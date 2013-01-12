@@ -36,9 +36,9 @@ class VideoHandler {
         return false;
     }
 
-    protected function onSuccess($video)
+    protected function onSuccess($entity)
     {
-        $this->em->persist($video);
+        $this->em->persist($entity);
         $this->em->flush();
     }
 }

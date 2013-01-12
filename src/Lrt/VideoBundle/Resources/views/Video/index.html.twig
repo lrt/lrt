@@ -7,11 +7,19 @@
 <li class="active">Liste</li>
 {% endblock %}
 
+{% block menu %}
+    <li class="nav-header">Video</li>
+    <li><a href="{{ path('video_new') }}">Ajouter</a></li>
+    <li><a href="{{ path('video') }}">Liste des vidéos</a></li>
+    <li><a href="#">Vidéo(s) en attente</a></li>
+    <li><a href="#">Corbeille</a></li>
+{% endblock %}
+
 {% block body %}
 <div class="box">
     <h4 class="box-header round-top">
         <i class="icon-play-circle"></i>
-        Liste des vidéos
+        Liste des vidéos ({% if nb is defined %}{{ nb }}{% endif %})
         <a class="box-btn" title="close">
             <i class="icon-remove"></i>
         </a>
@@ -24,15 +32,33 @@
     </h4>
     <div class="box-container-toggle">
         <div class="box-content">
+            <div id="filtres">
+                <div id="titreFiltres">
+                    <h4>filtres</h4>
+                </div>
+                <div id="contentFiltres">
+                    <form action="{{ path('video') }}" method="get" class="form-inline">
+                        {{ form_widget(form.title,{ 'attr': {'placeholder': 'titre'} }) }} <br><br>
+                        {{ form_widget(form.status) }} {{ form_widget(form.isPublic) }} <br><br>
+                        {{ form_rest(form) }}
+                        <a href="{{ path('video') }}" class="btn btn-small raz-filter" data-href="{{ path('video') }}">
+                            <i class="icon-refresh"></i>
+                            Réinitialiser
+                        </a>
+                        <button type="submit" class="btn btn-small btn-primary"><i class="icon-filter icon-white"></i>Filtrer</button>
+                    </form>
+                </div>
+            </div>
+            <hr>
             <table class="table table-striped tListeVideos">
                 <thead>
                     <tr>
                         <th></th>
                         <th>Vidéo</th>
                         <th>Liens Vidéo</th>
-                        <th>Status</th>
+                        <th>Statut</th>
                         <th>Visibilité</th>
-                        <th>Actions</th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -63,7 +89,7 @@
                             {% endif %}
                         </td>
                         <td>
-                            <a href="{{ path('video_show', { 'id': entity.id }) }}" class="btn btn-small btn-success">
+                            <a rel="{{ entity.title }}" href="{{ path('video_show', { 'id': entity.id }) }}" class="btn btn-small btn-success popin">
                                 <i class="icon-zoom-in icon-white"></i>
                                 Voir
                             </a>
@@ -83,6 +109,7 @@
         </div>
     </div>
 </div>
+
 <a href="{{ path('video_new') }}" class="btn btn-small btn-primary">
     Ajouter une vidéo
 </a>

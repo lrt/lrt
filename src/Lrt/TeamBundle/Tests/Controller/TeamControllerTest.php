@@ -4,11 +4,9 @@ namespace Lrt\TeamBundle\Tests\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
-class TeamControllerTest extends WebTestCase
-{
+class TeamControllerTest extends WebTestCase {
 
-    public function testCompleteScenario()
-    {
+    public function testCompleteScenario() {
         // Create a new client to browse the application
         $client = static::createClient();
 
@@ -19,8 +17,8 @@ class TeamControllerTest extends WebTestCase
 
         // Fill in the form and submit it
         $form = $crawler->selectButton('Create')->form(array(
-            'lrt_teambundle_teamtype[name]'  => 'Test',
-        ));
+            'lrt_teambundle_teamtype[name]' => 'Test',
+                ));
 
         $client->submit($form);
         $crawler = $client->followRedirect();
@@ -32,8 +30,8 @@ class TeamControllerTest extends WebTestCase
         $crawler = $client->click($crawler->selectLink('Edit')->link());
 
         $form = $crawler->selectButton('Valider')->form(array(
-            'lrt_teambundle_teamtype[name]'  => 'Test',
-        ));
+            'lrt_teambundle_teamtype[name]' => 'Test',
+                ));
 
         $client->submit($form);
         $crawler = $client->followRedirect();
@@ -48,4 +46,5 @@ class TeamControllerTest extends WebTestCase
         // Check the entity has been delete on the list
         $this->assertNotRegExp('/Test/', $client->getResponse()->getContent());
     }
+
 }

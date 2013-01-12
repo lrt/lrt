@@ -7,10 +7,19 @@
 <li class="active">All</li>
 {% endblock %}
 
+{% block menu %}
+<li class="nav-header">Article</li>
+<li><a href="{{ path('article_new') }}">Ajouter</a></li>
+<li><a href="{{ path('article') }}">Liste des articles</a></li>
+<li><a href="#">Article(s) en attente</a></li>
+<li><a href="{{ path('category') }}">Rubrique</a></li>
+<li><a href="#">Corbeille</a></li>
+{% endblock %}
+
 {% block body %}
 <div class="box">
     <h4 class="box-header round-top">
-        Liste des articles
+        Liste des articles ({% if nb is defined %}{{ nb }}{% endif %})
         <a class="box-btn" title="close">
             <i class="icon-remove"></i>
         </a>
@@ -23,14 +32,33 @@
     </h4>
     <div class="box-container-toggle">
         <div class="box-content">
-            <table class="table table-striped">
+            <div id="filtres">
+                <div id="titreFiltres">
+                    <h4>filtres</h4>
+                </div>
+                <div id="contentFiltres">
+                    <form action="{{ path('article') }}" method="get" class="form-inline">
+                        {{ form_widget(form.title,{ 'attr': {'placeholder': 'titre'} }) }} {{ form_widget(form.category) }} <br><br>
+                        {{ form_widget(form.status) }} {{ form_widget(form.isPublic) }} <br><br>
+                        {{ form_rest(form) }}
+                        <a href="{{ path('article') }}" class="btn btn-small raz-filter" data-href="{{ path('article') }}">
+                            <i class="icon-refresh"></i>
+                             Réinitialiser
+                        </a>
+                        <button type="submit" class="btn btn-small btn-primary"><i class="icon-filter icon-white"></i>Filtrer</button>
+                    </form>
+                </div>
+            </div>
+            <hr>
+            <table class="table table-striped tListeArticles">
                 <thead>
                     <tr>
-                        <th>#</th>
+                        <th></th>
                         <th>Contenu</th>
-                        <th>Statut</th>
+                        <th>Date</th>
+                        <th>Rubrique</th>
                         <th>Visibilité</th>
-                        <th>Actions</th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -42,10 +70,11 @@
                                 <img src="{{ asset('bundles/site/images/page.png') }}" alt="Prévisualiser" title="Prévisualiser" class="preview">
                                 <a class="title_preview" title="Modifier" href="{{ path('article_edit', { 'id': entity.id }) }}">{{ entity.id }} - <b>{{ entity.title }}</b></a>
                             </div>
-                            {{ entity.content | truncate(50) }}
+                            {{ entity.content|raw|truncate(50) }}
                             ( posté par  <a title="" href="#">{{ entity.user }}</a> )
                         </td>
-                        <td></td>
+                        <td>{{ entity.created|date('d/m/Y h:m') }}</td>
+                        <td>{{ entity.category.name }}</td>
                         <td>
                             {% if entity.isPublic == 1 %}
                             Public
@@ -54,7 +83,7 @@
                             {% endif %}
                         </td>
                         <td>
-                            <a href="{{ path('article_show', { 'id': entity.id }) }}" class="btn btn-small btn-success">
+                            <a data-toggle="modal" rel="{{ entity.title }}" href="{{ path('article_show', { 'id': entity.id }) }}" class="btn btn-small btn-success popin">
                                 <i class="icon-zoom-in icon-white"></i>
                                 Voir
                             </a>
@@ -67,6 +96,10 @@
                                 Supprimer
                             </a>
                         </td>
+                    </tr>
+                    {% else %}
+                    <tr>
+                        <td>Aucun article ne correspond à votre recherche</td>
                     </tr>
                     {% endfor %}
                 </tbody>

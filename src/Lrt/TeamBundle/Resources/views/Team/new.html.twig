@@ -5,6 +5,7 @@
 {% endblock %}
 
 {% block box_content %}
+    {% form_theme form 'AdminBundle:Themes:form.html.twig' %}
     <form action="{{ path('team_create') }}" method="post" {{ form_enctype(form) }}>
         {{ form_widget(form) }}
         <p>

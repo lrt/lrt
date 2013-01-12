@@ -14,16 +14,17 @@
     </h4>
     <div class="box-container-toggle">
         <div class="box-content">
-            <form action="{{ path('user_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>
+            {% form_theme edit_form 'AdminBundle:Themes:form.html.twig' %}
+            <form action="{{ path('user_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }} class="form-horizontal">
                 {{ form_widget(edit_form) }}
-                <p>
-                    <button type="submit">Modifier</button>
-                </p>
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary"><i class="icon-check icon-white"></i> Modifier</button>
+                    <a href="{{ path('user') }}" class="btn">
+                        <i class="icon-list"></i> Retour à la liste
+                    </a>
+                </div>
             </form>
         </div>
     </div>
 </div>
-<a href="{{ path('user') }}" class="btn btn-small btn-primary">
-    Retour à la liste
-</a>
 {% endblock %}

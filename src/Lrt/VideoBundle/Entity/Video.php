@@ -10,10 +10,9 @@
 namespace Lrt\VideoBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Doctrine\Common\Collections\ArrayCollection;
 
 /**
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Lrt\VideoBundle\Repository\VideoRepository")
  * @ORM\Table(name="video")
  * @ORM\HasLifecycleCallbacks()
  */

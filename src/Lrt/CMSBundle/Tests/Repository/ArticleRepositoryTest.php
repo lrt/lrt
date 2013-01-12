@@ -7,40 +7,52 @@
  * @link     http://longchamp-roller-team.com
  */
 
-namespace Lrt\CMSBundle\Tests\Controller;
+namespace Lrt\CMSBundle\Tests\Repository;
 
-use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use Lrt\SiteBundle\Tests\Controller\LrtWebTestCase;
 
-/**
- * User: alex
- * Date: 23/12/12
- */
-class ArticleRepositoryTest extends WebTestCase
-{
+class ArticleRepositoryTest extends LrtWebTestCase {
 
-    /**
-     * @var \Symfony\Bundle\FrameworkBundle\Client;
-     */
-    protected $client;
-
-    protected function setup()
-    {
-        $this->client = static::createClient(array('environment' => 'test'));
-        $this->em = $this->client->getContainer()->get('doctrine')->getEntityManager();
-    }
-
+    const LIMIT = 5;
+    
     /**
      * @test
      * @testdox Recupère la liste des derniers articles avec une limite définie
      * @group art
      */
-    public function getLatestArticlesWithLimit()
-    {
+    public function getLatestArticlesWithLimit() {
 
-        $limit = 5;
+        $rpArticle = $this->em->getRepository('CMSBundle:Article')->getLatestArticles(self::LIMIT);
+        
+        $this->assertNotEmpty($rpArticle);
+        $this->assertEquals(self::LIMIT, count($rpArticle));
+    }
+    
+    /**
+    * @test
+    * @testdox Recupère la liste des articles d'une catégorie
+    * @group art
+    */
+    public function getArticlesByCategoryReturnArray() {
 
-        $rpArticle = $this->em->getRepository('CMSBundle:Article')->getLatestArticles($limit);
+        $rpCategory = $this->em->getRepository('CMSBundle:Category')->findOneBy(array('name' => 'Actualités'));
+        $this->assertNotNull($rpCategory);
+        
+        $rpArticle = $this->em->getRepository('CMSBundle:Article')->getArticlesByCategory($rpCategory->getName());
+        $this->assertNotEmpty($rpArticle);
+    }
+    
+    /**
+    * @test
+    * @testdox Recupère la liste des articles d'un utilisateur (auteur)
+    * @group art
+    */
+    public function getArticlesByUserReturnArray() {
 
+        $user = $this->em->getRepository('UserBundle:User')->findOneBy(array('username' => 'alexandre'));
+        $this->assertNotNull($user);
+        
+        $rpArticle = $this->em->getRepository('CMSBundle:Article')->getArticlesByUser($user);
         $this->assertNotEmpty($rpArticle);
     }
 }

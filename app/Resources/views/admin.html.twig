@@ -18,16 +18,62 @@
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
 </head>
 <body>
-<div id="maincontainer" class="clearfix">
-    <header>
-    <div class="navbar navbar-fixed-top">
-        <div class="navbar-inner">
-            <div class="container-fluid">
-                <a class="brand" href="#">
-                    <i class="icon-home icon-white"></i>
-                    {{ sitename }}
-                </a>
-                <ul class="nav user_menu pull-right">
+<div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+        <div class="container-fuild">
+            <a class="btn btn-navbar collapsed" data-toggle="collapse" data-target=".nav-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </a>
+            <a class="brand" href="{{ path('dashboard') }}">
+                <i class="icon-home icon-white"></i>
+                {{ sitename }}
+            </a>
+            <div class="nav-collapse">
+                <ul class="nav">
+                    <li class="dropdown">
+                        <a href="#" data-toggle="dropdown" class="dropdown-toggle">
+                            <i class="icon-folder-close icon-white"></i>
+                            Contenu
+                            <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="{{ path('article') }}">Articles</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="{{ path('user') }}" title="Utilisateurs">
+                            <i class="icon-user icon-white"></i>
+                            Utilisateurs
+                        </a>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" data-toggle="dropdown" class="dropdown-toggle">
+                            <i class="icon-bullhorn icon-white"></i>
+                            Evènement(s)
+                            <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#"><i class="icon-calendar"></i> Tous les évènements</a></li>
+                            <li class="divider"></li>
+                            <li><a href="#"><i class="icon-plus"></i> Ajouter un évènement</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" data-toggle="dropdown" class="dropdown-toggle">
+                            <i class="icon-play-circle icon-white"></i>
+                            Videos
+                            <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="{{ path('video') }}"> <i class="icon-list"></i> Toutes les vidéos</a></li>
+                            <li class="divider"></li>
+                            <li><a href="{{ path('video_new') }}"><i class="icon-plus"></i> Ajouter une vidéo</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <ul class="nav pull-right">
                     <li class="divider-vertical hidden-phone hidden-tablet"></li>
                     {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
                     <li class="dropdown">
@@ -52,13 +98,13 @@
                                 <div class="row-fluid">
                                     <div class="span6 center">
                                         <a class="btn btn-primary btn-small" href="#">
-                                            <span class="icon-edit icon-white"></span> 
+                                            <span class="icon-edit icon-white"></span>
                                             Modifier mon profil
                                         </a>
                                     </div>
                                     <div class="span6 center">
                                         <a class="btn btn-danger btn-small" href="#">
-                                            <span class="icon-off icon-white"></span> 
+                                            <span class="icon-off icon-white"></span>
                                             Se deconnecter
                                         </a>
                                     </div>
@@ -80,89 +126,50 @@
                     </li>
                     {%  endif %}
                 </ul>
-                <ul class="nav" id="mobile-nav">
-                    <li class="dropdown">
-                        <a href="#" data-toggle="dropdown" class="dropdown-toggle">
-                            <i class="icon-folder-close icon-white"></i>
-                            Contenu
-                            <b class="caret"></b>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a href="{{ path('article') }}">Articles</a></li>
-                        </ul>
-                    </li>
-                    <li class="dropdown">
-                        <a href="#" data-toggle="dropdown" class="dropdown-toggle">
-                            <i class="icon-user icon-white"></i>
-                            Utilisateurs
-                            <b class="caret"></b>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a href="{{ path('user') }}">Liste</a></li>
-                        </ul>
-                    </li>
-                    <li class="dropdown">
-                        <a href="#" data-toggle="dropdown" class="dropdown-toggle">
-                            <i class="icon-play-circle icon-white"></i>
-                            Videos
-                            <b class="caret"></b>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a href="{{ path('video') }}">All</a></li>
-                        </ul>
-                    </li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <i class="icon-envelope icon-white"></i>
-                            Notifications <span class="label label-info">100</span>
-                            <b class="caret"></b>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a href="#">Message 1</a></li>
-                            <li><a href="#">Another message</a></li>
-                            <li><a href="#">Something else message</a></li>
-                            <li class="divider"></li>
-                            <li><a href="#">Older messages...</a></li>
-                        </ul>
-                    </li>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="span2">
+            <div class="well sidebar-nav">
+                <ul class="nav nav-list">
+                    {% block menu %}{% endblock %}
                 </ul>
-                <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </a>
             </div>
         </div>
-    </div>
-    </header>
-    <div id="contentwrapper">
-        <div class="main_content">
+        <div class="span10">
+            <div>
+                <ul class="breadcrumb">
+                    <li class="first">
+                        <i class="icon-home"></i>
+                        <a href="{{ path('dashboard') }}">Tableau de bord</a> <span class="divider">/</span>
+                    </li>
+                    {% block breadcrumb %}{% endblock %}
+                </ul>
+            </div>
             <div class="row-fluid">
-                <div class="span2"></div>
-                <div class="span10">
-                    <div>
-                        <ul class="breadcrumb">
-                            <li class="first">
-                                <i class="icon-home"></i>
-                                <a href="{{ path('dashboard') }}">Tableau de bord</a> <span class="divider">/</span>
-                            </li>
-                            {% block breadcrumb %}{% endblock %}
-                        </ul>
+                {% block body %}{% endblock %}
+                <!-- modal -->
+                <div id="box" class="modal hide fade" role="dialog">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h3 id="myModalLabel"></h3>
                     </div>
-                    <div class="row-fluid">
-                    {% block body %}{% endblock %}
-                    </div>
+                    <div class="modal-body"></div>
                 </div>
+                <!-- modal -->
             </div>
         </div>
     </div>
-    <div class="sidebar"></div>
 </div>
 {% block javascripts %}
     <script src="{{ asset('bundles/site/js/jquery.min.js') }}"></script>
     <script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js'></script>
-    <script src="{{ asset('bundles/site/js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('bundles/admin/js/bootstrap/bootstrap.min.js') }}"></script>
     <script src="{{ asset('bundles/site/js/admin/simplenso.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/admin/js/modal.js') }}"></script>
 {% endblock %}
 </body>
 </html>

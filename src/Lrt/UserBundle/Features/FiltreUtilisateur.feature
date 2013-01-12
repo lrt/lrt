@@ -10,15 +10,15 @@ Contexte: Je suis un administrateur qui recherche des utilisateurs
     Alors je suis sur la page d'accueil
     Et je ne devrais pas voir "Exception detected!"
     Soit je suis "Admin"
-    Et je suis "Liste"
-    Alors je devrais voir "Gestion des utilisateurs"
+    Et je suis "Utilisateurs"
+    Alors je devrais voir "Liste des utilisateurs"
 
 @filtre_user
 Scénario: Je recherche un utilisateur par son login
 
     Lorsque je remplis le texte suivant:
         | Login |  alexandre  |
-    Et je presse "afficher"
+    Et je presse "Filtrer"
     Alors je devrais voir les lignes suivantes dans le tableau "tListeUsers" :
         | alexandre | * | alexandre.seiller@longchamp-roller-team.com | admin | * | * |
 
@@ -27,7 +27,7 @@ Scénario: Je recherche un utilisateur par son email
 
     Lorsque je remplis le texte suivant:
         | Email |  julien.morelle@longchamp-roller-team.com  |
-    Et je presse "afficher"
+    Et je presse "Filtrer"
     Alors je devrais voir les lignes suivantes dans le tableau "tListeUsers" :
         | julien | * | julien.morelle@longchamp-roller-team.com | admin | * | * |
 
@@ -36,7 +36,7 @@ Scénario: Je recherche un utilisateur par son nom
 
     Lorsque je remplis le texte suivant:
         | Nom |  dubosc  |
-    Et je presse "afficher"
+    Et je presse "Filtrer"
     Alors je devrais voir les lignes suivantes dans le tableau "tListeUsers" :
         | jeremy | * | jeremy.dubosc@longchamp-roller-team.com | admin | * | * |
 
@@ -45,7 +45,7 @@ Scénario: Je recherche tous les administrateurs
 
     Lorsque je remplis le texte suivant:
         | Type |  ROLE_ADMIN  |
-    Et je presse "afficher"
+    Et je presse "Filtrer"
     Alors je devrais voir les lignes suivantes dans le tableau "tListeUsers" :
         | alexandre | * | alexandre.seiller@longchamp-roller-team.com | admin | * | * |
     Et je ne devrais pas voir les lignes suivantes dans le tableau "tListeUsers" :

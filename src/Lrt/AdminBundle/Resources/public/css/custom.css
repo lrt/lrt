@@ -1,3 +1,29 @@
+/**FILTRES**/
+#filtres #titreFiltres {
+    width: 130px;
+    border-right: 1px solid #DDD;
+    position: absolute;
+    /*top: 0;
+    left: 0;*/
+    height: 127px;
+}
+
+#filtres #contentFiltres {
+    margin-left: 130px;
+    padding: 0 15px;
+}
+
+#filtres #titreFiltres h4 {
+    position: absolute;
+    top: 50%;
+    margin-top: -10px;
+    text-transform: uppercase;
+    text-align: center;
+    display: block;
+    font-size: 18px;
+    font-weight:normal;
+    width: 100%;
+}
 /**/
 .menu-account-info {
     background-color: #EDEDED;

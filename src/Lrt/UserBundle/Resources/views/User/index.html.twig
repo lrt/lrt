@@ -7,11 +7,18 @@
 <li class="active">Liste</li>
 {% endblock %}
 
+{% block menu %}
+    <li class="nav-header">Utilisateur</li>
+    <li><a href="{{ path('user_new') }}">Ajouter</a></li>
+    <li><a href="{{ path('user') }}">Liste des utilisateurs</a></li>
+    <li><a href="#">Utilisateur(s) en attente</a></li>
+{% endblock %}
+
 {% block body %}
 <div class="box">
     <h4 class="box-header round-top">
         <i class="icon-user"></i>
-        Liste des utilisateurs
+        Liste des utilisateurs ({% if nb is defined %}{{ nb }}{% endif %})
         <a class="box-btn" title="close">
             <i class="icon-remove"></i>
         </a>
@@ -25,12 +32,20 @@
     <div class="box-container-toggle">
         <div class="box-content">
             <div id="filtres">
+                <div id="titreFiltres">
+                    <h4>filtres</h4>
+                </div>
                 <div id="contentFiltres">
                     <form action="{{ path('user') }}" method="get" class="form-inline">
-                        {{ form_label(form.login) }} {{ form_widget(form.login) }} {{ form_label(form.nom) }} {{ form_widget(form.nom) }} <br><br>
-                        {{ form_label(form.email) }} {{ form_widget(form.email) }} {{ form_label(form.type) }} {{ form_widget(form.type) }}
+                        {{ form_widget(form.login,{ 'attr': {'placeholder': 'login'} }) }} {{ form_widget(form.nom,{ 'attr': {'placeholder': 'nom'} }) }} 
+                        {{ form_widget(form.email,{ 'attr': {'placeholder': 'email'} }) }}  <br><br>
+                        {{ form_widget(form.type) }} {{ form_widget(form.status) }} <br><br>
                         {{ form_rest(form) }}
-                        <input type="submit" value="afficher">
+                        <a href="{{ path('user') }}" class="btn btn-small raz-filter" data-href="{{ path('user') }}">
+                            <i class="icon-refresh"></i>
+                             Réinitialiser
+                        </a>
+                        <button type="submit" class="btn btn-small btn-primary"><i class="icon-filter icon-white"></i>Filtrer</button>
                     </form>
                 </div>
             </div>
@@ -43,7 +58,7 @@
                         <th>Email</th>
                         <th>Role</th>
                         <th>Statut</th>
-                        <th>Action</th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -55,7 +70,7 @@
                             {{ entity.firstName }} {{ entity.lastName }}
                             </a>
                         </td>
-                        <td>{{ entity.email }}</td>
+                        <td>{{ entity.email|replace({'@': '[@]'}) }}</td>
                         <td>
                             {% for role in entity.roles %}
                                 {% if role != 'ROLE_USER' %}

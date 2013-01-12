@@ -26,8 +26,7 @@ use Lrt\VideoBundle\Form\Type\VideoType;
  *
  * @Route("/video")
  */
-class VideoController extends Controller
-{
+class VideoController extends Controller {
 
     /** @DI\Inject("security.context") */
     public $sc;
@@ -35,19 +34,32 @@ class VideoController extends Controller
     /** @DI\Inject("doctrine.orm.entity_manager") */
     public $em;
 
+    /** @DI\Inject("form.video.filter.type") */
+    public $videoFilter;
+
     /**
      * Lists all Video entities.
      *
      * @Route("/", name="video")
      * @Template()
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
-        $entities = $this->em->getRepository('VideoBundle:Video')->findAll();
+        $form = $this->createForm($this->videoFilter, array());
+        $form->bind($request);
+        $data = $form->getData();
 
-        return array(
-            'entities' => $entities,
-        );
+        if($form->isValid()) {
+            $videos = $this->em->getRepository('VideoBundle:Video')->filter($data['title'], $data['status'], $data['isPublic']);
+
+            return array(
+                'entities' => $videos,
+                'form' => $form->createView(),
+                'nb' => count($videos)
+            );
+        } else {
+            return $this->redirect($this->generateUrl('video'));
+        }
     }
 
     /**
@@ -56,8 +68,7 @@ class VideoController extends Controller
      * @Route("/{id}/show", name="video_show")
      * @Template()
      */
-    public function showAction($id)
-    {
+    public function showAction($id) {
         $video = $this->em->getRepository('VideoBundle:Video')->find($id);
 
         if (!$video) {
@@ -76,14 +87,13 @@ class VideoController extends Controller
      * @Secure(roles="ROLE_ADMIN")
      * @Template()
      */
-    public function newAction()
-    {
+    public function newAction() {
         $video = new Video();
-        $form   = $this->createForm(new VideoType(), $video);
+        $form = $this->createForm(new VideoType(), $video);
 
         return array(
             'entity' => $video,
-            'form'   => $form->createView(),
+            'form' => $form->createView(),
         );
     }
 
@@ -95,21 +105,28 @@ class VideoController extends Controller
      * @Method("POST")
      * @Template("VideoBundle:Video:new.html.twig")
      */
-    public function createAction(Request $request)
-    {
-        $video  = new Video();
-        $form = $this->createForm(new VideoType(), $video);
-        $formHandler = new VideoHandler($form, $this->getRequest(), $this->em);
+    public function createAction(Request $request) {
+        $user = $this->sc->getToken()->getUser();
 
-        if ($formHandler->process()) {
+        if (is_object($user)) {
 
-            return $this->redirect($this->generateUrl('video_show', array('id' => $video->getId())));
+            $video = new Video();
+            $video->setUser($user);
+            $form = $this->createForm(new VideoType(), $video);
+            $formHandler = new VideoHandler($form, $this->getRequest(), $this->em);
+
+            if ($formHandler->process()) {
+
+                return $this->redirect($this->generateUrl('video_show', array('id' => $video->getId())));
+            }
+
+            return array(
+                'entity' => $video,
+                'form' => $form->createView(),
+            );
+        } else {
+            return new Response('Vous devez être connecté', 404);
         }
-
-        return array(
-            'entity' => $video,
-            'form'   => $form->createView(),
-        );
     }
 
     /**
@@ -119,23 +136,22 @@ class VideoController extends Controller
      * @Secure(roles="ROLE_ADMIN")
      * @Template()
      */
-    public function editAction($id)
-    {
+    public function editAction($id) {
 
         $user = $this->sc->getToken()->getUser();
 
-        if(is_object($user)) {
-            $entity = $this->em->getRepository('VideoBundle:Video')->find($id);
+        if (is_object($user)) {
+            $video = $this->em->getRepository('VideoBundle:Video')->find($id);
 
-            if (!$entity) {
+            if (!$video) {
                 throw $this->createNotFoundException('Unable to find Video entity.');
             }
 
-            $editForm = $this->createForm(new VideoType(), $entity);
+            $editForm = $this->createForm(new VideoType(), $video);
 
             return array(
-                'entity'      => $entity,
-                'edit_form'   => $editForm->createView(),
+                'entity' => $video,
+                'edit_form' => $editForm->createView(),
             );
         } else {
             return new Response('Vous devez être connecté', 404);
@@ -150,31 +166,30 @@ class VideoController extends Controller
      * @Method("POST")
      * @Template("VideoBundle:Video:edit.html.twig")
      */
-    public function updateAction(Request $request, $id)
-    {
+    public function updateAction(Request $request, $id) {
 
         $user = $this->sc->getToken()->getUser();
 
-        if(is_object($user)) {
-            $entity = $this->em->getRepository('VideoBundle:Video')->find($id);
+        if (is_object($user)) {
+            $video = $this->em->getRepository('VideoBundle:Video')->find($id);
 
-            if (!$entity) {
+            if (!$video) {
                 throw $this->createNotFoundException('Unable to find Video entity.');
             }
 
-            $editForm = $this->createForm(new VideoType(), $entity);
+            $editForm = $this->createForm(new VideoType(), $video);
             $editForm->bind($request);
 
             if ($editForm->isValid()) {
-                $this->em->persist($entity);
+                $this->em->persist($video);
                 $this->em->flush();
 
                 return $this->redirect($this->generateUrl('video_edit', array('id' => $id)));
             }
 
             return array(
-                'entity'      => $entity,
-                'edit_form'   => $editForm->createView(),
+                'entity' => $video,
+                'edit_form' => $editForm->createView(),
             );
         } else {
             return new Response('Vous devez être connecté', 404);
@@ -188,30 +203,29 @@ class VideoController extends Controller
      * @Secure(roles="ROLE_ADMIN")
      * @Method("POST")
      */
-    public function deleteAction(Request $request, $id)
-    {
+    public function deleteAction(Request $request, $id) {
         $form = $this->createDeleteForm($id);
         $form->bind($request);
 
         if ($form->isValid()) {
-            $entity = $this->em->getRepository('VideoBundle:Video')->find($id);
+            $video = $this->em->getRepository('VideoBundle:Video')->find($id);
 
-            if (!$entity) {
+            if (!$video) {
                 throw $this->createNotFoundException('Unable to find Video entity.');
             }
 
-            $this->em->remove($entity);
+            $this->em->remove($video);
             $this->em->flush();
         }
 
         return $this->redirect($this->generateUrl('video'));
     }
 
-    private function createDeleteForm($id)
-    {
+    private function createDeleteForm($id) {
         return $this->createFormBuilder(array('id' => $id))
-            ->add('id', 'hidden')
-            ->getForm()
-            ;
+                        ->add('id', 'hidden')
+                        ->getForm()
+        ;
     }
+
 }
