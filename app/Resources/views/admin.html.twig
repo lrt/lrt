@@ -18,6 +18,7 @@
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
 </head>
 <body>
+{% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
 <div class="navbar navbar-fixed-top">
     <div class="navbar-inner">
         <div class="container-fuild">
@@ -75,7 +76,6 @@
                 </ul>
                 <ul class="nav pull-right">
                     <li class="divider-vertical hidden-phone hidden-tablet"></li>
-                    {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown">
                             <span class="icon-user icon-white"></span>
@@ -124,12 +124,12 @@
                             <li><a href="#"><span class="icon-pencil"></span> Nouveau message</a></li>
                         </ul>
                     </li>
-                    {%  endif %}
                 </ul>
             </div>
         </div>
     </div>
 </div>
+{%  endif %}
 <div class="container-fluid">
     <div class="row-fluid">
         <div class="span2">
