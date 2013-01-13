@@ -122,7 +122,7 @@ class ArticleController extends Controller
 
             if($formHandler->process()) {
 
-                return $this->redirect($this->generateUrl('article_show', array('id' => $article->getId())));
+                return $this->redirect($this->generateUrl('article'));
             }
 
             return array('entity' => $article,'form' => $form->createView());

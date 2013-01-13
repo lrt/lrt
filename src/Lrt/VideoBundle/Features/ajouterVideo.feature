@@ -11,7 +11,7 @@ Contexte: Je suis un utilisateur qui veut ajouter une vidéo
     Et je ne devrais pas voir "Exception detected!"
     Soit je suis "Admin"
     Et je devrais voir "Videos"
-    Et je suis "All"
+    Et je suis "Toutes les vidéos"
     Alors je devrais voir "Liste des vidéos"
 
 @new_video

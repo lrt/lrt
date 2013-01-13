@@ -28,31 +28,6 @@ class ArticleControllerTest extends LrtWebTestCase
 
     /**
      * @test
-     * @testdox Création d'un nouvelle article après avoir appuyer sur "valider" on renvoie un message.
-     * @group article
-     */
-    public function addArticle()
-    {
-        $this->login($this->client, array('user' => 'alexandre'));
-        $crawler = $this->client->request('GET', '/article/new');
-
-        $form = $crawler->selectButton('Ajouter')->form(array(
-            'lrt_cmsbundle_articletype[title]' => 'Nouvelle article du site',
-            'lrt_cmsbundle_articletype[content]' => 'is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.',
-            'lrt_cmsbundle_articletype[status]' => 'IMMEDIATE',
-            'lrt_cmsbundle_articletype[isPublic]' => 1,
-            'lrt_cmsbundle_articletype[category]' => 1,
-        ));
-
-        $crawler = $this->client->submit($form);
-
-        $articleRepository = $this->em->getRepository('CMSBundle:Article');
-        $article = $articleRepository->findOneBy(array('title' => 'Nouvelle article du site'));
-        $this->assertNotEmpty($article);
-    }
-
-    /**
-     * @test
      * @testdox Modifier un article dont les données seraient valide
      * @group article
      */
@@ -66,7 +41,7 @@ class ArticleControllerTest extends LrtWebTestCase
 
         $crawler = $this->client->request('GET', '/article/'.$article->getId().'/edit');
 
-        $form = $crawler->selectButton('Edit')->form(array(
+        $form = $crawler->selectButton('Valider')->form(array(
             'lrt_cmsbundle_articletype[title]' => 'Nouveau Site',
         ));
 
@@ -112,22 +87,5 @@ class ArticleControllerTest extends LrtWebTestCase
         $this->login($this->client, array('user' => 'alexandre'));
         $this->client->request('GET', '/article/1/show');
         $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
-    }
-
-    /**
-     * @test
-     * @testdox Supprimer un article
-     * @group article
-     */
-    public function deleteArticleReturns200()
-    {
-        $this->login($this->client, array('user' => 'alexandre'));
-        $this->client->request('GET', '/article');
-        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
-
-        $articleRepository = $this->em->getRepository('CMSBundle:Article');
-        $article = $articleRepository->findOneBy(array('title' => 'Nouvelle article du site'));
-
-        $crawler = $this->client->request('POST', '/article/'.$article->getId().'/delete');
     }
 }

@@ -46,7 +46,7 @@ class VideoControllerTest extends LrtWebTestCase
 
         $crawler = $client->request('GET', '/video/'.$video->getId().'/edit');
 
-        $form = $crawler->selectButton('Edit')->form(array(
+        $form = $crawler->selectButton('Valider')->form(array(
             'lrt_videobundle_videotype[title]' => 'Longchamp - Barcelone',
         ));
 

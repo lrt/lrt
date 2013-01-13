@@ -17,7 +17,7 @@ Contexte: Je suis un administrateur qui recherche des utilisateurs
 Scénario: Je recherche un utilisateur par son login
 
     Lorsque je remplis le texte suivant:
-        | Login |  alexandre  |
+        | userbundle_userfiltertype_login |  alexandre  |
     Et je presse "Filtrer"
     Alors je devrais voir les lignes suivantes dans le tableau "tListeUsers" :
         | alexandre | * | alexandre.seiller@longchamp-roller-team.com | admin | * | * |
@@ -26,7 +26,7 @@ Scénario: Je recherche un utilisateur par son login
 Scénario: Je recherche un utilisateur par son email
 
     Lorsque je remplis le texte suivant:
-        | Email |  julien.morelle@longchamp-roller-team.com  |
+        | userbundle_userfiltertype_email |  julien.morelle@longchamp-roller-team.com  |
     Et je presse "Filtrer"
     Alors je devrais voir les lignes suivantes dans le tableau "tListeUsers" :
         | julien | * | julien.morelle@longchamp-roller-team.com | admin | * | * |
@@ -35,7 +35,7 @@ Scénario: Je recherche un utilisateur par son email
 Scénario: Je recherche un utilisateur par son nom
 
     Lorsque je remplis le texte suivant:
-        | Nom |  dubosc  |
+        | userbundle_userfiltertype_nom |  dubosc  |
     Et je presse "Filtrer"
     Alors je devrais voir les lignes suivantes dans le tableau "tListeUsers" :
         | jeremy | * | jeremy.dubosc@longchamp-roller-team.com | admin | * | * |
@@ -44,7 +44,7 @@ Scénario: Je recherche un utilisateur par son nom
 Scénario: Je recherche tous les administrateurs
 
     Lorsque je remplis le texte suivant:
-        | Type |  ROLE_ADMIN  |
+        | userbundle_userfiltertype_type |  ROLE_ADMIN  |
     Et je presse "Filtrer"
     Alors je devrais voir les lignes suivantes dans le tableau "tListeUsers" :
         | alexandre | * | alexandre.seiller@longchamp-roller-team.com | admin | * | * |
