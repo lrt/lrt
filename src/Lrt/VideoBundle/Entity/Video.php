@@ -80,6 +80,7 @@ class Video
         $this->setIsPublished(0);
         $this->setIsHighlighted(0);
         $this->setIsAutoPlay(0);
+        $this->setIsValid(0);
     }
 
     /**

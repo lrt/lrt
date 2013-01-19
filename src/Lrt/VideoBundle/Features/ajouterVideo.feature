@@ -7,9 +7,7 @@ Contexte: Je suis un utilisateur qui veut ajouter une vidéo
     Lorsque je remplis "username" avec "alexandre"
     Et je remplis "Mot de passe :" avec "test"
     Et je presse "Connexion"
-    Alors je suis sur la page d'accueil
     Et je ne devrais pas voir "Exception detected!"
-    Soit je suis "Admin"
     Et je devrais voir "Videos"
     Et je suis "Toutes les vidéos"
     Alors je devrais voir "Liste des vidéos"

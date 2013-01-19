@@ -5,6 +5,7 @@
     width:32px;
     height:32px;
     background: url(../../img/icons-dashboard.png) no-repeat;
+    vertical-align: middle !important;
 }
 
 .icon-dashboard-chat {background-position:-32px 0;}

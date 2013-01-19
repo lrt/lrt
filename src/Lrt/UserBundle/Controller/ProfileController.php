@@ -39,7 +39,17 @@ class ProfileController extends Controller
      */
     public function myProfileAction(User $user)
     {
-        return $this->render('UserBundle:Profile:myProfile.html.twig', array('profile' => $user));
+        if ($user->hasGroup('admin')) {
+
+            $users = $this->em->getRepository('UserBundle:User')->findAll();
+        }
+
+        $users = $this->em->getRepository('UserBundle:User')->findAll();
+
+        return $this->render('UserBundle:Profile:myProfile.html.twig', array(
+            'profile' => $user,
+            'users' => $users
+        ));
     }
 
     /**

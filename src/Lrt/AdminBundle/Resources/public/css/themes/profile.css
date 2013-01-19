@@ -165,3 +165,66 @@
     -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
+
+.events {
+    background: none !important;
+    border:none !important;
+}
+
+.events .item .date {
+    width: 70px;
+    padding: 0px 5px;
+    display: block;
+    position: absolute;
+}
+
+.events .item .info {
+    display: block;
+    margin-left: 80px;
+    border-left: 1px solid #E5E5E5;
+    padding: 5px;
+    -moz-box-shadow: inset 1px 0px 1px #FFF;
+    -webkit-box-shadow: inset 1px 0px 1px white;
+    box-shadow: inset 1px 0px 1px white;
+}
+
+.events .item .date .caption {
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    background: url('../../img/backgrounds/event.png') left top no-repeat;
+}
+
+.events .item .date span.day {
+    padding-top: 10px;
+    font-size: 40px;
+    color: #666;
+    line-height: 36px;
+    text-align: center;
+    display: block;
+    text-shadow: 0px 1px 1px white;
+}
+
+.events .item .date span.month {
+    font-size: 13px;
+    color: #999;
+    font-family: 'Helvetica Neue','Helvetica',Arial,sans-serif;
+    line-height: 17px;
+    display: block;
+    text-align: center;
+}
+.events .item .info > a {
+    font-size: 13px;
+    line-height: 17px;
+    font-family: 'Helvetica Neue','Helvetica',Arial,sans-serif;
+    color: #005580;
+    font-weight: bold;
+    display: block;
+    text-decoration: none;
+    text-shadow: 0px 1px 0px white;
+}
+TAR {
+    text-align: right !important;
+}

@@ -26,7 +26,9 @@ class DefaultController extends Controller
     {
         $user = $this->sc->getToken()->getUser();
 
-        if ($user->hasGroup('member')) {
+        return $this->redirect($this->generateUrl('user_profile_show', array('id' => $user->getId())));
+
+        /*if ($user->hasGroup('member')) {
 
             return $this->redirect($this->generateUrl('user_profile_show', array('id' => $user->getId())));
 
@@ -40,6 +42,6 @@ class DefaultController extends Controller
                 'users' => $users,
                 'videos' => $videos
             );
-        }
+        }*/
     }
 }
