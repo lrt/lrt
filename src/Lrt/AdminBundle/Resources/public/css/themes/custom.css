@@ -1,5 +1,63 @@
 @import 'profile.css';
 
+body {
+    background-color: #F1F1F1 !important;
+}
+
+.container-fluid {
+    padding-top: 20px;
+}
+
+.sidebar {
+    width: 100px;
+    float: left;
+    height: 100%;
+    position: fixed;
+    left: 0;
+    top: 60px;
+    background-color: #F1F1F1;
+    border-right: 1px solid #E5E5E5;
+}
+.sidebar .nav-tabs.nav-stacked > li > a {
+    border: none !important;
+}
+.sidebar .nav-tabs.nav-stacked > li > a {
+    text-align: center;
+    font-size: 11px;
+    color: #555;
+}
+.sidebar .nav-tabs.nav-stacked > li.active img, .sidebar .nav-tabs.nav-stacked > li > a:hover img {
+    opacity: 1;
+    -moz-opacity: 1;
+    filter: alpha(opacity=1);
+}
+.sidebar .nav-tabs.nav-stacked > li > .active {
+    background-color: #F1F1F1 !important;
+}
+.sidebar .nav-tabs.nav-stacked > li > a img {
+    display: inline;
+    opacity: 0.5;
+    -moz-opacity: 0.5;
+    filter: alpha(opacity=5);
+}
+.sidebar .nav-tabs.nav-stacked > li > a {
+    text-align: center;
+    font-size: 11px;
+    color: #555;
+}
+.m-badge-notification {
+    position: absolute;
+    top: 5px;
+    right: 20px;
+    z-index: 1000;
+}
+
+.main-container {
+    background-color: white;
+    min-height: 500px;
+    margin-left: 100px;
+}
+
 /** ICONS DASHBOARD **/
 [class^="icon-dashboard-"] {
     width:32px;

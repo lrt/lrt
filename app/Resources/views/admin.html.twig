@@ -26,7 +26,6 @@
                 <span class="icon-bar"></span>
             </a>
             <a class="brand" href="{{ path('dashboard') }}">
-                <i class="icon-home icon-white"></i>
                 {{ sitename }}
             </a>
             <div class="nav-collapse">
@@ -138,35 +137,115 @@
     </div>
 </div>
 {%  endif %}
-<div class="container-fluid">
-    <div class="row-fluid">
-        <div class="span2">
-            <div class="well sidebar-nav">
-                <ul class="nav nav-list">
-                    {% block menu %}{% endblock %}
-                </ul>
-            </div>
-        </div>
-        <div class="span10">
-            <!--<div>
-                <ul class="breadcrumb">
-                    <li class="first">
-                        <i class="icon-home"></i>
-                        <a href="{{ path('dashboard') }}">Tableau de bord</a> <span class="divider">/</span>
-                    </li>
-                    {% block breadcrumb %}{% endblock %}
-                </ul>
-            </div>-->
-            {% block body %}{% endblock %}
-            <!-- modal -->
-            <div id="box" class="modal hide fade" role="dialog">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h3 id="myModalLabel"></h3>
+<aside class="sidebar">
+    <ul class="nav nav-tabs nav-stacked">
+        <li>
+            <a href="#">
+                <div>
+                    <div class="ico">
+                        <img src="{{ asset('bundles/admin/img/ico/ico-home.png') }}">
+                    </div>
+                    <div class="title">
+                        Accueil
+                    </div>
                 </div>
-                <div class="modal-body"></div>
+
+                <div class="arrow">
+                    <div class="bubble-arrow-border"></div>
+                    <div class="bubble-arrow"></div>
+                </div>
+            </a>
+        </li>
+        <li>
+            <a href="#">
+                <span class="badge badge-important m-badge-notification">6</span>
+                <div>
+                    <div class="ico">
+                        <img src="{{ asset('bundles/admin/img/ico/ico-notification.gif') }}">
+                    </div>
+                    <div class="title">
+                        Evènements
+                    </div>
+                </div>
+
+                <div class="arrow">
+                    <div class="bubble-arrow-border"></div>
+                    <div class="bubble-arrow"></div>
+                </div>
+            </a>
+        </li>
+        <li>
+            <a href="#">
+                <div>
+                    <div class="ico">
+                        <img src="{{ asset('bundles/admin/img/ico/ico-user.gif') }}">
+                    </div>
+                    <div class="title">
+                        Utilisateurs
+                    </div>
+                </div>
+
+                <div class="arrow">
+                    <div class="bubble-arrow-border"></div>
+                    <div class="bubble-arrow"></div>
+                </div>
+            </a>
+        </li>
+        <li class="">
+            <a href="#">
+                <div>
+                    <div class="ico">
+                        <img src="{{ asset('bundles/admin/img/ico/ico-media.gif') }}">
+                    </div>
+                    <div class="title">
+                        Media
+                    </div>
+                </div>
+                <div class="arrow">
+                    <div class="bubble-arrow-border"></div>
+                    <div class="bubble-arrow"></div>
+                </div>
+            </a>
+        </li>
+        <li class="">
+            <a href="#" id="btn-more" style="display: block;">
+                <div>
+                    <div class="ico">
+                        <img src="{{ asset('bundles/admin/img/ico/ico-more.png') }}">
+                    </div>
+                    <div class="title">
+                        Plus
+                    </div>
+                </div>
+            </a>
+
+        </li>
+    </ul>
+</aside>
+<div class="main-container">
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <div class="span12">
+                <!--<div>
+                    <ul class="breadcrumb">
+                        <li class="first">
+                            <i class="icon-home"></i>
+                            <a href="{{ path('dashboard') }}">Tableau de bord</a> <span class="divider">/</span>
+                        </li>
+                        {% block breadcrumb %}{% endblock %}
+                    </ul>
+                </div>-->
+                {% block body %}{% endblock %}
+                <!-- modal -->
+                <div id="box" class="modal hide fade" role="dialog">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h3 id="myModalLabel"></h3>
+                    </div>
+                    <div class="modal-body"></div>
+                </div>
+                <!-- modal -->
             </div>
-            <!-- modal -->
         </div>
     </div>
 </div>
