@@ -10,10 +10,11 @@
 {% block menu %}
 <li class="nav-header">Article</li>
 <li><a href="{{ path('article_new') }}">Ajouter</a></li>
-<li><a href="{{ path('article') }}">Liste des articles</a></li>
+<li class="active"><a href="{{ path('article') }}">Liste des articles</a></li>
 <li><a href="#">Article(s) en attente</a></li>
+<li><a href="{{ path('article_draft') }}">Brouillons</a></li>
 <li><a href="{{ path('category') }}">Rubrique</a></li>
-<li><a href="#">Corbeille</a></li>
+<li><a href="{{ path('article_bin') }}">Corbeille</a></li>
 {% endblock %}
 
 {% block body %}
@@ -57,6 +58,7 @@
                         <th>Contenu</th>
                         <th>Date</th>
                         <th>Rubrique</th>
+                        <th>Active</th>
                         <th>Visibilité</th>
                         <th></th>
                     </tr>
@@ -76,6 +78,11 @@
                         <td>{{ entity.created|date('d/m/Y h:m') }}</td>
                         <td>{{ entity.category.name }}</td>
                         <td>
+                            {% if entity.isValid == 1 %}
+                                <i class="icon-ok"></i>
+                            {% endif %}
+                        </td>
+                        <td>
                             {% if entity.isPublic == 1 %}
                             Public
                             {% else %}
@@ -87,14 +94,16 @@
                                 <i class="icon-zoom-in icon-white"></i>
                                 Voir
                             </a>
-                            <a href="{{ path('article_edit', { 'id': entity.id }) }}" class="btn btn-small btn-info">
-                                <i class="icon-edit icon-white"></i>
-                                Modifier
-                            </a>
-                            <a href="{{ path('article_edit', { 'id': entity.id }) }}" class="btn btn-small btn-danger">
-                                <i class="icon-trash icon-white"></i>
-                                Supprimer
-                            </a>
+                            {% if entity.status == 3 %}
+                                <a href="{{ path('article_edit', { 'id': entity.id }) }}" class="btn btn-small btn-info">
+                                    <i class="icon-edit icon-white"></i>
+                                    Modifier
+                                </a>
+                                <a href="{{ path('article_delete', { 'id': entity.id }) }}" class="btn btn-small btn-danger">
+                                    <i class="icon-trash icon-white"></i>
+                                    Corbeille
+                                </a>
+                            {% endif %}
                         </td>
                     </tr>
                     {% else %}

@@ -12,7 +12,11 @@ namespace Lrt\UserBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use JMS\DiExtraBundle\Annotation\Service;
 
+/**
+ * @Service("users.form.userType", public=true)
+ */
 class UserType extends AbstractType
 {
 

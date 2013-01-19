@@ -7,6 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Response;
 use JMS\DiExtraBundle\Annotation as DI;
 use JMS\SecurityExtraBundle\Annotation\Secure;
@@ -25,6 +26,8 @@ use Lrt\CMSBundle\Form\Type\CategoryType;
  */
 class CategoryController extends Controller
 {
+    /** @DI\Inject("doctrine.orm.entity_manager") */
+    public $em;
 
     /** @DI\Inject("security.context") */
     public $sc;
@@ -37,9 +40,7 @@ class CategoryController extends Controller
      */
     public function indexAction()
     {
-        $em = $this->getDoctrine()->getManager();
-
-        $entities = $em->getRepository('CMSBundle:Category')->findAll();
+        $entities = $this->em->getRepository('CMSBundle:Category')->findAll();
 
         return array(
             'entities' => $entities,
@@ -49,21 +50,14 @@ class CategoryController extends Controller
     /**
      * Finds and displays a Category entity.
      *
-     * @Route("/{id}/show", name="category_show")
+     * @Route("/{id}/show", name="category_show", requirements={"id" = "\d+"})
+     * @ParamConverter("category", class="CMSBundle:Category", options={"id" = "id"})
      * @Template()
      */
-    public function showAction($id)
+    public function showAction(Category $category)
     {
-        $em = $this->getDoctrine()->getManager();
-
-        $entity = $em->getRepository('CMSBundle:Category')->find($id);
-
-        if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Category entity.');
-        }
-
         return array(
-            'entity' => $entity,
+            'entity' => $category,
         );
     }
 
@@ -76,7 +70,6 @@ class CategoryController extends Controller
      */
     public function newAction()
     {
-
         $user = $this->sc->getToken()->getUser();
 
         if(is_object($user)) {
@@ -130,29 +123,21 @@ class CategoryController extends Controller
     /**
      * Displays a form to edit an existing Category entity.
      *
-     * @Route("/{id}/edit", name="category_edit")
+     * @Route("/{id}/edit", name="category_edit", requirements={"id" = "\d+"})
+     * @ParamConverter("category", class="CMSBundle:Category", options={"id" = "id"})
      * @Secure(roles="ROLE_ADMIN")
      * @Template()
      */
-    public function editAction($id)
+    public function editAction(Category $category)
     {
-
         $user = $this->sc->getToken()->getUser();
 
         if(is_object($user)) {
 
-            $em = $this->getDoctrine()->getManager();
-
-            $entity = $em->getRepository('CMSBundle:Category')->find($id);
-
-            if (!$entity) {
-                throw $this->createNotFoundException('Unable to find Category entity.');
-            }
-
-            $editForm = $this->createForm(new CategoryType(), $entity);
+            $editForm = $this->createForm(new CategoryType(), $category);
 
             return array(
-                'entity'      => $entity,
+                'entity'      => $category,
                 'edit_form'   => $editForm->createView(),
             );
         } else {
@@ -163,38 +148,31 @@ class CategoryController extends Controller
     /**
      * Edits an existing Category entity.
      *
-     * @Route("/{id}/update", name="category_update")
+     * @Route("/{id}/update", name="category_update", requirements={"id" = "\d+"})
+     * @ParamConverter("category", class="CMSBundle:Category", options={"id" = "id"})
      * @Secure(roles="ROLE_ADMIN")
      * @Method("POST")
      * @Template("CMSBundle:Category:edit.html.twig")
      */
-    public function updateAction(Request $request, $id)
+    public function updateAction(Request $request, Category $category)
     {
-
         $user = $this->sc->getToken()->getUser();
 
         if(is_object($user)) {
-            $em = $this->getDoctrine()->getManager();
 
-            $entity = $em->getRepository('CMSBundle:Category')->find($id);
-
-            if (!$entity) {
-                throw $this->createNotFoundException('Unable to find Category entity.');
-            }
-
-            $editForm = $this->createForm(new CategoryType(), $entity);
+            $editForm = $this->createForm(new CategoryType(), $category);
             $editForm->bind($request);
 
             if ($editForm->isValid()) {
-                $em->persist($entity);
-                $em->flush();
+                $this->em->persist($category);
+                $this->em->flush();
 
-                return $this->redirect($this->generateUrl('category_edit', array('id' => $id)));
+                return $this->redirect($this->generateUrl('category_edit', array('id' => $category->getId())));
             }
 
             return array(
-                'entity'      => $entity,
-                'edit_form'   => $editForm->createView(),
+                'entity'    => $category,
+                'edit_form' => $editForm->createView(),
             );
         } else {
             return new Response('Vous devez être connecté', 404);
@@ -204,29 +182,23 @@ class CategoryController extends Controller
     /**
      * Deletes a Category entity.
      *
-     * @Route("/{id}/delete", name="category_delete")
+     * @Route("/{id}/delete", name="category_delete", requirements={"id" = "\d+"})
+     * @ParamConverter("category", class="CMSBundle:Category", options={"id" = "id"})
      * @Secure(roles="ROLE_ADMIN")
      * @Method("POST")
      */
-    public function deleteAction(Request $request, $id)
+    public function deleteAction(Request $request, Category $category)
     {
-
         $user = $this->sc->getToken()->getUser();
 
         if(is_object($user)) {
-            $form = $this->createDeleteForm($id);
+            $form = $this->createDeleteForm($category->getId());
             $form->bind($request);
 
             if ($form->isValid()) {
-                $em = $this->getDoctrine()->getManager();
-                $entity = $em->getRepository('CMSBundle:Category')->find($id);
 
-                if (!$entity) {
-                    throw $this->createNotFoundException('Unable to find Category entity.');
-                }
-
-                $em->remove($entity);
-                $em->flush();
+                $this->em->remove($category);
+                $this->em->flush();
             }
 
             return $this->redirect($this->generateUrl('category'));

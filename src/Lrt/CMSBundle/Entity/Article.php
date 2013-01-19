@@ -11,17 +11,14 @@ namespace Lrt\CMSBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
-use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Lrt\CMSBundle\Entity\Category;
 
 /**
  * @ORM\Entity(repositoryClass="Lrt\CMSBundle\Repository\ArticleRepository")
  * @ORM\HasLifecycleCallbacks()
- * @UniqueEntity(fields="title", message="Un article existe déjà avec ce titre.")
- **/
+ */
 class Article extends Content
 {
-
     /**
      * @ORM\Column(type="integer")
      * @Assert\NotBlank()
@@ -47,14 +44,6 @@ class Article extends Content
     public function getStatus()
     {
         return $this->status;
-    }
-
-    public function getStatusLabel()
-    {
-        $enumStatusArticle = new \Lrt\SiteBundle\Enum\StatusArticleEnum();
-        $dataLabel = $enumStatusArticle->getData();
-
-        return (isset($dataLabel[$this->status])) ? $dataLabel[$this->status] : '';
     }
 
     /**

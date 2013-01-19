@@ -8,3 +8,7 @@ form:
     article:
         title: Ajouter un article
         add: Ajouter
+    status:
+        immediate: "Publication immédiate"
+        drafts: "Brouillon"
+        bin: "Corbeille"

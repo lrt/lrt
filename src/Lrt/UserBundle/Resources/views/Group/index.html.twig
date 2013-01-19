@@ -1,0 +1,75 @@
+{% extends '::admin.html.twig' %}
+
+{% block breadcrumb %}
+    <li>
+        <a href="{{ path('user') }}">Utilisateurs</a> <span class="divider">/</span>
+    </li>
+    <li class="active">Groupes</li>
+{% endblock %}
+
+{% block menu %}
+    <li class="nav-header">Utilisateur</li>
+    <li><a href="{{ path('user_new') }}">Ajouter</a></li>
+    <li><a href="{{ path('user') }}">Liste des utilisateurs</a></li>
+    <li><a href="#">Utilisateur(s) en attente</a></li>
+{% endblock %}
+
+{% block body %}
+<div class="box">
+    <h4 class="box-header round-top">
+        <i class="icon-user"></i>
+        Liste des groupes ({% if nb is defined %}{{ nb }}{% endif %})
+        <a class="box-btn" title="close">
+            <i class="icon-remove"></i>
+        </a>
+        <a class="box-btn" title="toggle">
+            <i class="icon-minus"></i>
+        </a>
+        <a class="box-btn" title="#box-config-modal" data-toggle="modal" title="config">
+            <i class="icon-cog"></i>
+        </a>
+    </h4>
+    <div class="box-container-toggle">
+        <div class="box-content">
+            <table class="table table-striped tListeUsers">
+                <thead>
+                    <tr>
+                        <th>Nom</th>
+                        <th>Description</th>
+                        <th>Roles</th>
+                        <th>Id</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for entity in entities %}
+                    <tr>
+                        <td><a href="{{ path('group_show', { 'id': entity.id }) }}">{{ entity.name }}</a></td>
+                        <td></td>
+                        <td>
+                            {% for role in entity.roles %}
+                                {{ role | lower | replace({'role_':''}) }}
+                            {% endfor %}
+                        </td>
+                        <td>{{ entity.id }}</td>
+                        <td>
+                            <a href="{{ path('group_edit', { 'id': entity.id }) }}" class="btn btn-small btn-info">
+                                <i class="icon-edit icon-white"></i>
+                                Modifier
+                            </a>
+                            <a href="{{ path('group_delete', { 'id': entity.id }) }}" class="btn btn-small btn-danger">
+                                <i class="icon-edit icon-white"></i>
+                                Supprimer
+                            </a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<a href="{{ path('group_new') }}" class="btn btn-small btn-primary">
+    Créer un nouveau groupe
+</a>
+{% endblock %}

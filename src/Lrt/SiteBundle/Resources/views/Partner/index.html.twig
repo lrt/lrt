@@ -1,0 +1,72 @@
+{% extends '::admin.html.twig' %}
+
+{% block breadcrumb %}
+    <li>
+        <a href="{{ path('partner') }}">Partenaires</a> <span class="divider">/</span>
+    </li>
+    <li class="active">Liste</li>
+{% endblock %}
+
+{% block menu %}
+    <li class="nav-header">Partenaire</li>
+    <li><a href="{{ path('partner_new') }}">Ajouter</a></li>
+    <li class="active"><a href="{{ path('partner') }}">Liste des partenaires</a></li>
+{% endblock %}
+
+{% block body %}
+<div class="box">
+    <h4 class="box-header round-top">
+        <i class="icon-user"></i>
+        Liste des partenaires ({% if nb is defined %}{{ nb }}{% endif %})
+        <a class="box-btn" title="close">
+            <i class="icon-remove"></i>
+        </a>
+        <a class="box-btn" title="toggle">
+            <i class="icon-minus"></i>
+        </a>
+        <a class="box-btn" title="#box-config-modal" data-toggle="modal" title="config">
+            <i class="icon-cog"></i>
+        </a>
+    </h4>
+    <div class="box-container-toggle">
+        <div class="box-content">
+            <table class="table table-striped tListePartners">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Description</th>
+                        <th>Site internet</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for entity in entities %}
+                    <tr>
+                        <td>{{ entity.name }}</td>
+                        <td>{{ entity.description }}</td>
+                        <td>{{ entity.website }}</td>
+                        <td>
+                            <a data-toggle="modal" rel="{{ entity.name }}" href="{{ path('partner_show', { 'id': entity.id }) }}" class="btn btn-small btn-success popin">
+                                <i class="icon-edit icon-white"></i>
+                                Voir
+                            </a>
+                            <a href="{{ path('partner_edit', { 'id': entity.id }) }}" class="btn btn-small btn-info">
+                                <i class="icon-edit icon-white"></i>
+                                Modifier
+                            </a>
+                            <a href="{{ path('partner_delete', { 'id': entity.id }) }}" class="btn btn-small btn-danger">
+                                <i class="icon-trash icon-white"></i>
+                                Supprimer
+                            </a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<a href="{{ path('partner_new') }}" class="btn btn-small btn-primary">
+    Ajouter un nouveau partenaire
+</a>
+{% endblock %}

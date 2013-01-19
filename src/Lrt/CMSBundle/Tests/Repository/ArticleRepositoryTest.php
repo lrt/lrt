@@ -18,7 +18,7 @@ class ArticleRepositoryTest extends LrtWebTestCase {
     /**
      * @test
      * @testdox Recupère la liste des derniers articles avec une limite définie
-     * @group art
+     * @group ko
      */
     public function getLatestArticlesWithLimit() {
 
@@ -54,5 +54,16 @@ class ArticleRepositoryTest extends LrtWebTestCase {
         
         $rpArticle = $this->em->getRepository('CMSBundle:Article')->getArticlesByUser($user);
         $this->assertNotEmpty($rpArticle);
+    }
+
+    /**
+     * @test
+     * @testdox Recupère la liste des articles en attente de validation
+     * @group art
+     */
+    public function getArticlesNotValidatedTest() {
+
+        $rpArticle = $this->em->getRepository('CMSBundle:Article')->getArticlesNotValidated();
+        $this->assertEquals(1, count($rpArticle));
     }
 }

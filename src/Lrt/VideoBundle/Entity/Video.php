@@ -18,6 +18,9 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Video
 {
+    const IS_NOT_VALIDATED = 0;
+    const IS_VALIDATED = 1;
+
     /**
      * @ORM\Id
      * @ORM\Column(type="integer")
@@ -65,6 +68,11 @@ class Video
      * @ORM\Column(name="is_highlighted", type="integer")
      */
     protected $isHighlighted;
+
+    /**
+     * @ORM\Column(name="is_valid", type="integer")
+     */
+    protected $isValid;
 
     public function __construct()
     {
@@ -242,5 +250,25 @@ class Video
     public function getIsAutoPlay()
     {
         return $this->isAutoPlay;
+    }
+
+    /**
+     * Set is_valid
+     *
+     * @param integer $isValid
+     */
+    public function setIsValid($isValid)
+    {
+        $this->isValid = $isValid;
+    }
+
+    /**
+     * Get is_valid
+     *
+     * @return integer
+     */
+    public function getIsValid()
+    {
+        return $this->isValid;
     }
 }

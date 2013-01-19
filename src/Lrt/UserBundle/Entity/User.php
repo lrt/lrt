@@ -12,6 +12,7 @@ namespace Lrt\UserBundle\Entity;
 
 use FOS\UserBundle\Entity\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
 use Lrt\CMSBundle\Entity\Content;
 
@@ -30,11 +31,13 @@ class User extends BaseUser
 
     /**
      * @ORM\Column(name="firstName", type="string")
+     * @Assert\NotBlank()
      */
     protected $firstName;
 
     /**
      * @ORM\Column(name="lastName", type="string")
+     * @Assert\NotBlank()
      */
     protected $lastName;
 
@@ -46,9 +49,29 @@ class User extends BaseUser
     protected $plainPassword;
 
     /**
+     * @var string
+     * @Assert\Regex("/^[A-Za-z0-9._%-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/")
+     */
+    protected $email;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="Lrt\UserBundle\Entity\Group", inversedBy="users")
+     * @ORM\JoinTable(name="fos_user_user_group",
+     *      joinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="group_id", referencedColumnName="id")}
+     * )
+     */
+    protected $groups;
+
+    /**
      * @ORM\OneToMany(targetEntity="\Lrt\CMSBundle\Entity\Content", mappedBy="user")
      */
     protected $content;
+
+    /**
+     * @ORM\OneToMany(targetEntity="\Lrt\SiteBundle\Entity\Partner", mappedBy="user")
+     */
+    protected $partners;
 
     /**
      * @ORM\OneToMany(targetEntity="\Lrt\VideoBundle\Entity\Video", mappedBy="user")
@@ -63,6 +86,7 @@ class User extends BaseUser
 
     public function __construct()
     {
+        $this->groups = new ArrayCollection();
         parent::__construct();
     }
 
@@ -141,10 +165,10 @@ class User extends BaseUser
     /**
      * Add content
      *
-     * @param \Lrt\UserBundle\Entity\Content $content
+     * @param \Lrt\CMSBundle\Entity\Content $content
      * @return void
      */
-    public function addContent(Content $content)
+    public function addContent(\Lrt\CMSBundle\Entity\Content $content)
     {
         $this->content[] = $content;
     }
@@ -157,6 +181,27 @@ class User extends BaseUser
     public function getContent()
     {
         return $this->content;
+    }
+
+    /**
+     * Add partner
+     *
+     * @param \Lrt\SiteBundle\Entity\Partner $partner
+     * @return void
+     */
+    public function addPartners(\Lrt\SiteBundle\Entity\Partner $partner)
+    {
+        $this->partners[] = $partner;
+    }
+
+    /**
+     * Get partner
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getPartners()
+    {
+        return $this->partners;
     }
 
     /**
@@ -188,11 +233,10 @@ class User extends BaseUser
         }
     }
 
-
     /**
      * Remove content
      *
-     * @param Lrt\CMSBundle\Entity\Content $content
+     * @param \Lrt\CMSBundle\Entity\Content $content
      */
     public function removeContent(\Lrt\CMSBundle\Entity\Content $content)
     {
@@ -200,9 +244,19 @@ class User extends BaseUser
     }
 
     /**
+     * Remove partner
+     *
+     * @param \Lrt\SiteBundle\Entity\Partner $partner
+     */
+    public function removePartner(\Lrt\SiteBundle\Entity\Partner $partner)
+    {
+        $this->content->removeElement($partner);
+    }
+
+    /**
      * Remove videos
      *
-     * @param Lrt\VideoBundle\Entity\Video $videos
+     * @param \Lrt\VideoBundle\Entity\Video $videos
      */
     public function removeVideo(\Lrt\VideoBundle\Entity\Video $videos)
     {
@@ -212,7 +266,7 @@ class User extends BaseUser
     /**
      * Set team
      *
-     * @param Lrt\TeamBundle\Entity\Team $team
+     * @param \Lrt\TeamBundle\Entity\Team $team
      * @return User
      */
     public function setTeam(\Lrt\TeamBundle\Entity\Team $team = null)
@@ -225,10 +279,27 @@ class User extends BaseUser
     /**
      * Get team
      *
-     * @return Lrt\TeamBundle\Entity\Team 
+     * @return \Lrt\TeamBundle\Entity\Team
      */
     public function getTeam()
     {
         return $this->team;
+    }
+
+    public function getUserRoles()
+    {
+        foreach ($this->roles as $role) {
+            if ($role == 'ROLE_MEMBER') {
+                return 'Membre';
+            }
+            if ($role == 'ROLE_SUPERVISEUR') {
+                return 'Superviseur';
+            }
+        }
+    }
+
+    public function resetGroups()
+    {
+        $this->groups = array();
     }
 }

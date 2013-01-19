@@ -4,12 +4,14 @@ namespace Lrt\VideoBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
 use Lrt\UserBundle\Entity\User;
+use Lrt\VideoBundle\Entity\Video;
 
 class VideoRepository extends EntityRepository
 {
     /**
     * Retourne la liste des vidéos d'un contributeur
-    * @param Lrt\UserBundle\Entity\User $user
+    * @param \Lrt\UserBundle\Entity\User $user
+    * @return array
     */
     public function getVideosByUser(User $user)
     {
@@ -20,6 +22,22 @@ class VideoRepository extends EntityRepository
         $query = $this->getEntityManager()->createQuery($sql)
                     ->setParameter('user', $user);
        
+        return $query->getResult();
+    }
+
+    /**
+     * Retourne la liste des vidéos en attente de validation
+     * @return array
+     */
+    public function getVideosNotValidated()
+    {
+        $sql = 'SELECT v FROM VideoBundle:Video v
+                JOIN UserBundle:User u WITH v.user = u.id
+                AND v.isValid = :valid';
+
+        $query = $this->getEntityManager()->createQuery($sql)
+            ->setParameter('valid', Video::IS_NOT_VALIDATED);
+
         return $query->getResult();
     }
 

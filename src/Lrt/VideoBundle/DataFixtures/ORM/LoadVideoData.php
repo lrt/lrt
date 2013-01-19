@@ -32,6 +32,7 @@ class LoadVideoData extends AbstractFixture implements OrderedFixtureInterface
         $video->setUser($user);
         $video->setDescription('Vestibulum vulputate mauris eget erat congue dapibus imperdiet justo scelerisque. Na. Cras elementum molestie vestibulum. Morbi id quam nisl. Praesent hendrerit, orci sed elementum lobortis.');
         $video->setVimeoId($vimeoId);
+        $video->setIsValid(Video::IS_VALIDATED);
 
         $this->manager->persist($video);
         $this->manager->flush();

@@ -14,22 +14,29 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use JMS\DiExtraBundle\Annotation\Service;
 use JMS\DiExtraBundle\Annotation as DI;
-use Lrt\SiteBundle\Enum\StatusArticleEnum;
+use Lrt\CMSBundle\Entity\Content;
 
 /**
  * @Service("form.cms.article.type")
  */
 class ArticleType extends AbstractType
 {
+    /** @DI\Inject("translator") */
+    public $tr;
+
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $statusArticleEnum = new StatusArticleEnum();
-
         $builder
             ->add('title', 'text', array('label' => 'Titre', 'required' => true))
             ->add('content', 'textarea', array('label' => 'Contenu', 'required' => true))
-            ->add('status', 'choice', array('label' => 'Status','choices' => $statusArticleEnum->getData()))
-            ->add('isPublic', null, array('label' => 'Publique'))
+            ->add('status', 'choice', array(
+            'label' => 'Etat de publication',
+            'choices' => array(
+                Content::DRAFTS => 'Brouillon',
+                Content::IMMEDIATE => 'Publication immédiate',
+            )))
+            //->add('image', new FileType())
+            ->add('isPublic', null, array('label' => 'Voir sur la page principal ?', 'required' => false))
             ->add('category', 'entity', array(
             'class' => 'Lrt\CMSBundle\Entity\Category',
             'property' => 'name',

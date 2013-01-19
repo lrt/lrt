@@ -30,6 +30,7 @@ class AppKernel extends Kernel
             new Lrt\AdminBundle\AdminBundle(),
             new Lrt\VideoBundle\VideoBundle(),
             new Lrt\TeamBundle\TeamBundle(),
+            new Lrt\CalendarBundle\CalendarBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

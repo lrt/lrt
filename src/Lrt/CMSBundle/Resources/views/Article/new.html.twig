@@ -1,9 +1,6 @@
 {% extends 'AdminBundle:Themes:box.html.twig' %}
 
 {% block breadcrumb %}
-<li>
-    <a href="{{ path('article') }}">Articles</a> <span class="divider">/</span>
-</li>
 <li class="active">Ajouter un article</li>
 {% endblock %}
 
@@ -12,7 +9,6 @@
 {% endblock %}
 
 {% block box_content %}
-<div class="row-fluid">
     {% form_theme form 'AdminBundle:Themes:form.html.twig' %}
     <form action="{{ path('article_create') }}" method="post" {{ form_enctype(form) }} class="form-horizontal">
         {{ form_widget(form) }}
@@ -23,12 +19,10 @@
             </a>
         </div>
     </form>
-</div>
 {% endblock %}
    
 {% block javascripts %} 
    {{ parent() }}
-   <script type="text/javascript" src="{{ asset('bundles/cms/js/plugins/ckeditor/ckeditor.js') }}"></script>
    <script type="text/javascript">
    //<![CDATA[
     var editor = CKEDITOR.replace( 'lrt_cmsbundle_articletype[content]' );

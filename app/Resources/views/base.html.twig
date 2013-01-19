@@ -10,7 +10,7 @@
         {% block stylesheets %}
         <link rel="stylesheet" href="{{ asset('bundles/site/css/common.css') }}" type="text/css" />
         {% endblock %}
-        <!--[if lt IE 9]> <script src="{{ asset('bundles/site/js/html5.js') }}"></script> <![endif]-->
+        <!--[if lt IE 9]> <script src="{{ asset('web/js/html5.js') }}"></script> <![endif]-->
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
     <body>
@@ -27,8 +27,7 @@
                         <li><a title="Association" href="{{ path('show_page', { 'page': 'association' }) }}">Association</a></li>
                         <li><a title="Photos" href="{{ path('show_page', { 'page': 'photos' }) }}">Photos</a></li>
                         <li><a title="Videos" href="{{ path('video') }}">Vidéos</a></li>
-                        <li><a title="Contact" href="">Contact</a></li>
-                        <li><a title="Admin"  href="{{ path('dashboard') }}">Admin</a></li>
+                        <li><a title="Contact" href="{{ path('contact') }}">Contact</a></li>
                     </ul>
                 </nav>
                 <!-- End  Navigation -->

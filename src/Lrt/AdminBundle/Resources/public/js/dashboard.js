@@ -2,8 +2,6 @@
 
 	$(document).ready(function() {
 
-        $(".scroll").mCustomScrollbar();
-
 		//* calendar
 		gebo_calendar.init();
 		//* resize elements on window resize

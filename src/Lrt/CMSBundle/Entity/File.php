@@ -35,7 +35,7 @@ class File
     public $size;
 
     /**
-     * @Assert\File(maxSize="6000000")
+     * @Assert\File(maxSize="6000000",mimeTypes= {"image/jpeg","image/gif","image/png"},mimeTypesMessage= "Format de fichier non valide")
      */
     public $file;
 

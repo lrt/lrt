@@ -9,11 +9,11 @@ use Lrt\CMSBundle\Entity\Category;
 
 class LoadArticleCategoryData extends AbstractFixture implements OrderedFixtureInterface
 {
-
     /**
      * Load data fixtures with the passed EntityManager
      *
-     * @param Doctrine\Common\Persistence\ObjectManager $manager
+     * @param \Doctrine\Common\Persistence\ObjectManager $manager
+     * @return void
      */
     public function load(ObjectManager $manager)
     {

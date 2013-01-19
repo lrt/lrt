@@ -20,7 +20,7 @@ Scénario: Je recherche un utilisateur par son login
         | userbundle_userfiltertype_login |  alexandre  |
     Et je presse "Filtrer"
     Alors je devrais voir les lignes suivantes dans le tableau "tListeUsers" :
-        | alexandre | * | alexandre.seiller@longchamp-roller-team.com | admin | * | * |
+        | alexandre | * | * | admin | * | * |
 
 @filtre_user
 Scénario: Je recherche un utilisateur par son email
@@ -29,7 +29,7 @@ Scénario: Je recherche un utilisateur par son email
         | userbundle_userfiltertype_email |  julien.morelle@longchamp-roller-team.com  |
     Et je presse "Filtrer"
     Alors je devrais voir les lignes suivantes dans le tableau "tListeUsers" :
-        | julien | * | julien.morelle@longchamp-roller-team.com | admin | * | * |
+        | julien | * | * | admin | * | * |
 
 @filtre_user
 Scénario: Je recherche un utilisateur par son nom
@@ -38,7 +38,7 @@ Scénario: Je recherche un utilisateur par son nom
         | userbundle_userfiltertype_nom |  dubosc  |
     Et je presse "Filtrer"
     Alors je devrais voir les lignes suivantes dans le tableau "tListeUsers" :
-        | jeremy | * | jeremy.dubosc@longchamp-roller-team.com | admin | * | * |
+        | jeremy | * | * | admin | * | * |
 
 @filtre_user
 Scénario: Je recherche tous les administrateurs
@@ -47,6 +47,6 @@ Scénario: Je recherche tous les administrateurs
         | userbundle_userfiltertype_type |  ROLE_ADMIN  |
     Et je presse "Filtrer"
     Alors je devrais voir les lignes suivantes dans le tableau "tListeUsers" :
-        | alexandre | * | alexandre.seiller@longchamp-roller-team.com | admin | * | * |
+        | alexandre | * | * | admin | * | * |
     Et je ne devrais pas voir les lignes suivantes dans le tableau "tListeUsers" :
-        | test | * | test@longchamp-roller-team.com | * | non activé | * |
+        | test | * | * | * | non activé | * |

@@ -42,10 +42,14 @@ class MailService
                 ->setBody($body)
                 ->setContentType('text/html');
 
+            $failures = null;
+            $result = $this->mailer->send($mail, $failures);
 
-            $this->mailer->send($mail);
+            if (!$result) {
+                return $failures;
+            }
 
-            return true;
+            return $result;
         }
         return false;
     }

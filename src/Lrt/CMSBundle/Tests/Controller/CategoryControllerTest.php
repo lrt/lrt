@@ -62,7 +62,7 @@ class CategoryControllerTest extends LrtWebTestCase
     /**
      * @test
      * @testdox Modifier une catégorie dont les données seraient valide
-     * @group ko
+     * @group cat
      */
     public function editCategoryValid()
     {

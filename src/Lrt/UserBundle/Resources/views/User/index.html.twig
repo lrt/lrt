@@ -53,10 +53,12 @@
             <table class="table table-striped tListeUsers">
                 <thead>
                     <tr>
-                        <th>Login</th>
+                        <th>Identifiant</th>
+                        <th>Prénom</th>
                         <th>Nom</th>
                         <th>Email</th>
                         <th>Role</th>
+                        <th>Dernière connexion</th>
                         <th>Statut</th>
                         <th></th>
                     </tr>
@@ -64,12 +66,9 @@
                 <tbody>
                 {% for entity in entities %}
                     <tr>
-                        <td>{{ entity.username }}</td>
-                        <td>
-                            <a href="{{ path('user_show', { 'id': entity.id }) }}">
-                            {{ entity.firstName }} {{ entity.lastName }}
-                            </a>
-                        </td>
+                        <td><a href="{{ path('user_edit', { 'id': entity.id }) }}">{{ entity.username }}</a></td>
+                        <td>{{ entity.firstName }} </td>
+                        <td>{{ entity.lastName }}</td>
                         <td>{{ entity.email|replace({'@': '[@]'}) }}</td>
                         <td>
                             {% for role in entity.roles %}
@@ -77,6 +76,11 @@
                                 {{ role | lower | replace({'role_':''}) }}
                                 {% endif %}
                             {% endfor %}
+                        </td>
+                        <td>
+                            {% if entity.lastLogin is not null %}
+                                {{ entity.lastLogin|date('d/m/Y H:i:s') }}
+                            {% endif %}
                         </td>
                         <td>
                             {% if entity.isEnabled == 1 %}

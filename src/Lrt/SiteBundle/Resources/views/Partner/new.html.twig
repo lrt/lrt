@@ -1,0 +1,36 @@
+{% extends '::admin.html.twig' %}
+
+{% block breadcrumb %}
+    <li>
+        <a href="{{ path('partner') }}">Partenaires</a> <span class="divider">/</span>
+    </li>
+    <li class="active">Ajouter un partenaire</li>
+{% endblock %}
+
+{% block menu %}
+    <li class="nav-header">Partenaire</li>
+    <li class="active"><a href="{{ path('partner_new') }}">Ajouter</a></li>
+    <li><a href="{{ path('partner') }}">Liste des partenaires</a></li>
+{% endblock %}
+
+{% block body %}
+<div class="box">
+    <h4 class="box-header round-top">
+        Ajouter un partenaire
+    </h4>
+    <div class="box-container-toggle">
+        <div class="box-content">
+            {% form_theme form 'AdminBundle:Themes:form.html.twig' %}
+            <form action="{{ path('partner_create') }}" method="post" {{ form_enctype(form) }}>
+                {{ form_widget(form) }}
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary"><i class="icon-check icon-white"></i> Valider</button>
+                    <a href="{{ path('partner') }}" class="btn">
+                        <i class="icon-list"></i> Retour à la liste
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

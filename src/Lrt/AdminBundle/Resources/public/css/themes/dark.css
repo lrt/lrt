@@ -1,0 +1,94 @@
+@import "mCustomScrollbar.css";
+@import "custom.css";
+
+/* ---- Gebo Admin dark theme ---- */
+
+    .navbar-inner {
+		background: #45484d;
+		background: -moz-linear-gradient(top,  #45484d 0%, #000000 100%);
+		background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#45484d), color-stop(100%,#000000));
+		background: -webkit-linear-gradient(top,  #45484d 0%,#000000 100%);
+		background: -o-linear-gradient(top,  #45484d 0%,#000000 100%);
+		background: -ms-linear-gradient(top,  #45484d 0%,#000000 100%);
+		background: linear-gradient(top,  #45484d 0%,#000000 100%);
+		filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#45484d', endColorstr='#000000',GradientType=0 );
+    }
+    .navbar .nav > li > a {
+        color: #bababa;
+    }
+    .navbar .nav > li:hover > a {
+        color:#fff;
+    }
+    .navbar .nav .active > a, .navbar .nav .active > a:hover {
+        background: #555 !important;
+    }
+    .navbar .divider-vertical {
+		border-left-color:#000;
+        border-right-color:#3b3b3b;
+    }
+    .dropdown-menu li > a:hover, .dropdown-menu .active > a,
+	.dropdown-menu .active > a:hover,
+    .nav-list > .active > a, .nav-list > .active > a:hover {
+        background: #5c778a !important;
+    }
+    .ui-menu .ui-menu-item a.ui-state-hover,
+    .ui-menu .ui-menu-item a.ui-state-active {
+        background: #5c778a !important;
+        border-color:#5c778a !important;
+    }
+
+	.dataTables_wrapper th.sorting_asc,.dataTables_wrapper th.sorting_desc {background-color:#dce3e7 !important}
+
+.main_content .row-fluid + .row-fluid {margin-top: 30px;}
+
+/* dashboard icon navigation*/
+.dshb_icoNav {text-align:center}
+.dshb_icoNav li {-webkit-box-shadow: inset 0px 1px 0px 0px #fff;box-shadow: inset 0px 1px 0px 0px #fff;text-align:center;list-style:none;display:inline-block;margin:0 5px 10px;background: #f9f9f9;background: -moz-linear-gradient(top, #f9f9f9 0%, #efefef 100%);background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f9f9f9), color-stop(100%,#efefef));background: -webkit-linear-gradient(top, #f9f9f9 0%,#efefef 100%);background: -o-linear-gradient(top, #f9f9f9 0%,#efefef 100%);background: -ms-linear-gradient(top, #f9f9f9 0%,#efefef 100%);background: linear-gradient(top, #f9f9f9 0%,#efefef 100%);filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f9f9f9', endColorstr='#efefef',GradientType=0 );border:1px solid #e2e2e2;-webkit-border-radius: 6px;-moz-border-radius: 6px;-ms-border-radius: 6px;border-radius: 6px}
+.dshb_icoNav li:hover {border-color:#d2d2d2;-moz-box-shadow: 0 0 6px #ccc;-webkit-box-shadow: 0 0 6px #ccc;box-shadow: 0 0 6px #ccc}
+.dshb_icoNav li a {position:relative;display:block;padding:9px 10px 11px;width:91px;font-size:12px;color:#222;background-repeat:no-repeat;background-position: center 10px}
+.dshb_icoNav li a:hover {text-decoration:none}
+.dshb_icoNav .label {position:absolute;right:-5px;top:-5px}
+.iconNav_left {text-align:left}
+.iconNav_right {text-align:right}
+
+/* Portlets */
+.box h4.box-header {
+    background-color: #fbfbfb;
+    background-image: -moz-linear-gradient(top, #ffffff, #f5f5f5);
+    background-image: -ms-linear-gradient(top, #ffffff, #f5f5f5);
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#ffffff), to(#f5f5f5));
+    background-image: -webkit-linear-gradient(top, #ffffff, #f5f5f5);
+    background-image: -o-linear-gradient(top, #ffffff, #f5f5f5);
+    background-image: linear-gradient(top, #ffffff, #f5f5f5);
+    background-repeat: repeat-x;
+    border: 1px solid #ddd;
+    filter: progid:dximagetransform.microsoft.gradient(startColorstr='#ffffff', endColorstr='#f5f5f5', GradientType=0);
+    -webkit-box-shadow: inset 0 1px 0 #ffffff;
+    -moz-box-shadow: inset 0 1px 0 #ffffff;
+    box-shadow: inset 0 1px 0 #ffffff;
+}
+
+.box .box-container-toggle {
+    border-left:1px solid #DDD;
+    border-right:1px solid #DDD;
+    border-bottom:1px solid #DDD;
+
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    -webkit-border-top-left-radius: 0px;
+    -webkit-border-top-right-radius: 0px;
+    -moz-border-top-left-radius: 0px;
+    -moz-border-top-right-radius: 0px;
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px
+}
+
+.box-btn {
+    border:1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 3px;
+    -moz-box-shadow: 0px 1px 0px rgba(255,255,255,0.3);
+    -webkit-box-shadow: 0px 1px 0px rgba(255,255,255,0.3);
+    box-shadow: 0px 1px 0px rgba(255,255,255,0.3);
+}
+

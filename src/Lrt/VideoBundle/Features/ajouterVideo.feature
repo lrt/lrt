@@ -4,7 +4,7 @@ Fonctionnalité: Ajouter une vidéo
 Contexte: Je suis un utilisateur qui veut ajouter une vidéo
 
     Soit je suis sur "login"
-    Lorsque je remplis "Nom d'utilisateur :" avec "alexandre"
+    Lorsque je remplis "username" avec "alexandre"
     Et je remplis "Mot de passe :" avec "test"
     Et je presse "Connexion"
     Alors je suis sur la page d'accueil

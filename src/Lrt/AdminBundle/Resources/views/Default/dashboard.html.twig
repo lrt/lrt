@@ -1,36 +1,36 @@
 {% extends '::admin.html.twig' %}
 
-{% block stylesheets %}
-    {{ parent() }}
-    <link rel="stylesheet" href="{{ asset('bundles/admin/css/plugins/fullcalendar/fullcalendar_gebo.css') }}" />
-{% endblock %}
-
 {% block body %}
 <div class="row-fluid">
     <div class="span12">
         <ul class="dshb_icoNav clearfix">
             <li>
-                <a href="{{ path('user') }}" style="background-image: url({{ asset('bundles/admin/img/gCons/multi-agents.png') }})">
-                    <span class="label label-info">+10</span> Utilisateurs
+                <a href="{{ path('user') }}">
+                    <i class="icon-dashboard-users"></i>
+                    Utilisateurs
                 </a>
             </li>
             <li>
-                <a href="javascript:void(0)" style="background-image: url({{ asset('bundles/admin/img/gCons/chat-.png') }})">
+                <a href="#">
+                    <i class="icon-dashboard-chat"></i>
                     Messages
                 </a>
             </li>
             <li>
-                <a href="{{ path('article_new') }}" style="background-image: url({{ asset('bundles/admin/img/gCons/edit.png') }})">
+                <a href="{{ path('article_new') }}">
+                    <i class="icon-dashboard-edit"></i>
                     Ajouter un article
                 </a>
             </li>
             <li>
-                <a href="javascript:void(0)" style="background-image: url({{ asset('bundles/admin/img/gCons/add-item.png') }})">
+                <a href="#">
+                    <i class="icon-dashboard-add-item"></i>
                     Ajouter une page
                 </a>
             </li>
             <li>
-                <a href="javascript:void(0)" style="background-image: url({{ asset('bundles/admin/img/gCons/configuration.png') }})">
+                <a href="#">
+                    <i class="icon-dashboard-configuration"></i>
                     Configuration
                 </a>
             </li>
@@ -186,7 +186,5 @@
 {% block javascripts %}
     {{ parent() }}
     <script src="{{ asset('bundles/admin/js/plugins/fullcalendar/fullcalendar.min.js') }}"></script>
-    <script src="{{ asset('bundles/admin/js/plugins/mcustomscrollbar/jquery.mCustomScrollbar.min.js') }}"></script>
-    <script src="{{ asset('bundles/admin/js/plugins/jquery.mousewheel.min.js') }}"></script>
     <script src="{{ asset('bundles/admin/js/dashboard.js') }}"></script>
 {% endblock %}

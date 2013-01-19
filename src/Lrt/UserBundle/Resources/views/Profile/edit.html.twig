@@ -1,0 +1,59 @@
+{% extends '::admin.html.twig' %}
+
+{% block breadcrumb %}
+    <li>Profil <span class="divider">/</span></li>
+    <li class="active">{{ app.user.username }}</li>
+{% endblock %}
+
+{% block body %}
+<div class="row-fluid">
+    <div class="span3">
+        <div class="test">
+            <a href="">Nhl57</a>
+            <a href="">
+                <img src="{{ asset('bundles/admin/img/users/aqvatarius.jpg') }}" class="img-polaroid"/>
+            </a>
+            <div class="uploader"><input type="file" name="image" style="opacity: 0;" size="19"><span class="filename">No file selected</span><span class="action">Choose File</span></div>
+        </div>
+        <div class="block-fuild without-head">
+        </div>
+    </div>
+    <div class="span6">
+        <div class="box">
+            <h4 class="box-header round-top">
+                <i class="icon-user"></i>
+                Informations personnelles
+            </h4>
+            <div class="box-container-toggle">
+                <div class="box-content">
+                    {% form_theme form 'AdminBundle:Themes:form.box.html.twig' %}
+                    <form action="{{ path('user_update', { 'id': user.id }) }}" method="post" {{ form_enctype(form) }}>
+                        {{ form_widget(form) }}
+                        <button type="submit" class="btn btn-primary"><i class="icon-check icon-white"></i> Modifier</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="span3">
+        <div class="box">
+            <h4 class="box-header round-top">
+                <i class="icon-lock"></i>
+                Modifier mon mot de passe
+            </h4>
+            <div class="box-container-toggle">
+                <div class="box-content">
+                    <form action="{{ path('fos_user_change_password') }}" method="post" {{ form_enctype(form_pass) }}>
+                        {{ form_widget(form_pass) }}
+                        <button type="submit" class="btn btn-primary"><i class="icon-check icon-white"></i> Modifier</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row-fluid">
+    <div class="span6">6</div>
+    <div class="span6">6</div>
+</div>
+{% endblock %}

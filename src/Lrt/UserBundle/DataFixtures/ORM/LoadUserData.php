@@ -16,14 +16,18 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface {
         $team1 = $this->getReference('equipe-1');
         $team2 = $this->getReference('equipe-2');
 
+        $groupSuperviseur = $this->getReference('superviseur-group');
+        $groupMember = $this->getReference('member-group');
+        $groupAdmin = $this->getReference('admin-group');
+
         //ADMIN
-        $this->newUser('alexandre', 'alexandre', 'seiller','alexandre.seiller@longchamp-roller-team.com', true, 'ROLE_ADMIN',$team2,'alexandre1');
-        $this->newUser('jeremy', 'jeremy', 'dubosc', 'jeremy.dubosc@longchamp-roller-team.com', true, 'ROLE_ADMIN', $team1,'jeremy1');
-        $this->newUser('julien', 'julien', 'morelle','julien.morelle@longchamp-roller-team.com', true, 'ROLE_ADMIN', $team1,'julien1');
-        $this->newUser('nicolas', 'nicolas', 'prat','nicolas.prat@longchamp-roller-team.com', true, 'ROLE_ADMIN',$team1,'nicolas1');
+        $this->newUser('alexandre', 'alexandre', 'seiller','alexandre.seiller@longchamp-roller-team.com', true, $groupAdmin ,$team2,'alexandre1');
+        $this->newUser('jeremy', 'jeremy', 'dubosc', 'jeremy.dubosc@longchamp-roller-team.com', true, $groupSuperviseur, $team1,'jeremy1');
+        $this->newUser('julien', 'julien', 'morelle','julien.morelle@longchamp-roller-team.com', true, $groupSuperviseur, $team1,'julien1');
+        $this->newUser('nicolas', 'nicolas', 'prat','nicolas.prat@longchamp-roller-team.com', true, $groupMember ,$team1,'nicolas1');
     }
 
-    protected function newUser($userName, $firstName, $lastName, $email, $enabled, $role, $team, $reference)
+    protected function newUser($userName, $firstName, $lastName, $email, $enabled, $group, $team, $reference)
     {
         $user = new User();
         $user->setUsername($userName);
@@ -32,7 +36,8 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface {
         $user->setEmail($email);
         $user->setEnabled($enabled);
         $user->setTeam($team);
-        $user->addRole($role);
+        $user->addGroup($group);
+        //$user->addRole($role);
         $user->setPlainPassword('test');
         $this->addReference($reference,$user);
         $this->manager->persist($user);
@@ -41,7 +46,7 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface {
 
     public function getOrder()
     {
-        return 1;
+        return 2;
     }
 
 }

@@ -14,7 +14,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use JMS\DiExtraBundle\Annotation\Service;
 use JMS\DiExtraBundle\Annotation as DI;
-use Lrt\SiteBundle\Enum\StatusArticleEnum;
+use Lrt\CMSBundle\Entity\Content;
 
 /**
  * @Service("form.cms.article.filter.type")
@@ -23,14 +23,15 @@ class ArticleFilterType extends AbstractType {
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $statusArticleEnum = new StatusArticleEnum();
-        
         $builder->add('title', null, array('required' => false, 'label' => 'Titre :'))
                 ->add('status', 'choice', array(
-                    'required' => false,
-                    'label' => 'Statut :',
-                    'empty_value' => 'Etat de publication',
-                    'choices' => $statusArticleEnum->getData()))
+                'required' => false,
+                'label' => 'Etat de publication :',
+                'empty_value' => 'Etat de publication',
+                'choices' => array(
+                    '0' => 'Brouillon',
+                    '1' => 'Publication immédiate',
+                )))
                 ->add('isPublic', 'choice', array(
                     'required' => false,
                     'label' => 'Visibilité :',

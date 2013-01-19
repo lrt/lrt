@@ -1,3 +1,8 @@
+calendar:
+    resource: "@CalendarBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
 team:
     resource: "@TeamBundle/Controller/"
     type:     annotation

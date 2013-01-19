@@ -5,6 +5,7 @@ namespace Lrt\CMSBundle\Repository;
 use Doctrine\ORM\EntityRepository;
 use JMS\DiExtraBundle\Annotation as DI;
 use Lrt\UserBundle\Entity\User;
+use Lrt\CMSBundle\Entity\Content;
 
 class ArticleRepository extends EntityRepository
 {    
@@ -13,26 +14,77 @@ class ArticleRepository extends EntityRepository
      * @param integer $limit
      * @return array
      */
-    public function getLatestArticles($limit = 5)
+    public function getLatestArticles($limit)
     {
         $qb = $this->createQueryBuilder('a')
                 ->select('a.id, a.title, a.content, a.slug, c.name as category_name')
                 ->join('a.category', 'c')
                 ->where('a.status = ?1')
-                ->setParameter(1, 0);
+                ->setParameter(1, Content::IMMEDIATE);
 
         if (!is_null($limit)) {
-            $qb->setMaxResults(5);
+            $qb->setMaxResults($limit);
         }
-
-        $qb->setMaxResults($limit);
 
         return $qb->getQuery()->getArrayResult();
     }
 
     /**
+     * Retourne la liste des articles d'un utilisateur en mode brouillon
+     * @param \Lrt\UserBundle\Entity\User $user
+     * @return array
+     */
+    public function getArticlesDraftsByUser(User $user)
+    {
+        $sql = 'SELECT a FROM CMSBundle:Article a
+                JOIN CMSBundle:Category c WITH a.category = c.id
+                JOIN UserBundle:User u WITH a.user = u.id
+                WHERE a.user = :user
+                AND a.status = :status';
+
+        $query = $this->getEntityManager()->createQuery($sql)
+            ->setParameter('user', $user)
+            ->setParameter('status', Content::DRAFTS);
+
+        return $query->getResult();
+    }
+
+    /**
+     * Retourne la liste des articles dans la corbeille
+     * @return array
+     */
+    public function getArticlesInBin()
+    {
+        $sql = 'SELECT a FROM CMSBundle:Article a
+                JOIN CMSBundle:Category c WITH a.category = c.id
+                AND a.status = :status';
+
+        $query = $this->getEntityManager()->createQuery($sql)
+            ->setParameter('status', Content::BIN);
+
+        return $query->getResult();
+    }
+
+    /**
+     * Retourne la liste des articles en attente de validation
+     * @return array
+     */
+    public function getArticlesNotValidated()
+    {
+        $sql = 'SELECT a FROM CMSBundle:Article a
+                JOIN CMSBundle:Category c WITH a.category = c.id
+                AND a.isValid = :valid';
+
+        $query = $this->getEntityManager()->createQuery($sql)
+            ->setParameter('valid', Content::IS_NOT_VALIDATED);
+
+        return $query->getResult();
+    }
+
+    /**
      * Retourne la liste des articles par catégories
-     * @param type $categoryName
+     * @param string $categoryName
+     * @return array
      */
     public function getArticlesByCategory($categoryName)
     {
@@ -44,11 +96,12 @@ class ArticleRepository extends EntityRepository
 
         return $qb->getQuery()->getArrayResult();
     }
-        
+
     /**
-    * Retourne la liste des articles dont l'utilisateur est l'auteur
-    * @param Lrt\UserBundle\Entity\User $user
-    */
+     * Retourne la liste des articles dont l'utilisateur est l'auteur
+     * @param \Lrt\UserBundle\Entity\User $user
+     * @return array
+     */
     public function getArticlesByUser(User $user)
     {
         $sql = 'SELECT a FROM CMSBundle:Article a
@@ -61,25 +114,23 @@ class ArticleRepository extends EntityRepository
        
         return $query->getResult();
     }
-    
+
     /**
      * Filtre sur la liste des articles
      * @param string $title
-     * @param string $status
      * @param string $publish
+     * @param string $category
      * @return array
      */
-    public function filter($title = '',$status = '',$publish = '',$category = '')
+    public function filter($title = '', $publish = '',$category = '')
     {        
         $queryStr = 'SELECT a FROM CMSBundle:Article a
                      JOIN CMSBundle:Category c WITH a.category = c.id
-                     WHERE 1 = 1 ';
+                     WHERE 1 = 1
+                     AND a.status != '.Content::BIN.' ';
                 
         if ($title != null && $title != '') {
             $queryStr.= ' AND a.title LIKE :title ';
-        }
-        if ($status != null && $status != '') {
-            $queryStr.= ' AND a.status LIKE :status ';
         }
         if ($publish != null && $publish != '') {
             $queryStr.= ' AND a.isPublic LIKE :publish ';
@@ -92,9 +143,6 @@ class ArticleRepository extends EntityRepository
         
         if ($title != null && $title != '') {
             $query->setParameter('title', '%'.$title.'%');
-        }
-        if ($status != null && $status != '') {
-            $query->setParameter('status', '%'.$status.'%');
         }
         if ($publish != null && $publish != '') {
             $query->setParameter('publish', '%'.$publish.'%');

@@ -11,7 +11,6 @@ namespace Lrt\CMSBundle\Entity;
 
 use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 use Lrt\UserBundle\Entity\User;
 
@@ -25,10 +24,11 @@ use Lrt\UserBundle\Entity\User;
  */
 class Content
 {
-
-    const IMMEDIATE = 'Publication immédiate';
-    const DRAFTS = 'Brouillon';
-    const INVISIBLE = 'Invisible';
+    const IS_NOT_VALIDATED = 0;
+    const IS_VALIDATED = 1;
+    const DRAFTS = 2;
+    const IMMEDIATE = 3;
+    const BIN = 4;
 
     /**
      * @ORM\Id
@@ -38,6 +38,7 @@ class Content
     protected $id;
 
     /**
+     * @Gedmo\Slug(fields={"title"}, updatable=false, separator="-")
      * @ORM\Column(type="string")
      */
     protected $title;
@@ -49,10 +50,15 @@ class Content
     protected $content;
 
     /**
-     * @Gedmo\Slug(fields={"title"})
-     * @ORM\Column(type="string", nullable=true)
+     * @Gedmo\Slug(fields={"title"}, style="camel", separator="-", updatable=true, unique=false)
+     * @ORM\Column(type="string", unique=true, nullable=true)
      */
     protected $slug;
+
+    /**
+     * @ORM\Column(name="is_valid", type="integer")
+     */
+    protected $isValid;
 
     /**
      * @ORM\ManyToOne(targetEntity="\Lrt\UserBundle\Entity\User", inversedBy="content")
@@ -150,6 +156,26 @@ class Content
     public function getSlug()
     {
         return $this->slug;
+    }
+
+    /**
+     * Set is_valid
+     *
+     * @param integer $isValid
+     */
+    public function setIsValid($isValid)
+    {
+        $this->isValid = $isValid;
+    }
+
+    /**
+     * Get is_valid
+     *
+     * @return integer
+     */
+    public function getIsValid()
+    {
+        return $this->isValid;
     }
 
     /**

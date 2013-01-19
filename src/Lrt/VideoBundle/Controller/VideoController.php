@@ -14,6 +14,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Response;
 use JMS\DiExtraBundle\Annotation as DI;
 use JMS\SecurityExtraBundle\Annotation\Secure;
@@ -50,13 +51,11 @@ class VideoController extends Controller {
         $data = $form->getData();
 
         if($form->isValid()) {
+
             $videos = $this->em->getRepository('VideoBundle:Video')->filter($data['title'], $data['status'], $data['isPublic']);
 
-            return array(
-                'entities' => $videos,
-                'form' => $form->createView(),
-                'nb' => count($videos)
-            );
+            return array('entities' => $videos,'form' => $form->createView(),'nb' => count($videos));
+
         } else {
             return $this->redirect($this->generateUrl('video'));
         }
@@ -66,14 +65,10 @@ class VideoController extends Controller {
      * Finds and displays a Video entity.
      *
      * @Route("/{id}/show", name="video_show")
+     * @ParamConverter("video", class="VideoBundle:Video", options={"id" = "id"})
      * @Template()
      */
-    public function showAction($id) {
-        $video = $this->em->getRepository('VideoBundle:Video')->find($id);
-
-        if (!$video) {
-            throw $this->createNotFoundException('Unable to find Video entity.');
-        }
+    public function showAction(Video $video) {
 
         return array(
             'entity' => $video,
@@ -113,7 +108,7 @@ class VideoController extends Controller {
             $video = new Video();
             $video->setUser($user);
             $form = $this->createForm(new VideoType(), $video);
-            $formHandler = new VideoHandler($form, $this->getRequest(), $this->em);
+            $formHandler = new VideoHandler($form, $request, $this->em);
 
             if ($formHandler->process()) {
 
@@ -133,19 +128,15 @@ class VideoController extends Controller {
      * Displays a form to edit an existing Video entity.
      *
      * @Route("/{id}/edit", name="video_edit")
+     * @ParamConverter("video", class="VideoBundle:Video", options={"id" = "id"})
      * @Secure(roles="ROLE_ADMIN")
      * @Template()
      */
-    public function editAction($id) {
+    public function editAction(Video $video) {
 
         $user = $this->sc->getToken()->getUser();
 
         if (is_object($user)) {
-            $video = $this->em->getRepository('VideoBundle:Video')->find($id);
-
-            if (!$video) {
-                throw $this->createNotFoundException('Unable to find Video entity.');
-            }
 
             $editForm = $this->createForm(new VideoType(), $video);
 
@@ -162,20 +153,16 @@ class VideoController extends Controller {
      * Edits an existing Video entity.
      *
      * @Route("/{id}/update", name="video_update")
+     * @ParamConverter("video", class="VideoBundle:Video", options={"id" = "id"})
      * @Secure(roles="ROLE_ADMIN")
      * @Method("POST")
      * @Template("VideoBundle:Video:edit.html.twig")
      */
-    public function updateAction(Request $request, $id) {
+    public function updateAction(Request $request, Video $video) {
 
         $user = $this->sc->getToken()->getUser();
 
         if (is_object($user)) {
-            $video = $this->em->getRepository('VideoBundle:Video')->find($id);
-
-            if (!$video) {
-                throw $this->createNotFoundException('Unable to find Video entity.');
-            }
 
             $editForm = $this->createForm(new VideoType(), $video);
             $editForm->bind($request);
@@ -184,7 +171,7 @@ class VideoController extends Controller {
                 $this->em->persist($video);
                 $this->em->flush();
 
-                return $this->redirect($this->generateUrl('video_edit', array('id' => $id)));
+                return $this->redirect($this->generateUrl('video_edit', array('id' => $video->getId())));
             }
 
             return array(
@@ -200,19 +187,16 @@ class VideoController extends Controller {
      * Deletes a Video entity.
      *
      * @Route("/{id}/delete", name="video_delete")
+     * @ParamConverter("video", class="VideoBundle:Video", options={"id" = "id"})
      * @Secure(roles="ROLE_ADMIN")
      * @Method("POST")
      */
-    public function deleteAction(Request $request, $id) {
-        $form = $this->createDeleteForm($id);
+    public function deleteAction(Request $request, Video $video) {
+
+        $form = $this->createDeleteForm($video->getId());
         $form->bind($request);
 
         if ($form->isValid()) {
-            $video = $this->em->getRepository('VideoBundle:Video')->find($id);
-
-            if (!$video) {
-                throw $this->createNotFoundException('Unable to find Video entity.');
-            }
 
             $this->em->remove($video);
             $this->em->flush();
