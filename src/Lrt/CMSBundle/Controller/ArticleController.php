@@ -196,6 +196,8 @@ class ArticleController extends Controller
             $formHandler = new ArticleHandler($form, $request, $this->em);
 
             if($formHandler->process()) {
+
+                $this->get('session')->setFlash('success', 'Modification de l\'article '.$article->getTitle().' réussi avec succès.' );
                 return $this->redirect($this->generateUrl('article_edit', array('id' => $article->getId())));
             }
 

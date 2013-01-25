@@ -1,45 +1,10 @@
-{% extends '::admin.html.twig' %}
-
-{% block breadcrumb %}
-<li>
-    <a href="{{ path('event') }}">Evènements</a> <span class="divider">/</span>
-</li>
-<li class="active">Ajouter un évènement</li>
-{% endblock %}
-
-{% block menu %}
-    <li class="nav-header">Evènement</li>
-    <li class="active"><a href="{{ path('event_new') }}">Ajouter</a></li>
-    <li><a href="{{ path('event') }}">Liste des évènements</a></li>
-{% endblock %}
-
-{% block body %}
-<div class="box">
-    <h4 class="box-header round-top">
-        Ajouter un évènement
-    </h4>
-    <div class="box-container-toggle">
-        <div class="box-content">
-            {% form_theme form 'AdminBundle:Themes:form.html.twig' %}
-            <form action="{{ path('event_create') }}" method="post" {{ form_enctype(form) }} class="form-horizontal">
-                {{ form_widget(form) }}
-                <div class="form-actions">
-                    <button type="submit" class="btn btn-primary"><i class="icon-check icon-white"></i> Valider</button>
-                    <a href="{{ path('event') }}" class="btn">
-                        <i class="icon-list"></i> Retour à la liste
-                    </a>
-                </div>
-            </form>
-        </div>
+{% form_theme form 'AdminBundle:Themes:form.html.twig' %}
+<form action="{{ path('event_create') }}" method="post" {{ form_enctype(form) }} class="form-horizontal">
+    {{ form_widget(form) }}
+    <div class="form-actions">
+        <button type="submit" class="btn btn-primary"><i class="icon-check icon-white"></i> Valider</button>
+        <a href="{{ path('event') }}" class="btn">
+            <i class="icon-list"></i> Retour à la liste
+        </a>
     </div>
-</div>
-{% endblock %}
-
-{% block javascripts %}
-    {{ parent() }}
-    <script type="text/javascript">
-        //<![CDATA[
-        var editor = CKEDITOR.replace( 'lrt_calendarbundle_eventtype[description]' );
-        //]]>
-    </script>
-{% endblock %}
+</form>

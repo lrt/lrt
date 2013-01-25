@@ -14,7 +14,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use JMS\DiExtraBundle\Annotation\Service;
 use JMS\DiExtraBundle\Annotation as DI;
-use Lrt\CMSBundle\Entity\Content;
+use Lrt\CMSBundle\Entity\Article;
 
 /**
  * @Service("form.cms.article.type")
@@ -28,14 +28,14 @@ class ArticleType extends AbstractType
     {
         $builder
             ->add('title', 'text', array('label' => 'Titre', 'required' => true))
-            ->add('content', 'textarea', array('label' => 'Contenu', 'required' => true))
+            ->add('content', 'textarea', array('label' => 'Contenu', 'required' => true, 'attr' => array('class' => 'ckeditor')))
             ->add('status', 'choice', array(
             'label' => 'Etat de publication',
             'choices' => array(
-                Content::DRAFTS => 'Brouillon',
-                Content::IMMEDIATE => 'Publication immédiate',
+                Article::DRAFTS => 'Brouillon',
+                Article::IMMEDIATE => 'Publication immédiate',
             )))
-            //->add('image', new FileType())
+            ->add('picture',null, array('label' => 'Image', 'required' => false))
             ->add('isPublic', null, array('label' => 'Voir sur la page principal ?', 'required' => false))
             ->add('category', 'entity', array(
             'class' => 'Lrt\CMSBundle\Entity\Category',

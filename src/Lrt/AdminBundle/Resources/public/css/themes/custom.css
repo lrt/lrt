@@ -1,12 +1,61 @@
 @import 'profile.css';
 
+/**SCROLLBAR**/
+::-webkit-scrollbar{width: 12px; background: #eee; border-left: 1px solid #ddd;}
+::-webkit-scrollbar-track {background: transparent;}
+::-webkit-scrollbar-thumb {background: #ccc;cursor: pointer;}
+
 body {
     background-color: #F1F1F1 !important;
 }
 
+.shadow {
+    box-shadow: 0 0 3px 0 #dadada;
+    -moz-box-shadow: 0 0 3px 0 #dadada;
+    -webkit-box-shadow: 0 0 3px 0 #dadada;
+    -o-box-shadow: 0 0 3px 0 #dadada;
+    -ms-box-shadow: 0 0 3px 0 #dadada;
+}
+
 .container-fluid {
     padding-top: 20px;
+    background-color: white;
+    margin: 0 252px 0 100px;
+    border: 1px solid #E5E5E5;
+    padding-bottom: 19px;
 }
+
+.sidebar .nav-tabs > li.active .arrow {
+    display: block !important;
+}
+.sidebar .nav-tabs > li > a:hover, .sidebar .nav-tabs > li.active > a {
+    background: none !important;
+    color: #08C !important;
+}
+
+.bubble-arrow {
+    border: 10px solid transparent;
+    border-right-color: #FFF;
+    height: 0;
+    width: 0;
+    position: absolute;
+    top: 30px;
+    right: -1px;
+}
+.bubble-arrow-border {
+    border: 10px solid transparent;
+    border-right-color: #E5E5E5;
+    height: 0;
+    width: 0;
+    position: absolute;
+    top: 30px;
+    right: 0px;
+}
+
+.m-botton-group {
+    margin-bottom: 10px;
+}
+
 
 .sidebar {
     width: 100px;
@@ -14,9 +63,9 @@ body {
     height: 100%;
     position: fixed;
     left: 0;
-    top: 60px;
+    top: 80px;
     background-color: #F1F1F1;
-    border-right: 1px solid #E5E5E5;
+    /*border-right: 1px solid #E5E5E5;*/
 }
 .sidebar .nav-tabs.nav-stacked > li > a {
     border: none !important;
@@ -25,6 +74,10 @@ body {
     text-align: center;
     font-size: 11px;
     color: #555;
+}
+.sidebar .nav {
+    margin-bottom: 0;
+    position: relative;
 }
 .sidebar .nav-tabs.nav-stacked > li.active img, .sidebar .nav-tabs.nav-stacked > li > a:hover img {
     opacity: 1;
@@ -36,9 +89,9 @@ body {
 }
 .sidebar .nav-tabs.nav-stacked > li > a img {
     display: inline;
-    opacity: 0.5;
-    -moz-opacity: 0.5;
-    filter: alpha(opacity=5);
+    opacity: 0.2;
+    -moz-opacity: 0.2;
+    filter: alpha(opacity=2);
 }
 .sidebar .nav-tabs.nav-stacked > li > a {
     text-align: center;
@@ -56,6 +109,8 @@ body {
     background-color: white;
     min-height: 500px;
     margin-left: 100px;
+    border-top: 1px solid #E5E5E5;
+    border-left: 1px solid #E5E5E5;
 }
 
 /** ICONS DASHBOARD **/
@@ -101,7 +156,6 @@ body {
 }
 /**/
 .menu-account-info {
-    background-color: #EDEDED;
     border-bottom: 1px solid #CCC;
     color: #333;
     margin-bottom: 10px;

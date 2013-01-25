@@ -1,4 +1,5 @@
 @import "plugins/fullcalendar/fullcalendar.css";
+@import "../js/plugins/datepicker/datepicker.css";
 
 @import "themes/default.css";
 @import "themes/dark.css";

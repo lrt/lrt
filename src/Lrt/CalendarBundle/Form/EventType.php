@@ -11,18 +11,18 @@ class EventType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name','text', array('label' => 'Nom'))
+            ->add('title','text', array('label' => 'Nom', 'attr' => array('placeholder' => 'Titre de l\'évènement')))
             ->add('dateDeb', 'genemu_jquerydate', array(
             'widget' => 'single_text',
             'label' => 'Date de début',
             'format' => 'dd/MM/yyyy',
-            'attr' => array('class' => 'date')
+            'attr' => array('class' => 'datepicker mask_date')
             ))
             ->add('dateEnd', 'genemu_jquerydate', array(
             'widget' => 'single_text',
             'label' => 'Date de fin',
             'format' => 'dd/MM/yyyy',
-            'attr' => array('class' => 'date')
+            'attr' => array('class' => 'datepicker mask_date')
             ))
             ->add('place','text', array('label' => 'Ville'))
             ->add('website','text', array('label' => 'Site internet'))

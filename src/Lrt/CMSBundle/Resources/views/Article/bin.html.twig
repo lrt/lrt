@@ -56,7 +56,7 @@
                                 {{ entity.content|raw|truncate(50) }}
                                 ( posté par  <a title="" href="#">{{ entity.user }}</a> )
                             </td>
-                            <td>{{ entity.created|date('d/m/Y h:m') }}</td>
+                            <td>{{ entity.dateSubmission|date('d/m/Y h:m') }}</td>
                             <td>{{ entity.category.name }}</td>
                             <td>
                                 {% if entity.isPublic == 1 %}

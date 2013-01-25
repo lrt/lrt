@@ -1,12 +1,5 @@
 {% extends '::admin.html.twig' %}
 
-{% block breadcrumb %}
-<li>
-    <a href="{{ path('user') }}">Utilisateurs</a> <span class="divider">/</span>
-</li>
-<li class="active">Liste</li>
-{% endblock %}
-
 {% block menu %}
     <li class="nav-header">Utilisateur</li>
     <li><a href="{{ path('user_new') }}">Ajouter</a></li>
@@ -14,8 +7,32 @@
     <li><a href="#">Utilisateur(s) en attente</a></li>
 {% endblock %}
 
+{% block page_header %}
+    <div class="row-fluid" style="border-bottom: 1px solid #eeeeee;margin-bottom: 18px;">
+        <div class="span8 m-botton-group">
+            <h3>Liste des utilisateurs</h3>
+        </div>
+        <div class="span4">
+            <div class="btn-group pull-right">
+                <a class="btn btn-danger" href="{{ path('user_new') }}">
+                    Ajouter un utilisateur
+                </a>
+                <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+                    <i class="icon-cog"></i>
+                    <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a data-toggle="modal" href="{{ path('export_user') }}"><i class="icon-download-alt"></i> Exporter la liste</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
 {% block body %}
-<div class="box">
+<!--<div class="box">
     <h4 class="box-header round-top">
         <i class="icon-user"></i>
         Liste des utilisateurs ({% if nb is defined %}{{ nb }}{% endif %})
@@ -25,12 +42,12 @@
         <a class="box-btn" title="toggle">
             <i class="icon-minus"></i>
         </a>
-        <a class="box-btn" title="#box-config-modal" data-toggle="modal" title="config">
+        <a class="box-btn" title="#box-config-modal" data-toggle="modal">
             <i class="icon-cog"></i>
         </a>
     </h4>
     <div class="box-container-toggle">
-        <div class="box-content">
+        <div class="box-content">-->
             <div id="filtres">
                 <div id="titreFiltres">
                     <h4>filtres</h4>
@@ -90,10 +107,16 @@
                             {% endif %}
                         </td>
                         <td>
-                            <a href="{{ path('user_edit', { 'id': entity.id }) }}" class="btn btn-small btn-info">
-                                <i class="icon-edit icon-white"></i>
-                                Modifier le compte
-                            </a>
+                            <div class="btn-group">
+                                <a class="btn btn-small dropdown-toggle" data-toggle="dropdown" href="#">
+                                    Action
+                                    <span class="caret"></span>
+                                </a>
+                                <ul class="dropdown-menu pull-right">
+                                    <li><a href="{{ path('user_edit', { 'id': entity.id }) }}"><i class="icon-edit"></i> Modifier</a></li>
+                                    <li><a href="#"><i class="icon-ban-circle"></i> Désactiver</a></li>
+                                </ul>
+                            </div>
                         </td>
                     </tr>
                 {%  else %}
@@ -101,11 +124,8 @@
                 {% endfor %}
                 </tbody>
             </table>
-        </div>
+       <!-- </div>
     </div>
-</div>
-<a href="{{ path('user_new') }}" class="btn btn-small btn-primary">
-    Créer un nouvel utilisateur
-</a>
+</div>-->
 {% endblock %}
 

@@ -55,9 +55,7 @@
                     <tr>
                         <th></th>
                         <th>Vidéo</th>
-                        <th>Liens Vidéo</th>
                         <th>Statut</th>
-                        <th>Visibilité</th>
                         <th></th>
                     </tr>
                 </thead>
@@ -73,19 +71,11 @@
                             {{ entity.description | truncate(50) }}
                             ( posté par  <a title="" href="#">{{ entity.user }}</a> )
                         </td>
-                        <td>{{ entity.vimeoId }}</td>
                         <td>
                             {% if entity.isPublished == 1 %}
                                 Publié
                             {% else %}
                                 Non publié
-                            {% endif %}
-                        </td>
-                        <td>
-                            {% if entity.isPublic == 1 %}
-                                Public
-                            {% else %}
-                                Privé
                             {% endif %}
                         </td>
                         <td>

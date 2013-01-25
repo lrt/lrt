@@ -4,89 +4,41 @@ namespace Lrt\CalendarBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Lrt\AdminBundle\Entity\EventRequest;
 
 /**
  * @ORM\Entity
  * @ORM\Table(name="event")
  */
-class Event
+class Event extends EventRequest
 {
     /**
-     * @ORM\GeneratedValue
-     * @ORM\Id
-     * @ORM\Column(type="integer")
-     */
-    protected $id;
-
-    /**
-     * @ORM\Column(type="string")
-     * @Assert\NotBlank()
-     */
-    protected $name;
-
-    /**
-     * @ORM\Column(name="date_deb", type="date")
+     * @ORM\Column(name="date_deb", type="date", nullable=true)
      */
     protected $dateDeb;
 
     /**
-     * @ORM\Column(name="date_end", type="date")
+     * @ORM\Column(name="date_end", type="date", nullable=true)
      */
     protected $dateEnd;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", nullable=true)
      * @Assert\NotBlank()
      */
     protected $place;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", nullable=true)
      * @Assert\NotBlank()
      */
     protected $website;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", nullable=true)
      * @Assert\NotBlank()
      */
     protected $description;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="\Lrt\UserBundle\Entity\User", inversedBy="events")
-     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
-     */
-    protected $user;
-
-    /**
-     * Get id
-     *
-     * @return integer
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * Set name
-     *
-     * @param string $name
-     */
-    public function setName($name)
-    {
-        $this->name = $name;
-    }
-
-    /**
-     * Get name
-     *
-     * @return string
-     */
-    public function getName()
-    {
-        return $this->name;
-    }
 
     /**
      * Set dateDeb
@@ -187,26 +139,4 @@ class Event
     {
         return $this->description;
     }
-
-    /**
-     * Set user
-     *
-     * @param \Lrt\UserBundle\Entity\User $user
-     */
-    public function setUser(\Lrt\UserBundle\Entity\User $user)
-    {
-        $this->user = $user;
-    }
-
-    /**
-     * Get user
-     *
-     * @return \Lrt\UserBundle\Entity\User
-     */
-    public function getUser()
-    {
-        return $this->user;
-    }
-
-
 }

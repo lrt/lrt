@@ -19,20 +19,20 @@ class LoadVideoData extends AbstractFixture implements OrderedFixtureInterface
         $this->manager = $manager;
         $user = $this->getReference('alexandre1');
 
-        $this->newVideo($user,31803605,'Longchamp @t Barcelone');
-        $this->newVideo($user,50012660,'Longchamp @t Corée du Sud');
-        $this->newVideo($user,53188843,'Longchamp @t Téléthon 2012');
+        $this->newVideo($user,'Longchamp @t Barcelone');
+        $this->newVideo($user,'Longchamp @t Corée du Sud');
+        $this->newVideo($user,'Longchamp @t Téléthon 2012');
     }
 
-    protected function newVideo($user,$vimeoId,$title)
+    protected function newVideo($user,$title)
     {
         $video = new Video();
 
         $video->setTitle($title);
         $video->setUser($user);
         $video->setDescription('Vestibulum vulputate mauris eget erat congue dapibus imperdiet justo scelerisque. Na. Cras elementum molestie vestibulum. Morbi id quam nisl. Praesent hendrerit, orci sed elementum lobortis.');
-        $video->setVimeoId($vimeoId);
         $video->setIsValid(Video::IS_VALIDATED);
+        $video->setDateSubmission(new \DateTime('22-01-2013'));
 
         $this->manager->persist($video);
         $this->manager->flush();

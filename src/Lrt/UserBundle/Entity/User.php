@@ -14,11 +14,13 @@ use FOS\UserBundle\Entity\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
-use Lrt\CMSBundle\Entity\Content;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass="Lrt\UserBundle\Repository\UserRepository")
- * @ORM\Table(name="membre")
+ * @ORM\Table(name="fos_user")
+ * @UniqueEntity("email")
+ * @UniqueEntity("username")
  */
 class User extends BaseUser
 {
@@ -40,6 +42,11 @@ class User extends BaseUser
      * @Assert\NotBlank()
      */
     protected $lastName;
+
+    /**
+     * @var string
+     */
+    protected $username;
 
     /**
      * Plain password. Used for model validation. Must not be persisted.
@@ -64,19 +71,9 @@ class User extends BaseUser
     protected $groups;
 
     /**
-     * @ORM\OneToMany(targetEntity="\Lrt\CMSBundle\Entity\Content", mappedBy="user")
+     * @ORM\OneToMany(targetEntity="Lrt\AdminBundle\Entity\EventRequest", mappedBy="user")
      */
-    protected $content;
-
-    /**
-     * @ORM\OneToMany(targetEntity="\Lrt\SiteBundle\Entity\Partner", mappedBy="user")
-     */
-    protected $partners;
-
-    /**
-     * @ORM\OneToMany(targetEntity="\Lrt\VideoBundle\Entity\Video", mappedBy="user")
-     */
-    protected $videos;
+    protected $request;
 
     /**
      * @ORM\ManyToOne(targetEntity="\Lrt\TeamBundle\Entity\Team")
@@ -159,70 +156,40 @@ class User extends BaseUser
      */
     public function getFullName()
     {
-        $this->firstName.' '.$this->lastName;
+        return $this->firstName.' '.$this->lastName;
     }
 
     /**
-     * Add content
-     *
-     * @param \Lrt\CMSBundle\Entity\Content $content
-     * @return void
-     */
-    public function addContent(\Lrt\CMSBundle\Entity\Content $content)
-    {
-        $this->content[] = $content;
-    }
-
-    /**
-     * Get content
+     * Get sites
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getContent()
+    public function getRequest()
     {
-        return $this->content;
+        return $this->request;
     }
 
     /**
-     * Add partner
+     * Add request
      *
-     * @param \Lrt\SiteBundle\Entity\Partner $partner
-     * @return void
+     * @param \Lrt\AdminBundle\Entity\EventRequest $request
+     * @return User
      */
-    public function addPartners(\Lrt\SiteBundle\Entity\Partner $partner)
+    public function addRequest(\Lrt\AdminBundle\Entity\EventRequest $request)
     {
-        $this->partners[] = $partner;
+        $this->request[] = $request;
+
+        return $this;
     }
 
     /**
-     * Get partner
+     * Remove request
      *
-     * @return \Doctrine\Common\Collections\Collection
+     * @param \Lrt\AdminBundle\Entity\EventRequest $request
      */
-    public function getPartners()
+    public function removeRequest(\Lrt\AdminBundle\Entity\EventRequest $request)
     {
-        return $this->partners;
-    }
-
-    /**
-     * Add videos
-     *
-     * @param \Lrt\VideoBundle\Entity\Video $videos
-     * @return void
-     */
-    public function addVideo(\Lrt\VideoBundle\Entity\Video $videos)
-    {
-        $this->videos[] = $videos;
-    }
-
-    /**
-     * Get videos
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getVideos()
-    {
-        return $this->videos;
+        $this->request->removeElement($request);
     }
 
     public function getStatus() {
@@ -231,36 +198,6 @@ class User extends BaseUser
         } else {
             return 0;
         }
-    }
-
-    /**
-     * Remove content
-     *
-     * @param \Lrt\CMSBundle\Entity\Content $content
-     */
-    public function removeContent(\Lrt\CMSBundle\Entity\Content $content)
-    {
-        $this->content->removeElement($content);
-    }
-
-    /**
-     * Remove partner
-     *
-     * @param \Lrt\SiteBundle\Entity\Partner $partner
-     */
-    public function removePartner(\Lrt\SiteBundle\Entity\Partner $partner)
-    {
-        $this->content->removeElement($partner);
-    }
-
-    /**
-     * Remove videos
-     *
-     * @param \Lrt\VideoBundle\Entity\Video $videos
-     */
-    public function removeVideo(\Lrt\VideoBundle\Entity\Video $videos)
-    {
-        $this->videos->removeElement($videos);
     }
 
     /**

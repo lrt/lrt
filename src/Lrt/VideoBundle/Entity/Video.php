@@ -10,107 +10,34 @@
 namespace Lrt\VideoBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Lrt\AdminBundle\Entity\EventRequest;
 
 /**
  * @ORM\Entity(repositoryClass="Lrt\VideoBundle\Repository\VideoRepository")
- * @ORM\Table(name="video")
- * @ORM\HasLifecycleCallbacks()
  */
-class Video
+class Video extends EventRequest
 {
-    const IS_NOT_VALIDATED = 0;
-    const IS_VALIDATED = 1;
-
-    /**
-     * @ORM\Id
-     * @ORM\Column(type="integer")
-     * @ORM\GeneratedValue(strategy="AUTO")
-     */
-    protected $id;
-
-    /**
-     * @ORM\Column(type="string")
-     */
-    protected $title;
-
     /**
      * @ORM\Column(type="text")
      */
     protected $description;
 
     /**
-     * @ORM\ManyToOne(targetEntity="\Lrt\UserBundle\Entity\User", inversedBy="videos")
-     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
-     */
-    protected $user;
-
-    /**
-     * @ORM\Column(name="vimeo_id", type="integer")
-     */
-    protected $vimeoId;
-
-    /**
-     * @ORM\Column(name="is_autoplay", type="integer")
-     */
-    protected $isAutoPlay;
-
-    /**
-     * @ORM\Column(name="is_published", type="integer")
+     * @ORM\Column(name="is_published", type="integer", nullable=true)
      */
     protected $isPublished;
 
     /**
-     * @ORM\Column(name="is_public", type="integer")
-     */
-    protected $isPublic;
-
-    /**
-     * @ORM\Column(name="is_highlighted", type="integer")
+     * @ORM\Column(name="is_highlighted", type="integer", nullable=true)
      */
     protected $isHighlighted;
 
-    /**
-     * @ORM\Column(name="is_valid", type="integer")
-     */
-    protected $isValid;
-
     public function __construct()
     {
-        $this->setIsPublic(0);
         $this->setIsPublished(0);
         $this->setIsHighlighted(0);
-        $this->setIsAutoPlay(0);
+        $this->setDateSubmission(new \DateTime());
         $this->setIsValid(0);
-    }
-
-    /**
-     * Get id
-     *
-     * @return integer
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * Set title
-     *
-     * @param string $title
-     */
-    public function setTitle($title)
-    {
-        $this->title = $title;
-    }
-
-    /**
-     * Get title
-     *
-     * @return string
-     */
-    public function getTitle()
-    {
-        return $this->title;
     }
 
     /**
@@ -134,46 +61,6 @@ class Video
     }
 
     /**
-     * Set user
-     *
-     * @param string $user
-     */
-    public function setUser($user)
-    {
-        $this->user = $user;
-    }
-
-    /**
-     * Get auser
-     *
-     * @return string
-     */
-    public function getUser()
-    {
-        return $this->user;
-    }
-
-    /**
-     * Set vimeoId
-     *
-     * @param integer $vimeoId
-     */
-    public function setVimeoId($vimeoId)
-    {
-        $this->vimeoId = $vimeoId;
-    }
-
-    /**
-     * Get vimeoId
-     *
-     * @return integer
-     */
-    public function getVimeoId()
-    {
-        return $this->vimeoId;
-    }
-
-    /**
      * Set isPublished
      *
      * @param integer $isPublished
@@ -194,26 +81,6 @@ class Video
     }
 
     /**
-     * Set isPublic
-     *
-     * @param integer $isPublic
-     */
-    public function setIsPublic($isPublic)
-    {
-        $this->isPublic = $isPublic;
-    }
-
-    /**
-     * Get isPublic
-     *
-     * @return integer
-     */
-    public function getIsPublic()
-    {
-        return $this->isPublic;
-    }
-
-    /**
      * Set isHighlighted
      *
      * @param integer $isHighlighted
@@ -231,45 +98,5 @@ class Video
     public function getIsHighlighted()
     {
         return $this->isHighlighted;
-    }
-
-    /**
-     * Set isAutoPlay
-     *
-     * @param integer $isAutoPlay
-     */
-    public function setIsAutoPlay($isAutoPlay)
-    {
-        $this->isAutoPlay = $isAutoPlay;
-    }
-
-    /**
-     * Get isAutoPlay
-     *
-     * @return integer
-     */
-    public function getIsAutoPlay()
-    {
-        return $this->isAutoPlay;
-    }
-
-    /**
-     * Set is_valid
-     *
-     * @param integer $isValid
-     */
-    public function setIsValid($isValid)
-    {
-        $this->isValid = $isValid;
-    }
-
-    /**
-     * Get is_valid
-     *
-     * @return integer
-     */
-    public function getIsValid()
-    {
-        return $this->isValid;
     }
 }

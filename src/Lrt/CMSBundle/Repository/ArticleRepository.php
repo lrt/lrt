@@ -5,7 +5,8 @@ namespace Lrt\CMSBundle\Repository;
 use Doctrine\ORM\EntityRepository;
 use JMS\DiExtraBundle\Annotation as DI;
 use Lrt\UserBundle\Entity\User;
-use Lrt\CMSBundle\Entity\Content;
+use Lrt\CMSBundle\Entity\Article;
+use Lrt\AdminBundle\Entity\EventRequest;
 
 class ArticleRepository extends EntityRepository
 {    
@@ -17,10 +18,10 @@ class ArticleRepository extends EntityRepository
     public function getLatestArticles($limit)
     {
         $qb = $this->createQueryBuilder('a')
-                ->select('a.id, a.title, a.content, a.slug, c.name as category_name')
+                ->select('a.id, a.title, a.content, c.name as category_name, a.path')
                 ->join('a.category', 'c')
                 ->where('a.status = ?1')
-                ->setParameter(1, Content::IMMEDIATE);
+                ->setParameter(1, Article::IMMEDIATE);
 
         if (!is_null($limit)) {
             $qb->setMaxResults($limit);
@@ -44,7 +45,7 @@ class ArticleRepository extends EntityRepository
 
         $query = $this->getEntityManager()->createQuery($sql)
             ->setParameter('user', $user)
-            ->setParameter('status', Content::DRAFTS);
+            ->setParameter('status', Article::DRAFTS);
 
         return $query->getResult();
     }
@@ -60,7 +61,7 @@ class ArticleRepository extends EntityRepository
                 AND a.status = :status';
 
         $query = $this->getEntityManager()->createQuery($sql)
-            ->setParameter('status', Content::BIN);
+            ->setParameter('status', Article::BIN);
 
         return $query->getResult();
     }
@@ -76,7 +77,7 @@ class ArticleRepository extends EntityRepository
                 AND a.isValid = :valid';
 
         $query = $this->getEntityManager()->createQuery($sql)
-            ->setParameter('valid', Content::IS_NOT_VALIDATED);
+            ->setParameter('valid', EventRequest::IS_NOT_VALIDATED);
 
         return $query->getResult();
     }
@@ -89,7 +90,7 @@ class ArticleRepository extends EntityRepository
     public function getArticlesByCategory($categoryName)
     {
         $qb = $this->createQueryBuilder('a')
-                ->select('a.id, a.title, a.content, a.slug, c.name as category_name')
+                ->select('a.id, a.title, a.content, c.name as category_name')
                 ->join('a.category', 'c')
                 ->where('c.name = ?1')
                 ->setParameter(1, $categoryName);
@@ -127,7 +128,7 @@ class ArticleRepository extends EntityRepository
         $queryStr = 'SELECT a FROM CMSBundle:Article a
                      JOIN CMSBundle:Category c WITH a.category = c.id
                      WHERE 1 = 1
-                     AND a.status != '.Content::BIN.' ';
+                     AND a.status != '.Article::BIN.' ';
                 
         if ($title != null && $title != '') {
             $queryStr.= ' AND a.title LIKE :title ';

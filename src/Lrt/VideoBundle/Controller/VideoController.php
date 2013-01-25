@@ -101,6 +101,7 @@ class VideoController extends Controller {
      * @Template("VideoBundle:Video:new.html.twig")
      */
     public function createAction(Request $request) {
+
         $user = $this->sc->getToken()->getUser();
 
         if (is_object($user)) {
@@ -112,7 +113,7 @@ class VideoController extends Controller {
 
             if ($formHandler->process()) {
 
-                return $this->redirect($this->generateUrl('video_show', array('id' => $video->getId())));
+                return $this->redirect($this->generateUrl('video', array('id' => $video->getId())));
             }
 
             return array(

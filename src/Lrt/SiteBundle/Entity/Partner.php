@@ -4,20 +4,14 @@ namespace Lrt\SiteBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Lrt\AdminBundle\Entity\EventRequest;
 
 /**
  * @ORM\Entity
  * @ORM\Table(name="partner")
  */
-class Partner
+class Partner extends EventRequest
 {
-    /**
-     * @ORM\Id
-     * @ORM\Column(type="integer")
-     * @ORM\GeneratedValue(strategy="AUTO")
-     */
-    protected $id;
-
     /**
      * @var string $name
      *
@@ -29,34 +23,18 @@ class Partner
     /**
      * @var string $description
      *
-     * @ORM\Column(name="description", type="string", length=4000)
+     * @ORM\Column(name="description_partner", type="string", length=4000)
      */
     protected $description;
 
     /**
      * @var string $description
      *
-     * @ORM\Column(name="website", type="string", length=125)
+     * @ORM\Column(name="website_partner", type="string", length=125)
      * @Assert\NotBlank()
      * @Assert\Url(message="Vous devez saisir une adresse de site correct.")
      */
     protected $website;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="\Lrt\UserBundle\Entity\User", inversedBy="partners")
-     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
-     */
-    protected $user;
-
-    /**
-     * Get id
-     *
-     * @return integer
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
 
     /**
      * Set name
@@ -125,26 +103,5 @@ class Partner
     public function getWebsite()
     {
         return $this->website;
-    }
-
-    /**
-     * Set user
-     *
-     * @param \Lrt\UserBundle\Entity\User $user
-     * @internal param $User
-     */
-    public function setUser(\Lrt\UserBundle\Entity\User $user)
-    {
-        $this->user = $user;
-    }
-
-    /**
-     * Get user
-     *
-     * @return \Lrt\UserBundle\Entity\User
-     */
-    public function getUser()
-    {
-        return $this->user;
     }
 }

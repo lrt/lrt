@@ -42,13 +42,15 @@ class ProfileController extends Controller
         if ($user->hasGroup('admin')) {
 
             $users = $this->em->getRepository('UserBundle:User')->findAll();
-        }
 
-        $users = $this->em->getRepository('UserBundle:User')->findAll();
+            return $this->render('UserBundle:Profile:myProfile.html.twig', array(
+                'profile' => $user,
+                'users' => $users
+            ));
+        }
 
         return $this->render('UserBundle:Profile:myProfile.html.twig', array(
             'profile' => $user,
-            'users' => $users
         ));
     }
 

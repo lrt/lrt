@@ -1,73 +1,91 @@
 {% extends '::admin.html.twig' %}
 
-{% block breadcrumb %}
-    <li>
-        <a href="{{ path('event') }}">Evènements</a> <span class="divider">/</span>
-    </li>
-    <li class="active">Liste</li>
-{% endblock %}
-
 {% block menu %}
     <li class="nav-header">Evènement</li>
     <li><a href="{{ path('event_new') }}">Ajouter</a></li>
     <li class="active"><a href="{{ path('event') }}">Liste des évènements</a></li>
 {% endblock %}
 
-{% block body %}
-<div class="box">
-    <h4 class="box-header round-top">
-        Liste des évènements ({% if nb is defined %}{{ nb }}{% endif %})
-        <a class="box-btn" title="close">
-            <i class="icon-remove"></i>
-        </a>
-        <a class="box-btn" title="toggle">
-            <i class="icon-minus"></i>
-        </a>
-        <a class="box-btn" title="#box-config-modal" data-toggle="modal" title="config">
-            <i class="icon-cog"></i>
-        </a>
-    </h4>
-    <div class="box-container-toggle">
-        <div class="box-content">
-            <table class="table table-striped tListeEvents">
-                <thead>
-                    <tr>
-                        <th>Nom</th>
-                        <th>Début</th>
-                        <th>Fin</th>
-                        <th>Lieux</th>
-                        <th>Site internet</th>
-                        <th>Description</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                {% for entity in entities %}
-                    <tr>
-                        <td>{{ entity.name }}</td>
-                        <td>{% if entity.dateDeb %}{{ entity.dateDeb|date('Y-m-d H:i:s') }}{% endif %}</td>
-                        <td>{% if entity.dateEnd %}{{ entity.dateEnd|date('Y-m-d H:i:s') }}{% endif %}</td>
-                        <td>{{ entity.place }}</td>
-                        <td>{{ entity.website }}</td>
-                        <td>{{ entity.description }}</td>
-                        <td>
-                            <ul>
-                                <li>
-                                    <a href="{{ path('event_show', { 'id': entity.id }) }}">show</a>
-                                </li>
-                                <li>
-                                    <a href="{{ path('event_edit', { 'id': entity.id }) }}">edit</a>
-                                </li>
-                            </ul>
-                        </td>
-                    </tr>
-                {% endfor %}
-                </tbody>
-            </table>
+{% block page_header %}
+    <div class="row-fluid" style="border-bottom: 1px solid #eeeeee;margin-bottom: 18px;">
+        <div class="span8 m-botton-group">
+            <h3>événements</h3>
+        </div>
+        <div class="span4">
+            <div class="btn-group pull-right">
+                <a data-toggle="modal" rel="Ajouter un évenement" class="btn btn-danger popin" href="{{ path('event_new') }}" >
+                    Ajouter un évenement
+                </a>
+                <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+                    <i class="icon-cog"></i>
+                    <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a data-toggle="modal" href="#myModal"><i class="icon-file"></i>Video</a>
+                    </li>
+                    <li>
+                        <a data-toggle="modal" href="#myModal">
+                            <i class="icon-picture"></i>
+                            Image
+                        </a>
+                    </li>
+                </ul>
+            </div>
         </div>
     </div>
-</div>
+{% endblock %}
 
-<a href="{{ path('event_new') }}"><button class="btn" type="button">Ajouter un évènement</button></a>
-
+{% block body %}
+<table class="table table-striped tListeEvents">
+    <thead>
+        <tr>
+            <th>Nom</th>
+            <th>Début</th>
+            <th>Fin</th>
+            <th>Lieux</th>
+            <th>Site internet</th>
+            <th>Description</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for entity in entities %}
+        <tr>
+            <td>{{ entity.title }}</td>
+            <td>{% if entity.dateDeb %}{{ entity.dateDeb|date('Y-m-d H:i:s') }}{% endif %}</td>
+            <td>{% if entity.dateEnd %}{{ entity.dateEnd|date('Y-m-d H:i:s') }}{% endif %}</td>
+            <td>{{ entity.place }}</td>
+            <td>{{ entity.website }}</td>
+            <td>{{ entity.description }}</td>
+            <td>
+                <div class="btn-group">
+                    <a class="btn btn-small dropdown-toggle" data-toggle="dropdown" href="#">
+                        Action
+                        <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu pull-right">
+                        <li>
+                            <a data-toggle="modal" rel="{{ entity.title }}" href="{{ path('event_show', { 'id': entity.id }) }}" class="popin">
+                                <i class="icon-zoom-in"></i>
+                                Voir
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ path('event_edit', { 'id': entity.id }) }}">
+                                <i class="icon-edit"></i>
+                                Modifier
+                            </a>
+                            <a href="{{ path('event_delete', { 'id': entity.id }) }}">
+                                <i class="icon-trash"></i>
+                                Corbeille
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
 {% endblock %}

@@ -20,11 +20,8 @@ class VideoType extends AbstractType
         $builder
             ->add('title', null, array('required' => false, 'label' => 'Titre :'))
             ->add('description', null, array('required' => false, 'label' => 'Description :'))
-            ->add('vimeoId')
-            ->add('isAutoPlay')
-            ->add('isPublished')
-            ->add('isPublic')
-            ->add('isHighlighted')
+            ->add('isPublished', null, array('required' => false, 'label' => 'Publication :'))
+            ->add('isHighlighted', null, array('required' => false, 'label' => 'Mise en avant ?'))
         ;
     }
 

@@ -24,8 +24,8 @@
 {% block javascripts %} 
    {{ parent() }}
    <script type="text/javascript">
-   //<![CDATA[
-    var editor = CKEDITOR.replace( 'lrt_cmsbundle_articletype[content]' );
-   //]]>
+       CKEDITOR.replace( 'lrt_cmsbundle_articletype[content]', {
+           uiColor: '#FAFAFA'
+       });
    </script>    
 {% endblock %} 

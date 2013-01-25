@@ -14,7 +14,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use JMS\DiExtraBundle\Annotation\Service;
 use JMS\DiExtraBundle\Annotation as DI;
-use Lrt\CMSBundle\Entity\Content;
+use Lrt\CMSBundle\Entity\Article;
 
 /**
  * @Service("form.cms.article.filter.type")
@@ -29,8 +29,8 @@ class ArticleFilterType extends AbstractType {
                 'label' => 'Etat de publication :',
                 'empty_value' => 'Etat de publication',
                 'choices' => array(
-                    '0' => 'Brouillon',
-                    '1' => 'Publication immédiate',
+                    Article::DRAFTS => 'Brouillon',
+                    Article::IMMEDIATE => 'Publication immédiate',
                 )))
                 ->add('isPublic', 'choice', array(
                     'required' => false,

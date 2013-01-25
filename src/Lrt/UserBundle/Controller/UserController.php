@@ -50,6 +50,23 @@ class UserController extends Controller
     }
 
     /**
+     * @Route("/export", name="export_user")
+     * @Secure(roles="ROLE_ADMIN")
+     * @Template()
+     */
+    public function exportAction()
+    {
+        $exportUsers = $this->container->get('service.export_users');
+        $csvReadyUsers = $exportUsers->generateCsvReadyDatas();
+
+        if(!is_object($csvReadyUsers)) {
+            return $this->get('session')->setFlash('error', 'Impossible d\'exporter la liste des utilisateurs');
+        } else {
+            return $csvReadyUsers;
+        }
+    }
+
+    /**
      * Finds and displays a User entity.
      *
      * @Route("/{id}/show", name="user_show", requirements={"id" = "\d+"})
@@ -74,7 +91,9 @@ class UserController extends Controller
     public function newAction()
     {
         $user = new User();
-        $form   = $this->createForm(new UserType(), $user);
+
+        $userType = $this->container->get('users.form.userRegisterType');
+        $form   = $this->createForm($userType, $user);
 
         return array(
             'entity' => $user,

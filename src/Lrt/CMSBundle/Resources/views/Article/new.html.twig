@@ -20,13 +20,13 @@
         </div>
     </form>
 {% endblock %}
-   
-{% block javascripts %} 
-   {{ parent() }}
-   <script type="text/javascript">
-   //<![CDATA[
-    var editor = CKEDITOR.replace( 'lrt_cmsbundle_articletype[content]' );
-   //]]>
-   </script>    
-{% endblock %}   
+
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript">
+        CKEDITOR.replace( 'lrt_cmsbundle_articletype_content', {
+            uiColor: '#FAFAFA'
+        });
+    </script>
+{% endblock %}
    
