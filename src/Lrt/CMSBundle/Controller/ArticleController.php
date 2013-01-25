@@ -235,4 +235,21 @@ class ArticleController extends Controller
             throw $this->createNotFoundException('Vous devez être connecté pour accèder à cette page.');
         }
     }
+
+    /**
+     * @Route("/export", name="export_article")
+     * @Secure(roles="ROLE_ADMIN")
+     * @Template()
+     */
+    public function exportAction()
+    {
+        $exportArticles = $this->container->get('service.export_articles');
+        $csvReadyArticles = $exportArticles->generateCsvReadyDatas();
+
+        if(!is_object($csvReadyArticles)) {
+            return $this->get('session')->setFlash('error', 'Impossible d\'exporter la liste des articles');
+        } else {
+            return $csvReadyArticles;
+        }
+    }
 }

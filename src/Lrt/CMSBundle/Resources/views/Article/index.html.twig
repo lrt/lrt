@@ -33,13 +33,7 @@
                 </a>
                 <ul class="dropdown-menu">
                     <li>
-                        <a data-toggle="modal" href="#myModal"><i class="icon-file"></i>Video</a>
-                    </li>
-                    <li>
-                        <a data-toggle="modal" href="#myModal">
-                            <i class="icon-picture"></i>
-                            Image
-                        </a>
+                        <a data-toggle="modal" href="{{ path('export_article') }}"><i class="icon-download-alt"></i> Exporter la liste</a>
                     </li>
                 </ul>
             </div>
@@ -84,7 +78,11 @@
             <td><img width="100" height="55" src="{{ asset('bundles/site/images/no_picture.png') }}" alt=""></td>
             <td>
                 <div class="space_half">
-                    <img src="{{ asset('bundles/site/images/page.png') }}" alt="Prévisualiser" title="Prévisualiser" class="preview">
+                    {% if entity.path is not null %}
+                        <img src="{{ asset(entity.path) }}" data-original="{{ asset(entity.path) }}" alt="Prévisualiser" title="Prévisualiser" class="preview">
+                    {% else %}
+                        <img src="{{ asset('bundles/site/images/page.png') }}" alt="Prévisualiser" title="Prévisualiser" class="preview">
+                    {%  endif %}
                     <a class="title_preview" title="Modifier" href="{{ path('article_edit', { 'id': entity.id }) }}">{{ entity.id }} - <b>{{ entity.title }}</b></a>
                 </div>
                 {{ entity.content|raw|truncate(50) }}

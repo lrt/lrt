@@ -173,4 +173,21 @@ class PartnerController extends Controller
             ->getForm()
         ;
     }
+
+    /**
+     * @Route("/export", name="export_partner")
+     * @Secure(roles="ROLE_ADMIN")
+     * @Template()
+     */
+    public function exportAction()
+    {
+        $exportPartners = $this->container->get('service.export_partners');
+        $csvReadyPartners = $exportPartners->generateCsvReadyDatas();
+
+        if(!is_object($csvReadyPartners)) {
+            return $this->get('session')->setFlash('error', 'Impossible d\'exporter la liste des partenaires');
+        } else {
+            return $csvReadyPartners;
+        }
+    }
 }
