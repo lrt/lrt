@@ -31,10 +31,11 @@
             </a>
             <div class="nav-collapse">
                 <ul class="nav">
+                    {% if is_granted("ROLE_SUPERVISEUR") %}
                     <li class="dropdown">
                         <a href="#" data-toggle="dropdown" class="dropdown-toggle">
                             <i class="icon-folder-close icon-white"></i>
-                            Contenu
+                            Gestion
                             <b class="caret"></b>
                         </a>
                         <ul class="dropdown-menu">
@@ -46,6 +47,7 @@
                             </li>
                         </ul>
                     </li>
+                    {% endif %}
                     <li class="dropdown">
                         <a href="#" data-toggle="dropdown" class="dropdown-toggle">
                             <i class="icon-play-circle icon-white"></i>
