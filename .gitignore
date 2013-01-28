@@ -2,6 +2,7 @@ app/cache/*
 app/logs/*
 build/*
 web/bundles/*
+web/uploads/*
 */nbproject/*
 .idea
 *.php~
