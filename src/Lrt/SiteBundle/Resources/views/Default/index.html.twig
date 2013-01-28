@@ -41,7 +41,7 @@
 </div> <!--end content-->
 
 <!-- SideBar -->
-<aside id="sidebar">
+{% block sidebar %}
     <div id="block-latest-race" class="widget race">
         <div class="widget_title"><h2>Prochaine course</h2></div>
         <div class="widget_container">
@@ -100,6 +100,6 @@
             </div>
         </div>
     </div>
-</aside>
+{% endblock %}
 <!--end sidebar-->
 {% endblock %}

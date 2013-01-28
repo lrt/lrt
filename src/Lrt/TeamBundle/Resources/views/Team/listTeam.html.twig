@@ -11,95 +11,85 @@
 {% endblock %}
 
 {% block body %}
-    {% block content %}
-        <div id="content" class="column">
-
-            {% block breadcrumb %}
-                <div id="breadcrumb">
-                    <a href="/">Accueil</a>
-                    <span class="separator"></span>
-                    Ã©quipe
-                </div>
-            {% endblock %}
-
-            <h2 class="title">Coureurs</h2>
-            <div id="block-views-rider-block_1" class="clear-block block block-views">
-                <div class="content"><div class="view view-rider view-id-rider view-display-id-block_1 view-dom-id-1">
-                    <div class="view-content">
-                        <div class="item-list">
-                            <ul>
-                                {% for rider in riders %}
-                                    <li class="views-row views-row-2 views-row-even">
-                                        <a href="{{ path('TeamBundle_rider_show', { 'id': rider.profile_id, 'slug': rider.slug }) }}"><img src="{{ asset(['/images/profile/', 'nobody_thumb.png' ]|join) }}" alt="" title="" width="82" height="82"></a>
-                                        <div class="name"><a href="{{ path('TeamBundle_rider_show', { 'id': rider.profile_id, 'slug': rider.slug }) }}">{{ rider.firstName}}</a></div>
-                                    </li>
-                                {% endfor%}
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="view-footer">
-                        <div style="clear:both;"></div>
-                    </div>
-                </div>
+<div id="content" class="column">
+    <h2 class="title">Coureurs</h2>
+    <div id="block-views-rider-block_1" class="clear-block block block-views">
+        <div class="content"><div class="view view-rider view-id-rider view-display-id-block_1 view-dom-id-1">
+            <div class="view-content">
+                <div class="item-list">
+                    <ul>
+                        {% for rider in riders %}
+                            <li class="views-row views-row-2 views-row-even">
+                                <a href="{{ path('team_rider_show', { 'id': rider.id }) }}"><img src="{{ asset(['/images/profile/', 'nobody_thumb.png' ]|join) }}" alt="" title="" width="82" height="82"></a>
+                                <div class="name"><a href="{{ path('team_rider_show', { 'id': rider.id }) }}">{{ rider.firstName }}</a></div>
+                            </li>
+                        {% endfor%}
+                    </ul>
                 </div>
             </div>
+            <div class="view-footer">
+                <div style="clear:both;"></div>
+            </div>
         </div>
-    {% endblock %}
-    {% block sidebar %}
-        <div id="sidebar">
-            <div id="block-block-1" class="block palmares">
-                <div class="title"><h2>PalmarÃ¨s Ã©quipe</h2></div>
-                <div class="container">
-                    <div class="content">
-                        <div class="view-palmares">
-                            <div class="view-content">
-                                <div class="group">
-                                    <div class="views-field-date">
-                                        <div class="date-stroke">
-                                            2011
-                                            <div class="stroke"></div>
-                                        </div>
-                                    </div>
-                                    <div class="views-row">
-                                        <div class="views-field-position">2Ã¨me</div>
-                                        <div class="views-field-race">Challenge du Centre</div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block sidebar %}
+    <div id="sidebar">
+        <div id="block-block-1" class="block palmares">
+            <div class="title"><h2>PalmarÃ¨s Ã©quipe</h2></div>
+            <div class="container">
+                <div class="content">
+                    <div class="view-palmares">
+                        <div class="view-content">
+                            <div class="group">
+                                <div class="views-field-date">
+                                    <div class="date-stroke">
+                                        2011
+                                        <div class="stroke"></div>
                                     </div>
                                 </div>
-                                <div class="group">
-                                    <div class="views-field-date">
-                                        <div class="date-stroke">
-                                            2010
-                                            <div class="stroke"></div>
-                                        </div>
+                                <div class="views-row">
+                                    <div class="views-field-position">2Ã¨me</div>
+                                    <div class="views-field-race">Challenge du Centre</div>
+                                </div>
+                            </div>
+                            <div class="group">
+                                <div class="views-field-date">
+                                    <div class="date-stroke">
+                                        2010
+                                        <div class="stroke"></div>
                                     </div>
-                                    <div class="views-row">
-                                        <div class="views-field-position">1er</div>
-                                        <div class="views-field-race">Challenge du Centre</div>
-                                    </div>
-                                    <div class="views-row">
-                                        <div class="views-field-position">3Ã¨me</div>
-                                        <div class="views-field-race">24h du Mans (endurance)</div>
-                                    </div>
+                                </div>
+                                <div class="views-row">
+                                    <div class="views-field-position">1er</div>
+                                    <div class="views-field-race">Challenge du Centre</div>
+                                </div>
+                                <div class="views-row">
+                                    <div class="views-field-position">3Ã¨me</div>
+                                    <div class="views-field-race">24h du Mans (endurance)</div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div id="block-block-2" class="block">
-                <div class="title"><h2>Partenaires</h2></div>
-                <div class="container">
-                    <div class="content">
-                        <ul style="margin-left: 58px;">
-                            <li style="cursor:pointer;" onclick="window.open('/');" class="sponsors rs2p"></li>
-                            <li style="cursor:pointer;" onclick="window.open('http://www.synergie.fr/');" class="sponsors synergie"></li>
-                            <li style="cursor:pointer;" onclick="window.open('http://www.arcade-groupe.com/');" class="sponsors arcade"></li>
-                            <li style="cursor:pointer;" onclick="window.open('http://www.matis-group.com/');" class="sponsors matis"></li>
-                            <li style="cursor:pointer;" onclick="window.open('http://www.cabinet-iena.com');" class="sponsors iena"></li>
-                        </ul>
-                    </div>
+        </div>
+        <div id="block-block-2" class="block">
+            <div class="title"><h2>Partenaires</h2></div>
+            <div class="container">
+                <div class="content">
+                    <ul style="margin-left: 58px;">
+                        <li style="cursor:pointer;" onclick="window.open('/');" class="sponsors rs2p"></li>
+                        <li style="cursor:pointer;" onclick="window.open('http://www.synergie.fr/');" class="sponsors synergie"></li>
+                        <li style="cursor:pointer;" onclick="window.open('http://www.arcade-groupe.com/');" class="sponsors arcade"></li>
+                        <li style="cursor:pointer;" onclick="window.open('http://www.matis-group.com/');" class="sponsors matis"></li>
+                        <li style="cursor:pointer;" onclick="window.open('http://www.cabinet-iena.com');" class="sponsors iena"></li>
+                    </ul>
                 </div>
             </div>
         </div>
-    {% endblock %}
+    </div>
 {% endblock %}

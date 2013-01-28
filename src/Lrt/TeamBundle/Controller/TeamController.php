@@ -36,6 +36,44 @@ class TeamController extends Controller
     }
 
     /**
+     * Lists all Team entities.
+     *
+     * @Route("/list", name="team_list")
+     * @Template("TeamBundle:Team:listTeam.html.twig")
+     */
+    public function listAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $entities = $em->getRepository('UserBundle:User')->findAll();
+
+        return array(
+            'riders' => $entities,
+        );
+    }
+
+    /**
+     * Finds and displays a Team entity.
+     *
+     * @Route("/rider/{id}/show", name="team_rider_show")
+     * @Template()
+     */
+    public function viewRiderAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $entity = $em->getRepository('UserBundle:User')->find($id);
+
+        if (!$entity) {
+            throw $this->createNotFoundException('Unable to find Team entity.');
+        }
+
+        return array(
+            'rider' => $entity,
+        );
+    }
+
+    /**
      * Finds and displays a Team entity.
      *
      * @Route("/{id}/show", name="team_show")

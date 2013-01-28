@@ -35,10 +35,11 @@
             <!-- End Header  -->
             {% block featured %}{% endblock %}
 
-            <div id="container">
+            <div id="page-wrapper">
                 <div id="content" class="column">
                 {% block body %}{% endblock %}
                 </div>
+                <aside id="sidebar">{% block sidebar %}{% endblock %}</div>
             </div>
         </div>
         {% block javascripts %}
