@@ -1,0 +1,15 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+    <div class="date" style="font-size:11px;margin: 2px 0 5px 0;color: #BDBDBD;">
+        <span>{{ article.dateSubmission|date('F j, Y') }}</span>
+    </div>
+    <h1>{{ article.title }}</h1>
+    <div id="images" style="width:605px; height:400px;">
+        <img width="605" height="400" alt="{{ article.title }}" class="picture" src="{{ asset(['uploads/articles/{{ article.id }}/', article.path]|join) }}" original="{{ asset(['uploads/articles/images/', article.path]|join) }}">
+    </div>
+    <div class="text">
+        {{ article.content | raw }}
+    </div>
+    <div class="fb-comments" data-href="http://longchamp-roller-team.com" data-num-posts="2" data-width="620"></div>
+{% endblock %}

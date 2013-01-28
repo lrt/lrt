@@ -173,4 +173,43 @@ class UserController extends Controller
             'edit_form'   => $editForm->createView(),
         );
     }
+
+    /**
+     * @Route("/{id}/activate", name="activate_user")
+     * @ParamConverter("user", class="UserBundle:User", options={"id" = "id"})
+     * @Secure(roles="ROLE_ADMIN")
+     * @Method("GET")
+     * @Template("UserBundle:User:index.html.twig")
+     */
+    public function enabledAction(User $user)
+    {
+        $user->setEnabled(1);
+
+        $this->get('fos_user.user_manager')->updateUser($user, false);
+
+        $this->em->flush();
+
+        $this->get('session')->setFlash('success', 'Le compte est activé.');
+        return $this->redirect($this->generateUrl('user'));
+    }
+
+    /**
+     * @Route("/{id}/deactivate", name="deactivate_user")
+     * @ParamConverter("user", class="UserBundle:User", options={"id" = "id"})
+     * @Secure(roles="ROLE_ADMIN")
+     * @Method("GET")
+     * @Template("UserBundle:User:index.html.twig")
+     */
+    public function enabledOffAction(User $user)
+    {
+        $user->setEnabled(0);
+
+        $this->get('fos_user.user_manager')->updateUser($user, false);
+
+        $this->em->flush();
+
+        $this->get('session')->setFlash('success', 'Le compte est désactivé.');
+        return $this->redirect($this->generateUrl('user'));
+    }
+
 }

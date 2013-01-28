@@ -109,6 +109,20 @@ class ArticleController extends Controller
     }
 
     /**
+     * Display a article in front
+     *
+     * @Route("/{id}/view", name="article_view")
+     * @ParamConverter("article", class="CMSBundle:Article", options={"id" = "id"})
+     * @Template("CMSBundle:Article:view.html.twig")
+     */
+    public function viewAction(Article $article)
+    {
+        return array(
+            'article' => $article
+        );
+    }
+
+    /**
      * Displays a form to create a new Article entity.
      *
      * @Route("/new", name="article_new")

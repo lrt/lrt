@@ -10,7 +10,7 @@
 {% block page_header %}
     <div class="row-fluid" style="border-bottom: 1px solid #eeeeee;margin-bottom: 18px;">
         <div class="span8 m-botton-group">
-            <h3>Liste des utilisateurs</h3>
+            <h4>Liste des utilisateurs</h4>
         </div>
         <div class="span4">
             <div class="btn-group pull-right">
@@ -23,7 +23,7 @@
                 </a>
                 <ul class="dropdown-menu">
                     <li>
-                        <a data-toggle="modal" href="{{ path('export_user') }}"><i class="icon-download-alt"></i> Exporter la liste</a>
+                        <a href="{{ path('export_user') }}"><i class="icon-download-alt"></i> Exporter la liste</a>
                     </li>
                 </ul>
             </div>
@@ -114,7 +114,11 @@
                                 </a>
                                 <ul class="dropdown-menu pull-right">
                                     <li><a href="{{ path('user_edit', { 'id': entity.id }) }}"><i class="icon-edit"></i> Modifier</a></li>
-                                    <li><a href="#"><i class="icon-ban-circle"></i> Désactiver</a></li>
+                                    {% if entity.isEnabled == 0 %}
+                                        <li><a href="{{ path('activate_user', { 'id': entity.id }) }}"><i class="icon-ban-circle"></i> Activer</a></li>
+                                    {% else %}
+                                        <li><a href="{{ path('deactivate_user', { 'id': entity.id }) }}"><i class="icon-ban-circle"></i> Désactiver</a></li>
+                                    {% endif %}
                                 </ul>
                             </div>
                         </td>

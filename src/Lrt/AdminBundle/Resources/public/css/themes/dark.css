@@ -15,6 +15,7 @@
     }
     .navbar .nav > li > a {
         color: #bababa;
+        text-shadow: none!important;
     }
     .navbar .nav > li:hover > a {
         color:#fff;

@@ -75,14 +75,16 @@
     <tbody>
         {% for entity in entities %}
         <tr>
-            <td><img width="100" height="55" src="{{ asset('bundles/site/images/no_picture.png') }}" alt=""></td>
+            <td>
+                {% if entity.path is not null %}
+                    <img width="100" height="75" src="{{ asset(entity.path) }}" data-original="{{ asset(entity.path) }}" alt="Prévisualiser" title="Prévisualiser" class="preview">
+                {% else %}
+                    <img width="100" height="75" src="{{ asset('bundles/admin/img/example_mini.jpg') }}" alt="Prévisualiser" title="Prévisualiser" class="preview">
+                {%  endif %}
+            </td>
             <td>
                 <div class="space_half">
-                    {% if entity.path is not null %}
-                        <img src="{{ asset(entity.path) }}" data-original="{{ asset(entity.path) }}" alt="Prévisualiser" title="Prévisualiser" class="preview">
-                    {% else %}
-                        <img src="{{ asset('bundles/site/images/page.png') }}" alt="Prévisualiser" title="Prévisualiser" class="preview">
-                    {%  endif %}
+                    <img src="{{ asset('bundles/site/images/page.png') }}" alt="Prévisualiser" title="Prévisualiser" class="preview">
                     <a class="title_preview" title="Modifier" href="{{ path('article_edit', { 'id': entity.id }) }}">{{ entity.id }} - <b>{{ entity.title }}</b></a>
                 </div>
                 {{ entity.content|raw|truncate(50) }}
