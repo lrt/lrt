@@ -1,0 +1,17 @@
+#page-wrapper {
+    width: 1000px;
+    margin: auto;
+    position: relative;
+    /*padding-top: 146px;*/
+}
+
+#featured {
+    background: black;
+    height: 368px;
+    position: relative;
+    /*top: 140px;*/
+    z-index: 20;
+    width: 1000px;
+    margin: 0 auto;
+    border-top: 3px solid #D8162B;
+}

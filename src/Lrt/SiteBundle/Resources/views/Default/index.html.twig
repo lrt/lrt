@@ -1,105 +1,112 @@
 {% extends '::base.html.twig' %}
 
 {% block featured %}
-<div id="video_featured">
-    <video width="1000" height="368" poster="http://dev.grtgaz.com/uploads/tx_obvideogrtgaz/vid_rando_challenge_01.png" controls="controls">
-        <source src="http://www.html5rocks.com/en/tutorials/video/basics/Chrome_ImF.webm" type='video/webm; codecs="vp8, vorbis"' />
-        <source src="http://www.html5rocks.com/en/tutorials/video/basics/Chrome_ImF.ogv" type='video/ogg; codecs="theora, vorbis"' />
-        <object type="application/x-shockwave-flash" width="1000" height="368" data="http://www.youtube.com/v/HVMoJqg41Bw">
-            <param name="movie" value="http://www.youtube.com/v/HVMoJqg41Bw" />
-            <param name="wmode" value="transparent" />
-            <!--[if lte IE 6 ]>
-            <embed src="http://www.youtube.com/v/HVMoJqg41Bw" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="1000" height="368"></embed>
-            <![endif]-->
-            <p>Vous n'avez pas de navigateur moderne, ni flash d'installé sur Internet Explorer... suivez les liens ci-dessous pour télécharger les vidéos.</p>
-        </object>
-    </video>
-</div>
+<video width="1000" height="368" poster="http://dev.grtgaz.com/uploads/tx_obvideogrtgaz/vid_rando_challenge_01.png" controls="controls">
+    <source src="http://www.html5rocks.com/en/tutorials/video/basics/Chrome_ImF.webm" type='video/webm; codecs="vp8, vorbis"' />
+    <source src="http://www.html5rocks.com/en/tutorials/video/basics/Chrome_ImF.ogv" type='video/ogg; codecs="theora, vorbis"' />
+    <object type="application/x-shockwave-flash" width="1000" height="368" data="http://www.youtube.com/v/HVMoJqg41Bw">
+        <param name="movie" value="http://www.youtube.com/v/HVMoJqg41Bw" />
+        <param name="wmode" value="transparent" />
+        <!--[if lte IE 6 ]>
+        <embed src="http://www.youtube.com/v/HVMoJqg41Bw" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="1000" height="368"></embed>
+        <![endif]-->
+        <p>Vous n'avez pas de navigateur moderne, ni flash d'installé sur Internet Explorer... suivez les liens ci-dessous pour télécharger les vidéos.</p>
+    </object>
+</video>
 {% endblock %}
 
 {% block body %}
-<section id="entries">
-    {% for a in articles %}
-    <article class="post" id="post-{{ a.id }}">
-        <span class="post_categorie"><a href="">{{ a.category_name }}</a></span><span class="post_date">16.12.2012 - 11:15</span>
-        <h1><a href="{{ path('article_show', { 'id': a.id }) }}" title="{{ a.title }}">{{ a.title }}</a></h1>
-        <aside class="post_image">
-            <a href="{{ path('article_show', { 'id': a.id }) }}" title="{{ a.title }}">
-                {% if a.path is not null %}
-                    <img src="{{ asset(a.path) }}" data-original="{{ asset(a.path) }}" alt="" />
-                {% else %}
-                    <img src="{{ asset('bundles/site/images/no_picture.png') }}" data-original="{{ asset('bundles/site/images/no_picture.png') }}" alt="" />
-                {%  endif %}
-            </a>
-        </aside>
-        <section class="post_content">
-            {{ a.content | truncate(350) | raw }}
-        </section>
-    </article>
-    {% endfor %}
-</section>
-</div> <!--end content-->
 
-<!-- SideBar -->
-{% block sidebar %}
-    <div id="block-latest-race" class="widget race">
-        <div class="widget_title"><h2>Prochaine course</h2></div>
-        <div class="widget_container">
-            <div class="widget_content">
-                <div>
-                    <div class="stage">
-                    <span class="field-content">
-                        <span class="stage_tour">
-                            <a href="">Challenge du Centre</a>
+    <!-- SideBar -->
+    <aside id="sidebar">
+        <div id="block-latest-race" class="widget race">
+            <div class="widget_title"><h2>Prochaine course</h2></div>
+            <div class="widget_container">
+                <div class="widget_content">
+                    <div>
+                        <div class="stage">
+                        <span class="field-content">
+                            <span class="stage_tour">
+                                <a href="">Challenge du Centre</a>
+                            </span>
+                            <span class="stage_title">étape 6</span>
                         </span>
-                        <span class="stage_title">étape 6</span>
-                    </span>
-                    </div>
-                    <div class="date">
-                        <div class="field-content date-stroke">
-                            <span class="date-display-single">22.01</span>
-                            <div class="stroke"></div>
                         </div>
-                    </div>
-                    <div class="field-title">
-                    <span class="field-content">
-                        <a href="" title="">Adelaide City Council Street Circuit</a>
-                    </span>
+                        <div class="date">
+                            <div class="field-content date-stroke">
+                                <span class="date-display-single">22.01</span>
+                                <div class="stroke"></div>
+                            </div>
+                        </div>
+                        <div class="field-title">
+                        <span class="field-content">
+                            <a href="" title="">Adelaide City Council Street Circuit</a>
+                        </span>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div id="widget-1" class="widget">
-        <div class="widget_title"><h2>Devenir fan</h2></div>
-        <div class="widget_container">
-            <div class="widget_content">
-                <div class="fb-like-box" data-href="{{ socialFacebook }}" data-width="280" data-height="90" data-show-faces="false" data-stream="false" data-header="false"></div>
+        <div id="widget-1" class="widget">
+            <div class="widget_title"><h2>Devenir fan</h2></div>
+            <div class="widget_container">
+                <div class="widget_content">
+                    <div class="fb-like-box" data-href="{{ socialFacebook }}" data-width="280" data-height="90" data-show-faces="false" data-stream="false" data-header="false"></div>
+                </div>
             </div>
         </div>
-    </div>
-    <div id="widget-2" class="widget partner">
-        <div class="widget_title"><h2>Partenaires</h2></div>
-        <div class="widget_container">
-            <div class="widget_content">
-                <ul style="margin-left: 58px;">
-                    <li style="cursor:pointer;" onclick="window.open('/');" class="sponsors rs2p"></li>
-                    <li style="cursor:pointer;" onclick="window.open('http://www.synergie.fr/');" class="sponsors synergie"></li>
-                    <li style="cursor:pointer;" onclick="window.open('http://www.arcade-groupe.com/');" class="sponsors arcade"></li>
-                    <li style="cursor:pointer;" onclick="window.open('http://www.matis-group.com/');" class="sponsors matis"></li>
-                    <li style="cursor:pointer;" onclick="window.open('http://www.cabinet-iena.com');" class="sponsors iena"></li>
-                </ul>
+        <div id="widget-2" class="widget partner">
+            <div class="widget_title"><h2>Partenaires</h2></div>
+            <div class="widget_container">
+                <div class="widget_content">
+                    <ul style="margin-left: 58px;">
+                        <li style="cursor:pointer;" onclick="window.open('/');" class="sponsors rs2p"></li>
+                        <li style="cursor:pointer;" onclick="window.open('http://www.synergie.fr/');" class="sponsors synergie"></li>
+                        <li style="cursor:pointer;" onclick="window.open('http://www.arcade-groupe.com/');" class="sponsors arcade"></li>
+                        <li style="cursor:pointer;" onclick="window.open('http://www.matis-group.com/');" class="sponsors matis"></li>
+                        <li style="cursor:pointer;" onclick="window.open('http://www.cabinet-iena.com');" class="sponsors iena"></li>
+                    </ul>
+                </div>
             </div>
         </div>
-    </div>
-    <div id="widget-3" class="widget">
-        <div class="widget_title"><h2>Ligne droite sur votre mobile</h2></div>
-        <div class="widget_container">
-            <div class="widget_content">
-                <img alt="" width="270" src="{{ asset('bundles/site/images/no_picture.png') }}" data-original="{{ asset('bundles/site/images/no_picture.png') }}" />
+        <div id="widget-3" class="widget">
+            <div class="widget_title"><h2>Ligne droite sur votre mobile</h2></div>
+            <div class="widget_container">
+                <div class="widget_content">
+                    <img alt="" width="270" src="{{ asset('bundles/site/images/no_picture.png') }}" data-original="{{ asset('bundles/site/images/no_picture.png') }}" />
+                </div>
             </div>
         </div>
+    </aside>
+    <!--end sidebar-->
+
+    {% block content %}
+    <div id="content" class="column">
+        <section id="entries">
+            {% for a in articles %}
+            <article class="post" id="post-{{ a.id }}">
+                <span class="post_categorie"><a href="">{{ a.category_name }}</a></span><span class="post_date">16.12.2012 - 11:15</span>
+                <h1><a href="{{ path('article_show', { 'id': a.id }) }}" title="{{ a.title }}">{{ a.title }}</a></h1>
+                <aside class="post_image">
+                    <a href="{{ path('article_show', { 'id': a.id }) }}" title="{{ a.title }}">
+                        {% if a.path is not null %}
+                            <img src="{{ asset(a.path) }}" data-original="{{ asset(a.path) }}" alt="" />
+                        {% else %}
+                            <img src="{{ asset('bundles/site/images/no_picture.png') }}" data-original="{{ asset('bundles/site/images/no_picture.png') }}" alt="" />
+                        {%  endif %}
+                    </a>
+                </aside>
+                <section class="post_content">
+                    {{ a.content | truncate(350) | raw }}
+                </section>
+            </article>
+            {% endfor %}
+        </section> <!--end content-->
     </div>
+    {% endblock %}
+
 {% endblock %}
-<!--end sidebar-->
-{% endblock %}
+
+
+
+

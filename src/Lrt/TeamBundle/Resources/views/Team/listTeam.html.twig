@@ -20,7 +20,7 @@
                     <ul>
                         {% for rider in riders %}
                             <li class="views-row views-row-2 views-row-even">
-                                <a href="{{ path('team_rider_show', { 'id': rider.id }) }}"><img src="{{ asset(['/images/profile/', 'nobody_thumb.png' ]|join) }}" alt="" title="" width="82" height="82"></a>
+                                <a href="{{ path('team_rider_show', { 'id': rider.id }) }}"><img src="{{ asset(['bundles/team/images/', 'nobody_thumb.png' ]|join) }}" alt="" title="" width="82" height="82"></a>
                                 <div class="name"><a href="{{ path('team_rider_show', { 'id': rider.id }) }}">{{ rider.firstName }}</a></div>
                             </li>
                         {% endfor%}
