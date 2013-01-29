@@ -28,6 +28,8 @@
                         <li><a title="Association" href="{{ path('show_page', { 'page': 'association' }) }}">Association</a></li>
                         <li><a title="Photos" href="{{ path('show_page', { 'page': 'photos' }) }}">Photos</a></li>
                         <li><a title="Videos" href="{{ path('video') }}">Vidéos</a></li>
+                        <li><a title="Calendrier" href="{{ path('show_page', { 'page': 'calendar' }) }}">Calendrier</a></li>
+                        <li><a title="Calendrier" href="{{ path('team_list') }}">Equipe</a></li>
                         <li><a title="Contact" href="{{ path('contact') }}">Contact</a></li>
                     </ul>
                 </nav>
@@ -43,6 +45,49 @@
                 </div>
             </div>
         </div>
+        <footer id="footer">
+            <div class="centered-wrapper">
+                <div id="topfooter">
+                    <div class="one-half">
+                        <h3>About Us</h3>
+                        <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam veritatis et quasi nam liber tempore.</p>
+                        <div class="footer-logo"></div>
+                    </div><!--end percent-one-half-->
+                    <div class="one-half column-last">
+                        <div class="percent-one-half">
+                            <h3>We are on Twitter</h3>
+                            <div class="tweet"><p class="loading">loading tweets...</p></div>
+                        </div>
+
+                        <div class="percent-one-half column-last">
+                            <h3>Get in Touch with Us</h3>
+                            <ul>
+                                <li>Address: 1600 Amphitheatre Parkway, Mountain View, CA 94043</li>
+                                <li>Phone: +321 123 456 7<br>
+                                    E-mail: <a href="mailto:">johndoe@ipsum.com</a></li>
+                            </ul>
+                        </div><!--end one-half-->
+                    </div><!--end one-half-->
+                    <div class="clear"></div></div><!--end topfooter-->
+            </div><!--end centered-wrapper-->
+            <div id="bottomfooter">
+                <div class="centered-wrapper">
+                    <div class="one-half">
+                        <p>COPYRIGHT © 2013 - SYMPATHIQUE | ALL RIGHTS RESERVED</p>
+                    </div><!--end one-half-->
+
+                    <div class="one-half column-last">
+                        <ul id="social">
+                            <li><a class="rss" href="#">RSS Feed</a></li>
+                            <li><a class="facebook" href="#">Facebook</a></li>
+                            <li><a class="twitter" href="#">Twitter</a></li>
+                            <li><a class="flickr" href="#">Flickr</a></li>
+                            <li><a class="google" href="#">Google</a></li>
+                        </ul>
+                    </div><!--end one-half-->
+                </div><!--end centered-wrapper-->
+            </div><!--end bottomfooter-->
+        </footer>
         {% block javascripts %}
         <script type="text/javascript" src="{{ asset('bundles/site/js/jquery.min.js') }}"></script>
         <script type="text/javascript" src="http://connect.facebook.net/en_US/all.js#xfbml=1&appId=296297797115446"></script>

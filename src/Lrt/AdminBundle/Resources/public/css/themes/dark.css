@@ -13,6 +13,14 @@
 		background: linear-gradient(top,  #45484d 0%,#000000 100%);
 		filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#45484d', endColorstr='#000000',GradientType=0 );
     }
+
+    .navbar .brand {
+        text-shadow: none;
+    }
+
+    .navbar .nav li.dropdown.open > .dropdown-toggle, .navbar .nav li.dropdown.active > .dropdown-toggle, .navbar .nav li.dropdown.open.active > .dropdown-toggle {
+        background-color: transparent;
+    }
     .navbar .nav > li > a {
         color: #bababa;
         text-shadow: none!important;

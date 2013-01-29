@@ -16,28 +16,28 @@ class File
      * @ORM\Column(type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    public $id;
+    protected $id;
 
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank
      */
-    public $name;
+    protected $name;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    public $path;
+    protected $path;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
      */
-    public $size;
+    protected $size;
 
     /**
      * @Assert\File(maxSize="6000000",mimeTypes= {"image/jpeg","image/gif","image/png"},mimeTypesMessage= "Format de fichier non valide")
      */
-    public $file;
+    protected $file;
 
     public function upload()
     {

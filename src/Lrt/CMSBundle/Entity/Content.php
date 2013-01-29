@@ -61,12 +61,6 @@ class Content
     protected $isValid;
 
     /**
-     * @ORM\ManyToOne(targetEntity="\Lrt\UserBundle\Entity\User", inversedBy="content")
-     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
-     */
-    protected $user;
-
-    /**
      * @ORM\Column(type="datetime")
      */
     protected $created;

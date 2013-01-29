@@ -86,9 +86,9 @@
             {% for a in articles %}
             <article class="post" id="post-{{ a.id }}">
                 <span class="post_categorie"><a href="">{{ a.category_name }}</a></span><span class="post_date">16.12.2012 - 11:15</span>
-                <h1><a href="{{ path('article_show', { 'id': a.id }) }}" title="{{ a.title }}">{{ a.title }}</a></h1>
+                <h1><a href="{{ path('article_view', { 'id': a.id }) }}" title="{{ a.title }}">{{ a.title }}</a></h1>
                 <aside class="post_image">
-                    <a href="{{ path('article_show', { 'id': a.id }) }}" title="{{ a.title }}">
+                    <a href="{{ path('article_view', { 'id': a.id }) }}" title="{{ a.title }}">
                         {% if a.path is not null %}
                             <img src="{{ asset(a.path) }}" data-original="{{ asset(a.path) }}" alt="" />
                         {% else %}

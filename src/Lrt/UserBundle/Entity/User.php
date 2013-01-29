@@ -71,6 +71,15 @@ class User extends BaseUser
     protected $groups;
 
     /**
+     * @ORM\ManyToMany(targetEntity="Lrt\CalendarBundle\Entity\Event", inversedBy="users")
+     * @ORM\JoinTable(name="user_event",
+     *      joinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="event_id", referencedColumnName="id")}
+     * )
+     */
+    protected $events;
+
+    /**
      * @ORM\OneToMany(targetEntity="Lrt\AdminBundle\Entity\EventRequest", mappedBy="user")
      */
     protected $request;
@@ -84,6 +93,7 @@ class User extends BaseUser
     public function __construct()
     {
         $this->groups = new ArrayCollection();
+        $this->events = new ArrayCollection();
         parent::__construct();
     }
 
@@ -238,5 +248,38 @@ class User extends BaseUser
     public function resetGroups()
     {
         $this->groups = array();
+    }
+
+    /**
+     * Add events
+     *
+     * @param \Lrt\CalendarBundle\Entity\Event $events
+     * @return \Lrt\CalendarBundle\Entity\Event
+     */
+    public function addEvent(\Lrt\CalendarBundle\Entity\Event $events)
+    {
+        $this->events[] = $events;
+
+        return $this;
+    }
+
+    /**
+     * Remove events
+     *
+     * @param \Lrt\CalendarBundle\Entity\Event $events
+     */
+    public function removeEvent(\Lrt\CalendarBundle\Entity\Event $events)
+    {
+        $this->events->removeElement($events);
+    }
+
+    /**
+     * Get events
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getEvents()
+    {
+        return $this->events;
     }
 }

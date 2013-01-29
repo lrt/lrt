@@ -27,6 +27,7 @@ class PartnerController extends Controller
      * Lists all Partner entities.
      *
      * @Route("/", name="partner")
+     * @Secure(roles="ROLE_ADMIN,ROLE_SUPERVISEUR")
      * @Template()
      */
     public function indexAction()
@@ -44,6 +45,7 @@ class PartnerController extends Controller
      *
      * @Route("/{id}/show", name="partner_show", requirements={"id" = "\d+"})
      * @ParamConverter("partner", class="SiteBundle:Partner", options={"id" = "id"})
+     * @Secure(roles="ROLE_ADMIN,ROLE_SUPERVISEUR")
      * @Template()
      */
     public function showAction(Partner $partner)
@@ -60,6 +62,7 @@ class PartnerController extends Controller
      * Displays a form to create a new Partner entity.
      *
      * @Route("/new", name="partner_new")
+     * @Secure(roles="ROLE_ADMIN,ROLE_SUPERVISEUR")
      * @Template()
      */
     public function newAction()
@@ -77,6 +80,7 @@ class PartnerController extends Controller
      * Creates a new Partner entity.
      *
      * @Route("/create", name="partner_create")
+     * @Secure(roles="ROLE_ADMIN,ROLE_SUPERVISEUR")
      * @Method("POST")
      * @Template("SiteBundle:Partner:new.html.twig")
      */
@@ -103,6 +107,7 @@ class PartnerController extends Controller
      * Displays a form to edit an existing Partner entity.
      *
      * @Route("/{id}/edit", name="partner_edit")
+     * @Secure(roles="ROLE_ADMIN,ROLE_SUPERVISEUR")
      * @ParamConverter("partner", class="SiteBundle:Partner", options={"id" = "id"})
      * @Template()
      */
@@ -122,6 +127,7 @@ class PartnerController extends Controller
      * Edits an existing Partner entity.
      *
      * @Route("/{id}/update", name="partner_update")
+     * @Secure(roles="ROLE_ADMIN,ROLE_SUPERVISEUR")
      * @ParamConverter("partner", class="SiteBundle:Partner", options={"id" = "id"})
      * @Method("POST")
      * @Template("SiteBundle:Partner:edit.html.twig")
@@ -150,6 +156,7 @@ class PartnerController extends Controller
      * Deletes a Partner entity.
      *
      * @Route("/{id}/delete", name="partner_delete")
+     * @Secure(roles="ROLE_ADMIN,ROLE_SUPERVISEUR")
      * @ParamConverter("partner", class="SiteBundle:Partner", options={"id" = "id"})
      * @Method("POST")
      */
@@ -176,7 +183,7 @@ class PartnerController extends Controller
 
     /**
      * @Route("/export", name="export_partner")
-     * @Secure(roles="ROLE_ADMIN")
+     * @Secure(roles="ROLE_ADMIN,ROLE_SUPERVISEUR")
      * @Template()
      */
     public function exportAction()

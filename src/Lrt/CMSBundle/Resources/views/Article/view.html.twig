@@ -1,15 +1,85 @@
 {% extends '::base.html.twig' %}
 
 {% block body %}
-    <div class="date" style="font-size:11px;margin: 2px 0 5px 0;color: #BDBDBD;">
-        <span>{{ article.dateSubmission|date('F j, Y') }}</span>
-    </div>
-    <h1>{{ article.title }}</h1>
-    <div id="images" style="width:605px; height:400px;">
-        <img width="605" height="400" alt="{{ article.title }}" class="picture" src="{{ asset(['uploads/articles/{{ article.id }}/', article.path]|join) }}" original="{{ asset(['uploads/articles/images/', article.path]|join) }}">
-    </div>
-    <div class="text">
-        {{ article.content | raw }}
-    </div>
-    <div class="fb-comments" data-href="http://longchamp-roller-team.com" data-num-posts="2" data-width="620"></div>
+    {% block content %}
+        <div id="content" class="column">
+            <div class="date" style="font-size:11px;margin: 2px 0 5px 0;color: #BDBDBD;">
+                <span>{{ article.dateSubmission|date('F j, Y') }}</span>
+            </div>
+            <h1>{{ article.title }}</h1>
+            <div class="headline">
+                The fifth and final monument of the year, and for many teams, the final race of the season is upon us.
+            </div>
+            <div id="images" style="width:605px; height:400px;">
+                <img width="605" height="400" alt="{{ article.title }}" class="picture" src="{{ asset(article.path) }}" original="{{ asset(article.path) }}">
+            </div>
+            <div class="text">
+                {{ article.content | raw }}
+            </div>
+            <div class="fb-comments" data-href="http://longchamp-roller-team.com" data-num-posts="2" data-width="620"></div>
+        </div>
+    {% endblock %}
+
+    <!-- SideBar -->
+    <aside id="sidebar">
+        <div id="block-latest-race" class="widget race">
+            <div class="widget_title"><h2>Prochaine course</h2></div>
+            <div class="widget_container">
+                <div class="widget_content">
+                    <div>
+                        <div class="stage">
+                        <span class="field-content">
+                            <span class="stage_tour">
+                                <a href="">Challenge du Centre</a>
+                            </span>
+                            <span class="stage_title">étape 6</span>
+                        </span>
+                        </div>
+                        <div class="date">
+                            <div class="field-content date-stroke">
+                                <span class="date-display-single">22.01</span>
+                                <div class="stroke"></div>
+                            </div>
+                        </div>
+                        <div class="field-title">
+                        <span class="field-content">
+                            <a href="" title="">Adelaide City Council Street Circuit</a>
+                        </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="widget-1" class="widget">
+            <div class="widget_title"><h2>Devenir fan</h2></div>
+            <div class="widget_container">
+                <div class="widget_content">
+                    <div class="fb-like-box" data-href="{{ socialFacebook }}" data-width="280" data-height="90" data-show-faces="false" data-stream="false" data-header="false"></div>
+                </div>
+            </div>
+        </div>
+        <div id="widget-2" class="widget partner">
+            <div class="widget_title"><h2>Partenaires</h2></div>
+            <div class="widget_container">
+                <div class="widget_content">
+                    <ul style="margin-left: 58px;">
+                        <li style="cursor:pointer;" onclick="window.open('/');" class="sponsors rs2p"></li>
+                        <li style="cursor:pointer;" onclick="window.open('http://www.synergie.fr/');" class="sponsors synergie"></li>
+                        <li style="cursor:pointer;" onclick="window.open('http://www.arcade-groupe.com/');" class="sponsors arcade"></li>
+                        <li style="cursor:pointer;" onclick="window.open('http://www.matis-group.com/');" class="sponsors matis"></li>
+                        <li style="cursor:pointer;" onclick="window.open('http://www.cabinet-iena.com');" class="sponsors iena"></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div id="widget-3" class="widget">
+            <div class="widget_title"><h2>Ligne droite sur votre mobile</h2></div>
+            <div class="widget_container">
+                <div class="widget_content">
+                    <img alt="" width="270" src="{{ asset('bundles/site/images/no_picture.png') }}" data-original="{{ asset('bundles/site/images/no_picture.png') }}" />
+                </div>
+            </div>
+        </div>
+    </aside>
+    <!--end sidebar-->
 {% endblock %}
