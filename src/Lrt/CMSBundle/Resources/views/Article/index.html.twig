@@ -77,9 +77,9 @@
         <tr>
             <td>
                 {% if entity.path is not null %}
-                    <img width="100" height="75" src="{{ asset(entity.path) }}" data-original="{{ asset(entity.path) }}" alt="Prévisualiser" title="Prévisualiser" class="preview">
+                    <img width="100" height="75" src="{{ asset(entity.path) }}" data-original="{{ asset(entity.path) }}" alt="Prévisualiser" title="Prévisualiser" class="preview img-rounded">
                 {% else %}
-                    <img width="100" height="75" src="{{ asset('bundles/admin/img/example_mini.jpg') }}" alt="Prévisualiser" title="Prévisualiser" class="preview">
+                    <img width="100" height="75" src="{{ asset('bundles/admin/img/example_mini.jpg') }}" alt="Prévisualiser" title="Prévisualiser" class="preview img-rounded">
                 {%  endif %}
             </td>
             <td>
