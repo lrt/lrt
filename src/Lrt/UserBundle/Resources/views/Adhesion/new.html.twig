@@ -1,0 +1,7 @@
+{% form_theme form 'AdminBundle:Themes:form.html.twig' %}
+<form action="{{ path('adhesion_create') }}" method="post" {{ form_enctype(form) }} class="form-horizontal">
+    {{ form_widget(form) }}
+    <div class="form-actions">
+        <button type="submit" class="btn btn-primary"><i class="icon-check icon-white"></i> Valider</button>
+    </div>
+</form>

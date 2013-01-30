@@ -37,9 +37,10 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface {
         $user->setEnabled($enabled);
         $user->setTeam($team);
         $user->addGroup($group);
-        //$user->addRole($role);
+        $user->setDateValidation(new \DateTime());
         $user->setPlainPassword('test');
         $this->addReference($reference,$user);
+
         $this->manager->persist($user);
         $this->manager->flush();
     }

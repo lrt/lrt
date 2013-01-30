@@ -44,6 +44,35 @@ class User extends BaseUser
     protected $lastName;
 
     /**
+     * @var \DateTime $birthday
+     *
+     * @ORM\Column(name="birthday", type="date", nullable=true)
+     */
+    protected $birthday;
+
+    /**
+     * @ORM\Column(name="gender", type="string", nullable=true)
+     * @Assert\NotBlank()
+     */
+    protected $gender;
+
+    /**
+     * @ORM\Column(name="phone", type="string", nullable=true)
+     * @Assert\Regex(
+     *      pattern="((0[0-68]([-.\s]?\d{2}){4}))",
+     *      message="Ce numéro de téléphone n'est pas valide, il doit avoir les indicatifs 01 à 06 et 08 et il doit y avoir un .- ou un espace entre deux chiffres."
+     * )
+     */
+    protected $phone;
+
+    /**
+     * @var \DateTime $date_validation
+     *
+     * @ORM\Column(name="date_validation", type="datetime")
+     */
+    protected $dateValidation;
+
+    /**
      * @var string
      */
     protected $username;
@@ -86,7 +115,7 @@ class User extends BaseUser
 
     /**
      * @ORM\ManyToOne(targetEntity="\Lrt\TeamBundle\Entity\Team")
-     * @ORM\JoinColumn(nullable=true)
+     * @ORM\JoinColumn(name="team_id", nullable=true)
      */
     protected $team;
 
@@ -145,6 +174,92 @@ class User extends BaseUser
     public function getLastName()
     {
         return $this->lastName;
+    }
+
+    /**
+     * Set date_validation
+     *
+     * @param \DateTime $dateValidation
+     * @return User
+     */
+    public function setDateValidation($dateValidation)
+    {
+        $this->dateValidation = $dateValidation;
+
+        return $this;
+    }
+
+    /**
+     * Get birthday
+     *
+     * @return \DateTime
+     */
+    public function getBirthday()
+    {
+        return $this->birthday;
+    }
+
+    /**
+     * Set birthday
+     *
+     * @param \DateTime $birthday
+     * @return User
+     */
+    public function setBirthday($birthday)
+    {
+        $this->birthday = $birthday;
+
+        return $this;
+    }
+
+    /**
+     * Set gender
+     *
+     * @param $gender
+     */
+    public function setGender($gender)
+    {
+        $this->gender = $gender;
+    }
+
+    /**
+     * Get gender
+     *
+     * @return string
+     */
+    public function getGender()
+    {
+        return $this->gender;
+    }
+
+    /**
+     * Set phone
+     *
+     * @param $phone
+     */
+    public function setPhone($phone)
+    {
+        $this->phone = $phone;
+    }
+
+    /**
+     * Get phone
+     *
+     * @return string
+     */
+    public function getPhone()
+    {
+        return $this->phone;
+    }
+
+    /**
+     * Get date_validation
+     *
+     * @return \DateTime
+     */
+    public function getDateValidation()
+    {
+        return $this->dateValidation;
     }
 
     public function getPlainPassword()
@@ -281,5 +396,10 @@ class User extends BaseUser
     public function getEvents()
     {
         return $this->events;
+    }
+
+    public function getReferenceUser()
+    {
+        return 'M' . $this->dateValidation->format('Ymd') . $this->id;
     }
 }

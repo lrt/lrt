@@ -19,21 +19,55 @@
         </div>
     </div>
     <div class="span6">
-        <div class="box">
-            <h4 class="box-header round-top">
-                <i class="icon-user"></i>
-                Informations personnelles
-            </h4>
-            <div class="box-container-toggle">
-                <div class="box-content">
-                    {% form_theme form 'AdminBundle:Themes:form.box.html.twig' %}
-                    <form action="{{ path('user_update', { 'id': user.id }) }}" method="post" {{ form_enctype(form) }}>
-                        {{ form_widget(form) }}
-                        <button type="submit" class="btn btn-primary"><i class="icon-check icon-white"></i> Modifier</button>
-                    </form>
+        <ul class="nav nav-tabs" id="myTab">
+            <li class="active"><a href="#home"><i class="icon-user"></i> Informations sur le compte</a></li>
+            <li><a href="#profile"><i class="icon-wrench"></i> Paramètres de compte</a></li>
+        </ul>
+        <form action="{{ path('user_update', { 'id': user.id }) }}" method="post" {{ form_enctype(form) }} class="form-horizontal"  >
+        <div class="tab-content">
+            <div class="tab-pane active" id="home">
+
+                <div class="control-group">
+                    {{ form_label(form.firstName, label|default(null), {'label_attr': {'class': 'control-label'}}) }}
+                    <div class="controls">
+                        {{ form_widget(form.firstName) }}
+                    </div>
                 </div>
+                <div class="control-group">
+                    {{ form_label(form.lastName, label|default(null), {'label_attr': {'class': 'control-label'}}) }}
+                    <div class="controls">
+                        {{ form_widget(form.lastName) }}
+                    </div>
+                </div>
+                <div class="control-group">
+                    {{ form_label(form.birthday, label|default(null), {'label_attr': {'class': 'control-label'}}) }}
+                    <div class="controls">
+                        <div class="input-prepend">
+                            <span class="add-on"><i class="icon-calendar"></i></span>
+                            {{ form_widget(form.birthday) }}
+                        </div>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-danger pull-right"><i class="icon-check icon-white"></i> Enregistrer les modifications</button>
+            </div>
+            <div class="tab-pane" id="profile">
+                {{ form_label(form.username) }}
+                {{ form_widget(form.username) }}
+
+                <div class="control-group">
+                    {{ form_label(form.email) }}
+                    <div class="controls">
+                        <div class="input-prepend">
+                            <span class="add-on"><i class="icon-envelope"></i></span>
+                            {{ form_widget(form.email) }}
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
+        {{ form_rest(form) }}
+        </form>
     </div>
     <div class="span3">
         <div class="box">
@@ -56,4 +90,14 @@
     <div class="span6"></div>
     <div class="span6"></div>
 </div>
+{% endblock %}
+
+{%  block javascripts %}
+{{ parent() }}
+<script type="text/javascript">
+    $('#myTab a').click(function (e) {
+        e.preventDefault();
+        $(this).tab('show');
+    })
+</script>
 {% endblock %}
