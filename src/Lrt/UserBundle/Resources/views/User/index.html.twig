@@ -53,7 +53,7 @@
                     <h4>filtres</h4>
                 </div>
                 <div id="contentFiltres">
-                    <form action="{{ path('user') }}" method="get" class="form-inline">
+                    <form id="test" action="{{ path('user') }}" method="get" class="form-inline">
                         {{ form_widget(form.login,{ 'attr': {'placeholder': 'login'} }) }} {{ form_widget(form.nom,{ 'attr': {'placeholder': 'nom'} }) }} 
                         {{ form_widget(form.email,{ 'attr': {'placeholder': 'email'} }) }}  <br><br>
                         {{ form_widget(form.type) }} {{ form_widget(form.status) }} <br><br>
@@ -128,6 +128,7 @@
                 {% endfor %}
                 </tbody>
             </table>
+            <div id="resultats_recherche"></div>
        <!-- </div>
     </div>
 </div>-->

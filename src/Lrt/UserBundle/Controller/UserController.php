@@ -34,7 +34,7 @@ class UserController extends Controller
      */
     public function indexAction(Request $request)
     {
-        $form = $this->createForm($this->container->get('users.form.userFilterType'), array());
+        $form = $this->createForm($this->container->get('users.form.userFilterType'));
         $form->bind($request);
         $data = $form->getData();
 
