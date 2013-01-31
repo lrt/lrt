@@ -1,97 +1,173 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="description" content="description de la page"/>
-        <meta name="keywords" content="mots-clé1, mots-clé2, ..."/>
-        <meta name="robots" content="index,follow" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>{% block title %}{{ sitename }}{% endblock %}</title>
-        {% block stylesheets %}
-        <link rel="stylesheet" href="{{ asset('bundles/site/css/common.css') }}" type="text/css" />
-        <link rel="stylesheet" href="{{ asset('bundles/site/css/custom.css') }}" type="text/css" />
-        {% endblock %}
-        <!--[if lt IE 9]> <script src="{{ asset('web/js/html5.js') }}"></script> <![endif]-->
-        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
-    </head>
-    <body>
-        <div id="fb-root"></div>
-        <div id="wrapper">
-            <!-- Header -->
-            <header>
-                <hgroup>
-                    <h1><a title="Accueil" href="{{ path('home') }}">Longchamp Roller Team</a></h1>
-                </hgroup>
-                <!-- Navigation -->
-                <nav role="navigation">
-                    <ul>
-                        <li><a title="Association" href="{{ path('show_page', { 'page': 'association' }) }}">Association</a></li>
-                        <li><a title="Photos" href="{{ path('show_page', { 'page': 'photos' }) }}">Photos</a></li>
-                        <li><a title="Videos" href="{{ path('video') }}">Vidéos</a></li>
-                        <li><a title="Calendrier" href="{{ path('show_page', { 'page': 'calendar' }) }}">Calendrier</a></li>
-                        <li><a title="Calendrier" href="{{ path('team_list') }}">Equipe</a></li>
-                        <li><a title="Contact" href="{{ path('contact') }}">Contact</a></li>
-                    </ul>
-                </nav>
-                <!-- End  Navigation -->
-            </header>
-            <!-- End Header  -->
-        </div>
-        <div id="featured">{% block featured %}{% endblock %}</div>
-        <div id="page-wrapper">
-            <div id="page">
-                <div id="main">
-                    {% block body %}{% endblock %}
-                </div>
+<!--[if IE 7]> <html lang="en" class="ie7"> <![endif]-->
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
+<!--[if !IE]><!--> <html lang="en">   <!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+    <title>Creativo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <link href="{{ asset('bundles/admin/css/bootstrap/bootstrap.min.css') }}" rel="stylesheet">
+    <!--<link rel="stylesheet" href="assets/font-awesome/css/font-awesome.css">-->
+    <!--[if IE 7]>
+    <!--<link rel="stylesheet" href="assets/font-awesome/css/font-awesome-ie7.css">
+    <![endif]-->
+    <link href="{{ asset('bundles/site/css/themes/style.css') }}" rel="stylesheet">
+    <link href="{{ asset('bundles/site/css/themes/style_responsive.css') }}" rel="stylesheet">
+    <link href="{{ asset('bundles/site/css/themes/animate.css') }}" rel="stylesheet">
+    <link href="{{ asset('bundles/site/css/themes/effects.css') }}" rel="stylesheet">
+    <!--<link href="assets/fancybox/source/jquery.fancybox.css" rel="stylesheet">-->
+</head>
+<body>
+<div id="header">
+    <div class="container">
+        <div class="row-fluid">
+            <div id="logo">
+                <img src="{{ asset('bundles/site/images/themes/logo.png') }}" class="hide1" alt="Logo">
+            </div><!-- /logo -->
+            <div id="menu">
+                <div class="navbar pull-right">
+                    <div class="navbar-inner">
+                        <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </a><!-- /nav-collapse -->
+                        <div class="nav-collapse collapse">
+                            <ul class="nav">
+                                <li class="active"><a href="{{ path('home') }}">Accueil</a></li>
+                                <li><a href="{{ path('show_page', { 'page': 'about' }) }}">L'association</a></li>
+                                <li><a href="{{ path('blog') }}">Blog</a></li>
+                                <li><a href="{{ path('blog') }}">Partenaires</a></li>
+                                <li><a href="{{ path('contact') }}">Contact</a></li>
+                            </ul><!-- /nav -->
+                        </div><!-- /nav-collapse -->
+                    </div><!-- /navbar-inner -->
+                </div><!-- /navbar -->
+            </div><!-- /span9 -->
+        </div> <!-- /row-fluid -->
+    </div><!-- /container -->
+</div><!-- /header -->
+
+{% block body %}{% endblock %}
+
+<div id="footer">
+    <div class="container">
+        <div class="row-fluid">
+            <div class="span12">
+                <a class="top" href="javascript:;">top</a>
             </div>
         </div>
-        <footer id="footer">
-            <div class="centered-wrapper">
-                <div id="topfooter">
-                    <div class="one-half">
-                        <h3>About Us</h3>
-                        <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam veritatis et quasi nam liber tempore.</p>
-                        <div class="footer-logo"></div>
-                    </div><!--end percent-one-half-->
-                    <div class="one-half column-last">
-                        <div class="percent-one-half">
-                            <h3>We are on Twitter</h3>
-                            <div class="tweet"><p class="loading">loading tweets...</p></div>
-                        </div>
+        <div class="row-fluid">
+            <div class="span3">
+                <h4>About Us</h4>
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+                    sed do eiusmod tempor incididunt ut labore et dolore magna
+                    aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+                    ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                </p>
+            </div>
+            <div class="span3">
+                <h4>Latest From Blog</h4>
+                <p>
+                <div class="row-fluid">
+                    <div class="span4">
+                        <a href="blog.html">
+                            <img class="media-object img-rounded" src="{{ asset('bundles/site/images/themes/blog/thumb1.jpg') }}">
+                        </a>
+                    </div>
+                    <div class="span8">
+                        Cras sit amet nibh libero, in gravida nulla, in gravida nulla...
+                        <br><a href="blog.html" class="">read more</a>
+                    </div>
+                </div>
+                <div class="row-fluid margin-top-10">
+                    <div class="span4">
+                        <a class="" href="blog.html">
+                            <img class="media-object img-rounded" src="{{ asset('bundles/site/images/themes/blog/thumb2.jpg') }}'">
+                        </a>
+                    </div>
+                    <div class="span8">
+                        Fusce condimentum nunc ac nisi vulputate nunc ac nisi...
+                        <br><a href="blog.html" class="">read more</a>
+                    </div>
+                </div>
+                </p>
+            </div>
+            <div class="span3">
+                <h4>Contact</h4>
+                <p>
+                    <span class="grey-light">Address:</span>&nbsp;<span class="">25, Lorem Lis, California, US</span>
+                    <br>
+                    <span class="grey-light">Phone:</span>&nbsp;<span>800 123 3456</span><br>
+                    <span class="grey-light">Fax:</span>&nbsp;<span class="">800 123 3456</span><br>
+                    <span class="grey-light">Email:</span>&nbsp;<a href="mailto:info@anybiz.com" class="">info@anybiz.com</a>
+                <div class="margin-top-5">
+                    <a href="contact.html">
+                        <img  src="{{ asset('bundles/site/images/themes/map.jpg') }}"
+                              alt="map" class="img-rounded tooltips"  data-original-title="View our location">
+                    </a>
+                </div>
+                </p>
+            </div>
+            <div class="span3">
+                <h4>Subscribe</h4>
+                <p>
+                    Subscribe to our newsletter and stay up to date with the latest news and deals!
+                </p>
+                <form class="form-inline">
+                    <input type="text" class="input-medium" placeholder="Your email">
+                    &nbsp;
+                    <button type="submit" class="btn btn-inverse">Go</button>
+                </form>
 
-                        <div class="percent-one-half column-last">
-                            <h3>Get in Touch with Us</h3>
-                            <ul>
-                                <li>Address: 1600 Amphitheatre Parkway, Mountain View, CA 94043</li>
-                                <li>Phone: +321 123 456 7<br>
-                                    E-mail: <a href="mailto:">johndoe@ipsum.com</a></li>
-                            </ul>
-                        </div><!--end one-half-->
-                    </div><!--end one-half-->
-                    <div class="clear"></div></div><!--end topfooter-->
-            </div><!--end centered-wrapper-->
-            <div id="bottomfooter">
-                <div class="centered-wrapper">
-                    <div class="one-half">
-                        <p>COPYRIGHT © 2013 - SYMPATHIQUE | ALL RIGHTS RESERVED</p>
-                    </div><!--end one-half-->
-
-                    <div class="one-half column-last">
-                        <ul id="social">
-                            <li><a class="rss" href="#">RSS Feed</a></li>
-                            <li><a class="facebook" href="#">Facebook</a></li>
-                            <li><a class="twitter" href="#">Twitter</a></li>
-                            <li><a class="flickr" href="#">Flickr</a></li>
-                            <li><a class="google" href="#">Google</a></li>
-                        </ul>
-                    </div><!--end one-half-->
-                </div><!--end centered-wrapper-->
-            </div><!--end bottomfooter-->
-        </footer>
-        {% block javascripts %}
-        <script type="text/javascript" src="{{ asset('bundles/site/js/jquery.min.js') }}"></script>
-        <script type="text/javascript" src="http://connect.facebook.net/en_US/all.js#xfbml=1&appId=296297797115446"></script>
-        <script type="text/javascript" src="{{ asset('bundles/site/js/plugins/lazyload/jquery.lazyload.min.js') }}"></script>
-        {% endblock %}
-    </body>
+                <h4>Stay Tuned</h4>
+                <p>
+                    <a href="#" class="iconify"><i class="icon-linkedin"></i></a>
+                    <a href="#" class="iconify"><i class="icon-google-plus"></i></a>
+                    <a href="#" class="iconify"><i class="icon-twitter"></i></a>
+                    <a href="#" class="iconify"><i class="icon-facebook"></i></a>
+                    <a href="#" class="iconify"><i class="icon-pinterest"></i></a>
+                </p>
+            </div>
+        </div><!-- /row-fluid -->
+        <div class="row-fluid visible-phone">
+            <div class="span12">
+                <a class="top" href="javascript:;">top</a>
+            </div>
+        </div>
+        <div class="row-fluid margin-top-20">
+            <div class="span12">
+                <div id="quick-menu" class="span6 pull-right">
+                    <ul class="menu white pull-right">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="projects.html">Projects</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="pricing.html">Pricing</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                        <li><a href="faq.html">FAQ</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div><!-- /quick-menu -->
+                <div id="copyright" class="span6 pull-left">
+                    &copy; 2012 Creativo. All Rights Reserved.
+                </div><!-- /copyright -->
+            </div>
+        </div>
+    </div>
+</div><!-- /footer -->
+<script src="{{ asset('bundles/site/js/jquery-1.8.2.min.js') }}"></script>
+<script src="{{ asset('bundles/site/js/bootstrap.min.js') }}"></script>
+<!--<script src="assets/fancybox/source/jquery.fancybox.pack.js"></script>
+<script src="assets/flexslider2/jquery.flexslider-min.js"></script>-->
+<!--[if lt IE 9]>
+<script src="assets/js/respond.js"></script>
+<![endif]-->
+<script src="{{ asset('bundles/site/js/themes/app.js') }}"></script>
+</body>
 </html>

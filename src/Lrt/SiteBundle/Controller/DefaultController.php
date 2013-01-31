@@ -45,6 +45,17 @@ class DefaultController extends Controller
     }
 
     /**
+     * @Route("/blog", name="blog")
+     * @Template("SiteBundle:Default:blog.html.twig")
+     */
+    public function blogAction()
+    {
+        $articles = $this->em->getRepository('CMSBundle:Article')->getLatestArticles(5);
+
+        return array('articles' => $articles);
+    }
+
+    /**
      * @Route("/information/{page}", name="show_page")
      * @Cache(smaxage="600")
      * @Template()
