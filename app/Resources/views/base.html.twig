@@ -5,20 +5,18 @@
 <!--[if !IE]><!--> <html lang="en">   <!--<![endif]-->
 <head>
     <meta charset="utf-8">
-    <title>Creativo</title>
+    <title>{{ sitename }}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <link href="{{ asset('bundles/admin/css/bootstrap/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('bundles/site/css/bootstrap.min.css') }}" rel="stylesheet">
     <!--<link rel="stylesheet" href="assets/font-awesome/css/font-awesome.css">-->
     <!--[if IE 7]>
     <!--<link rel="stylesheet" href="assets/font-awesome/css/font-awesome-ie7.css">
     <![endif]-->
     <link href="{{ asset('bundles/site/css/themes/style.css') }}" rel="stylesheet">
     <link href="{{ asset('bundles/site/css/themes/style_responsive.css') }}" rel="stylesheet">
-    <link href="{{ asset('bundles/site/css/themes/animate.css') }}" rel="stylesheet">
-    <link href="{{ asset('bundles/site/css/themes/effects.css') }}" rel="stylesheet">
     <!--<link href="assets/fancybox/source/jquery.fancybox.css" rel="stylesheet">-->
 </head>
 <body>
@@ -65,10 +63,7 @@
             <div class="span3">
                 <h4>About Us</h4>
                 <p>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                    sed do eiusmod tempor incididunt ut labore et dolore magna
-                    aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                    ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                    L'association Longchamp Roller Team est une équipe de roller de vitesse ayant pour but de promouvoir ce sport sous toutes ses formes.
                 </p>
             </div>
             <div class="span3">
@@ -105,7 +100,7 @@
                     <br>
                     <span class="grey-light">Phone:</span>&nbsp;<span>800 123 3456</span><br>
                     <span class="grey-light">Fax:</span>&nbsp;<span class="">800 123 3456</span><br>
-                    <span class="grey-light">Email:</span>&nbsp;<a href="mailto:info@anybiz.com" class="">info@anybiz.com</a>
+                    <span class="grey-light">Email:</span>&nbsp;<a href="mailto:longchamp-roller-team@laposte.net" class="">longchamp-roller-team@laposte.net</a>
                 <div class="margin-top-5">
                     <a href="contact.html">
                         <img  src="{{ asset('bundles/site/images/themes/map.jpg') }}"
@@ -127,11 +122,9 @@
 
                 <h4>Stay Tuned</h4>
                 <p>
-                    <a href="#" class="iconify"><i class="icon-linkedin"></i></a>
                     <a href="#" class="iconify"><i class="icon-google-plus"></i></a>
                     <a href="#" class="iconify"><i class="icon-twitter"></i></a>
                     <a href="#" class="iconify"><i class="icon-facebook"></i></a>
-                    <a href="#" class="iconify"><i class="icon-pinterest"></i></a>
                 </p>
             </div>
         </div><!-- /row-fluid -->
@@ -144,18 +137,14 @@
             <div class="span12">
                 <div id="quick-menu" class="span6 pull-right">
                     <ul class="menu white pull-right">
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="about.html">About</a></li>
-                        <li><a href="projects.html">Projects</a></li>
-                        <li><a href="services.html">Services</a></li>
-                        <li><a href="pricing.html">Pricing</a></li>
-                        <li><a href="blog.html">Blog</a></li>
-                        <li><a href="faq.html">FAQ</a></li>
-                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="{{ path('home') }}">Accueil</a></li>
+                        <li><a href="{{ path('show_page', { 'page': 'about' }) }}">L'association</a></li>
+                        <li><a href="{{ path('blog') }}">Blog</a></li>
+                        <li><a href="{{ path('show_page', { 'page': 'contact' }) }}">Contact</a></li>
                     </ul>
                 </div><!-- /quick-menu -->
                 <div id="copyright" class="span6 pull-left">
-                    &copy; 2012 Creativo. All Rights Reserved.
+                    &copy; 2013 {{ sitename }}. All Rights Reserved.
                 </div><!-- /copyright -->
             </div>
         </div>

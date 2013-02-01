@@ -5,18 +5,13 @@
         <div class="container">
             <h2>Blog</h2>
         </div>
-
     </div>
     <div id="body">
-
         <div class="container">
-
             <div class="row-fluid blog">
-
                 <div class="span9">
-
+                    {% for a in articles %}
                     <div class="row-fluid">
-
                         <div class="span3">
                             <div class="date">
                                 <div class="published">
@@ -26,7 +21,7 @@
                                 </div>
                             </div>
                             <div class="author">
-                                by Nick Stone
+                                par {{ a.user.firstName }} {{ a.user.lastName }}
                             </div>
                             <div class="tags">
                                 <i class="icon-tags"></i>
@@ -40,68 +35,22 @@
                             </div>
                         </div>
                         <div class="span9">
-                            <h3>Blog Post #1</h3>
+                            <h3>{{ a.title }}</h3>
                             <p>
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                                sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                                {% if a.path is not null %}
+                                    <img src="{{ asset(a.path) }}" data-original="{{ asset(a.path) }}" alt="" />
+                                {% else %}
+                                    <img src="{{ asset('bundles/site/images/no_picture.png') }}" data-original="{{ asset('bundles/site/images/no_picture.png') }}" alt="" />
+                                {%  endif %}
                             </p>
+                            <p>{{ a.content | truncate(350) | raw }}</p>
                             <p>
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                                sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                            </p>
-                            <p>
-                            <iframe src="http://player.vimeo.com/video/24302498?badge=0" width="100%" height="300" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen=""></iframe>
-                            </p>
-                            <p>
-                                <a class="btn pull-right" href="blog_post.html">Read more ...</a>
+                                <a class="btn pull-right" href="{{ path('article_view', { 'id': a.id }) }}">Lire la suite ...</a>
                             </p>
                         </div>
-
                     </div>
-
                     <hr class="solid">
-
-                    <div class="row-fluid">
-
-                        <div class="span3">
-                            <div class="date">
-                                <div class="published">
-                                    <div class="day pull-left">15</div>
-                                    <div class="month pull-right">SEP 2012</div>
-                                    <div class="clearfix"></div>
-                                </div>
-                            </div>
-                            <div class="author">
-                                by Lisa Miller
-                            </div>
-                            <div class="tags">
-                                <i class="icon-tags"></i>
-                                <span class="label"><a href="">Art</a></span>
-                                <span class="label"><a href="">Technology</a></span>
-                                <span class="label"><a href="">Photography</a></span>
-                            </div>
-                            <div class="comments">
-                                <i class="icon-comments"></i> <a href="blog_post.html#comments">131 comments</a>
-                            </div>
-                        </div>
-
-                        <div class="span9">
-                            <h3>Blog Post #2</h3>
-                            <p>
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                                sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat
-                            </p>
-                            <p>
-                                <img src="assets/img/work/work1.jpg">
-                            </p>
-                            <p>
-                                <a class="btn pull-right" href="blog_post.html">Read more ...</a>
-                            </p>
-                        </div>
-
-                    </div>
-
-                    <hr class="solid">
+                    {% endfor %}
 
                     <div class="row-fluid margin-top-10">
                         <div class="pagination pagination-centered">
@@ -115,17 +64,12 @@
                             </ul>
                         </div>
                     </div>
-
                 </div>
-
                 <div class="span3">
-
                     <form class="form-search margin-top-20 margin-bottom-30">
                         <input type="text" placeholder="Search ..." class="input-large search-query">
                     </form>
-
                     <h3 class="">Menu</h3>
-
                     <div class="clearfix bottom-20 margin-top-10">
                         <ul class="nav nav-list">
                             <li class="active bold"><a href="#"><i class="icon-chevron-left"></i> Creative Technologies</a></li>
@@ -136,9 +80,7 @@
                             <li class=""><a href="#"><i class="icon-chevron-left"></i> Marketing Analyses</a></li>
                         </ul>
                     </div>
-
                     <hr class="dashed">
-
                     <h3>Recent posts</h3>
                     <p>
                     </p><div class="row-fluid">
@@ -179,7 +121,6 @@
                     <hr class="dashed">
 
                     <h3>Tags</h3>
-
                     <span class="label"><a href="">HTML5</a></span>
                     <span class="label"><a href="">CSS3</a></span>
                     <span class="label"><a href="">Photography</a></span>
@@ -192,9 +133,7 @@
                     <span class="label"><a href="">Transportation</a></span>
 
                 </div>
-
             </div>
         </div>
-
     </div>
 {% endblock %}

@@ -1,7 +1,55 @@
-{% form_theme form 'AdminBundle:Themes:form.html.twig' %}
-<form action="{{ path('adhesion_create') }}" method="post" {{ form_enctype(form) }} class="form-horizontal">
-    {{ form_widget(form) }}
-    <div class="form-actions">
-        <button type="submit" class="btn btn-primary"><i class="icon-check icon-white"></i> Valider</button>
+{% extends '::base.html.twig' %}
+
+{% block body %}
+<div id="page">
+    <div class="container">
+        <h2>Devenir adhérent ?</h2>
     </div>
-</form>
+</div>
+<div id="body">
+    <div class="container">
+        <div class="row-fluid">
+            <div class="span8">
+                <img src="{{ asset('bundles/site/images/themes/slider/image2.png') }}">
+            </div>
+            <div class="span4 adhesion">
+                <form action="{{ path('adhesion_create') }}" method="post" {{ form_enctype(form) }} class="form-horizontal">
+                    <div class="control-group">
+                        {{ form_label(form.lastName) }}
+                        <div class="controls">
+                        {{ form_widget(form.firstName) }} {{ form_widget(form.lastName) }}
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        {{ form_label(form.birthday) }}
+                        <div class="controls">
+                            {{ form_widget(form.birthday) }}
+                            <span class="help-inline">01/01/2000</span>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        {{ form_label(form.gender) }}
+                        <div class="controls">
+                            {{ form_widget(form.gender) }}
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        {{ form_label(form.phone) }}
+                        <div class="controls">
+                            {{ form_widget(form.phone) }}
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        {{ form_label(form.email) }}
+                        <div class="controls">
+                            {{ form_widget(form.email) }}
+                        </div>
+                    </div>
+                    {{ form_widget(form) }}
+                    <button type="submit" class="btn btn-danger"><i class="icon-check icon-white"></i> Valider</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,4 +1,8 @@
 @import url(http://fonts.googleapis.com/css?family=Yanone+Kaffeesatz);
+@import url('animate.css');
+@import url('effects.css');
+@import url('font.css');
+@import url('lrt.css');
 
 body { 
 	color: #333; 

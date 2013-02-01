@@ -50,7 +50,7 @@ class DefaultController extends Controller
      */
     public function blogAction()
     {
-        $articles = $this->em->getRepository('CMSBundle:Article')->getLatestArticles(5);
+        $articles = $this->em->getRepository('CMSBundle:Article')->findAll();
 
         return array('articles' => $articles);
     }
