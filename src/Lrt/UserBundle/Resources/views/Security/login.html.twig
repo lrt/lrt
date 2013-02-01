@@ -4,6 +4,7 @@
     {% if error %}
         <div class="alert alert-error">{{ error|trans({}, 'FOSUserBundle') }}</div>
     {% endif %}
+    <a href="{{ path('adhesion_new') }}" class="btn btn-primary"><i class="icon-check icon-white"></i> Devenir Membre</a>
     <form action="{{ path("fos_user_security_check") }}" method="post" class="form-signin">
         <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
 
