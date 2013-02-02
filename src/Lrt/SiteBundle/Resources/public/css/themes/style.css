@@ -252,8 +252,8 @@ i.cert {font-size: 18px; color: #e4ca1a; margin-right: 4px;}
 .navbar .nav > li > a {
 	color: #eee;
 	text-shadow: none;
-	font-size: 18px;
-	font-family: 'Yanone Kaffeesatz';
+	font-size: 22px;
+    font-family: 'EngschriftDINDRegular',Helvetica,Arial,Verdana,sans-serif !important;
 	text-transform: uppercase;
 	padding: 5px 10px 5px 10px;
 }

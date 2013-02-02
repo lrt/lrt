@@ -23,6 +23,9 @@ class AdhesionType extends AbstractType
                 'format' => 'dd/MM/yyyy',
                 'attr' => array('class' => 'datepicker span8')
             ))
+            ->add('address', 'text', array('label' => 'Adresse','attr' => array('class' => 'span8')))
+            ->add('city', 'text', array('label' => 'Nom','attr' => array('class' => 'span4', 'placeholder' => 'Ville')))
+            ->add('zipCode', 'text', array('label' => 'Nom','attr' => array('class' => 'span4', 'placeholder' => 'Code Postal')))
             ->add('gender', 'choice', array(
                 'label' => 'Sexe',
                 'empty_value' => 'Je suis un/une ...',

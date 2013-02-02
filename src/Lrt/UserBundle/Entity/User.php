@@ -66,6 +66,24 @@ class User extends BaseUser
     protected $phone;
 
     /**
+     * @ORM\Column(name="address", type="string", nullable=true)
+     * @Assert\NotBlank()
+     */
+    protected $address;
+
+    /**
+     * @ORM\Column(name="city", type="string", nullable=true)
+     * @Assert\NotBlank()
+     */
+    protected $city;
+
+    /**
+     * @ORM\Column(name="zipCode", type="string", nullable=true)
+     * @Assert\NotBlank()
+     */
+    protected $zipCode;
+
+    /**
      * @var \DateTime $date_validation
      *
      * @ORM\Column(name="date_validation", type="datetime")
@@ -230,6 +248,66 @@ class User extends BaseUser
     public function getGender()
     {
         return $this->gender;
+    }
+
+    /**
+     * Set address
+     *
+     * @param $address
+     */
+    public function setAddress($address)
+    {
+        $this->address = $address;
+    }
+
+    /**
+     * Get address
+     *
+     * @return string
+     */
+    public function getAddress()
+    {
+        return $this->address;
+    }
+
+    /**
+     * Set city
+     *
+     * @param $city
+     */
+    public function setCity($city)
+    {
+        $this->city = $city;
+    }
+
+    /**
+     * Get city
+     *
+     * @return string
+     */
+    public function getCity()
+    {
+        return $this->city;
+    }
+
+    /**
+     * Set zipCode
+     *
+     * @param $zipCode
+     */
+    public function setZipCode($zipCode)
+    {
+        $this->zipCode = $zipCode;
+    }
+
+    /**
+     * Get zipCode
+     *
+     * @return string
+     */
+    public function getZipCode()
+    {
+        return $this->zipCode;
     }
 
     /**

@@ -21,6 +21,17 @@
                         </div>
                     </div>
                     <div class="control-group">
+                        {{ form_label(form.address) }}
+                        <div class="controls">
+                            {{ form_widget(form.address) }}
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <div class="controls">
+                            {{ form_widget(form.zipCode) }} {{ form_widget(form.city) }}
+                        </div>
+                    </div>
+                    <div class="control-group">
                         {{ form_label(form.birthday) }}
                         <div class="controls">
                             {{ form_widget(form.birthday) }}
