@@ -1,23 +1,17 @@
-@import url(http://fonts.googleapis.com/css?family=Yanone+Kaffeesatz);
+/*@import url(http://fonts.googleapis.com/css?family=Yanone+Kaffeesatz);*/
 @import url('animate.css');
 @import url('effects.css');
 @import url('font.css');
 @import url('lrt.css');
 
 body { 
-	color: #333; 
-	background-image1: url("../img/bg.png");
+	color: #333;
 	background: #d5d5d5;
 	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
     line-height: 1.6;
     font-size:13px;
     padding: 0;
     -webkit-font-smoothing: antialiased;
-}
-
-/* try to fix vertical positioning of icons */
-[class^="icon-"], [class*=" icon-"],[class^="icon-"]:hover, [class*=" icon-"]:hover { 
-   background: none !important;
 }
 
 p { line-height: 1.6;}
@@ -70,7 +64,7 @@ i.huge {font-size: 75px !important;}
 .centered {text-align: center; vertical-align: middle !important;}
 /*end;*/
 
-h1, h2, h3, h4, h5 {text-shadow:none; font-family: "Yanone Kaffeesatz"; font-weight: normal; color:#555; margin-top: 5px;} 
+h1, h2, h3, h4, h5 {text-shadow:none; font-family: "EngschriftDINDRegular"; font-weight: normal; color:#555; margin-top: 5px;}
 h1 i, h2 i, h3 i, h4 i, h5 i {margin-right: 7px;}
 
 .reply-author {font-family: none; font-size: 14px; font-weight: bold}
@@ -128,7 +122,8 @@ h1 i, h2 i, h3 i, h4 i, h5 i {margin-right: 7px;}
 .about {padding-left: 15px;}
 
 #body {
-	background-color: #f3f3f3;
+	/*background-color: #f3f3f3;*/
+    background-color: #fff;
 	border: 1px solid #DDD;
 	border: 1px solid rgba(221, 221, 221, 1);
 	 -webkit-box-shadow: 0 0 7px #CCC;
