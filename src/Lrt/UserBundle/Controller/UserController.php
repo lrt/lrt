@@ -22,7 +22,10 @@ use Lrt\UserBundle\Form\UserType;
 
 class UserController extends Controller
 {
-    /** @DI\Inject("doctrine.orm.entity_manager") */
+    /**
+     * @DI\Inject("doctrine.orm.entity_manager")
+     * @var \Doctrine\ORM\EntityManager
+     */
     public $em;
 
     /**

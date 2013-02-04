@@ -8,8 +8,8 @@ parameters:
 
     mailer_transport:  smtp
     mailer_host:       localhost
-    mailer_user:       ~
-    mailer_password:   ~
+    mailer_user:       null
+    mailer_password:   null
 
-    locale:            en
+    locale:            fr
     secret:            ThisTokenIsNotSoSecretChangeIt

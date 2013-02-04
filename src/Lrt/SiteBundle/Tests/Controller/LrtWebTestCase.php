@@ -22,12 +22,13 @@ abstract class LrtWebTestCase extends WebTestCase
         $this->client->followRedirects();
         $this->em = $this->client->getContainer()->get('doctrine')->getEntityManager();
     }
-    
+
     /**
      * Do login for user
      *
      * @param Client $client
-     * @param type $role
+     * @param $user
+     * @internal param \Lrt\SiteBundle\Tests\Controller\type $role
      * @return Client
      */
     protected function login(Client $client, $user)

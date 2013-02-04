@@ -24,8 +24,13 @@ class AdhesionType extends AbstractType
                 'attr' => array('class' => 'datepicker span8')
             ))
             ->add('address', 'text', array('label' => 'Adresse','attr' => array('class' => 'span8')))
-            ->add('city', 'text', array('label' => 'Nom','attr' => array('class' => 'span4', 'placeholder' => 'Ville')))
-            ->add('zipCode', 'text', array('label' => 'Nom','attr' => array('class' => 'span4', 'placeholder' => 'Code Postal')))
+            ->add('city', 'text', array(
+                'label' => 'Nom',
+                'attr' => array('class' => 'span4', 'placeholder' => 'Ville')))
+            ->add('zipCode', 'text', array(
+                'label' => 'Nom',
+                'max_length' => '5',
+                'attr' => array('class' => 'span4', 'placeholder' => 'Code Postale')))
             ->add('gender', 'choice', array(
                 'label' => 'Sexe',
                 'empty_value' => 'Je suis un/une ...',
@@ -33,8 +38,13 @@ class AdhesionType extends AbstractType
                 'required'  => false,
                 'attr' => array('class' => 'span8')
             ))
-            ->add('phone', 'text', array('label' => 'Numéro de téléphone mobile','attr' => array('class' => 'span8')))
-            ->add('email', 'email', array('label' => 'Votre adresse e-mail actuelle','attr' => array('class' => 'span8')))
+            ->add('phone', 'text', array(
+                'label' => 'Numéro de téléphone mobile',
+                'max_length' => '10',
+                'attr' => array('class' => 'span8')))
+            ->add('email', 'email', array(
+                'label' => 'Votre adresse e-mail actuelle',
+                'attr' => array('class' => 'span8')))
         ;
     }
 

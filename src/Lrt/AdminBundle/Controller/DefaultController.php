@@ -11,10 +11,16 @@ use JMS\SecurityExtraBundle\Annotation\Secure;
 class DefaultController extends Controller
 {
 
-    /** @DI\Inject("doctrine.orm.entity_manager") */
+    /**
+     * @DI\Inject("doctrine.orm.entity_manager")
+     * @var \Doctrine\ORM\EntityManager
+     */
     public $em;
 
-    /** @DI\Inject("security.context") */
+    /**
+     * @DI\Inject("security.context")
+     * @var \Symfony\Component\Security\Core\SecurityContext
+     */
     private $sc;
 
     /**

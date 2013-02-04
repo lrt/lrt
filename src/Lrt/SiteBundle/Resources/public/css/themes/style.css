@@ -75,18 +75,6 @@ h1 i, h2 i, h3 i, h4 i, h5 i {margin-right: 7px;}
           	text-shadow: none;}
 .title i {font-size: 16px; color: #ab1c1c; margin-right: 4px; margin-top:5px;}
 
-#header {
-	background-color:#ab1c1c;
-	background-image: url('../../images/themes/top_bg.png');
-	background-repeat: repeat-x;
-	 -webkit-box-shadow: 0 0 7px #fff;
-	    -moz-box-shadow: 0 0 7px #fff;
-	         box-shadow: 0 0 7px #fff;
-	padding-left:5px; 
-	padding-right:5px; 
-	padding-top: 20px;
-	padding-bottom: 20px;	
-}
 #logo {float: left; padding-top: 5px;  padding-left: 0px;}
 #menu {float: right;}
 
@@ -321,7 +309,6 @@ a.top:hover {color: #fff; border-bottom: 2px #fff dotted; text-decoration: none}
 
 #footer p, #footer h3, #footer h4{color: #ddd;}
 
-#footer {background-color: #333; }
 #footer .menu {list-style: none; margin-left: 0px;}
 #footer .menu li {float:left; margin-right: 10px;}
 #footer .menu li a {color: #666; -webkit-text-shadow: none;
@@ -442,121 +429,5 @@ hr.solid.thin {
 .blog .media-heading {font-size: 13px !important; font-weight: normal!important; margin: 0px!important; }
 .blog .reply-author{font-size: 13px !important; font-weight: bold !important;}
 .blog .reply-date{font-size: 13px !important; font-weight: normal !important;}
-.pricing {
-	text-align: center;
-}
-
-.pricing .plan {
-	margin-top: 20px;
-	font: 12px 'Lucida Sans', 'trebuchet MS', Arial, Helvetica;
-	text-shadow: 0 1px rgba(255,255,255,.8);        
-	background: #fff;      
-	border: 1px solid #ddd;
-	color: #333;
-	padding: 20px;
-	margin-bottom: 5px;
-	border-radius: 8px;
-	-moz-border-radius: 8px;
-	-webkit-border-radius: 8px;
-}
-
-.pricing .plan:hover {
-	-moz-box-shadow: 20px 0 10px -10px rgba(0, 0, 0, .15), -20px 0 10px -10px rgba(0, 0, 0, .15);
-	-webkit-box-shadow: 20px 0 10px -10px rgba(0, 0, 0, .15), -20px 0 10px -10px rgba(0, 0, 0, .15);
-	box-shadow: 20px 0 10px -10px rgba(0, 0, 0, .15), -20px 0 10px -10px rgba(0, 0, 0, .15);    
-}
-
-.pricing h3 {
-	-moz-border-radius: 8px 8px 0 0;
-	-webkit-border-radius: 8px 8px 0 0;
-	border-radius: 8px 8px 0 0;
-	font-size: 20px;
-	font-weight: normal;
-	padding: 20px;
-	margin: -20px -20px 50px -20px;
-	background-color: #eee;
-	background-image: -moz-linear-gradient(#fff,#eee);
-	background-image: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#eee));    
-	background-image: -webkit-linear-gradient(#fff, #eee);
-	background-image: -o-linear-gradient(#fff, #eee);
-	background-image: -ms-linear-gradient(#fff, #eee);
-	background-image: linear-gradient(#fff, #eee);
-}
-
-.pricing .most-popular h3 {
-	background-color: #ddd;
-	background-image: -moz-linear-gradient(#eee,#ddd);
-	background-image: -webkit-gradient(linear, left top, left bottom, from(#eee), to(#ddd));    
-	background-image: -webkit-linear-gradient(#eee, #ddd);
-	background-image: -o-linear-gradient(#eee, #ddd);
-	background-image: -ms-linear-gradient(#eee, #ddd);
-	background-image: linear-gradient(#eee, #ddd);
-	margin-top: -30px;
-	padding-top: 30px;		
-}
-
-.pricing .plan.most-popular {
-	margin-top: 0px;
-	border-width: 4px;
-	padding: 30px 20px;
-	padding-bottom: 20px; 
-	font-size: 14px; 
-	background-color1: #eee;
-	border-radius: 8px;
-	-moz-border-radius: 8px;
-	-webkit-border-radius: 8px;
-
-	-moz-box-shadow: 20px 0 10px -10px rgba(0, 0, 0, .15), -20px 0 10px -10px rgba(0, 0, 0, .15);
-	-webkit-box-shadow: 20px 0 10px -10px rgba(0, 0, 0, .15), -20px 0 10px -10px rgba(0, 0, 0, .15);
-	box-shadow: 20px 0 10px -10px rgba(0, 0, 0, .15), -20px 0 10px -10px rgba(0, 0, 0, .15);    
-}
-
-.pricing .plan.most-popular h3{
-	-moz-border-radius: 4px 4px 0 0;
-	-webkit-border-radius: 4px 4px 0 0;
-	border-radius: 4px 4px 0 0;
-	font-size: 22px;
-}
-
-.pricing .plan.most-popular h3 span{
-	font: bold 30px/100px Georgia, Serif;
-}
-
-.pricing .plan.most-popular ul li{
-	padding: 12px 0;
-}
-
-
-.pricing h3 span {
-	display: block;
-	font: bold 25px/100px Georgia, Serif;
-	color: #777;
-	background: #fff;
-	border: 5px solid #fff;
-	-moz-border-radius: 100px;
-	-webkit-border-radius: 100px;
-	border-radius: 100px;
-	height: 100px;
-	width: 100px;
-	margin: 10px auto -65px;
-	-moz-box-shadow: 0 5px 20px #ddd inset, 0 3px 0 #999 inset;
-	-webkit-box-shadow: 0 5px 20px #ddd inset, 0 3px 0 #999 inset;
-	box-shadow: 0 5px 20px #ddd inset, 0 3px 0 #999 inset;
-}
-
-.ie7 .pricing h3 span{
-	clear: both;
-}
-
-.pricing ul {
-	margin: 20px 0 0 0;
-	padding: 0;
-	list-style: none;
-}
-
-.pricing li {
-	border-top: 1px solid #ddd;
-	padding: 10px 0;
-}
 
 .faq .accordion-group {margin-bottom: 10px;}

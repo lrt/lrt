@@ -8,6 +8,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use JMS\DiExtraBundle\Annotation as DI;
+use JMS\SecurityExtraBundle\Annotation\Secure;
 use Lrt\TeamBundle\Entity\Team;
 use Lrt\TeamBundle\Form\TeamType;
 
@@ -19,6 +21,12 @@ use Lrt\TeamBundle\Form\TeamType;
 class TeamController extends Controller
 {
     /**
+     * @DI\Inject("doctrine.orm.entity_manager")
+     * @var \Doctrine\ORM\EntityManager
+     */
+    private $em;
+
+    /**
      * Lists all Team entities.
      *
      * @Route("/", name="team")
@@ -26,9 +34,7 @@ class TeamController extends Controller
      */
     public function indexAction()
     {
-        $em = $this->getDoctrine()->getManager();
-
-        $entities = $em->getRepository('TeamBundle:Team')->findAll();
+        $entities = $this->em->getRepository('TeamBundle:Team')->findAll();
 
         return array(
             'entities' => $entities,
@@ -43,9 +49,7 @@ class TeamController extends Controller
      */
     public function listAction()
     {
-        $em = $this->getDoctrine()->getManager();
-
-        $entities = $em->getRepository('UserBundle:User')->findAll();
+        $entities = $this->em->getRepository('UserBundle:User')->findAll();
 
         return array(
             'riders' => $entities,
@@ -60,9 +64,7 @@ class TeamController extends Controller
      */
     public function viewRiderAction($id)
     {
-        $em = $this->getDoctrine()->getManager();
-
-        $entity = $em->getRepository('UserBundle:User')->find($id);
+        $entity = $this->em->getRepository('UserBundle:User')->find($id);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Team entity.');
@@ -81,9 +83,7 @@ class TeamController extends Controller
      */
     public function showAction($id)
     {
-        $em = $this->getDoctrine()->getManager();
-
-        $entity = $em->getRepository('TeamBundle:Team')->find($id);
+        $entity = $this->em->getRepository('TeamBundle:Team')->find($id);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Team entity.');
@@ -128,9 +128,8 @@ class TeamController extends Controller
         $form->bind($request);
 
         if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($entity);
-            $em->flush();
+            $this->em->persist($entity);
+            $this->em->flush();
 
             return $this->redirect($this->generateUrl('team_show', array('id' => $entity->getId())));
         }
@@ -149,9 +148,7 @@ class TeamController extends Controller
      */
     public function editAction($id)
     {
-        $em = $this->getDoctrine()->getManager();
-
-        $entity = $em->getRepository('TeamBundle:Team')->find($id);
+        $entity = $this->em->getRepository('TeamBundle:Team')->find($id);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Team entity.');
@@ -176,9 +173,7 @@ class TeamController extends Controller
      */
     public function updateAction(Request $request, $id)
     {
-        $em = $this->getDoctrine()->getManager();
-
-        $entity = $em->getRepository('TeamBundle:Team')->find($id);
+        $entity = $this->em->getRepository('TeamBundle:Team')->find($id);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Team entity.');
@@ -189,8 +184,8 @@ class TeamController extends Controller
         $editForm->bind($request);
 
         if ($editForm->isValid()) {
-            $em->persist($entity);
-            $em->flush();
+            $this->em->persist($entity);
+            $this->em->flush();
 
             return $this->redirect($this->generateUrl('team_edit', array('id' => $id)));
         }
@@ -214,15 +209,14 @@ class TeamController extends Controller
         $form->bind($request);
 
         if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $entity = $em->getRepository('TeamBundle:Team')->find($id);
+            $entity = $this->em->getRepository('TeamBundle:Team')->find($id);
 
             if (!$entity) {
                 throw $this->createNotFoundException('Unable to find Team entity.');
             }
 
-            $em->remove($entity);
-            $em->flush();
+            $this->em->remove($entity);
+            $this->em->flush();
         }
 
         return $this->redirect($this->generateUrl('team'));

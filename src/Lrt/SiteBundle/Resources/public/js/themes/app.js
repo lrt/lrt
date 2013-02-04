@@ -29,9 +29,13 @@ var App = function() {
 			//fix html5 placeholder attribute for ie7 & ie8
 			if (jQuery.browser.msie && jQuery.browser.version.substr(0,1) < 9) { // ie7&ie8
 				jQuery('input[placeholder], textarea[placeholder]').each(function(){          
-			        var input = jQuery(this);        
-			        
-			        jQuery(input).val(input.attr('placeholder'));
+			        var input = jQuery(this);
+
+                    if(jQuery(input).val() == '') {
+                        jQuery(input).val(input.attr('placeholder'));
+                    }
+
+                    jQuery(input).val(input.attr('placeholder'));
 			                
 			        jQuery(input).focus(function(){
 			             if (input.val() == input.attr('placeholder')) {

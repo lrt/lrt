@@ -8,6 +8,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use JMS\DiExtraBundle\Annotation as DI;
+use JMS\SecurityExtraBundle\Annotation\Secure;
 use Lrt\TeamBundle\Entity\PrizeList;
 use Lrt\TeamBundle\Form\PrizeListType;
 
@@ -19,6 +21,12 @@ use Lrt\TeamBundle\Form\PrizeListType;
 class PrizeListController extends Controller
 {
     /**
+     * @DI\Inject("doctrine.orm.entity_manager")
+     * @var \Doctrine\ORM\EntityManager
+     */
+    private $em;
+
+    /**
      * Lists all PrizeList entities.
      *
      * @Route("/", name="prizelist")
@@ -26,9 +34,7 @@ class PrizeListController extends Controller
      */
     public function indexAction()
     {
-        $em = $this->getDoctrine()->getManager();
-
-        $entities = $em->getRepository('TeamBundle:PrizeList')->findAll();
+        $entities = $this->em->getRepository('TeamBundle:PrizeList')->findAll();
 
         return array(
             'entities' => $entities,
@@ -43,9 +49,7 @@ class PrizeListController extends Controller
      */
     public function showAction($id)
     {
-        $em = $this->getDoctrine()->getManager();
-
-        $entity = $em->getRepository('TeamBundle:PrizeList')->find($id);
+        $entity = $this->em->getRepository('TeamBundle:PrizeList')->find($id);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find PrizeList entity.');
@@ -90,9 +94,8 @@ class PrizeListController extends Controller
         $form->bind($request);
 
         if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($entity);
-            $em->flush();
+            $this->em->persist($entity);
+            $this->em->flush();
 
             return $this->redirect($this->generateUrl('prizelist_show', array('id' => $entity->getId())));
         }
@@ -111,9 +114,7 @@ class PrizeListController extends Controller
      */
     public function editAction($id)
     {
-        $em = $this->getDoctrine()->getManager();
-
-        $entity = $em->getRepository('TeamBundle:PrizeList')->find($id);
+        $entity = $this->em->getRepository('TeamBundle:PrizeList')->find($id);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find PrizeList entity.');
@@ -138,9 +139,7 @@ class PrizeListController extends Controller
      */
     public function updateAction(Request $request, $id)
     {
-        $em = $this->getDoctrine()->getManager();
-
-        $entity = $em->getRepository('TeamBundle:PrizeList')->find($id);
+        $entity = $this->em->getRepository('TeamBundle:PrizeList')->find($id);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find PrizeList entity.');
@@ -151,8 +150,8 @@ class PrizeListController extends Controller
         $editForm->bind($request);
 
         if ($editForm->isValid()) {
-            $em->persist($entity);
-            $em->flush();
+            $this->em->persist($entity);
+            $this->em->flush();
 
             return $this->redirect($this->generateUrl('prizelist_edit', array('id' => $id)));
         }
@@ -176,15 +175,14 @@ class PrizeListController extends Controller
         $form->bind($request);
 
         if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $entity = $em->getRepository('TeamBundle:PrizeList')->find($id);
+            $entity = $this->em->getRepository('TeamBundle:PrizeList')->find($id);
 
             if (!$entity) {
                 throw $this->createNotFoundException('Unable to find PrizeList entity.');
             }
 
-            $em->remove($entity);
-            $em->flush();
+            $this->em->remove($entity);
+            $this->em->flush();
         }
 
         return $this->redirect($this->generateUrl('prizelist'));

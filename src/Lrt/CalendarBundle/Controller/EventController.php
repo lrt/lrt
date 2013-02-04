@@ -20,7 +20,10 @@ use Lrt\CalendarBundle\Form\EventType;
  */
 class EventController extends Controller
 {
-    /** @DI\Inject("doctrine.orm.entity_manager") */
+    /**
+     * @DI\Inject("doctrine.orm.entity_manager")
+     * @var \Doctrine\ORM\EntityManager
+     */
     public $em;
 
     /**
@@ -86,9 +89,8 @@ class EventController extends Controller
         $form->bind($request);
 
         if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($event);
-            $em->flush();
+            $this->em->persist($event);
+            $this->em->flush();
 
             return $this->redirect($this->generateUrl('event_show', array('id' => $event->getId())));
         }

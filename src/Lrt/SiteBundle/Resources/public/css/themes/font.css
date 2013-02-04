@@ -21,7 +21,3 @@
     font-weight:normal;
     font-style:normal;
 }
-
-.navbar .nav > li > a:hover, .navbar .nav > li > a {
-    font-family: 'EngschriftDINDRegular',Helvetica,Arial,Verdana,sans-serif !important;
-}

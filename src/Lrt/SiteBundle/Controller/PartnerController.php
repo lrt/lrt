@@ -20,7 +20,10 @@ use Lrt\SiteBundle\Form\PartnerType;
  */
 class PartnerController extends Controller
 {
-    /** @DI\Inject("doctrine.orm.entity_manager") */
+    /**
+     * @DI\Inject("doctrine.orm.entity_manager")
+     * @var \Doctrine\ORM\EntityManager
+     */
     public $em;
 
     /**

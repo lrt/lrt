@@ -23,6 +23,11 @@ class MailService
      */
     public $mailer;
 
+    /**
+     * @DI\Inject("swiftmailer.transport.real")
+     */
+    public $transport;
+
     public function sendMessage($subject, $sender, $receiver, $body)
     {
         if (!is_object($this->mailer)) {
@@ -49,11 +54,13 @@ class MailService
                 return $failures;
             }
 
+            //SPOOL
+            $spool = $this->mailer->getTransport()->getSpool();
+            $spool->flushQueue($this->transport);
+
             return $result;
         }
         return false;
     }
 
 }
-
-?>
