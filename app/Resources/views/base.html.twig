@@ -97,7 +97,7 @@
             </div>
             <div class="span3">
                 <h4>Contact</h4>
-                <span class="grey-light">Email:</span>&nbsp;<a href="mailto:longchamp-roller-team@laposte.net" class="">longchamp-roller-team@laposte.net</a>
+                <span class="grey-light">Par mail :</span>&nbsp;<a href="mailto:longchamp-roller-team@laposte.net" class="">longchamp-roller-team@laposte.net</a>
                 <div class="margin-top-5">
                     <a href="{{ path('show_page', { 'page': 'contact' }) }}">
                         <img  src="{{ asset('bundles/site/images/themes/map.jpg') }}" alt="map" class="img-rounded tooltips" data-original-title="View our location">
@@ -126,7 +126,13 @@
                         <li><a title="Accueil" href="{{ path('home') }}">Accueil</a></li>
                         <li><a title="L'association" href="{{ path('show_page', { 'page': 'about' }) }}">L'association</a></li>
                         <li><a title="Blog" href="{{ path('blog') }}">Blog</a></li>
+                        <li><a href="{{ path('blog') }}">Partenaires</a></li>
                         <li><a title="Contact" href="{{ path('show_page', { 'page': 'contact' }) }}">Contact</a></li>
+                        {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                            <li><a href="{{ path('user_profile_show', { 'id': app.user.id }) }}">Mon compte</a></li>
+                        {%  else %}
+                            <li><a href="{{ path('fos_user_security_login') }}">Mon compte</a></li>
+                        {% endif %}
                     </ul>
                 </div><!-- /quick-menu -->
                 <div id="copyright" class="span6 pull-left">
