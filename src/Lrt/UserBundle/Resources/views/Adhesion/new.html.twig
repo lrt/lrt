@@ -13,7 +13,8 @@
                 <img src="{{ asset('bundles/site/images/themes/slider/image2.png') }}">
             </div>
             <div class="span4 adhesion">
-                <form action="{{ path('adhesion_create') }}" method="post" {{ form_enctype(form) }} class="form-horizontal">
+                <div id="#result"></div>
+                <form id="formAdhesion" action="{{ path('adhesion_create') }}" method="post" {{ form_enctype(form) }} class="form-horizontal">
                     <div class="control-group">
                         {{ form_label(form.lastName) }}
                         <div class="controls">

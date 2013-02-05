@@ -160,7 +160,7 @@
                     </div>
                 </a>
             </li>
-            {% if is_granted("ROLE_SUPERVISEUR") or is_granted("ROLE_ADMIN") %}
+            {% if is_granted("ROLE_ADMIN") %}
                 <li>
                     <a href="{{ path('user') }}">
                         <div>
@@ -169,6 +169,24 @@
                             </div>
                             <div class="title">
                                 Utilisateurs
+                            </div>
+                        </div>
+
+                        <div class="arrow">
+                            <div class="bubble-arrow-border"></div>
+                            <div class="bubble-arrow"></div>
+                        </div>
+                    </a>
+                </li>
+            {% elseif is_granted("ROLE_SUPERVISEUR") %}
+                <li>
+                    <a href="{{ path('adhesion_display') }}">
+                        <div>
+                            <div class="ico">
+                                <img src="{{ asset('bundles/admin/img/ico/ico-user.gif') }}" alt="Membres">
+                            </div>
+                            <div class="title">
+                                Membres
                             </div>
                         </div>
 
@@ -250,7 +268,7 @@
 </div>
 {%  endif %}
 {% block javascripts %}
-    <script src="{{ asset('bundles/site/js/jquery.min.js') }}"></script>
+    <script src="{{ asset('js/jquery-1.8.2.min.js') }}"></script>
     <script src="{{ asset('bundles/admin/js/bootstrap/bootstrap.min.js') }}"></script>
     <!-- Plugins -->
     <script src="{{ asset('bundles/admin/js/plugins/maskedinput/jquery.maskedinput-1.3.min.js') }}"></script>

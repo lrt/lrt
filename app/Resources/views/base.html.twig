@@ -11,9 +11,7 @@
     <meta name="author" content="">
     {% block stylesheets %}
     <link href="{{ asset('bundles/site/css/bootstrap.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('bundles/site/css/themes/style-lrt.css') }}" rel="stylesheet">
-    <link href="{{ asset('bundles/site/css/themes/style.css') }}" rel="stylesheet">
-    <link href="{{ asset('bundles/site/css/themes/style_responsive.css') }}" rel="stylesheet">
+    <link href="{{ asset('bundles/site/css/themes/style.min.css') }}" rel="stylesheet">
     <!--<link href="assets/fancybox/source/jquery.fancybox.css" rel="stylesheet">-->
     {% endblock %}
 </head>
@@ -75,7 +73,7 @@
                 <div class="row-fluid">
                     <div class="span4">
                         <a href="#">
-                            <img alt="" class="media-object img-rounded" src="{{ asset('bundles/site/images/themes/blog/thumb1.jpg') }}">
+                            <img alt="" class="media-object img-rounded" src="{{ asset('bundles/site/images/no_picture.png') }}">
                         </a>
                     </div>
                     <div class="span8">
@@ -86,7 +84,7 @@
                 <div class="row-fluid margin-top-10">
                     <div class="span4">
                         <a class="" href="#">
-                            <img alt="" class="media-object img-rounded" src="{{ asset('bundles/site/images/themes/blog/thumb2.jpg') }}'">
+                            <img alt="" class="media-object img-rounded" src="{{ asset('bundles/site/images/no_picture.png') }}">
                         </a>
                     </div>
                     <div class="span8">
@@ -105,7 +103,7 @@
                 </div>
             </div>
             <div class="span3">
-                {% render "SiteBundle:Newsletter:new" %}
+                {% render "SiteBundle:Newsletter:subscribe" %}
                 <h4>Nous rejoindre</h4>
                 <p>
                     <a href="#" class="iconify"><i class="icon-google-plus"></i></a>
@@ -143,28 +141,13 @@
     </div>
 </div><!-- /footer -->
 {% block javascripts %}
-<script type="text/javascript" src="{{ asset('bundles/site/js/jquery-1.8.2.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/jquery-1.8.2.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('bundles/site/js/bootstrap.min.js') }}"></script>
 <script type="text/javascript" src="http://connect.facebook.net/en_US/all.js#xfbml=1&appId=296297797115446"></script>
 <!--<script src="assets/fancybox/source/jquery.fancybox.pack.js"></script>
 <script src="assets/flexslider2/jquery.flexslider-min.js"></script>-->
 <script src="{{ asset('bundles/site/js/themes/app.js') }}"></script>
-<script type="text/javascript">
-    $("#form_newsletter").submit(function(e){
-        e.preventDefault();
-        var email = $("#newsletter_email").val();
-        $.ajax({
-            type: "POST",
-            url: "{{ path('newsletter_subscribe')}}",
-            data: 'email=' + email,
-            cache: false,
-            success: function(){
-                $('#result').html("<div class='alert alert-success'><button type='button' class='close' data-dismiss='alert'>×</button>Votre email a été enregistrer</div>");
-            }
-        });
-        return false;
-    });
-</script>
+<script src="{{ asset('bundles/site/js/common.js') }}"></script>
 {% endblock %}
 </body>
 </html>

@@ -3,7 +3,8 @@
     Abonnez-vous à notre newsletter et rester à jour des dernières nouvelles !
 </p>
 <div id="result"></div>
-<form id="form_newsletter" action="{{ path('newsletter_subscribe') }}" method="post" {{ form_enctype(form_newsletter) }} class="form-inline">
+<form id="formNewsletter" action="{{ path('newsletter_subscribe') }}" method="post" {{ form_enctype(form_newsletter) }} class="form-inline">
     {{ form_widget(form_newsletter.email) }}
+    {{ form_rest(form_newsletter) }}
     <button type="submit" class="btn btn-inverse">Ok</button>
 </form>

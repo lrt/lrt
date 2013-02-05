@@ -26,39 +26,31 @@ class NewsletterController extends Controller
     public $mailService;
 
     /**
+     * @Route("/subscribe", name="newsletter_subscribe")
      * @Template("SiteBundle:Newsletter:new.html.twig")
+     * @Method({"GET", "POST"})
      */
-    public function newAction()
+    public function subscribeAction(Request $request)
     {
         $newsletter = new Newsletter();
         $form = $this->createForm($this->container->get('form.site.newsletter.type'), $newsletter);
 
+        if($request->isXmlHttpRequest()) {
+            $form->bind($request);
+            if ($form->isValid()) {
+                $findEmail = $this->em->getRepository("SiteBundle:Newsletter")->findOneBy(array('email' => $newsletter->getEmail()));
+                if(!$findEmail) {
+                    $newsletter->setEmail($newsletter->getEmail());
+                    $this->em->persist($newsletter);
+                    $this->em->flush();
+
+                    $this->mailService->sendMessage("Newsletter", "no-reply@longchamp-roller-team.com", "longchamp-roller-team@laposte.net", "Test");
+                }
+            }
+        }
         return array(
             'newsletter' => $newsletter,
             'form_newsletter' => $form->createView(),
         );
-    }
-
-    /**
-     * @Route("/subscribe", name="newsletter_subscribe")
-     * @Method("POST")
-     */
-    public function subscribeAction(Request $request)
-    {
-        if($request->isXmlHttpRequest()) {
-
-            $email = $request->request->get('email');
-            $findEmail = $this->em->getRepository("SiteBundle:Newsletter")->findOneBy(array('email' => $email));
-
-            if(!$findEmail) {
-                $newsletter = new Newsletter();
-                $newsletter->setEmail($email);
-                $this->em->persist($newsletter);
-                $this->em->flush();
-
-                $this->mailService->sendMessage("Newsletter", "no-reply@longchamp-roller-team.com", "longchamp-roller-team@laposte.net", "Test");
-            }
-        }
-        return false;
     }
 }

@@ -32,6 +32,20 @@ class AdhesionController extends Controller
     public $mailService;
 
     /**
+    * Displays a list adhesion
+    *
+    * @Route("/list", name="adhesion_display")
+    * @Secure(roles="ROLE_ADMIN,ROLE_SUPERVISEUR")
+    * @Template()
+    */
+    public function indexAction()
+    {
+        $users = $this->em->getRepository('UserBundle:User')->getAdhesion();
+
+        return array('users' => $users,'nb' => count($users));
+    }
+
+    /**
      * Displays a form to create a new User entity.
      *
      * @Route("/new", name="adhesion_new")
@@ -42,7 +56,7 @@ class AdhesionController extends Controller
         $user = new User();
 
         $userType = $this->container->get('users.form.adhesionType');
-        $form   = $this->createForm($userType, $user);
+        $form = $this->createForm($userType, $user);
 
         return array(
             'entity' => $user,
@@ -60,30 +74,30 @@ class AdhesionController extends Controller
     public function createAction(Request $request)
     {
         $user  = new User();
+        $form = $this->createForm($this->container->get('users.form.adhesionType'),$user);
 
-        $userType = $this->container->get('users.form.adhesionType');
-        $form = $this->createForm($userType,$user);
-        $form->bind($request);
+        if($request->isXmlHttpRequest()) {
+            $form->bind($request);
+            if ($form->isValid()) {
+                $user->setUsername(strtolower($user->getFirstName().''.$user->getLastName()));
 
-        if ($form->isValid()) {
+                $user->setPlainPassword("test");
+                $encoder = new MessageDigestPasswordEncoder('sha512');
+                $password = $encoder->encodePassword('test', $user->getSalt());
+                $user->setPassword($password);
 
-            $user->setUsername(strtolower($user->getFirstName().''.$user->getLastName()));
+                $user->setEnabled(User::IS_NOT_ACTIVE);
+                $user->setIsAdhesion(User::IS_NEW_ADHESION);
+                $user->setDateSubmission(new \DateTime());
 
-            $user->setPlainPassword("test");
-            $encoder = new MessageDigestPasswordEncoder('sha512');
-            $password = $encoder->encodePassword('test', $user->getSalt());
-            $user->setPassword($password);
+                $this->em->persist($user);
+                $this->em->flush();
 
-            $user->setEnabled(0);
-            $user->setDateValidation(new \DateTime());
+                $this->mailService->sendMessage("Nouvelle adhésion", "no-reply@longchamp-roller-team.com", "longchamp-roller-team@laposte.net", "Test");
 
-            $this->em->persist($user);
-            $this->em->flush();
-
-            $this->mailService->sendMessage("Nouvelle adhésion", "no-reply@longchamp-roller-team.com", "longchamp-roller-team@laposte.net", "Test");
-
-            $this->get('session')->setFlash('success', 'Un e-mail vous sera envoyez.');
-            return $this->redirect($this->generateUrl('user_adhesion_show', array('id' => $user->getId())));
+                //$this->get('session')->setFlash('success', 'Un e-mail vous sera envoyez.');
+                //return $this->redirect($this->generateUrl('user_adhesion_show', array('id' => $user->getId())));
+            }
         }
 
         return array(

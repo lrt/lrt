@@ -15,6 +15,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Request;
 use JMS\DiExtraBundle\Annotation as DI;
 use Lrt\SiteBundle\Form\Type\EnquiryType;
 use Lrt\SiteBundle\Entity\Enquiry;
@@ -77,24 +78,15 @@ class DefaultController extends Controller
      * @Template("SiteBundle:Page:contact.html.twig")
      * @Method({"GET", "POST"})
      */
-    public function contactAction()
+    public function contactActon(Request $request)
     {
         $enquiry = new Enquiry();
-        $form = $this->createForm(new EnquiryType(), $enquiry);
-        $request = $this->getRequest();
+        $form = $this->createForm($this->container->get('form.site.contact.type'), $enquiry);
 
-        if ($request->getMethod() == 'POST') {
+        if($request->isXmlHttpRequest()) {
             $form->bind($request);
             if ($form->isValid()) {
-
-                $data = $form->getData();
-
-                var_dump($data);
-
-                //$this->mailService->sendMessage($subject, $sender, "alexandre.seiller92@gmail.com", $body);
-
-                $this->get('session')->setFlash('success', 'Your contact enquiry was successfully sent. Thank you!');
-                return $this->redirect($this->generateUrl('contact'));
+                $this->mailService->sendMessage($enquiry->getSubject(), $enquiry->getEmail(), "alexandre.seiller92@gmail.com", $enquiry->getBody());
             }
         }
 

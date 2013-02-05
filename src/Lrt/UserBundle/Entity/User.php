@@ -24,6 +24,10 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  */
 class User extends BaseUser
 {
+    const IS_NOT_ACTIVE = 0;
+    const IS_ACTIVE = 1;
+    const IS_NEW_ADHESION = 2;
+
     /**
      * @ORM\Id
      * @ORM\Column(type="integer")
@@ -86,9 +90,21 @@ class User extends BaseUser
     /**
      * @var \DateTime $date_validation
      *
-     * @ORM\Column(name="date_validation", type="datetime")
+     * @ORM\Column(name="date_validation", type="datetime", nullable=true)
      */
     protected $dateValidation;
+
+    /**
+     * @var \DateTime $date_submission
+     *
+     * @ORM\Column(name="date_submission", type="datetime")
+     */
+    protected $dateSubmission;
+
+    /**
+     * @ORM\Column(name="is_adhesion", type="integer")
+     */
+    protected $isAdhesion;
 
     /**
      * @var string
@@ -205,6 +221,29 @@ class User extends BaseUser
         $this->dateValidation = $dateValidation;
 
         return $this;
+    }
+
+    /**
+     * Set date_submission
+     *
+     * @param \DateTime $dateSubmission
+     * @return User
+     */
+    public function setDateSubmission($dateSubmission)
+    {
+        $this->dateSubmission = $dateSubmission;
+
+        return $this;
+    }
+
+    /**
+     * Get date_submission
+     *
+     * @return \DateTime
+     */
+    public function getDateSubmission()
+    {
+        return $this->dateSubmission;
     }
 
     /**
@@ -370,6 +409,26 @@ class User extends BaseUser
     public function getRequest()
     {
         return $this->request;
+    }
+
+    /**
+     * Set is_adhesion
+     *
+     * @param integer $isAdhesion
+     */
+    public function setIsAdhesion($isAdhesion)
+    {
+        $this->isAdhesion = $isAdhesion;
+    }
+
+    /**
+     * Get is_adhesion
+     *
+     * @return integer
+     */
+    public function getIsAdhesion()
+    {
+        return $this->isAdhesion;
     }
 
     /**

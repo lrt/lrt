@@ -10,9 +10,25 @@
 namespace Lrt\UserBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
+use Lrt\UserBundle\Entity\User;
 
 class UserRepository extends EntityRepository
 {
+
+    /**
+     * Liste les nouvelles adhésion
+     * @return array
+     */
+    public function getAdhesion()
+    {
+        $sql = 'SELECT u FROM UserBundle:User u
+                WHERE u.isAdhesion = :isAdhesion';
+
+        $query = $this->getEntityManager()->createQuery($sql)
+            ->setParameter('isAdhesion', User::IS_NEW_ADHESION);
+
+        return $query->getResult();
+    }
 
     /**
      * Filtre sur la liste des utilisateurs
