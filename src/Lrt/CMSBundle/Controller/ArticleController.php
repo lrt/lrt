@@ -35,6 +35,11 @@ class ArticleController extends Controller
      */
     private $em;
 
+    /**
+     * @DI\Inject("knp_paginator")
+     */
+    public $paginator;
+
     /** @DI\Inject("security.context") */
     private $sc;
 
@@ -55,7 +60,14 @@ class ArticleController extends Controller
 
             $articles = $this->em->getRepository('CMSBundle:Article')->filter($data['title'], $data['isPublic'], $data['category']);
 
-            return array('entities' => $articles,'form' => $form->createView(), 'nb' => count($articles));
+            $page = $request->query->get('page', 1);
+            $pagination = $this->paginator->paginate(
+                $articles,$page,$this->container->getParameter('knp_limit_per_page')
+            );
+
+            $arrayPagination = compact('pagination');
+
+            return array('entities' => $arrayPagination['pagination'],'form' => $form->createView(), 'nb' => count($articles));
 
         } else {
             return $this->redirect($this->generateUrl('article'));

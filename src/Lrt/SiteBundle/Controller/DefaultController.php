@@ -35,6 +35,11 @@ class DefaultController extends Controller
     public $mailService;
 
     /**
+     * @DI\Inject("knp_paginator")
+     */
+    public $paginator;
+
+    /**
      * @Route("/", name="home")
      * @Template()
      */
@@ -49,11 +54,17 @@ class DefaultController extends Controller
      * @Route("/blog", name="blog")
      * @Template("SiteBundle:Default:blog.html.twig")
      */
-    public function blogAction()
+    public function blogAction(Request $request)
     {
         $articles = $this->em->getRepository('CMSBundle:Article')->findAll();
 
-        return array('articles' => $articles);
+        $page = $request->query->get('page', 1);
+        $pagination = $this->paginator->paginate(
+            $articles,$page,$this->container->getParameter('knp_limit_per_page')
+        );
+        $arrayPagination = compact('pagination');
+
+        return array('articles' => $arrayPagination['pagination']);
     }
 
     /**
