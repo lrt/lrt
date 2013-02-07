@@ -95,6 +95,13 @@ class User extends BaseUser
     protected $dateValidation;
 
     /**
+     * @var \DateTime $date_last_revival
+     *
+     * @ORM\Column(name="date_last_revival", type="datetime", nullable=true)
+     */
+    protected $dateLastRevival;
+
+    /**
      * @var \DateTime $date_submission
      *
      * @ORM\Column(name="date_submission", type="datetime")
@@ -244,6 +251,29 @@ class User extends BaseUser
     public function getDateSubmission()
     {
         return $this->dateSubmission;
+    }
+
+    /**
+     * Set $date_last_revival
+     *
+     * @param \DateTime $dateLastRevival
+     * @return User
+     */
+    public function setDateLastRevival($dateLastRevival)
+    {
+        $this->dateLastRevival = $dateLastRevival;
+
+        return $this;
+    }
+
+    /**
+     * Get $date_last_revival
+     *
+     * @return \DateTime
+     */
+    public function getDateLastRevival()
+    {
+        return $this->dateLastRevival;
     }
 
     /**

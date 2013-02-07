@@ -35,7 +35,6 @@
                                 <li class="active"><a href="{{ path('home') }}">Accueil</a></li>
                                 <li><a href="{{ path('show_page', { 'page': 'about' }) }}">L'association</a></li>
                                 <li><a href="{{ path('blog') }}">Blog</a></li>
-                                <li><a href="{{ path('blog') }}">Partenaires</a></li>
                                 <li><a href="{{ path('contact') }}">Contact</a></li>
                                 {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
                                     <li><a href="{{ path('user_profile_show', { 'id': app.user.id }) }}">Mon compte</a></li>

@@ -34,9 +34,9 @@ class AdhesionController extends Controller
     /**
     * Displays a list adhesion
     *
-    * @Route("/list", name="adhesion_display")
+    * @Route("/", name="adhesion_display")
     * @Secure(roles="ROLE_ADMIN,ROLE_SUPERVISEUR")
-    * @Template()
+    * @Template("UserBundle:Adhesion:index.html.twig")
     */
     public function indexAction()
     {
@@ -54,7 +54,6 @@ class AdhesionController extends Controller
     public function newAction()
     {
         $user = new User();
-
         $userType = $this->container->get('users.form.adhesionType');
         $form = $this->createForm($userType, $user);
 
@@ -107,7 +106,85 @@ class AdhesionController extends Controller
     }
 
     /**
-     * Finds and displays a User entity.
+     * @Route("/{id}/validate", name="user_adhesion_validate", requirements={"id" = "\d+"})
+     * @ParamConverter("user", class="UserBundle:User", options={"id" = "id"})
+     * @Secure(roles="ROLE_SUPERVISEUR")
+     * @Method("GET")
+     * @Template("UserBundle:Adhesion:index.html.twig")
+     */
+    public function validateAction(User $user)
+    {
+        if($result = $this->em->getRepository('UserBundle:User')->findOneBy(array('isAdhesion' => User::IS_NEW_ADHESION))) {
+
+            $user->setDateValidation(new \DateTime());
+            $user->setEnabled(User::IS_ACTIVE);
+
+            $this->get('fos_user.user_manager')->updateUser($user, false);
+            $this->em->flush();
+            $this->mailService->sendMessage("Validation de votre adhésion", "no-reply@longchamp-roller-team.com", $user->getEmail(), "Votre demande d'adhésion est validé.");
+
+            $this->get('session')->setFlash('success', 'La demande de l\'adhérent a été validé.');
+            return $this->redirect($this->generateUrl('adhesion_display'));
+        }
+        return $this->redirect($this->generateUrl('adhesion_display'));
+    }
+
+    /**
+     * @Route("/{id}/reject", name="user_adhesion_reject", requirements={"id" = "\d+"})
+     * @ParamConverter("user", class="UserBundle:User", options={"id" = "id"})
+     * @Secure(roles="ROLE_SUPERVISEUR")
+     * @Method("GET")
+     * @Template("UserBundle:Adhesion:index.html.twig")
+     */
+    public function rejectAction(User $user)
+    {
+        if($result = $this->em->getRepository('UserBundle:User')->findOneBy(array('isAdhesion' => User::IS_NEW_ADHESION))) {
+
+            //UPDATE USER ??
+
+            $this->mailService->sendMessage("Validation de votre adhésion", "no-reply@longchamp-roller-team.com", $user->getEmail(), "Votre demande d'adhésion a été rejeté.");
+
+            $this->get('session')->setFlash('success', 'La demande de l\'adhérent a été rejeté.');
+            return $this->redirect($this->generateUrl('adhesion_display'));
+        }
+        return $this->redirect($this->generateUrl('adhesion_display'));
+    }
+
+    /**
+     * RELANCER UN ADHERENT
+     *
+     * @Route("/{id}/revival", name="user_adhesion_validate_revival", requirements={"id" = "\d+"})
+     * @ParamConverter("user", class="UserBundle:User", options={"id" = "id"})
+     * @Secure(roles="ROLE_SUPERVISEUR")
+     * @Method("GET")
+     * @Template("UserBundle:Adhesion:index.html.twig")
+     */
+    public function revivalAction(User $user)
+    {
+        if($result = $this->em->getRepository('UserBundle:User')->findOneBy(array('isAdhesion' => User::IS_NEW_ADHESION))) {
+
+            $currentDate = new \DateTime();
+            $dateSubmission = $user->getDateSubmission();
+            $interval = $dateSubmission->diff($currentDate, true)->days;
+
+            if($interval > 0) {
+                $user->setDateLastRevival($currentDate);
+                $this->get('fos_user.user_manager')->updateUser($user, false);
+                $this->em->flush();
+
+                $this->mailService->sendMessage("Valider votre adhésion", "no-reply@longchamp-roller-team.com", $user->getEmail(), "Il manque des informations pour valider votre adhésion.");
+
+                $this->get('session')->setFlash('success', 'Votre message a été envoyé.');
+                return $this->redirect($this->generateUrl('adhesion_display'));
+            }
+            $this->get('session')->setFlash('error', 'Votre demande de relance doit être supérieur à  la date de la demande.');
+            return $this->redirect($this->generateUrl('adhesion_display'));
+        }
+        return $this->redirect($this->generateUrl('adhesion_display'));
+    }
+
+    /**
+     * Show User entity.
      *
      * @Route("/{id}/show", name="user_adhesion_show", requirements={"id" = "\d+"})
      * @ParamConverter("user", class="UserBundle:User", options={"id" = "id"})

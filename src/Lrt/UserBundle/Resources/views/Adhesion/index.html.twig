@@ -25,12 +25,10 @@
     <table class="table table-striped tListeUsers">
         <thead>
         <tr>
-            <th>Identifiant</th>
             <th>Prénom</th>
             <th>Nom</th>
             <th>Email</th>
             <th>Demandé le</th>
-            <th>Validé le</th>
             <th>Statut</th>
             <th></th>
         </tr>
@@ -38,21 +36,15 @@
         <tbody>
         {% for u in users %}
             <tr>
-                <td><a href="{{ path('user_edit', { 'id': u.id }) }}">{{ u.username }}</a></td>
                 <td>{{ u.firstName }} </td>
                 <td>{{ u.lastName }}</td>
-                <td>{{ u.email|replace({'@': '[@]'}) }}</td>
+                <td>{{ u.email }}</td>
                 <td>{{ u.dateSubmission|date('d/m/Y') }}</td>
                 <td>
-                    {%  if u.dateValidation is not null %}
-                        {{ u.dateValidation|date('d/m/Y') }}
-                    {% endif %}
-                </td>
-                <td>
-                    {% if u.isEnabled == 1 %}
-                        <span class="label label-success">Activé</span>
-                    {% else %}
-                        <span class="label label-important">Non activé</span>
+                    {% if u.dateValidation is not null and u.isEnabled == 1 %}
+                        <span class="label label-success">Validé le {{ u.dateValidation|date('d/m/Y') }}</span>
+                    {% elseif u.dateLastRevival is not null and u.isEnabled == 0 %}
+                        <span class="label label-important">Relancé le {{ u.dateValidation|date('d/m/Y') }}</span>
                     {% endif %}
                 </td>
                 <td>
@@ -62,10 +54,9 @@
                             <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu pull-right">
-                            <li><a href="{{ path('user_edit', { 'id': u.id }) }}"><i class="icon-edit"></i> Modifier</a></li>
                             {% if u.isEnabled == 0 %}
-                                <li><a href="{{ path('activate_user', { 'id': u.id }) }}"><i class="icon-ok"></i> Activer</a></li>
-                                <li><a href="{{ path('user_edit', { 'id': u.id }) }}"><i class="icon-repeat"></i> Relancer</a></li>
+                                <li><a href="{{ path('user_adhesion_validate', { 'id': u.id }) }}"><i class="icon-ok"></i> Valider</a></li>
+                                <li><a href="{{ path('user_adhesion_validate_revival', { 'id': u.id }) }}"><i class="icon-repeat"></i> Relancer</a></li>
                             {% endif %}
                         </ul>
                     </div>

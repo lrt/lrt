@@ -186,7 +186,7 @@ class UserController extends Controller
      */
     public function enabledAction(User $user)
     {
-        $user->setEnabled(1);
+        $user->setEnabled(User::IS_ACTIVE);
 
         $this->get('fos_user.user_manager')->updateUser($user, false);
 
@@ -205,7 +205,7 @@ class UserController extends Controller
      */
     public function enabledOffAction(User $user)
     {
-        $user->setEnabled(0);
+        $user->setEnabled(User::IS_NOT_ACTIVE);
 
         $this->get('fos_user.user_manager')->updateUser($user, false);
 
