@@ -7,7 +7,7 @@
  * @link     http://longchamp-roller-team.com
  */
 
-namespace Lrt\VideoBundle\Controller;
+namespace Lrt\SiteBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -18,9 +18,9 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Response;
 use JMS\DiExtraBundle\Annotation as DI;
 use JMS\SecurityExtraBundle\Annotation\Secure;
-use Lrt\VideoBundle\Entity\Video;
-use Lrt\VideoBundle\Form\Handler\VideoHandler;
-use Lrt\VideoBundle\Form\Type\VideoType;
+use Lrt\SiteBundle\Entity\Video;
+use Lrt\SiteBundle\Form\Handler\VideoHandler;
+use Lrt\SiteBundle\Form\Type\VideoType;
 
 /**
  * Video controller.

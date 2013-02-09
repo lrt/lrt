@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="activity")
  * @ORM\InheritanceType("SINGLE_TABLE")
  * @ORM\DiscriminatorColumn(name="type", type="string")
- * @ORM\DiscriminatorMap({"video" = "Lrt\VideoBundle\Entity\Video",
+ * @ORM\DiscriminatorMap({"video" = "Lrt\SiteBundle\Entity\Video",
  *                        "event" = "Lrt\CalendarBundle\Entity\Event",
  *                        "article" = "Lrt\CMSBundle\Entity\Article",
  *                        "partner" = "Lrt\SiteBundle\Entity\Partner"

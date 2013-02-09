@@ -1,6 +1,6 @@
 <?php
 
-namespace Lrt\VideoBundle\Form\Handler;
+namespace Lrt\SiteBundle\Form\Handler;
 
 use Symfony\Component\Form\Form;
 use Symfony\Component\HttpFoundation\Request;

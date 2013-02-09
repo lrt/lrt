@@ -1,6 +1,6 @@
 <?php
 
-namespace Lrt\VideoBundle\Repository;
+namespace Lrt\SiteBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
 use Lrt\UserBundle\Entity\User;

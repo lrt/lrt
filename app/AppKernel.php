@@ -29,7 +29,6 @@ class AppKernel extends Kernel
             new Lrt\NotificationBundle\NotificationBundle(),
             new Lrt\CMSBundle\CMSBundle(),
             new Lrt\AdminBundle\AdminBundle(),
-            new Lrt\VideoBundle\VideoBundle(),
             new Lrt\TeamBundle\TeamBundle(),
             new Lrt\CalendarBundle\CalendarBundle(),
         );

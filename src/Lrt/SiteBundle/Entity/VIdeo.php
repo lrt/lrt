@@ -7,13 +7,13 @@
  * @link     http://longchamp-roller-team.com
  */
 
-namespace Lrt\VideoBundle\Entity;
+namespace Lrt\SiteBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Lrt\AdminBundle\Entity\EventRequest;
 
 /**
- * @ORM\Entity(repositoryClass="Lrt\VideoBundle\Repository\VideoRepository")
+ * @ORM\Entity(repositoryClass="Lrt\SiteBundle\Repository\VideoRepository")
  */
 class Video extends EventRequest
 {

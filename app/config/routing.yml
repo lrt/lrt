@@ -8,11 +8,6 @@ team:
     type:     annotation
     prefix:   /
 
-video:
-    resource: "@VideoBundle/Controller/"
-    type:     annotation
-    prefix:   /
-
 admin:
     resource: "@AdminBundle/Controller/"
     type:     annotation
