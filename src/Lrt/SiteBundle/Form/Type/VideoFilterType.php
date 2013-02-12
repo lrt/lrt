@@ -7,7 +7,7 @@
  * @link     http://longchamp-roller-team.com
  */
 
-namespace Lrt\VideoBundle\Form\Type;
+namespace Lrt\SiteBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;

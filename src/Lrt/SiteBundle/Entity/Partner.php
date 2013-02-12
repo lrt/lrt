@@ -4,13 +4,13 @@ namespace Lrt\SiteBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
-use Lrt\AdminBundle\Entity\EventRequest;
+use Lrt\SiteBundle\Entity\Activity;
 
 /**
  * @ORM\Entity
  * @ORM\Table(name="partner")
  */
-class Partner extends EventRequest
+class Partner extends Activity
 {
     /**
      * @var string $name

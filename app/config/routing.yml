@@ -1,18 +1,3 @@
-calendar:
-    resource: "@CalendarBundle/Controller/"
-    type:     annotation
-    prefix:   /
-
-team:
-    resource: "@TeamBundle/Controller/"
-    type:     annotation
-    prefix:   /
-
-admin:
-    resource: "@AdminBundle/Controller/"
-    type:     annotation
-    prefix:   /
-
 cms:
     resource: "@CMSBundle/Controller/"
     type:     annotation

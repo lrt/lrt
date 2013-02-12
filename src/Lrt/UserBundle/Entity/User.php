@@ -141,7 +141,7 @@ class User extends BaseUser
     protected $groups;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Lrt\CalendarBundle\Entity\Event", inversedBy="users")
+     * @ORM\ManyToMany(targetEntity="Lrt\SiteBundle\Entity\Event", inversedBy="users")
      * @ORM\JoinTable(name="user_event",
      *      joinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id")},
      *      inverseJoinColumns={@ORM\JoinColumn(name="event_id", referencedColumnName="id")}
@@ -150,15 +150,9 @@ class User extends BaseUser
     protected $events;
 
     /**
-     * @ORM\OneToMany(targetEntity="Lrt\AdminBundle\Entity\EventRequest", mappedBy="user")
+     * @ORM\OneToMany(targetEntity="Lrt\SiteBundle\Entity\Activity", mappedBy="user")
      */
     protected $request;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="\Lrt\TeamBundle\Entity\Team")
-     * @ORM\JoinColumn(name="team_id", nullable=true)
-     */
-    protected $team;
 
     public function __construct()
     {
@@ -464,10 +458,10 @@ class User extends BaseUser
     /**
      * Add request
      *
-     * @param \Lrt\AdminBundle\Entity\EventRequest $request
+     * @param \Lrt\SiteBundle\Entity\Activity $request
      * @return User
      */
-    public function addRequest(\Lrt\AdminBundle\Entity\EventRequest $request)
+    public function addRequest(\Lrt\SiteBundle\Entity\Activity $request)
     {
         $this->request[] = $request;
 
@@ -477,9 +471,9 @@ class User extends BaseUser
     /**
      * Remove request
      *
-     * @param \Lrt\AdminBundle\Entity\EventRequest $request
+     * @param \Lrt\SiteBundle\Entity\Activity $request
      */
-    public function removeRequest(\Lrt\AdminBundle\Entity\EventRequest $request)
+    public function removeRequest(\Lrt\SiteBundle\Entity\Activity $request)
     {
         $this->request->removeElement($request);
     }
@@ -490,29 +484,6 @@ class User extends BaseUser
         } else {
             return 0;
         }
-    }
-
-    /**
-     * Set team
-     *
-     * @param \Lrt\TeamBundle\Entity\Team $team
-     * @return User
-     */
-    public function setTeam(\Lrt\TeamBundle\Entity\Team $team = null)
-    {
-        $this->team = $team;
-    
-        return $this;
-    }
-
-    /**
-     * Get team
-     *
-     * @return \Lrt\TeamBundle\Entity\Team
-     */
-    public function getTeam()
-    {
-        return $this->team;
     }
 
     public function getUserRoles()
@@ -535,10 +506,10 @@ class User extends BaseUser
     /**
      * Add events
      *
-     * @param \Lrt\CalendarBundle\Entity\Event $events
-     * @return \Lrt\CalendarBundle\Entity\Event
+     * @param \Lrt\SiteBundle\Entity\Event $events
+     * @return \Lrt\SiteBundle\Entity\Event
      */
-    public function addEvent(\Lrt\CalendarBundle\Entity\Event $events)
+    public function addEvent(\Lrt\SiteBundle\Entity\Event $events)
     {
         $this->events[] = $events;
 
@@ -548,9 +519,9 @@ class User extends BaseUser
     /**
      * Remove events
      *
-     * @param \Lrt\CalendarBundle\Entity\Event $events
+     * @param \Lrt\SiteBundle\Entity\Event $events
      */
-    public function removeEvent(\Lrt\CalendarBundle\Entity\Event $events)
+    public function removeEvent(\Lrt\SiteBundle\Entity\Event $events)
     {
         $this->events->removeElement($events);
     }

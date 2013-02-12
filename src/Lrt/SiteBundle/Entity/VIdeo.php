@@ -10,12 +10,12 @@
 namespace Lrt\SiteBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Lrt\AdminBundle\Entity\EventRequest;
+use Lrt\SiteBundle\Entity\Activity;
 
 /**
  * @ORM\Entity(repositoryClass="Lrt\SiteBundle\Repository\VideoRepository")
  */
-class Video extends EventRequest
+class Video extends Activity
 {
     /**
      * @ORM\Column(type="text")

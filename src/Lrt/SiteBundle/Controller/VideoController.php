@@ -52,7 +52,7 @@ class VideoController extends Controller {
 
         if($form->isValid()) {
 
-            $videos = $this->em->getRepository('VideoBundle:Video')->filter($data['title'], $data['status'], $data['isPublic']);
+            $videos = $this->em->getRepository('SiteBundle:Video')->filter($data['title'], $data['status'], $data['isPublic']);
 
             return array('entities' => $videos,'form' => $form->createView(),'nb' => count($videos));
 
@@ -65,7 +65,7 @@ class VideoController extends Controller {
      * Finds and displays a Video entity.
      *
      * @Route("/{id}/show", name="video_show")
-     * @ParamConverter("video", class="VideoBundle:Video", options={"id" = "id"})
+     * @ParamConverter("video", class="SiteBundle:Video", options={"id" = "id"})
      * @Template()
      */
     public function showAction(Video $video) {
@@ -98,7 +98,7 @@ class VideoController extends Controller {
      * @Route("/create", name="video_create")
      * @Secure(roles="ROLE_ADMIN")
      * @Method("POST")
-     * @Template("VideoBundle:Video:new.html.twig")
+     * @Template("SiteBundle:Video:new.html.twig")
      */
     public function createAction(Request $request) {
 
@@ -129,7 +129,7 @@ class VideoController extends Controller {
      * Displays a form to edit an existing Video entity.
      *
      * @Route("/{id}/edit", name="video_edit")
-     * @ParamConverter("video", class="VideoBundle:Video", options={"id" = "id"})
+     * @ParamConverter("video", class="SiteBundle:Video", options={"id" = "id"})
      * @Secure(roles="ROLE_ADMIN")
      * @Template()
      */
@@ -154,10 +154,10 @@ class VideoController extends Controller {
      * Edits an existing Video entity.
      *
      * @Route("/{id}/update", name="video_update")
-     * @ParamConverter("video", class="VideoBundle:Video", options={"id" = "id"})
+     * @ParamConverter("video", class="SiteBundle:Video", options={"id" = "id"})
      * @Secure(roles="ROLE_ADMIN")
      * @Method("POST")
-     * @Template("VideoBundle:Video:edit.html.twig")
+     * @Template("SiteBundle:Video:edit.html.twig")
      */
     public function updateAction(Request $request, Video $video) {
 
@@ -188,7 +188,7 @@ class VideoController extends Controller {
      * Deletes a Video entity.
      *
      * @Route("/{id}/delete", name="video_delete")
-     * @ParamConverter("video", class="VideoBundle:Video", options={"id" = "id"})
+     * @ParamConverter("video", class="SiteBundle:Video", options={"id" = "id"})
      * @Secure(roles="ROLE_ADMIN")
      * @Method("POST")
      */
