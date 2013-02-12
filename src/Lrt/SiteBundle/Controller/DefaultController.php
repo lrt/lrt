@@ -51,12 +51,6 @@ class DefaultController extends Controller
      */
     public function indexAction()
     {
-        $user = $this->sc->getToken()->getUser();
-
-        if(is_object($user)) {
-            return $this->redirect($this->generateUrl('user_profile_show', array('id' => $user->getId())));
-        }
-
         $articles = $this->em->getRepository('CMSBundle:Article')->getLatestArticles(5);
 
         return array('articles' => $articles);
