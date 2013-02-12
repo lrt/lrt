@@ -6,7 +6,7 @@ use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Lrt\CMSBundle\Entity\Article;
-use Lrt\AdminBundle\Entity\EventRequest;
+use Lrt\SiteBundle\Entity\Activity;
 
 class LoadArticleData extends AbstractFixture implements OrderedFixtureInterface
 {
@@ -19,15 +19,15 @@ class LoadArticleData extends AbstractFixture implements OrderedFixtureInterface
 
         $category = $this->getReference('category1');
 
-        $this->newArticle($category,'Article 1',$user,EventRequest::IS_VALIDATED);
-        $this->newArticle($category,'Article 2',$user,EventRequest::IS_VALIDATED);
-        $this->newArticle($category,'Article 3',$user,EventRequest::IS_VALIDATED);
-        $this->newArticle($category,'Article 4',$user,EventRequest::IS_VALIDATED);
-        $this->newArticle($category,'Article 5',$user,EventRequest::IS_VALIDATED);
-        $this->newArticle($category,'Article 6',$user,EventRequest::IS_VALIDATED);
-        $this->newArticle($category,'Article 7',$user,EventRequest::IS_VALIDATED);
-        $this->newArticle($category,'Article 8',$user,EventRequest::IS_VALIDATED);
-        $this->newArticle($category,'Article 9',$user2,EventRequest::IS_NOT_VALIDATED);
+        $this->newArticle($category,'Article 1',$user,Activity::IS_VALIDATED);
+        $this->newArticle($category,'Article 2',$user,Activity::IS_VALIDATED);
+        $this->newArticle($category,'Article 3',$user,Activity::IS_VALIDATED);
+        $this->newArticle($category,'Article 4',$user,Activity::IS_VALIDATED);
+        $this->newArticle($category,'Article 5',$user,Activity::IS_VALIDATED);
+        $this->newArticle($category,'Article 6',$user,Activity::IS_VALIDATED);
+        $this->newArticle($category,'Article 7',$user,Activity::IS_VALIDATED);
+        $this->newArticle($category,'Article 8',$user,Activity::IS_VALIDATED);
+        $this->newArticle($category,'Article 9',$user2,Activity::IS_NOT_VALIDATED);
     }
 
     protected function newArticle($category,$title,$user,$valid)

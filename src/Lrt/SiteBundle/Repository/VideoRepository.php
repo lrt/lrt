@@ -4,7 +4,7 @@ namespace Lrt\SiteBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
 use Lrt\UserBundle\Entity\User;
-use Lrt\AdminBundle\Entity\EventRequest;
+use Lrt\AdminBundle\Entity\Activity;
 
 class VideoRepository extends EntityRepository
 {
@@ -36,7 +36,7 @@ class VideoRepository extends EntityRepository
                 AND v.isValid = :valid';
 
         $query = $this->getEntityManager()->createQuery($sql)
-            ->setParameter('valid', EventRequest::IS_NOT_VALIDATED);
+            ->setParameter('valid', Activity::IS_NOT_VALIDATED);
 
         return $query->getResult();
     }

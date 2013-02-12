@@ -71,7 +71,7 @@ class Activity
      * Set date_submission
      *
      * @param \DateTime $dateSubmission
-     * @return EventRequest
+     * @return Activity
      */
     public function setDateSubmission($dateSubmission)
     {

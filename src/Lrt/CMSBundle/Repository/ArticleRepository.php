@@ -6,7 +6,7 @@ use Doctrine\ORM\EntityRepository;
 use JMS\DiExtraBundle\Annotation as DI;
 use Lrt\UserBundle\Entity\User;
 use Lrt\CMSBundle\Entity\Article;
-use Lrt\AdminBundle\Entity\EventRequest;
+use Lrt\SiteBundle\Entity\Activity;
 
 class ArticleRepository extends EntityRepository
 {    
@@ -77,7 +77,7 @@ class ArticleRepository extends EntityRepository
                 AND a.isValid = :valid';
 
         $query = $this->getEntityManager()->createQuery($sql)
-            ->setParameter('valid', EventRequest::IS_NOT_VALIDATED);
+            ->setParameter('valid', Activity::IS_NOT_VALIDATED);
 
         return $query->getResult();
     }
