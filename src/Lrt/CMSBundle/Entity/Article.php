@@ -12,13 +12,13 @@ namespace Lrt\CMSBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Lrt\CMSBundle\Entity\Category;
-use Lrt\AdminBundle\Entity\EventRequest;
+use Lrt\SiteBundle\Entity\Activity;
 
 /**
  * @ORM\Entity(repositoryClass="Lrt\CMSBundle\Repository\ArticleRepository")
  * @ORM\HasLifecycleCallbacks()
  */
-class Article extends EventRequest
+class Article extends Activity
 {
     const DRAFTS = 2;
     const IMMEDIATE = 3;
