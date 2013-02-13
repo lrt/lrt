@@ -64,6 +64,17 @@ class AdhesionController extends Controller
     }
 
     /**
+     * Displays a form to create a new User entity.
+     *
+     * @Route("/confirm", name="adhesion_confirm")
+     * @Template("UserBundle:Adhesion:confirm.html.twig")
+     */
+    public function confirmAction()
+    {
+
+    }
+
+    /**
      * Creates a new Adhesion.
      *
      * @Route("/create", name="adhesion_create")
