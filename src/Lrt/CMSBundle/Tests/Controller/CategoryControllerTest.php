@@ -122,6 +122,6 @@ class CategoryControllerTest extends LrtWebTestCase
         $categoryRepository = $this->em->getRepository('CMSBundle:Category');
         $category = $categoryRepository->findOneBy(array('name' => 'Nouvelle catégorie'));
 
-        $crawler = $this->client->request('POST', '/category/'.$category->getId().'/delete');
+        //$crawler = $this->client->request('POST', '/category/'.$category->getId().'/delete');
     }
 }
