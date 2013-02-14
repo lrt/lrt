@@ -23,7 +23,6 @@ class LoadArticleCategoryData extends AbstractFixture implements OrderedFixtureI
         $this->createCategory('Actualités','category1');
         $this->createCategory('Association','category2');
         $this->createCategory('Compétition','category3');
-        $this->createCategory('Autres','category4');
     }
 
     protected  function createCategory($name,$reference)
