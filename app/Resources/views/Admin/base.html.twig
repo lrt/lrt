@@ -10,6 +10,7 @@
         <link rel="stylesheet" href="{{ asset('bundles/site/css/bootstrap-responsive.min.css') }}">
         <link rel="stylesheet" href="{{ asset('bundles/site/css/admin/main.css') }}">
         <link rel="stylesheet" href="{{ asset('bundles/site/css/admin/red.css') }}">
+        <link rel="stylesheet" href="{{ asset('bundles/site/css/admin/fullcalendar.css') }}">
         <link rel="stylesheet" href="{{ asset('bundles/site/css/admin/uniform.css') }}">
     {% endblock %}
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
@@ -20,7 +21,7 @@
 </head>
 <body>
     <div id="header">
-        <h1><a href="./dashboard.html">Unicorn Admin</a></h1>
+        <h1><a href="{{ path('dashboard') }}">{{ sitename }}</a></h1>
     </div>
     <div id="search">
         <input type="text" placeholder="Search here..."><button type="submit" class="tip-right" data-original-title="Search"><i class="icon-search icon-white"></i></button>
@@ -37,39 +38,33 @@
                 </ul>
             </li>
             <li class="btn btn-inverse"><a title="" href="#"><i class="icon icon-cog"></i> <span class="text">Settings</span></a></li>
-            <li class="btn btn-inverse"><a title="" href="login.html"><i class="icon icon-share-alt"></i> <span class="text">Logout</span></a></li>
+            <li class="btn btn-inverse"><a title="" href="{{ path('fos_user_security_logout') }}"><i class="icon icon-share-alt"></i> <span class="text">Déconnexion</span></a></li>
         </ul>
     </div>
     <div id="sidebar">
         <a href="#" class="visible-phone"><i class="icon icon-file"></i> Gallery</a>
         <ul style="display: block;">
-            <li><a href="index.html"><i class="icon icon-home"></i> <span>Dashboard</span></a></li>
+            <li><a href="{{ path('dashboard') }}"><i class="icon icon-home"></i> <span>Dashboard</span></a></li>
             <li class="submenu">
-                <a href="#"><i class="icon icon-th-list"></i> <span>Form elements</span> <span class="label">3</span></a>
+                <a href="#"><i class="icon icon-file"></i> <span>Contenu</span></a>
                 <ul>
-                    <li><a href="form-common.html">Common elements</a></li>
-                    <li><a href="form-validation.html">Validation</a></li>
-                    <li><a href="form-wizard.html">Wizard</a></li>
+                    <li><a href="{{ path('article') }}">Articles</a></li>
+                    <li><a href="">Pages</a></li>
+                    <li><a href="{{ path('category') }}">Catégories</a></li>
                 </ul>
             </li>
-            <li><a href="buttons.html"><i class="icon icon-tint"></i> <span>Buttons &amp; icons</span></a></li>
-            <li><a href="interface.html"><i class="icon icon-pencil"></i> <span>Interface elements</span></a></li>
-            <li><a href="tables.html"><i class="icon icon-th"></i> <span>Tables</span></a></li>
-            <li><a href="grid.html"><i class="icon icon-th-list"></i> <span>Grid Layout</span></a></li>
-            <li class="active submenu open">
-                <a href="#"><i class="icon icon-file"></i> <span>Sample pages</span> <span class="label">4</span></a>
+            <li><a href="{{ path('video') }}"><i class="icon icon-play-circle"></i> <span>Vidéos</span></a></li>
+            <li><a href="{{ path('event') }}"><i class="icon icon-calendar"></i> <span>Evènements</span></a></li>
+            <li>
+                <a href=""><i class="icon icon-signal"></i> <span>Stats</span></a>
+            </li>
+            <li class="submenu">
+                <a href=""><i class="icon icon-inbox"></i> <span>Association</span></a>
                 <ul>
-                    <li><a href="invoice.html">Invoice</a></li>
-                    <li><a href="chat.html">Support chat</a></li>
-                    <li><a href="calendar.html">Calendar</a></li>
-                    <li class="active"><a href="gallery.html">Gallery</a></li>
+                    <li><a href="{{ path('adhesion_display') }}">Membres</a></li>
+                    <li><a href="{{ path('partner') }}">Partenaires</a></li>
+                    <li><a href="">Partage de fichiers</a></li>
                 </ul>
-            </li>
-            <li>
-                <a href="charts.html"><i class="icon icon-signal"></i> <span>Charts &amp; graphs</span></a>
-            </li>
-            <li>
-                <a href="widgets.html"><i class="icon icon-inbox"></i> <span>Widgets</span></a>
             </li>
         </ul>
     </div>
@@ -89,9 +84,9 @@
             <a href="#" class="current">Gallery</a>
         </div>
         <div class="container-fluid">
+            {% block body %}{% endblock %}
             <div class="row-fluid">
                 <div class="span12">
-                    {% block body %}{% endblock %}
                 </div>
             </div>
             <div class="row-fluid">
@@ -104,6 +99,7 @@
     <ul class="typeahead dropdown-menu"></ul>
 {% block javascripts %}
     <script type="text/javascript" src="{{ asset('js/jquery-1.8.2.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/site/js/admin/jquery.ui.custom.js') }}"></script>
     <script type="text/javascript" src="{{ asset('bundles/site/js/bootstrap.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('bundles/site/js/admin/jquery.uniform.js') }}"></script>
     <script type="text/javascript" src="{{ asset('bundles/site/js/admin/main.js') }}"></script>

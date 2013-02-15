@@ -4,6 +4,9 @@ namespace Lrt\SiteBundle\Service;
 
 use JMS\DiExtraBundle\Annotation as DI;
 
+/**
+ * @DI\Service("service.event")
+ */
 class EventService
 {
     /**
@@ -17,8 +20,22 @@ class EventService
      */
     public function getEvents()
     {
-        $events = $this->em->getRepository('CMSBundle:Article')->getLatestArticles(5);
+        $events = $this->em->getRepository('SiteBundle:Event')->findAll();
 
-        return json_encode($events);
+        $data_source = array();
+
+        foreach($events as $event)
+        {
+            array_push($data_source, array(
+                'id'    => $event->getId(),
+                'title' => $event->getTitle(),
+                'start' => $event->getDateDeb()->format('Y-m-d'),
+                'end'   => $event->getDateEnd()->format('Y-m-d'),
+            ));
+        }
+
+        $data = json_encode($data_source);
+
+        return $data;
     }
 }

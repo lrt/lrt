@@ -28,7 +28,7 @@ class VideoType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Lrt\VideoBundle\Entity\Video'
+            'data_class' => 'Lrt\SiteBundle\Entity\Video'
         ));
     }
 

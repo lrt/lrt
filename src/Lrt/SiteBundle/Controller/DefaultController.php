@@ -57,6 +57,15 @@ class DefaultController extends Controller
     }
 
     /**
+    * @Route("/dashboard", name="dashboard")
+    * @Template("SiteBundle:Admin:dashboard.html.twig")
+    */
+    public function dashboardAction()
+    {
+        return array();
+    }
+
+    /**
      * @Route("/blog", name="blog")
      * @Template("SiteBundle:Default:blog.html.twig")
      */

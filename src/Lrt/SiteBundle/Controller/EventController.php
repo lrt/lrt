@@ -27,6 +27,12 @@ class EventController extends Controller
     public $em;
 
     /**
+     * @DI\Inject("service.event")
+     * @var \Lrt\SiteBundle\Service\EventService
+     */
+    public $eventService;
+
+    /**
      * Lists all Event entities.
      *
      * @Route("/", name="event")
@@ -34,7 +40,7 @@ class EventController extends Controller
      */
     public function indexAction()
     {
-        $events = $this->em->getRepository('SiteBundle:Event')->findAll();
+        $events = $this->eventService->getEvents();
 
         return array(
             'entities' => $events,

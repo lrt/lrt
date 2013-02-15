@@ -15,7 +15,7 @@ class VideoRepository extends EntityRepository
     */
     public function getVideosByUser(User $user)
     {
-        $sql = 'SELECT v FROM VideoBundle:Video v
+        $sql = 'SELECT v FROM SiteBundle:Video v
                 JOIN UserBundle:User u WITH v.user = u.id
                 WHERE v.user = :user ';
         
@@ -31,7 +31,7 @@ class VideoRepository extends EntityRepository
      */
     public function getVideosNotValidated()
     {
-        $sql = 'SELECT v FROM VideoBundle:Video v
+        $sql = 'SELECT v FROM SiteBundle:Video v
                 JOIN UserBundle:User u WITH v.user = u.id
                 AND v.isValid = :valid';
 
@@ -46,7 +46,7 @@ class VideoRepository extends EntityRepository
      */
     public function filter($title = '',$status = '',$publish = '')
     {
-        $queryStr = 'SELECT v FROM VideoBundle:Video v
+        $queryStr = 'SELECT v FROM SiteBundle:Video v
                      WHERE 1 = 1 ';
 
         if ($title != null && $title != '') {

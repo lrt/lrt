@@ -1,4 +1,8 @@
-{% extends '::admin.html.twig' %}
+{% extends ':Admin:base.html.twig' %}
+
+{% block title_page %}
+    Articles
+{% endblock %}
 
 {% block breadcrumb %}
 <li>
@@ -140,7 +144,7 @@
         {% endfor %}
     </tbody>
 </table>
-<div class="navigation">
+<div class="navigation alternate">
     {{ entities.render()|raw }}
 </div>
 {% endblock %}

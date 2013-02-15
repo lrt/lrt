@@ -13,17 +13,17 @@ use Lrt\SiteBundle\Entity\Activity;
 class Event extends Activity
 {
     /**
-     * @ORM\Column(name="date_deb", type="date", nullable=true)
+     * @ORM\Column(name="date_deb", type="datetime")
      */
     protected $dateDeb;
 
     /**
-     * @ORM\Column(name="date_end", type="date", nullable=true)
+     * @ORM\Column(name="date_end", type="datetime")
      */
     protected $dateEnd;
 
     /**
-     * @ORM\Column(type="string", nullable=true)
+     * @ORM\Column(type="string")
      * @Assert\NotBlank()
      */
     protected $place;
@@ -43,7 +43,7 @@ class Event extends Activity
     /**
      * Set dateDeb
      *
-     * @param date $dateDeb
+     * @param \DateTime $dateDeb
      */
     public function setDateDeb($dateDeb)
     {
@@ -53,7 +53,7 @@ class Event extends Activity
     /**
      * Get dateDeb
      *
-     * @return date
+     * @return \DateTime
      */
     public function getDateDeb()
     {
@@ -63,7 +63,7 @@ class Event extends Activity
     /**
      * Set dateEnd
      *
-     * @param date $dateEnd
+     * @param \DateTime $dateEnd
      */
     public function setDateEnd($dateEnd)
     {
@@ -73,7 +73,7 @@ class Event extends Activity
     /**
      * Get dateEnd
      *
-     * @return date
+     * @return \DateTime
      */
     public function getDateEnd()
     {

@@ -9,11 +9,10 @@
 
 namespace Lrt\NotificationBundle\Service;
 
-use JMS\DiExtraBundle\Annotation\Service;
 use JMS\DiExtraBundle\Annotation as DI;
 
 /**
- * @Service("lrt.service.mail")
+ * @DI\Service("lrt.service.mail")
  */
 class MailService
 {

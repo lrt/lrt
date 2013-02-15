@@ -33,7 +33,7 @@ class EventType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Lrt\CalendarBundle\Entity\Event'
+            'data_class' => 'Lrt\SiteBundle\Entity\Event'
         ));
     }
 
