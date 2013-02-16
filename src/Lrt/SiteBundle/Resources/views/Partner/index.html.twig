@@ -29,49 +29,53 @@
 {% endblock %}
 
 {% block body %}
-<table class="table table-bordered table-striped tListePartners">
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Description</th>
-            <th>Site internet</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-    {% for entity in entities %}
-        <tr>
-            <td>{{ entity.name }}</td>
-            <td>{{ entity.description }}</td>
-            <td>{{ entity.website }}</td>
-            <td>
-                <div class="btn-group">
-                    <a class="btn btn-small dropdown-toggle" data-toggle="dropdown" href="#">
-                        Action
-                        <span class="caret"></span>
-                    </a>
-                    <ul class="dropdown-menu pull-right">
-                        <li>
-                            <a data-toggle="modal" rel="{{ entity.name }}" href="{{ path('partner_show', { 'id': entity.id }) }}" class="popin">
-                                <i class="icon-zoom-in"></i>
-                                Voir
+<div class="row-fluid">
+    <div class="span12">
+        <table class="table table-bordered table-striped tListePartners">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Site internet</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for entity in entities %}
+                <tr>
+                    <td>{{ entity.name }}</td>
+                    <td>{{ entity.description }}</td>
+                    <td>{{ entity.website }}</td>
+                    <td>
+                        <div class="btn-group">
+                            <a class="btn btn-small dropdown-toggle" data-toggle="dropdown" href="#">
+                                Action
+                                <span class="caret"></span>
                             </a>
-                        </li>
-                        <li>
-                            <a href="{{ path('partner_edit', { 'id': entity.id }) }}">
-                                <i class="icon-edit"></i>
-                                Modifier
-                            </a>
-                            <a href="{{ path('partner_delete', { 'id': entity.id }) }}">
-                                <i class="icon-trash"></i>
-                                Corbeille
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </td>
-        </tr>
-    {% endfor %}
-    </tbody>
-</table>
+                            <ul class="dropdown-menu pull-right">
+                                <li>
+                                    <a data-toggle="modal" rel="{{ entity.name }}" href="{{ path('partner_show', { 'id': entity.id }) }}" class="popin">
+                                        <i class="icon-zoom-in"></i>
+                                        Voir
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{{ path('partner_edit', { 'id': entity.id }) }}">
+                                        <i class="icon-edit"></i>
+                                        Modifier
+                                    </a>
+                                    <a href="{{ path('partner_delete', { 'id': entity.id }) }}">
+                                        <i class="icon-trash"></i>
+                                        Corbeille
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
 {% endblock %}

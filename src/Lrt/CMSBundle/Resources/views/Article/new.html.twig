@@ -1,4 +1,4 @@
-{% extends 'AdminBundle:Themes:box.html.twig' %}
+{% extends ':Admin:base.html.twig' %}
 
 {% block breadcrumb %}
 <li class="active">Ajouter un article</li>
@@ -8,17 +8,29 @@
    Ajouter un article
 {% endblock %}
 
-{% block box_content %}
-    {% form_theme form 'AdminBundle:Themes:form.html.twig' %}
-    <form action="{{ path('article_create') }}" method="post" {{ form_enctype(form) }} class="form-horizontal">
-        {{ form_widget(form) }}
-        <div class="form-actions">
-            <button type="submit" class="btn btn-primary"><i class="icon-check icon-white"></i> Valider</button>
-            <a href="{{ path('article') }}" class="btn">
-                <i class="icon-list"></i> Retour à la liste
-            </a>
+{% block body %}
+<div class="row-fluid">
+    <div class="span12">
+        <div class="widget-box">
+            <div class="widget-title">
+                <span class="icon">
+                    <i class="icon-align-justify"></i>
+                </span>
+                <h5>Ajouter un article</h5>
+            </div>
+            {% form_theme form ':Themes:form.html.twig' %}
+            <form action="{{ path('article_create') }}" method="post" {{ form_enctype(form) }} class="form-horizontal">
+                {{ form_widget(form) }}
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary"><i class="icon-check icon-white"></i> Valider</button>
+                    <a href="{{ path('article') }}" class="btn">
+                        <i class="icon-list"></i> Retour à la liste
+                    </a>
+                </div>
+            </form>
         </div>
-    </form>
+    </div>
+</div>
 {% endblock %}
 
 {% block javascripts %}

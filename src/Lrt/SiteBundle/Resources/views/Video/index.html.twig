@@ -1,5 +1,9 @@
 {% extends ':Admin:base.html.twig' %}
 
+{% block title_page %}
+    Vidéo
+{% endblock %}
+
 {% block breadcrumb %}
 <li>
     <a href="{{ path('video') }}">Vidéos</a> <span class="divider">/</span>
@@ -7,100 +11,64 @@
 <li class="active">Liste</li>
 {% endblock %}
 
-{% block menu %}
-    <li class="nav-header">Video</li>
-    <li><a href="{{ path('video_new') }}">Ajouter</a></li>
-    <li><a href="{{ path('video') }}">Liste des vidéos</a></li>
-    <li><a href="#">Vidéo(s) en attente</a></li>
-    <li><a href="#">Corbeille</a></li>
-{% endblock %}
-
 {% block body %}
-<div class="box">
-    <h4 class="box-header round-top">
-        <i class="icon-play-circle"></i>
-        Liste des vidéos ({% if nb is defined %}{{ nb }}{% endif %})
-        <a class="box-btn" title="close">
-            <i class="icon-remove"></i>
-        </a>
-        <a class="box-btn" title="toggle">
-            <i class="icon-minus"></i>
-        </a>
-        <a class="box-btn" title="#box-config-modal" data-toggle="modal" title="config">
-            <i class="icon-cog"></i>
-        </a>
-    </h4>
-    <div class="box-container-toggle">
-        <div class="box-content">
-            <div id="filtres">
-                <div id="titreFiltres">
-                    <h4>filtres</h4>
-                </div>
-                <div id="contentFiltres">
-                    <form action="{{ path('video') }}" method="get" class="form-inline">
-                        {{ form_widget(form.title,{ 'attr': {'placeholder': 'titre'} }) }} <br><br>
-                        {{ form_widget(form.status) }} {{ form_widget(form.isPublic) }} <br><br>
-                        {{ form_rest(form) }}
-                        <a href="{{ path('video') }}" class="btn btn-small raz-filter" data-href="{{ path('video') }}">
-                            <i class="icon-refresh"></i>
-                            Réinitialiser
-                        </a>
-                        <button type="submit" class="btn btn-small btn-primary"><i class="icon-filter icon-white"></i>Filtrer</button>
-                    </form>
-                </div>
-            </div>
-            <hr>
-            <table class="table table-striped tListeVideos">
-                <thead>
-                    <tr>
-                        <th></th>
-                        <th>Vidéo</th>
-                        <th>Statut</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                {% for entity in entities %}
-                    <tr>
-                        <td><img width="100" height="55" src="{{ asset('bundles/site/images/no_picture.png') }}" alt=""></td>
-                        <td>
-                            <div class="space_half">
-                                <i class="icon-film"></i>
-                                <a class="title_preview" title="Modifier" href="{{ path('video_edit', { 'id': entity.id }) }}">{{ entity.id }} - <b>{{ entity.title }}</b></a>
-                            </div>
-                            {{ entity.description | truncate(50) }}
-                            ( posté par  <a title="" href="#">{{ entity.user }}</a> )
-                        </td>
-                        <td>
-                            {% if entity.isPublished == 1 %}
-                                Publié
-                            {% else %}
-                                Non publié
-                            {% endif %}
-                        </td>
-                        <td>
-                            <a rel="{{ entity.title }}" href="{{ path('video_show', { 'id': entity.id }) }}" class="btn btn-small btn-success popin">
-                                <i class="icon-zoom-in icon-white"></i>
-                                Voir
-                            </a>
-                            <a href="{{ path('video_edit', { 'id': entity.id }) }}" class="btn btn-small btn-info">
-                                <i class="icon-edit icon-white"></i>
-                                Modifier
-                            </a>
-                            <a href="{{ path('video_delete', { 'id': entity.id }) }}" class="btn btn-small btn-danger">
-                                <i class="icon-edit icon-white"></i>
-                                Supprimer
-                            </a>
-                        </td>
-                    </tr>
-                {% endfor %}
-                </tbody>
-            </table>
+<div class="row-fluid">
+    <div class="span12">
+        <div class="hero-unit" style="padding:10px;background: #FFF;">
+            <form action="{{ path('video') }}" method="get" class="form-inline">
+                {{ form_widget(form.title,{ 'attr': {'placeholder': 'titre'} }) }}
+                {{ form_widget(form.status) }} {{ form_widget(form.isPublic) }}
+                {{ form_rest(form) }}
+                <a href="{{ path('video') }}" class="btn btn-small raz-filter" data-href="{{ path('video') }}">
+                    <i class="icon-refresh"></i>
+                    Réinitialiser
+                </a>
+                <button type="submit" class="btn btn-small btn-primary"><i class="icon-filter icon-white"></i>Filtrer</button>
+            </form>
         </div>
     </div>
 </div>
-
-<a href="{{ path('video_new') }}" class="btn btn-small btn-primary">
-    Ajouter une vidéo
-</a>
+<div class="row-fluid">
+    <div class="span12">
+        <div class="widget-box">
+            <div class="widget-title">
+                <span class="icon">
+                    <i class="icon-play-circle"></i>
+                </span>
+                <h5>Videos</h5>
+                <div class="buttons">
+                    <a id="add-event" data-toggle="modal" href="#modal-add-event" class="btn btn-success btn-mini"><i class="icon-plus icon-white"></i> Ajouter une vidéo</a>
+                    <div class="modal hide" id="modal-add-event">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">×</button>
+                            <h3>Ajouter une vidéo</h3>
+                        </div>
+                        <div class="modal-body">
+                            {% render "SiteBundle:Video:new" %}
+                        </div>
+                        <div class="modal-footer">
+                            <a href="#" class="btn" data-dismiss="modal">Cancel</a>
+                            <a href="{{ path('video_new') }}" id="add-event-submit" class="btn btn-primary">Add event</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="widget-content">
+                <ul class="thumbnails">
+                    {% for entity in entities %}
+                    <li class="span2">
+                        <a href="#" class="thumbnail">
+                            <img src="http://placehold.it/140x140" alt="">
+                        </a>
+                        <div class="actions">
+                            <a title="" href="{{ path('video_edit', { 'id': entity.id }) }}"><i class="icon-pencil icon-white"></i></a>
+                            <a title="" href="#"><i class="icon-remove icon-white"></i></a>
+                        </div>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}

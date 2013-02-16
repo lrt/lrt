@@ -1,37 +1,12 @@
-<table class="record_properties">
-    <tbody>
-        <tr>
-            <th>Id</th>
-            <td>{{ entity.id }}</td>
-        </tr>
-        <tr>
-            <th>Title</th>
-            <td>{{ entity.title }}</td>
-        </tr>
-        <tr>
-            <th>Description</th>
-            <td>{{ entity.description }}</td>
-        </tr>
-        <tr>
-            <th>Ispublished</th>
-            <td>{{ entity.isPublished }}</td>
-        </tr>
-        <tr>
-            <th>Ishighlighted</th>
-            <td>{{ entity.isHighlighted }}</td>
-        </tr>
-    </tbody>
-</table>
-
-<ul class="record_actions">
-    <li>
-        <a href="{{ path('video') }}">
-            Retour à la liste
-        </a>
-    </li>
-    <li>
-        <a href="{{ path('video_edit', { 'id': entity.id }) }}">
-            Modifier
-        </a>
-    </li>
-</ul>
+<video width="1000" height="368" poster="http://dev.grtgaz.com/uploads/tx_obvideogrtgaz/vid_rando_challenge_01.png" controls="controls">
+    <source src="http://www.html5rocks.com/en/tutorials/video/basics/Chrome_ImF.webm" type='video/webm; codecs="vp8, vorbis"' />
+    <source src="http://www.html5rocks.com/en/tutorials/video/basics/Chrome_ImF.ogv" type='video/ogg; codecs="theora, vorbis"' />
+    <object type="application/x-shockwave-flash" width="1000" height="368" data="http://www.youtube.com/v/HVMoJqg41Bw">
+        <param name="movie" value="http://www.youtube.com/v/HVMoJqg41Bw" />
+        <param name="wmode" value="transparent" />
+        <!--[if lte IE 6 ]>
+        <embed src="http://www.youtube.com/v/HVMoJqg41Bw" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="1000" height="368"></embed>
+        <![endif]-->
+        <p>Vous n'avez pas de navigateur moderne, ni flash d'installé sur Internet Explorer... suivez les liens ci-dessous pour télécharger les vidéos.</p>
+    </object>
+</video>

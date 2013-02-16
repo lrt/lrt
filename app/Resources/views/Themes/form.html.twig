@@ -9,3 +9,14 @@
     </div>
 {%  endspaceless %}
 {% endblock field_row %}
+
+{% block choice_widget_expanded %}
+    {% spaceless %}
+        {% for child in form %}
+            <li class="checkBox">
+                {{ form_label(child) }}
+                {{ form_widget(child) }}
+            </li>
+        {% endfor %}
+    {% endspaceless %}
+{% endblock choice_widget_expanded %}

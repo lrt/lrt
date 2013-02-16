@@ -42,9 +42,7 @@ class EventController extends Controller
     {
         $events = $this->eventService->getEvents();
 
-        return array(
-            'entities' => $events,
-        );
+        return array();
     }
 
     /**

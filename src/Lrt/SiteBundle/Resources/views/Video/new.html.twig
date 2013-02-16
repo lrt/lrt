@@ -1,35 +1,10 @@
-{% extends 'AdminBundle:Themes:box.html.twig' %}
-
-{% block breadcrumb %}
-<li>
-    <a href="{{ path('video') }}">Vidéos</a> <span class="divider">/</span>
-</li>
-<li class="active">Ajouter une vidéo</li>
-{% endblock %}
-
-{% block box_title %}
-    Ajouter une vidéo
-{% endblock %}
-
-{% block box_content %}
-    {% form_theme form 'AdminBundle:Themes:form.html.twig' %}
-    <form action="{{ path('video_create') }}" method="post" {{ form_enctype(form) }} class="form-horizontal">
-        {{ form_widget(form) }}
-        <div class="form-actions">
-            <button type="submit" class="btn btn-primary"><i class="icon-check icon-white"></i> Valider</button>
-            <a href="{{ path('video') }}" class="btn">
-                <i class="icon-list"></i> Retour à la liste
-            </a>
-        </div>
-    </form>
-{% endblock %}
-
-{% block javascripts %}
-    {{ parent() }}
-    <script type="text/javascript" src="{{ asset('bundles/cms/js/plugins/ckeditor/ckeditor.js') }}"></script>
-    <script type="text/javascript">
-        //<![CDATA[
-        var editor = CKEDITOR.replace( 'lrt_videobundle_videotype[description]' );
-        //]]>
-    </script>
-{% endblock %}
+{% form_theme form ':Themes:form.html.twig' %}
+<form action="{{ path('video_create') }}" method="post" {{ form_enctype(form) }} class="form-horizontal">
+    {{ form_widget(form) }}
+    <div class="form-actions">
+        <button type="submit" class="btn btn-primary"><i class="icon-check icon-white"></i> Valider</button>
+        <a href="{{ path('video') }}" class="btn">
+            <i class="icon-list"></i> Retour à la liste
+        </a>
+    </div>
+</form>

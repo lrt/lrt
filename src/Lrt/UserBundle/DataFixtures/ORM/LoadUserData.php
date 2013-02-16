@@ -50,5 +50,3 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface {
 
 }
 
-?>
-

@@ -16,6 +16,11 @@ class EventService
     public $em;
 
     /**
+     * @DI\Inject("kernel")
+     */
+    public $kernel;
+
+    /**
      * Retourne l'ensemble des évènements sous forme JSON
      */
     public function getEvents()
@@ -36,6 +41,10 @@ class EventService
 
         $data = json_encode($data_source);
 
-        return $data;
+        $fp = fopen($this->kernel->getRootDir().'/../web/data/events/'.'data.json', 'w+');
+        fputs($fp, $data);
+        fclose($fp);
+
+        return true;
     }
 }

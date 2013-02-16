@@ -32,6 +32,13 @@ class Video extends Activity
      */
     protected $isHighlighted;
 
+    /**
+     * @var string $description
+     *
+     * @ORM\Column(name="path_video", type="string", length=125, nullable=true)
+     */
+    protected $path;
+
     public function __construct()
     {
         $this->setIsPublished(0);
@@ -98,5 +105,25 @@ class Video extends Activity
     public function getIsHighlighted()
     {
         return $this->isHighlighted;
+    }
+
+    /**
+     * Set path
+     *
+     * @param integer $path
+     */
+    public function setPath($path)
+    {
+        $this->path = $path;
+    }
+
+    /**
+     * Get $path
+     *
+     * @return string
+     */
+    public function getPath()
+    {
+        return $this->path;
     }
 }

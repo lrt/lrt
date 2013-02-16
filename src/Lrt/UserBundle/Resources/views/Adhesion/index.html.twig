@@ -26,49 +26,55 @@
 {% endblock %}
 
 {% block body %}
-    <table class="table table-striped tListeUsers">
-        <thead>
-        <tr>
-            <th>Prénom</th>
-            <th>Nom</th>
-            <th>Email</th>
-            <th>Demandé le</th>
-            <th>Statut</th>
-            <th></th>
-        </tr>
-        </thead>
-        <tbody>
-        {% for u in users %}
+<div class="row-fluid">
+    <div class="span12">
+        <table class="table table-bordered table-striped tListeUsers">
+            <thead>
             <tr>
-                <td>{{ u.firstName }} </td>
-                <td>{{ u.lastName }}</td>
-                <td>{{ u.email }}</td>
-                <td>{{ u.dateSubmission|date('d/m/Y') }}</td>
-                <td>
-                    {% if u.dateValidation is not null and u.isEnabled == 1 %}
-                        <span class="label label-success">Validé le {{ u.dateValidation|date('d/m/Y') }}</span>
-                    {% elseif u.dateLastRevival is not null and u.isEnabled == 0 %}
-                        <span class="label label-important">Relancé le {{ u.dateValidation|date('d/m/Y') }}</span>
-                    {% endif %}
-                </td>
-                <td>
-                    <div class="btn-group">
-                        <a class="btn btn-small dropdown-toggle" data-toggle="dropdown" href="#">
-                            Action
-                            <span class="caret"></span>
-                        </a>
-                        <ul class="dropdown-menu pull-right">
-                            {% if u.isEnabled == 0 %}
-                                <li><a href="{{ path('user_adhesion_validate', { 'id': u.id }) }}"><i class="icon-ok"></i> Valider</a></li>
-                                <li><a href="{{ path('user_adhesion_validate_revival', { 'id': u.id }) }}"><i class="icon-repeat"></i> Relancer</a></li>
-                            {% endif %}
-                        </ul>
-                    </div>
-                </td>
+                <th>Prénom</th>
+                <th>Nom</th>
+                <th>Email</th>
+                <th>Demandé le</th>
+                <th>Statut</th>
+                <th></th>
             </tr>
-        {%  else %}
-            <tr><td>Aucune nouvelle adhésion trouvée.</td></tr>
-        {% endfor %}
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+            {% for u in users %}
+                <tr>
+                    <td>{{ u.firstName }} </td>
+                    <td>{{ u.lastName }}</td>
+                    <td>{{ u.email }}</td>
+                    <td>{{ u.dateSubmission|date('d/m/Y') }}</td>
+                    <td>
+                        {% if u.dateValidation is not null and u.isEnabled == 1 %}
+                            <span class="label label-success">Validé le {{ u.dateValidation|date('d/m/Y') }}</span>
+                        {% elseif u.dateLastRevival is not null and u.isEnabled == 0 %}
+                            <span class="label label-important">Relancé le {{ u.dateValidation|date('d/m/Y') }}</span>
+                        {% else %}
+                            <span class="label label-important">Non validé</span>
+                        {% endif %}
+                    </td>
+                    <td>
+                        <div class="btn-group">
+                            <a class="btn btn-small dropdown-toggle" data-toggle="dropdown" href="#">
+                                Action
+                                <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu pull-right">
+                                {% if u.isEnabled == 0 %}
+                                    <li><a href="{{ path('user_adhesion_validate', { 'id': u.id }) }}"><i class="icon-ok"></i> Valider</a></li>
+                                    <li><a href="{{ path('user_adhesion_validate_revival', { 'id': u.id }) }}"><i class="icon-repeat"></i> Relancer</a></li>
+                                {% endif %}
+                            </ul>
+                        </div>
+                    </td>
+                </tr>
+            {%  else %}
+                <tr>Aucune nouvelle adhésion trouvée.</tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
 {% endblock %}

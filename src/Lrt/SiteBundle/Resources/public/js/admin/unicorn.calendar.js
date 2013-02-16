@@ -33,11 +33,14 @@ unicorn = {
 				center: 'title',
 				right: 'year,month,basicWeek'
 			},
+            firstDay: 1,
 			editable: true,
 			droppable: true, // this allows things to be dropped onto the calendar !!!
-            events: "../../bundles/site/data/events.json",
+            events: "../../data/events/data.json",
             eventClick: function(calEvent, jsEvent, view) {
-                alert('Event: ' + calEvent.title);
+                //alert('Event: ' + calEvent.title);
+                var title = calEvent.title;
+                unicorn.show_event(title);
             },
 			drop: function(date, allDay) { // this function is called when something is dropped
 				
@@ -77,7 +80,21 @@ unicorn = {
 			this.show_error();
 		}
 	},
-	
+
+    show_event: function(title){
+        /*if($('#event-name').val() != '') {
+            var event_name = $('#event-name').val();
+            $('#external-events .panel-content').append('<div class="external-event ui-draggable label label-inverse">'+event_name+'</div>');
+            this.external_events();
+            $('#modal-add-event').modal('hide');
+            $('#event-name').val('');
+        } else {
+            this.show_error();
+        }*/
+        $('#modal-show-event').modal('show');
+        $('#modal-show-event .modal-header').append(title);
+    },
+
 	// === Initialize the draggable external events === //
 	external_events: function(){
 		/* initialize the external events
