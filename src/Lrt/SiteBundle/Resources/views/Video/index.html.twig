@@ -62,7 +62,7 @@
                         </a>
                         <div class="actions">
                             <a title="" href="{{ path('video_edit', { 'id': entity.id }) }}"><i class="icon-pencil icon-white"></i></a>
-                            <a title="" href="#"><i class="icon-remove icon-white"></i></a>
+                            <a title="" href="{{ path('video_show', { 'id': entity.id }) }}"><i class="icon-search icon-white"></i></a>
                         </div>
                     </li>
                     {% endfor %}

@@ -1,0 +1,29 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+<div id="body">
+    <div class="container">
+        <h3>Vidéos</h3>
+        <div class="row-fluid">
+            <div class="span12">
+                {% for video in videos %}
+                    <h3>{{ video.title }}</h3>
+                    <video width="640" height="380" poster="http://dev.grtgaz.com/uploads/tx_obvideogrtgaz/vid_rando_challenge_01.png" controls="controls">
+                        <source src="{{ video.path }}" type="video/mp4">
+                        <source src="http://www.html5rocks.com/en/tutorials/video/basics/Chrome_ImF.webm" type='video/webm; codecs="vp8, vorbis"' />
+                        <source src="http://www.html5rocks.com/en/tutorials/video/basics/Chrome_ImF.ogv" type='video/ogg; codecs="theora, vorbis"' />
+                        <object type="application/x-shockwave-flash" width="640" height="380" data="{{ video.path }}">
+                            <param name="movie" value="{{ video.path }}" />
+                            <param name="wmode" value="transparent" />
+                            <!--[if lte IE 6 ]>
+                            <embed src="http://www.youtube.com/v/HVMoJqg41Bw" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="1000" height="368"></embed>
+                            <![endif]-->
+                            <p>Vous n'avez pas de navigateur moderne, ni flash d'installé sur Internet Explorer... suivez les liens ci-dessous pour télécharger les vidéos.</p>
+                        </object>
+                    </video>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
