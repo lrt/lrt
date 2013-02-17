@@ -10,6 +10,10 @@
     <li class="active"><a href="{{ path('event') }}">Liste des évènements</a></li>
 {% endblock %}
 
+{% block breadcrumb %}
+    <a class="current" href="{{ path('event') }}">Evénements</a>
+{% endblock %}
+
 {% block page_header %}
     <div class="row-fluid" style="border-bottom: 1px solid #eeeeee;margin-bottom: 18px;">
         <div class="span8 m-botton-group">

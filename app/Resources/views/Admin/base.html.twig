@@ -79,9 +79,8 @@
             </div>
         </div>
         <div id="breadcrumb">
-            <a href="#" class="tip-bottom" data-original-title="Go to Home"><i class="icon-home"></i> Home</a>
-            <a href="#">Sample pages</a>
-            <a href="#" class="current">Gallery</a>
+            <a href="{{ path('dashboard') }}" class="tip-bottom" data-original-title="Page d'accueil"><i class="icon-home"></i> Accueil</a>
+            {% block breadcrumb %}{% endblock %}
         </div>
         <div class="container-fluid">
             {% for message in app.session.flashbag.get('error') %}

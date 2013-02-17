@@ -5,10 +5,7 @@
 {% endblock %}
 
 {% block breadcrumb %}
-<li>
-    <a href="{{ path('video') }}">Vidéos</a> <span class="divider">/</span>
-</li>
-<li class="active">Liste</li>
+<a title="Vidéos" class="current" href="{{ path('video') }}">Vidéos</a>
 {% endblock %}
 
 {% block body %}
@@ -58,11 +55,11 @@
                     {% for entity in entities %}
                     <li class="span2">
                         <a href="#" class="thumbnail">
-                            <img src="http://placehold.it/140x140" alt="">
+                            <img width="140" height="140" src="{{ asset('bundles/site/images/video/poster.jpg') }}" alt="{{ entity.title }}">
                         </a>
                         <div class="actions">
-                            <a title="" href="{{ path('video_edit', { 'id': entity.id }) }}"><i class="icon-pencil icon-white"></i></a>
-                            <a title="" href="{{ path('video_show', { 'id': entity.id }) }}"><i class="icon-search icon-white"></i></a>
+                            <a title="{{ entity.title }}" href="{{ path('video_edit', { 'id': entity.id }) }}"><i class="icon-pencil icon-white"></i></a>
+                            <a title="{{ entity.title }}" href="{{ path('video_show', { 'id': entity.id }) }}"><i class="icon-search icon-white"></i></a>
                         </div>
                     </li>
                     {% endfor %}

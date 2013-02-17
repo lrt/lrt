@@ -5,10 +5,7 @@
 {% endblock %}
 
 {% block breadcrumb %}
-<li>
-    <a href="{{ path('article') }}">Articles</a> <span class="divider">/</span>
-</li>
-<li class="active">All</li>
+<a class="current" href="{{ path('article') }}">Articles</a>
 {% endblock %}
 
 {% block menu %}
