@@ -31,6 +31,24 @@ $(function(){
     $('#formAdhesion').ajaxForm();
 });
 
+//POPIN
+$('.popin').click(function(e) {
+    e.preventDefault();
+    var title = $(this).attr('title');
+
+    $.ajax({
+        url: $(this).attr('href'),
+        type: 'get',
+        beforeSend: function() {
+            $('#box').modal('toggle');
+        },
+        success: function(data) {
+            $('#myModalLabel').text(title);
+            $('#box .modal-body').html(data);
+        }
+    });
+});
+
 $('.clients-carousel').flexslider({
     animation: "slide",
     easing: "swing",

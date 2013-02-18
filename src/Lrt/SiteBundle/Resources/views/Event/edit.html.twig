@@ -1,10 +1,8 @@
 {% extends '::admin.html.twig' %}
 
 {% block breadcrumb %}
-    <li>
-        <a href="{{ path('event') }}">Evènements</a> <span class="divider">/</span>
-    </li>
-    <li class="active">Modifier l'évènement</li>
+<a href="{{ path('event') }}">Evènements</a> <span class="divider"></span>
+<a class="current">Modifier l'évènement</a>
 {% endblock %}
 
 {% block body %}

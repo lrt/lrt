@@ -22,7 +22,7 @@ class UserControllerTest extends LrtWebTestCase
 
         $crawler = $this->client->request('GET', '/user/');
         $this->assertTrue(200 === $this->client->getResponse()->getStatusCode());
-        $crawler = $this->client->click($crawler->selectLink('Créer un nouvel utilisateur')->link());
+        $crawler = $this->client->click($crawler->selectLink('Ajouter un utilisateur')->link());
 
         $form = $crawler->selectButton('Valider')->form(array(
             'lrt_userbundle_usertype[username]' => 'Test',

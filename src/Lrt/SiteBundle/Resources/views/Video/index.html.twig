@@ -64,6 +64,15 @@
                     </li>
                     {% endfor %}
                 </ul>
+                <div class="modal hide" id="box">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">×</button>
+                        <h3>Ajouter une vidéo</h3>
+                    </div>
+                    <div class="modal-body">
+                        {% render "SiteBundle:Video:new" %}
+                    </div>
+                </div>
             </div>
         </div>
     </div>

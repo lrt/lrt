@@ -1,10 +1,8 @@
 {% extends ':Admin:base.html.twig' %}
 
 {% block breadcrumb %}
-<li>
-    <a href="{{ path('video') }}">Vidéos</a> <span class="divider">/</span>
-</li>
-<li class="active">Modifier la vidéo {{ entity.title }}</li>
+<a href="{{ path('video') }}">Vidéos</a> <span class="divider"></span>
+<a class="current">Modifier la vidéo {{ entity.title }}</a>
 {% endblock %}
 
 {% block title_page %}

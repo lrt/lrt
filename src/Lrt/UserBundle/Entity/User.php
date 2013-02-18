@@ -63,7 +63,7 @@ class User extends BaseUser
     /**
      * @ORM\Column(name="phone", type="string", nullable=true)
      * @Assert\Regex(
-     *      pattern="((0[0-68]([-.\s]?\d{2}){4}))",
+     *      pattern="/^(0[1-9][-.\s]?(\d{2}[-.\s]?){3}\d{2})$/",
      *      message="Ce numéro de téléphone n'est pas valide, il doit avoir les indicatifs 01 à 06 et 08 et il doit y avoir un .- ou un espace entre deux chiffres."
      * )
      */
@@ -486,18 +486,6 @@ class User extends BaseUser
         }
     }
 
-    public function getUserRoles()
-    {
-        foreach ($this->roles as $role) {
-            if ($role == 'ROLE_MEMBER') {
-                return 'Membre';
-            }
-            if ($role == 'ROLE_SUPERVISEUR') {
-                return 'Superviseur';
-            }
-        }
-    }
-
     public function resetGroups()
     {
         $this->groups = array();
@@ -534,6 +522,23 @@ class User extends BaseUser
     public function getEvents()
     {
         return $this->events;
+    }
+
+    public function getRolesName()
+    {
+        foreach ($this->roles as $role) {
+            if ($role == 'ROLE_SUPERVISEUR') {
+                return 'Superviseur';
+            }
+            if ($role == 'ROLE_MEMBER') {
+                return 'Membre';
+            }
+            if ($role == 'ROLE_ADMIN') {
+                return 'Administrateur';
+            }
+        }
+
+        return 'inconnu';
     }
 
     public function getReferenceUser()

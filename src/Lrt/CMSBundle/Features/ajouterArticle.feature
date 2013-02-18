@@ -7,9 +7,9 @@ Contexte: Je suis un administrateur qui veut ajouter un article
     Lorsque je remplis "username" avec "alexandre"
     Et je remplis "Mot de passe :" avec "test"
     Et je presse "Connexion"
-    Et je ne devrais pas voir "Exception detected!"
-    Et je suis "Tous les articles"
-    Alors je devrais voir "Liste des articles"
+    Alors je suis "Mon Compte"
+    Et je suis "Articles"
+    Alors je devrais voir "Articles"
 
 @new_article
 Scénario: Je veux ajouter un article
@@ -21,5 +21,3 @@ Scénario: Je veux ajouter un article
         | lrt_cmsbundle_articletype_isPublic     | 1            |
         | lrt_cmsbundle_articletype_category     | 1            |
     Et je presse "Valider"
-    Alors je devrais voir les lignes suivantes dans le tableau "tListeArticles" :
-        | * | Nouvelle article du site behat | * | Actualités | * | *   |

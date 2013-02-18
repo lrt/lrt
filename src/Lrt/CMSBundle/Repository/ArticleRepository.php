@@ -139,7 +139,9 @@ class ArticleRepository extends EntityRepository
         if ($category != null && $category != '') {
             $queryStr.= ' AND a.category = :category ';
         }
-        
+
+        $queryStr .= 'ORDER BY a.dateSubmission DESC';
+
         $query = $this->getEntityManager()->createQuery($queryStr);
         
         if ($title != null && $title != '') {

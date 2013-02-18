@@ -12,7 +12,7 @@ use Behat\Gherkin\Node\PyStringNode,
 use Symfony\Component\HttpKernel\KernelInterface;
 use Behat\MinkExtension\Context\MinkContext;
 use Behat\Mink\Exception\ExpectationException;
-use Grdf\GgoBundle\Features\Context\FeatureGlobal;
+use Lrt\SiteBundle\Features\Context\FeatureGlobal;
 
 //
 // Require 3rd-party libraries here:

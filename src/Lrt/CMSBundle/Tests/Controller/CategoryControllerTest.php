@@ -61,31 +61,6 @@ class CategoryControllerTest extends LrtWebTestCase
 
     /**
      * @test
-     * @testdox Modifier une catégorie dont les données seraient valide
-     * @group cat
-     */
-    public function editCategoryValid()
-    {
-        $this->login($this->client, array('user' => 'alexandre'));
-
-        $categoryRepository = $this->em->getRepository('CMSBundle:Category');
-        $category = $categoryRepository->findOneBy(array('name' => 'Autres'));
-                
-        $crawler = $this->client->request('GET', '/category/'.$category->getId().'/edit');
-
-        $form = $crawler->selectButton('Edit')->form(array(
-            'lrt_cmsbundle_categorytype[name]' => 'Nouveauté',
-        ));
-
-        $crawler = $this->client->submit($form);
-
-        $test = $categoryRepository->findOneBy(array('name' => 'Nouveauté'));
-
-        $this->assertNotEmpty($test);
-    }
-
-    /**
-     * @test
      * @testdox La catégorie que l'on veut afficher n'existe pas alors on retourne 404.
      * @group cat
      */
@@ -106,22 +81,5 @@ class CategoryControllerTest extends LrtWebTestCase
         $this->login($this->client, array('user' => 'alexandre'));
         $this->client->request('GET', '/category/1/show');
         $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
-    }
-    
-    /**
-    * @test
-    * @testdox Supprimer une catégorie
-    * @group ko
-    */
-    public function deleteCategoryReturns200()
-    {
-        $this->login($this->client, array('user' => 'alexandre'));
-        $this->client->request('GET', '/category');
-        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
-
-        $categoryRepository = $this->em->getRepository('CMSBundle:Category');
-        $category = $categoryRepository->findOneBy(array('name' => 'Nouvelle catégorie'));
-
-        //$crawler = $this->client->request('POST', '/category/'.$category->getId().'/delete');
     }
 }

@@ -7,9 +7,9 @@ Contexte: Je suis un administrateur qui recherche des utilisateurs
     Lorsque je remplis "username" avec "alexandre"
     Et je remplis "Mot de passe :" avec "test"
     Et je presse "Connexion"
-    Et je ne devrais pas voir "Exception detected!"
+    Alors je suis "Mon Compte"
     Et je suis "Utilisateurs"
-    Alors je devrais voir "Liste des utilisateurs"
+    Alors je devrais voir "Gestion des utilisateurs"
 
 @filtre_user
 Scénario: Je recherche un utilisateur par son login
@@ -27,7 +27,7 @@ Scénario: Je recherche un utilisateur par son email
         | userbundle_userfiltertype_email |  julien.morelle@longchamp-roller-team.com  |
     Et je presse "Filtrer"
     Alors je devrais voir les lignes suivantes dans le tableau "tListeUsers" :
-        | julien | * | * | julien.morelle[@]longchamp-roller-team.com | * | * | * | * |
+        | julien | * | * | julien.morelle@longchamp-roller-team.com | * | * | * | * |
 
 @filtre_user
 Scénario: Je recherche un utilisateur par son nom

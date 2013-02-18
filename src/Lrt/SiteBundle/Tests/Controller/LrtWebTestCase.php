@@ -6,6 +6,9 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Bundle\FrameworkBundle\Client;
 use Doctrine\Common\DataFixtures\Executor\ORMExecutor;
 use Doctrine\Common\DataFixtures\Purger\ORMPurger;
+use Behat\Behat\Console\BehatApplication;
+use Symfony\Component\Console\Output\ConsoleOutput;
+use Symfony\Component\Console\Input\ArrayInput;
 
 abstract class LrtWebTestCase extends WebTestCase
 {
@@ -54,5 +57,26 @@ abstract class LrtWebTestCase extends WebTestCase
         $purger = new ORMPurger();
         $executor = new ORMExecutor($em, $purger);
         $executor->execute($loader->getFixtures());
+    }
+
+    public function scenariosMeetAcceptanceCriteria($bundleName)
+    {
+        if (!is_dir('build/logs/features/' . $bundleName)) {
+            if (!is_dir('build/logs/features/')) {
+                mkdir('build/logs/features/');
+            }
+            mkdir('build/logs/features/' . $bundleName);
+        }
+
+        $input = new ArrayInput(array(
+            '--format' => 'junit,html',
+            '--out' => 'build/logs/features/' . $bundleName . ',build/logs/features/' . $bundleName . '/index.html',
+            'features' => '@' . $bundleName
+        ));
+        $output = new ConsoleOutput();
+        $app = new BehatApplication('DEV');
+        $app->setAutoExit(false);
+        $result = $app->run($input, $output);
+        $this->assertEquals(0, $result, 'Au moins un des scénarios Behat ne passe pas dans ' . $bundleName . ', pour plus d\'info allez dans build/logs/features/ !');
     }
 }

@@ -6,6 +6,24 @@ $(document).ready(function(){
 
     $('input[type=checkbox],input[type=radio],input[type=file]').uniform();
 
+    //POPIN
+    $('.popin').click(function(e) {
+        e.preventDefault();
+        var title = $(this).attr('rel');
+
+        $.ajax({
+            url: $(this).attr('href'),
+            type: 'get',
+            beforeSend: function() {
+                $('#box').modal('toggle');
+            },
+            success: function(data) {
+                $('#myModalLabel').text(title);
+                $('#box .modal-body').html(data);
+            }
+        });
+    });
+
     // === Sidebar navigation === //
 
     $('.submenu > a').click(function(e)
@@ -107,28 +125,4 @@ $(document).ready(function(){
         var cwidth = $('#content-header .btn-group').width();
         $('#content-header .btn-group').css({width:cwidth,'margin-left':'-' + uwidth / 2 + 'px'});
     }
-
-    // === Style switcher === //
-    $('#style-switcher i').click(function()
-    {
-        if($(this).hasClass('open'))
-        {
-            $(this).parent().animate({marginRight:'-=190'});
-            $(this).removeClass('open');
-        } else
-        {
-            $(this).parent().animate({marginRight:'+=190'});
-            $(this).addClass('open');
-        }
-        $(this).toggleClass('icon-arrow-left');
-        $(this).toggleClass('icon-arrow-right');
-    });
-
-    $('#style-switcher a').click(function()
-    {
-        var style = $(this).attr('href').replace('#','');
-        $('.skin-color').attr('href','css/unicorn.'+style+'.css');
-        $(this).siblings('a').css({'border-color':'transparent'});
-        $(this).css({'border-color':'#aaaaaa'});
-    });
 });
