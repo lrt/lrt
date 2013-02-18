@@ -62,7 +62,9 @@ class DefaultController extends Controller
     */
     public function dashboardAction()
     {
-        return array();
+        $articles = $this->em->getRepository('CMSBundle:Article')->getLatestArticles(3);
+
+        return array('articles' => $articles);
     }
 
     /**

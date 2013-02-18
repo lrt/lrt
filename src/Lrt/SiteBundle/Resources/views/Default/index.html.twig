@@ -8,44 +8,24 @@
                     <div id="home-carousel" class="carousel slide">
                         <div class="carousel-inner">
                             <!--slide-->
-                            <!--slide-->
-                            <div class="active item">
-                                <div class="row-fluid">
-                                    <div class="span1"></div>
-                                    <div class="span6 animated  rotateInDownLeft">
-                                        <img src="{{ asset('bundles/site/images/themes/slider/image1.png')}}" alt=""/>
-                                    </div>
-                                    <div class="span4 animated rotateInUpRight block">
-                                        <h3>Fully Responsive Theme</h3>
-                                        <p>
-                                            Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                                            sed do eiusmod tempor incididunt ut labore et dolore magna
-                                            aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                                            ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                                        </p>
-                                        <a class="btn btn-danger" href="index.html">Lire la suite</a>
-                                    </div>
-                                    <div class="span1"></div>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="row-fluid">
-                                    <div class="span1"></div>
-                                    <div class="span4 span4 animated rotateInDownLeft block">
-                                        <h3>10 Page Templates</h3>
-                                        <p>
-                                            Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                                            sed do eiusmod tempor incididunt ut labore et dolore magna
-                                            aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                                            ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                                        </p>
-                                        <a class="btn btn-danger" href="services.html">Lire la suite</a>
-                                    </div>
-                                    <div class="span6 animated rotateInUpRight">
-                                        <img src="{{ asset('bundles/site/images/themes/slider/image2.png') }}" alt=""/>
+                            {% for a in articles %}
+                                <div class="{% if loop.first %}active{% endif %} item">
+                                    <div class="row-fluid">
+                                        <div class="span1"></div>
+                                        <div class="span6 animated  rotateInDownLeft">
+                                            <img src="{{ asset('bundles/site/images/themes/slider/image1.png')}}" alt=""/>
+                                        </div>
+                                        <div class="span4 animated rotateInUpRight block">
+                                            <h3>{{ a.title  }}</h3>
+                                            <p>
+                                                {{ a.content|truncate(232)  }}
+                                            </p>
+                                            <a class="btn btn-danger" href="{{ path('article_view', { 'id': a.id }) }}">Lire la suite</a>
+                                        </div>
+                                        <div class="span1"></div>
                                     </div>
                                 </div>
-                            </div>
+                            {% endfor %}
                         </div>
                         <a class="carousel-control left" href="#home-carousel" data-slide="prev">&lsaquo;</a>
                         <a class="carousel-control right" href="#home-carousel" data-slide="next">&rsaquo;</a>
