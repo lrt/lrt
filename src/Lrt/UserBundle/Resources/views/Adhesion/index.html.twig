@@ -1,7 +1,11 @@
 {% extends ':Admin:base.html.twig' %}
 
 {% block title_page %}
-    Gestion des adhésions
+    Gestion des adhérents
+{% endblock %}
+
+{% block breadcrumb %}
+    <a class="current" href="{{ path('user') }}">Adhérents</a>
 {% endblock %}
 
 {% block page_header %}
@@ -28,6 +32,9 @@
 {% block body %}
 <div class="row-fluid">
     <div class="span12">
+        <div class="alert alert-info">
+            Pour la saison 2012/2013, la période d'adhésion est du <b>1er Octobre 2012</b> au <b>30 Septembre 2013</b>.
+        </div>
         <table class="table table-bordered table-striped tListeUsers">
             <thead>
             <tr>
@@ -65,6 +72,8 @@
                                 {% if u.isEnabled == 0 %}
                                     <li><a href="{{ path('user_adhesion_validate', { 'id': u.id }) }}"><i class="icon-ok"></i> Valider</a></li>
                                     <li><a href="{{ path('user_adhesion_validate_revival', { 'id': u.id }) }}"><i class="icon-repeat"></i> Relancer</a></li>
+                                {% elseif is_granted('ROLE_ADMIN') %}
+                                    <li><a href="{{ path('deactivate_user', { 'id': u.id }) }}"><i class="icon-ban-circle"></i> Désactiver</a></li>
                                 {% endif %}
                             </ul>
                         </div>

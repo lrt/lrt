@@ -9,6 +9,8 @@ parameters:
     app.social.facebook: http://www.facebook.com/pages/Longchamp-Roller-Team/355637923045
     app.social.twitter:
     app.social.vimeo: http://vimeo.com/user9201223
+    app.adhesion.debut: "01/10/2012"
+    app.adhesion.fin: "30/09/2013"
     knp_limit_per_page: 5
 
 framework:
@@ -35,6 +37,8 @@ twig:
       socialFacebook: %app.social.facebook%
       socialTwitter: %app.social.twitter%
       socialVimeo: %app.social.vimeo%
+      adhesionDebut: %app.adhesion.debut%
+      adhesionFin: %app.adhesion.fin%
 
 services:
  twig.extension.text:

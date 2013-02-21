@@ -115,7 +115,8 @@ class UserController extends Controller
     public function createAction(Request $request)
     {
         $user  = new User();
-        $form = $this->createForm(new UserType(), $user);
+        $userType = $this->container->get('users.form.userRegisterType');
+        $form = $this->createForm($userType, $user);
         $form->bind($request);
 
         if ($form->isValid()) {

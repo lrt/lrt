@@ -38,9 +38,9 @@ unicorn = {
 			droppable: true, // this allows things to be dropped onto the calendar !!!
             events: "../../data/events/data.json",
             eventClick: function(calEvent, jsEvent, view) {
-                //alert('Event: ' + calEvent.title);
                 var title = calEvent.title;
-                unicorn.show_event(title);
+                var id = calEvent.id;
+                unicorn.show_event(id,title);
             },
 			drop: function(date, allDay) { // this function is called when something is dropped
 				
@@ -81,18 +81,21 @@ unicorn = {
 		}
 	},
 
-    show_event: function(title){
-        /*if($('#event-name').val() != '') {
-            var event_name = $('#event-name').val();
-            $('#external-events .panel-content').append('<div class="external-event ui-draggable label label-inverse">'+event_name+'</div>');
-            this.external_events();
-            $('#modal-add-event').modal('hide');
-            $('#event-name').val('');
-        } else {
-            this.show_error();
-        }*/
-        $('#modal-show-event').modal('show');
-        $('#modal-show-event .modal-header').append(title);
+    show_event: function(id,title){
+
+        var host = window.location.href;
+
+        $.ajax({
+            url: host.concat(id).concat('/show'),
+            type: 'get',
+            beforeSend: function() {
+                $('#modal-show-event').modal('show');
+            },
+            success: function(data) {
+                $('#modal-show-event .modal-header').text(title);
+                $('#modal-show-event .modal-body').html(data);
+            }
+        });
     },
 
 	// === Initialize the draggable external events === //

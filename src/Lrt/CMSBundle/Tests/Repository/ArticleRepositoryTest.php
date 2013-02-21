@@ -64,6 +64,6 @@ class ArticleRepositoryTest extends LrtWebTestCase {
     public function getArticlesNotValidatedTest() {
 
         $rpArticle = $this->em->getRepository('CMSBundle:Article')->getArticlesNotValidated();
-        $this->assertEquals(1, count($rpArticle));
+        $this->assertEquals(2, count($rpArticle));
     }
 }

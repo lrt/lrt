@@ -21,11 +21,15 @@ class UserRepository extends EntityRepository
      */
     public function getAdhesion()
     {
-        $sql = 'SELECT u FROM UserBundle:User u
-                WHERE u.isAdhesion = :isAdhesion';
+        $qb = $this->createQueryBuilder('u')
+            ->where('u.isAdhesion = :isAdhesion')
+            ->orWhere('u.enabled = :isEnabled')
+            ->orderBy('u.lastName')
+            ->setParameter('isAdhesion', User::IS_NEW_ADHESION)
+            ->setParameter('isEnabled', User::IS_ACTIVE)
+        ;
 
-        $query = $this->getEntityManager()->createQuery($sql)
-            ->setParameter('isAdhesion', User::IS_NEW_ADHESION);
+        $query = $qb->getQuery();
 
         return $query->getResult();
     }
