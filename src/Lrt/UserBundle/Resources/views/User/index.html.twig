@@ -8,6 +8,10 @@
     Gestion des utilisateurs
 {% endblock %}
 
+{% block button_actions %}
+    <a href="{{ path('export_user') }}" class="btn btn-large tip-bottom" data-original-title="Export file"><i class="icon-download-alt"></i></a>
+{% endblock %}
+
 {% block page_header %}
     <div class="row-fluid" style="border-bottom: 1px solid #eeeeee;margin-bottom: 18px;">
         <div class="span8 m-botton-group">

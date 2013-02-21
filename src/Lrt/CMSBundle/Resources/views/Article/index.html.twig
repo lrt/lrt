@@ -18,6 +18,10 @@
 <li><a href="{{ path('article_bin') }}">Corbeille</a></li>
 {% endblock %}
 
+{% block button_actions %}
+    <a href="{{ path('export_article') }}" class="btn btn-large tip-bottom" data-original-title="Export file"><i class="icon-download-alt"></i></a>
+{% endblock %}
+
 {% block body %}
 <div class="row-fluid">
     <div class="span12">

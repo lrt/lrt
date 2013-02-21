@@ -128,7 +128,8 @@ class VideoController extends Controller {
 
             if ($formHandler->process()) {
 
-                return $this->redirect($this->generateUrl('video', array('id' => $video->getId())));
+                $this->get('session')->setFlash('success', 'Video ajoutée avec succès.');
+                return $this->redirect($this->generateUrl('video'));
             }
 
             return array(
