@@ -13,8 +13,7 @@ class GroupType extends AbstractType
         $builder
             ->add('name')
             ->add('roles')
-            ->add('users')
-        ;
+            ->add('users');
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)

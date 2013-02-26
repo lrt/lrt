@@ -18,7 +18,8 @@ use JMS\DiExtraBundle\Annotation as DI;
 /**
  * @Service("form.video.filter.type")
  */
-class VideoFilterType extends AbstractType {
+class VideoFilterType extends AbstractType
+{
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {

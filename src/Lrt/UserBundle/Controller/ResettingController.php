@@ -51,7 +51,7 @@ class ResettingController extends BaseController
             return $response;
         }
 
-        return $this->container->get('templating')->renderResponse('FOSUserBundle:Resetting:reset.html.'.$this->getEngine(), array(
+        return $this->container->get('templating')->renderResponse('FOSUserBundle:Resetting:reset.html.' . $this->getEngine(), array(
             'token' => $token,
             'form' => $form->createView(),
         ));

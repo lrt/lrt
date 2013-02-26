@@ -71,6 +71,7 @@
                             <ul class="dropdown-menu pull-right">
                                 {% if u.isEnabled == 0 %}
                                     <li><a href="{{ path('user_adhesion_validate', { 'id': u.id }) }}"><i class="icon-ok"></i> Valider</a></li>
+                                    <li><a href="{{ path('user_adhesion_reject', { 'id': u.id }) }}"><i class="icon-ban-circle"></i> Rejeter</a></li>
                                     <li><a href="{{ path('user_adhesion_validate_revival', { 'id': u.id }) }}"><i class="icon-repeat"></i> Relancer</a></li>
                                 {% elseif is_granted('ROLE_ADMIN') %}
                                     <li><a href="{{ path('deactivate_user', { 'id': u.id }) }}"><i class="icon-ban-circle"></i> Désactiver</a></li>

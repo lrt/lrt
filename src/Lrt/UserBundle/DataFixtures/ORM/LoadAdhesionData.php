@@ -14,13 +14,13 @@ class LoadAdhesionData extends AbstractFixture implements OrderedFixtureInterfac
     {
         $this->manager = $manager;
 
-        $this->newAdherent('nicolas', 'durand', new \DateTime('1968-05-01'), 'nicolas.durand@gmail.com', '0658220012');
-        $this->newAdherent('brigitte', 'durand', new \DateTime('1969-06-10'), 'brigitte.durand@gmail.com', '0657220012');
-        $this->newAdherent('john', 'doe', new \DateTime('1997-07-26'), 'john.doe@gmail.com', '0658230212');
-        $this->newAdherent('marcel', 'michel', new \DateTime('1988-12-19'), 'marcel.michel@gmail.com', '0622220012');
+        $this->newAdherent('nicolas', 'durand', new \DateTime('1968-05-01'), 'nicolas.durand@gmail.com', '0658220012', new \DateTime('2013-02-25'));
+        $this->newAdherent('brigitte', 'durand', new \DateTime('1969-06-10'), 'brigitte.durand@gmail.com', '0657220012', new \DateTime('2013-02-25'));
+        $this->newAdherent('john', 'doe', new \DateTime('1997-07-26'), 'john.doe@gmail.com', '0658230212', new \DateTime('2013-02-25'));
+        $this->newAdherent('marcel', 'michel', new \DateTime('1988-12-19'), 'marcel.michel@gmail.com', '0622220012', new \DateTime());
     }
 
-    protected function newAdherent($firstName, $lastName, $birthday, $email, $phone)
+    protected function newAdherent($firstName, $lastName, $birthday, $email, $phone, $submission)
     {
         $userName = strtolower($firstName.''.$lastName);
 
@@ -36,7 +36,7 @@ class LoadAdhesionData extends AbstractFixture implements OrderedFixtureInterfac
         $adherent->setEmail($email);
         $adherent->setEnabled(User::IS_NOT_ACTIVE);
         $adherent->setIsAdhesion(User::IS_NEW_ADHESION);
-        $adherent->setDateSubmission(new \DateTime());
+        $adherent->setDateSubmission($submission);
 
         $adherent->setPlainPassword("test");
         $encoder = new MessageDigestPasswordEncoder('sha512');

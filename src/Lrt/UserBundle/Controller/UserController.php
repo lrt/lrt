@@ -41,11 +41,11 @@ class UserController extends Controller
         $form->bind($request);
         $data = $form->getData();
 
-        if($form->isValid()) {
+        if ($form->isValid()) {
 
             $users = $this->em->getRepository('UserBundle:User')->filter($data['login'], $data['nom'], $data['type'], $data['email'], $data['status']);
 
-            return array('entities' => $users,'form' => $form->createView(),'nb' => count($users));
+            return array('entities' => $users, 'form' => $form->createView(), 'nb' => count($users));
 
         } else {
             return $this->redirect($this->generateUrl('user'));
@@ -62,7 +62,7 @@ class UserController extends Controller
         $exportUsers = $this->container->get('service.export_users');
         $csvReadyUsers = $exportUsers->generateCsvReadyDatas();
 
-        if(!is_object($csvReadyUsers)) {
+        if (!is_object($csvReadyUsers)) {
             return $this->get('session')->setFlash('error', 'Impossible d\'exporter la liste des utilisateurs');
         } else {
             return $csvReadyUsers;
@@ -96,11 +96,11 @@ class UserController extends Controller
         $user = new User();
 
         $userType = $this->container->get('users.form.userRegisterType');
-        $form   = $this->createForm($userType, $user);
+        $form = $this->createForm($userType, $user);
 
         return array(
             'entity' => $user,
-            'form'   => $form->createView(),
+            'form' => $form->createView(),
         );
     }
 
@@ -114,7 +114,7 @@ class UserController extends Controller
      */
     public function createAction(Request $request)
     {
-        $user  = new User();
+        $user = new User();
         $userType = $this->container->get('users.form.userRegisterType');
         $form = $this->createForm($userType, $user);
         $form->bind($request);
@@ -129,7 +129,7 @@ class UserController extends Controller
 
         return array(
             'entity' => $user,
-            'form'   => $form->createView(),
+            'form' => $form->createView(),
         );
     }
 
@@ -146,7 +146,7 @@ class UserController extends Controller
         $editForm = $this->createForm(new UserType(), $user);
 
         return array(
-            'entity'    => $user,
+            'entity' => $user,
             'edit_form' => $editForm->createView(),
         );
     }
@@ -173,8 +173,8 @@ class UserController extends Controller
         }
 
         return array(
-            'entity'      => $user,
-            'edit_form'   => $editForm->createView(),
+            'entity' => $user,
+            'edit_form' => $editForm->createView(),
         );
     }
 

@@ -12,11 +12,11 @@
 
 {% block choice_widget_expanded %}
     {% spaceless %}
+        <div id="selector">
         {% for child in form %}
-            <li class="checkBox">
                 {{ form_label(child) }}
                 {{ form_widget(child) }}
-            </li>
         {% endfor %}
+        </div>
     {% endspaceless %}
 {% endblock choice_widget_expanded %}

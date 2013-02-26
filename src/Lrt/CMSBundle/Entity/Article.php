@@ -181,21 +181,24 @@ class Article extends Activity
         return $this->path;
     }
 
-    public function getFullPicturePath() {
-        return null === $this->picture ? null : $this->getUploadRootDir(). $this->picture;
+    public function getFullPicturePath()
+    {
+        return null === $this->picture ? null : $this->getUploadRootDir() . $this->picture;
     }
 
     public function getWebPath()
     {
-        return null === $this->picture ? null : $this->getUploadDir().'/'.$this->picture;
+        return null === $this->picture ? null : $this->getUploadDir() . '/' . $this->picture;
     }
 
-    protected function getUploadRootDir() {
+    protected function getUploadRootDir()
+    {
         // the absolute directory path where uploaded documents should be saved
-        return $this->getTmpUploadRootDir().$this->getId()."/";
+        return $this->getTmpUploadRootDir() . $this->getId() . "/";
     }
 
-    protected function getTmpUploadRootDir() {
+    protected function getTmpUploadRootDir()
+    {
         // the absolute directory path where uploaded documents should be saved
         return __DIR__ . '/../../../../web/uploads/articles/';
     }
@@ -209,17 +212,18 @@ class Article extends Activity
      * @ORM\PrePersist()
      * @ORM\PreUpdate()
      */
-    public function uploadPicture() {
+    public function uploadPicture()
+    {
         // the file property can be empty if the field is not required
         if (null === $this->picture) {
             return;
         }
-        if(!$this->id){
+        if (!$this->id) {
             $this->picture->move($this->getTmpUploadRootDir(), $this->picture->getClientOriginalName());
-        }else{
+        } else {
             $this->picture->move($this->getUploadRootDir(), $this->picture->getClientOriginalName());
         }
-        $this->setPath($this->getUploadDir().'/'.$this->getId().'/'.$this->picture->getClientOriginalName());
+        $this->setPath($this->getUploadDir() . '/' . $this->getId() . '/' . $this->picture->getClientOriginalName());
         $this->setPicture($this->picture->getClientOriginalName());
 
     }
@@ -232,11 +236,11 @@ class Article extends Activity
         if (null === $this->picture) {
             return;
         }
-        if(!is_dir($this->getUploadRootDir())){
+        if (!is_dir($this->getUploadRootDir())) {
             mkdir($this->getUploadRootDir());
         }
-        copy($this->getTmpUploadRootDir().$this->picture, $this->getFullPicturePath());
-        @unlink($this->getTmpUploadRootDir().$this->picture);
+        copy($this->getTmpUploadRootDir() . $this->picture, $this->getFullPicturePath());
+        @unlink($this->getTmpUploadRootDir() . $this->picture);
     }
 
     /**

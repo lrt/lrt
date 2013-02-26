@@ -21,8 +21,7 @@ class VideoType extends AbstractType
             ->add('title', null, array('required' => false, 'label' => 'Titre :'))
             ->add('description', null, array('required' => false, 'label' => 'Description :'))
             ->add('isPublished', null, array('required' => false, 'label' => 'Publication :'))
-            ->add('isHighlighted', null, array('required' => false, 'label' => 'Mise en avant ?'))
-        ;
+            ->add('isHighlighted', null, array('required' => false, 'label' => 'Mise en avant ?'));
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)

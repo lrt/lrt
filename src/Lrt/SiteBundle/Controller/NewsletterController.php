@@ -21,7 +21,7 @@ class NewsletterController extends Controller
     public $em;
 
     /** @DI\Inject("lrt.service.mail")
-     *  @var \Lrt\NotificationBundle\Service\MailService
+     * @var \Lrt\NotificationBundle\Service\MailService
      */
     public $mailService;
 
@@ -35,11 +35,11 @@ class NewsletterController extends Controller
         $newsletter = new Newsletter();
         $form = $this->createForm($this->container->get('form.site.newsletter.type'), $newsletter);
 
-        if($request->isXmlHttpRequest()) {
+        if ($request->isXmlHttpRequest()) {
             $form->bind($request);
             if ($form->isValid()) {
                 $findEmail = $this->em->getRepository("SiteBundle:Newsletter")->findOneBy(array('email' => $newsletter->getEmail()));
-                if(!$findEmail) {
+                if (!$findEmail) {
                     $newsletter->setEmail($newsletter->getEmail());
                     $this->em->persist($newsletter);
                     $this->em->flush();

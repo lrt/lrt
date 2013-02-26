@@ -13,8 +13,7 @@ class PartnerType extends AbstractType
         $builder
             ->add('name')
             ->add('description')
-            ->add('website')
-        ;
+            ->add('website');
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)

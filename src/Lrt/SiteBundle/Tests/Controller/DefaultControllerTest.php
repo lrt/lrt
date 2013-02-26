@@ -46,4 +46,16 @@ class DefaultControllerTest extends LrtWebTestCase
         $client->request('GET', '/information/test');
         $this->assertEquals(404, $client->getResponse()->getStatusCode());
     }
+
+    /**
+     * @test
+     * @testdox Voir la partie blog
+     * @group home
+     */
+    public function showBlogReturn200()
+    {
+        $client = static::createClient();
+        $client->request('GET', '/blog');
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+    }
 }

@@ -28,7 +28,7 @@ class GenerateFluxRssCommand extends ContainerAwareCommand
 
         $result = $fluxRSSService->generateRssArticles($articles);
 
-        if($result == true){
+        if ($result == true) {
             $output->writeln('Operation reussi.');
         } else {
             $output->writeln('Echec de l\'operation');

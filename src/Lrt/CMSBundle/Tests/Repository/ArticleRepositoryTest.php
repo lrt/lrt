@@ -18,7 +18,7 @@ class ArticleRepositoryTest extends LrtWebTestCase {
     /**
      * @test
      * @testdox Recupère la liste des derniers articles avec une limite définie
-     * @group ko
+     * @group art
      */
     public function getLatestArticlesWithLimit() {
 
@@ -36,10 +36,11 @@ class ArticleRepositoryTest extends LrtWebTestCase {
     public function getArticlesByCategoryReturnArray() {
 
         $rpCategory = $this->em->getRepository('CMSBundle:Category')->findOneBy(array('name' => 'Actualités'));
-        $this->assertNotNull($rpCategory);
         
-        $rpArticle = $this->em->getRepository('CMSBundle:Article')->getArticlesByCategory($rpCategory->getName());
-        $this->assertNotEmpty($rpArticle);
+        $result = $this->em->getRepository('CMSBundle:Article')->getArticlesByCategory($rpCategory->getName());
+        $this->assertNotNull($result);
+        $this->assertTrue(is_array($result));
+        $this->assertNotEquals(0, count($result));
     }
     
     /**
@@ -50,10 +51,11 @@ class ArticleRepositoryTest extends LrtWebTestCase {
     public function getArticlesByUserReturnArray() {
 
         $user = $this->em->getRepository('UserBundle:User')->findOneBy(array('username' => 'alexandre'));
-        $this->assertNotNull($user);
-        
-        $rpArticle = $this->em->getRepository('CMSBundle:Article')->getArticlesByUser($user);
-        $this->assertNotEmpty($rpArticle);
+
+        $result = $this->em->getRepository('CMSBundle:Article')->getArticlesByUser($user);
+        $this->assertNotNull($result);
+        $this->assertTrue(is_array($result));
+        $this->assertNotEquals(0, count($result));
     }
 
     /**
@@ -63,7 +65,9 @@ class ArticleRepositoryTest extends LrtWebTestCase {
      */
     public function getArticlesNotValidatedTest() {
 
-        $rpArticle = $this->em->getRepository('CMSBundle:Article')->getArticlesNotValidated();
-        $this->assertEquals(2, count($rpArticle));
+        $result = $this->em->getRepository('CMSBundle:Article')->getArticlesNotValidated();
+        $this->assertNotNull($result);
+        $this->assertTrue(is_array($result));
+        $this->assertNotEquals(0, count($result));
     }
 }

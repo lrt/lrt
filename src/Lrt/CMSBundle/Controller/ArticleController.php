@@ -56,18 +56,18 @@ class ArticleController extends Controller
         $form->bind($request);
         $data = $form->getData();
 
-        if($form->isValid()) {
+        if ($form->isValid()) {
 
             $articles = $this->em->getRepository('CMSBundle:Article')->filter($data['title'], $data['isPublic'], $data['category']);
 
             $page = $request->query->get('page', 1);
             $pagination = $this->paginator->paginate(
-                $articles,$page,$this->container->getParameter('knp_limit_per_page')
+                $articles, $page, $this->container->getParameter('knp_limit_per_page')
             );
 
             $arrayPagination = compact('pagination');
 
-            return array('entities' => $arrayPagination['pagination'],'form' => $form->createView(), 'nb' => count($articles));
+            return array('entities' => $arrayPagination['pagination'], 'form' => $form->createView(), 'nb' => count($articles));
 
         } else {
             return $this->redirect($this->generateUrl('article'));
@@ -85,7 +85,7 @@ class ArticleController extends Controller
     {
         $user = $this->sc->getToken()->getUser();
 
-        if($user) {
+        if ($user) {
             $articles = $this->em->getRepository('CMSBundle:Article')->getArticlesDraftsByUser($user);
 
             return array('entities' => $articles, 'nb' => count($articles));
@@ -152,7 +152,7 @@ class ArticleController extends Controller
 
         return array(
             'article' => $article,
-            'form'    => $form->createView(),
+            'form' => $form->createView(),
         );
     }
 
@@ -168,20 +168,20 @@ class ArticleController extends Controller
     {
         $user = $this->sc->getToken()->getUser();
 
-        if($user) {
+        if ($user) {
 
-            $article  = new Article();
+            $article = new Article();
             $article->setUser($user);
 
             $form = $this->createForm($this->container->get('form.cms.article.type'), $article);
             $formHandler = new ArticleHandler($form, $this->getRequest(), $this->em);
 
-            if($formHandler->process()) {
+            if ($formHandler->process()) {
 
                 return $this->redirect($this->generateUrl('article'));
             }
 
-            return array('entity' => $article,'form' => $form->createView());
+            return array('entity' => $article, 'form' => $form->createView());
 
         } else {
             throw $this->createNotFoundException('Vous devez être connecté pour accèder à cette page.');
@@ -201,7 +201,7 @@ class ArticleController extends Controller
         $editForm = $this->createForm($this->container->get('form.cms.article.type'), $article);
 
         return array(
-            'article'   => $article,
+            'article' => $article,
             'edit_form' => $editForm->createView(),
         );
     }
@@ -219,14 +219,14 @@ class ArticleController extends Controller
     {
         $user = $this->sc->getToken()->getUser();
 
-        if($user) {
+        if ($user) {
 
             $form = $this->createForm($this->container->get('form.cms.article.type'), $article);
             $formHandler = new ArticleHandler($form, $request, $this->em);
 
-            if($formHandler->process()) {
+            if ($formHandler->process()) {
 
-                $this->get('session')->setFlash('success', 'Modification de l\'article '.$article->getTitle().' réussi avec succès.' );
+                $this->get('session')->setFlash('success', 'Modification de l\'article ' . $article->getTitle() . ' réussi avec succès.');
                 return $this->redirect($this->generateUrl('article_edit', array('id' => $article->getId())));
             }
 
@@ -251,7 +251,7 @@ class ArticleController extends Controller
     {
         $user = $this->sc->getToken()->getUser();
 
-        if($user) {
+        if ($user) {
 
             $article->setStatus(Content::BIN); //corbeille
 
@@ -275,7 +275,7 @@ class ArticleController extends Controller
         $exportArticles = $this->container->get('service.export_articles');
         $csvReadyArticles = $exportArticles->generateCsvReadyDatas();
 
-        if(!is_object($csvReadyArticles)) {
+        if (!is_object($csvReadyArticles)) {
             return $this->get('session')->setFlash('error', 'Impossible d\'exporter la liste des articles');
         } else {
             return $csvReadyArticles;

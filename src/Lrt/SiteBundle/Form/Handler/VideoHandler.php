@@ -6,7 +6,8 @@ use Symfony\Component\Form\Form;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\ORM\EntityManager;
 
-class VideoHandler {
+class VideoHandler
+{
 
     protected $form;
     protected $request;
@@ -14,19 +15,17 @@ class VideoHandler {
 
     public function __construct(Form $form, Request $request, EntityManager $em)
     {
-        $this->form    = $form;
+        $this->form = $form;
         $this->request = $request;
         $this->em = $em;
     }
 
     public function process()
     {
-        if($this->request->getMethod() == 'POST')
-        {
+        if ($this->request->getMethod() == 'POST') {
             $this->form->bind($this->request);
 
-            if( $this->form->isValid() )
-            {
+            if ($this->form->isValid()) {
                 $this->onSuccess($this->form->getData());
 
                 return true;

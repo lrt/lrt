@@ -9,7 +9,7 @@ use Lrt\CMSBundle\Entity\Article;
 use Lrt\SiteBundle\Entity\Activity;
 
 class ArticleRepository extends EntityRepository
-{    
+{
     /**
      * Retourne la liste des articles
      * @param integer $limit
@@ -18,10 +18,10 @@ class ArticleRepository extends EntityRepository
     public function getLatestArticles($limit)
     {
         $qb = $this->createQueryBuilder('a')
-                ->select('a.id, a.title, a.content, c.name as category_name, a.path')
-                ->join('a.category', 'c')
-                ->where('a.status = ?1')
-                ->setParameter(1, Article::IMMEDIATE);
+            ->select('a.id, a.title, a.content, c.name as category_name, a.path')
+            ->join('a.category', 'c')
+            ->where('a.status = ?1')
+            ->setParameter(1, Article::IMMEDIATE);
 
         if (!is_null($limit)) {
             $qb->setMaxResults($limit);
@@ -90,10 +90,10 @@ class ArticleRepository extends EntityRepository
     public function getArticlesByCategory($categoryName)
     {
         $qb = $this->createQueryBuilder('a')
-                ->select('a.id, a.title, a.content, c.name as category_name')
-                ->join('a.category', 'c')
-                ->where('c.name = ?1')
-                ->setParameter(1, $categoryName);
+            ->select('a.id, a.title, a.content, c.name as category_name')
+            ->join('a.category', 'c')
+            ->where('c.name = ?1')
+            ->setParameter(1, $categoryName);
 
         return $qb->getQuery()->getArrayResult();
     }
@@ -109,10 +109,10 @@ class ArticleRepository extends EntityRepository
                 JOIN CMSBundle:Category c WITH a.category = c.id
                 JOIN UserBundle:User u WITH a.user = u.id
                 WHERE a.user = :user ';
-        
+
         $query = $this->getEntityManager()->createQuery($sql)
-                    ->setParameter('user', $user);
-       
+            ->setParameter('user', $user);
+
         return $query->getResult();
     }
 
@@ -123,37 +123,37 @@ class ArticleRepository extends EntityRepository
      * @param string $category
      * @return array
      */
-    public function filter($title = '', $publish = '',$category = '')
-    {        
+    public function filter($title = '', $publish = '', $category = '')
+    {
         $queryStr = 'SELECT a FROM CMSBundle:Article a
                      JOIN CMSBundle:Category c WITH a.category = c.id
                      WHERE 1 = 1
-                     AND a.status != '.Article::BIN.' ';
-                
+                     AND a.status != ' . Article::BIN . ' ';
+
         if ($title != null && $title != '') {
-            $queryStr.= ' AND a.title LIKE :title ';
+            $queryStr .= ' AND a.title LIKE :title ';
         }
         if ($publish != null && $publish != '') {
-            $queryStr.= ' AND a.isPublic LIKE :publish ';
+            $queryStr .= ' AND a.isPublic LIKE :publish ';
         }
         if ($category != null && $category != '') {
-            $queryStr.= ' AND a.category = :category ';
+            $queryStr .= ' AND a.category = :category ';
         }
 
         $queryStr .= 'ORDER BY a.dateSubmission DESC';
 
         $query = $this->getEntityManager()->createQuery($queryStr);
-        
+
         if ($title != null && $title != '') {
-            $query->setParameter('title', '%'.$title.'%');
+            $query->setParameter('title', '%' . $title . '%');
         }
         if ($publish != null && $publish != '') {
-            $query->setParameter('publish', '%'.$publish.'%');
+            $query->setParameter('publish', '%' . $publish . '%');
         }
         if ($category != null && $category != '') {
             $query->setParameter('category', $category->getId());
         }
-        
+
         return $query->getResult();
     }
 

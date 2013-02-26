@@ -10,9 +10,9 @@ $(function(){
                     cache: false,
                     success: function(){
                         $('#result').html("<div class='alert alert-success'><button type='button' class='close' data-dismiss='alert'>×</button>Votre email a été envoyé.</div>").show('slow');
-                        setTimeout(function() {
+                        /*setTimeout(function() {
                             $('#result').hide("slow");
-                        }, 5000);
+                        }, 5000);*/
                     },
                     error: function(error){
                         $('#result').html("<div class='alert alert-error'><button type='button' class='close' data-dismiss='alert'>×</button>Une erreur est survenue.</div>");

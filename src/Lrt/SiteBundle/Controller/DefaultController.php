@@ -29,12 +29,6 @@ class DefaultController extends Controller
     public $em;
 
     /**
-     * @DI\Inject("security.context")
-     * @var \Symfony\Component\Security\Core\SecurityContext
-     */
-    private $sc;
-
-    /**
      * @DI\Inject("lrt.service.mail")
      * @var \Lrt\NotificationBundle\Service\MailService
      */
@@ -57,9 +51,9 @@ class DefaultController extends Controller
     }
 
     /**
-    * @Route("/dashboard", name="dashboard")
-    * @Template("SiteBundle:Admin:dashboard.html.twig")
-    */
+     * @Route("/dashboard", name="dashboard")
+     * @Template("SiteBundle:Admin:dashboard.html.twig")
+     */
     public function dashboardAction()
     {
         $articles = $this->em->getRepository('CMSBundle:Article')->getLatestArticles(3);
@@ -77,7 +71,7 @@ class DefaultController extends Controller
 
         $page = $request->query->get('page', 1);
         $pagination = $this->paginator->paginate(
-            $articles,$page,$this->container->getParameter('knp_limit_per_page')
+            $articles, $page, $this->container->getParameter('knp_limit_per_page')
         );
         $arrayPagination = compact('pagination');
 
@@ -111,11 +105,13 @@ class DefaultController extends Controller
         $enquiry = new Enquiry();
         $form = $this->createForm($this->container->get('form.site.contact.type'), $enquiry);
 
-        if($request->isXmlHttpRequest()) {
+        if ($request->isXmlHttpRequest()) {
             $form->bind($request);
             if ($form->isValid()) {
                 $this->mailService->sendMessage($enquiry->getSubject(), $enquiry->getEmail(), "alexandre.seiller92@gmail.com", $enquiry->getBody());
             }
+
+            $this->get('session')->setFlash('error', 'Votre email n\'a pas été envoyé.');
         }
 
         return $this->render('SiteBundle:Page:contact.html.twig', array(

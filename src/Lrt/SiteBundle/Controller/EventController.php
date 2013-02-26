@@ -57,7 +57,7 @@ class EventController extends Controller
         $deleteForm = $this->createDeleteForm($event->getId());
 
         return array(
-            'entity'      => $event,
+            'entity' => $event,
             'delete_form' => $deleteForm->createView(),
         );
     }
@@ -71,11 +71,11 @@ class EventController extends Controller
     public function newAction()
     {
         $event = new Event();
-        $form   = $this->createForm(new EventType(), $event);
+        $form = $this->createForm(new EventType(), $event);
 
         return array(
             'entity' => $event,
-            'form'   => $form->createView(),
+            'form' => $form->createView(),
         );
     }
 
@@ -88,7 +88,7 @@ class EventController extends Controller
      */
     public function createAction(Request $request)
     {
-        $event  = new Event();
+        $event = new Event();
         $form = $this->createForm(new EventType(), $event);
         $form->bind($request);
 
@@ -101,7 +101,7 @@ class EventController extends Controller
 
         return array(
             'entity' => $event,
-            'form'   => $form->createView(),
+            'form' => $form->createView(),
         );
     }
 
@@ -118,8 +118,8 @@ class EventController extends Controller
         $deleteForm = $this->createDeleteForm($event->getId());
 
         return array(
-            'entity'      => $event,
-            'edit_form'   => $editForm->createView(),
+            'entity' => $event,
+            'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         );
     }
@@ -146,8 +146,8 @@ class EventController extends Controller
         }
 
         return array(
-            'entity'      => $event,
-            'edit_form'   => $editForm->createView(),
+            'entity' => $event,
+            'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         );
     }
@@ -176,7 +176,6 @@ class EventController extends Controller
     {
         return $this->createFormBuilder(array('id' => $id))
             ->add('id', 'hidden')
-            ->getForm()
-        ;
+            ->getForm();
     }
 }

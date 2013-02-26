@@ -11,23 +11,22 @@ class EventType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('title','text', array('label' => 'Nom', 'attr' => array('placeholder' => 'Titre de l\'évènement')))
+            ->add('title', 'text', array('label' => 'Nom', 'attr' => array('placeholder' => 'Titre de l\'évènement')))
             ->add('dateDeb', 'genemu_jquerydate', array(
             'widget' => 'single_text',
             'label' => 'Date de début',
             'format' => 'dd/MM/yyyy',
             'attr' => array('class' => 'datepicker mask_date')
-            ))
+        ))
             ->add('dateEnd', 'genemu_jquerydate', array(
             'widget' => 'single_text',
             'label' => 'Date de fin',
             'format' => 'dd/MM/yyyy',
             'attr' => array('class' => 'datepicker mask_date')
-            ))
-            ->add('place','text', array('label' => 'Ville'))
-            ->add('website','text', array('label' => 'Site internet'))
-            ->add('description', 'textarea', array('required' => false, 'label' => 'Description'))
-        ;
+        ))
+            ->add('place', 'text', array('label' => 'Ville'))
+            ->add('website', 'text', array('label' => 'Site internet'))
+            ->add('description', 'textarea', array('required' => false, 'label' => 'Description'));
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)

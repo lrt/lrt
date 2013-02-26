@@ -75,15 +75,15 @@ class CategoryController extends Controller
     {
         $user = $this->sc->getToken()->getUser();
 
-        if(is_object($user)) {
+        if (is_object($user)) {
             $entity = new Category();
-            $form   = $this->createForm(new CategoryType(), $entity);
+            $form = $this->createForm(new CategoryType(), $entity);
 
             return array(
                 'entity' => $entity,
-                'form'   => $form->createView(),
+                'form' => $form->createView(),
             );
-        }  else {
+        } else {
             return new Response('Vous devez être connecté', 404);
         }
     }
@@ -101,8 +101,8 @@ class CategoryController extends Controller
 
         $user = $this->sc->getToken()->getUser();
 
-        if(is_object($user)) {
-            $entity  = new Category();
+        if (is_object($user)) {
+            $entity = new Category();
             $form = $this->createForm(new CategoryType(), $entity);
             $form->bind($request);
 
@@ -116,7 +116,7 @@ class CategoryController extends Controller
 
             return array(
                 'entity' => $entity,
-                'form'   => $form->createView(),
+                'form' => $form->createView(),
             );
         } else {
             return new Response('Vous devez être connecté', 404);
@@ -135,13 +135,13 @@ class CategoryController extends Controller
     {
         $user = $this->sc->getToken()->getUser();
 
-        if(is_object($user)) {
+        if (is_object($user)) {
 
             $editForm = $this->createForm(new CategoryType(), $category);
 
             return array(
-                'entity'      => $category,
-                'edit_form'   => $editForm->createView(),
+                'entity' => $category,
+                'edit_form' => $editForm->createView(),
             );
         } else {
             return new Response('Vous devez être connecté', 404);
@@ -161,7 +161,7 @@ class CategoryController extends Controller
     {
         $user = $this->sc->getToken()->getUser();
 
-        if(is_object($user)) {
+        if (is_object($user)) {
 
             $editForm = $this->createForm(new CategoryType(), $category);
             $editForm->bind($request);
@@ -174,7 +174,7 @@ class CategoryController extends Controller
             }
 
             return array(
-                'entity'    => $category,
+                'entity' => $category,
                 'edit_form' => $editForm->createView(),
             );
         } else {
@@ -194,7 +194,7 @@ class CategoryController extends Controller
     {
         $user = $this->sc->getToken()->getUser();
 
-        if(is_object($user)) {
+        if (is_object($user)) {
             $form = $this->createDeleteForm($category->getId());
             $form->bind($request);
 
@@ -214,7 +214,6 @@ class CategoryController extends Controller
     {
         return $this->createFormBuilder(array('id' => $id))
             ->add('id', 'hidden')
-            ->getForm()
-        ;
+            ->getForm();
     }
 }

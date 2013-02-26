@@ -4,7 +4,7 @@
  **/
 $(document).ready(function(){
 
-    $('input[type=checkbox],input[type=radio],input[type=file]').uniform();
+    $('select,textarea,input[type=checkbox],input[type=radio],input[type=file],input[type=text]').uniform();
 
     //POPIN
     $('.popin').click(function(e) {

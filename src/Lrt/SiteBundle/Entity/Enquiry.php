@@ -8,8 +8,8 @@ class Enquiry
 {
 
     /**
-    * @Assert\NotNull()
-    */
+     * @Assert\NotNull()
+     */
     protected $name;
 
     /**

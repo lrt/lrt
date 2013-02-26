@@ -27,7 +27,8 @@ use Lrt\SiteBundle\Form\Type\VideoType;
  *
  * @Route("/video")
  */
-class VideoController extends Controller {
+class VideoController extends Controller
+{
 
     /** @DI\Inject("security.context") */
     public $sc;
@@ -50,11 +51,11 @@ class VideoController extends Controller {
         $form->bind($request);
         $data = $form->getData();
 
-        if($form->isValid()) {
+        if ($form->isValid()) {
 
             $videos = $this->em->getRepository('SiteBundle:Video')->filter($data['title'], $data['status'], $data['isPublic']);
 
-            return array('entities' => $videos,'form' => $form->createView(),'nb' => count($videos));
+            return array('entities' => $videos, 'form' => $form->createView(), 'nb' => count($videos));
 
         } else {
             return $this->redirect($this->generateUrl('video'));
@@ -83,7 +84,8 @@ class VideoController extends Controller {
      * @ParamConverter("video", class="SiteBundle:Video", options={"id" = "id"})
      * @Template()
      */
-    public function showAction(Video $video) {
+    public function showAction(Video $video)
+    {
 
         return array(
             'entity' => $video,
@@ -97,7 +99,8 @@ class VideoController extends Controller {
      * @Secure(roles="ROLE_ADMIN")
      * @Template()
      */
-    public function newAction() {
+    public function newAction()
+    {
         $video = new Video();
         $form = $this->createForm(new VideoType(), $video);
 
@@ -115,7 +118,8 @@ class VideoController extends Controller {
      * @Method("POST")
      * @Template("SiteBundle:Video:new.html.twig")
      */
-    public function createAction(Request $request) {
+    public function createAction(Request $request)
+    {
 
         $user = $this->sc->getToken()->getUser();
 
@@ -149,7 +153,8 @@ class VideoController extends Controller {
      * @Secure(roles="ROLE_ADMIN")
      * @Template()
      */
-    public function editAction(Video $video) {
+    public function editAction(Video $video)
+    {
 
         $user = $this->sc->getToken()->getUser();
 
@@ -175,7 +180,8 @@ class VideoController extends Controller {
      * @Method("POST")
      * @Template("SiteBundle:Video:edit.html.twig")
      */
-    public function updateAction(Request $request, Video $video) {
+    public function updateAction(Request $request, Video $video)
+    {
 
         $user = $this->sc->getToken()->getUser();
 
@@ -208,7 +214,8 @@ class VideoController extends Controller {
      * @Secure(roles="ROLE_ADMIN")
      * @Method("POST")
      */
-    public function deleteAction(Request $request, Video $video) {
+    public function deleteAction(Request $request, Video $video)
+    {
 
         $form = $this->createDeleteForm($video->getId());
         $form->bind($request);
@@ -222,11 +229,11 @@ class VideoController extends Controller {
         return $this->redirect($this->generateUrl('video'));
     }
 
-    private function createDeleteForm($id) {
+    private function createDeleteForm($id)
+    {
         return $this->createFormBuilder(array('id' => $id))
-                        ->add('id', 'hidden')
-                        ->getForm()
-        ;
+            ->add('id', 'hidden')
+            ->getForm();
     }
 
 }

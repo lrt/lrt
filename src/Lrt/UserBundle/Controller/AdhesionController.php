@@ -27,22 +27,22 @@ class AdhesionController extends Controller
     public $em;
 
     /** @DI\Inject("lrt.service.mail")
-     *  @var \Lrt\NotificationBundle\Service\MailService
+     * @var \Lrt\NotificationBundle\Service\MailService
      */
     public $mailService;
 
     /**
-    * Displays a list adhesion
-    *
-    * @Route("/", name="adhesion_display")
-    * @Secure(roles="ROLE_ADMIN,ROLE_SUPERVISEUR")
-    * @Template("UserBundle:Adhesion:index.html.twig")
-    */
+     * Displays a list adhesion
+     *
+     * @Route("/", name="adhesion_display")
+     * @Secure(roles="ROLE_ADMIN,ROLE_SUPERVISEUR")
+     * @Template("UserBundle:Adhesion:index.html.twig")
+     */
     public function indexAction()
     {
         $users = $this->em->getRepository('UserBundle:User')->getAdhesion();
 
-        return array('users' => $users,'nb' => count($users));
+        return array('users' => $users, 'nb' => count($users));
     }
 
     /**
@@ -59,19 +59,8 @@ class AdhesionController extends Controller
 
         return array(
             'entity' => $user,
-            'form'   => $form->createView(),
+            'form' => $form->createView(),
         );
-    }
-
-    /**
-     * Displays a form to create a new User entity.
-     *
-     * @Route("/confirm", name="adhesion_confirm")
-     * @Template("UserBundle:Adhesion:confirm.html.twig")
-     */
-    public function confirmAction()
-    {
-
     }
 
     /**
@@ -83,13 +72,13 @@ class AdhesionController extends Controller
      */
     public function createAction(Request $request)
     {
-        $user  = new User();
-        $form = $this->createForm($this->container->get('users.form.adhesionType'),$user);
+        $user = new User();
+        $form = $this->createForm($this->container->get('users.form.adhesionType'), $user);
 
-        if($request->isXmlHttpRequest()) {
+        if ($request->isXmlHttpRequest()) {
             $form->bind($request);
             if ($form->isValid()) {
-                $user->setUsername(strtolower($user->getFirstName().''.$user->getLastName()));
+                $user->setUsername(strtolower($user->getFirstName() . '' . $user->getLastName()));
 
                 $user->setPlainPassword("test");
                 $encoder = new MessageDigestPasswordEncoder('sha512');
@@ -103,16 +92,16 @@ class AdhesionController extends Controller
                 $this->em->persist($user);
                 $this->em->flush();
 
-                $this->mailService->sendMessage("Nouvelle adhésion", "no-reply@longchamp-roller-team.com", "longchamp-roller-team@laposte.net", "Test");
+                //$this->mailService->sendMessage("Nouvelle adhésion", "no-reply@longchamp-roller-team.com", "longchamp-roller-team@laposte.net", "Test");
 
-                //$this->get('session')->setFlash('success', 'Un e-mail vous sera envoyez.');
+                $this->get('session')->setFlash('success', 'Un e-mail vous sera envoyez.');
                 //return $this->redirect($this->generateUrl('user_adhesion_show', array('id' => $user->getId())));
             }
         }
 
         return array(
             'entity' => $user,
-            'form'   => $form->createView(),
+            'form' => $form->createView(),
         );
     }
 
@@ -125,7 +114,7 @@ class AdhesionController extends Controller
      */
     public function validateAction(User $user)
     {
-        if($result = $this->em->getRepository('UserBundle:User')->findOneBy(array('isAdhesion' => User::IS_NEW_ADHESION))) {
+        if ($result = $this->em->getRepository('UserBundle:User')->findOneBy(array('isAdhesion' => User::IS_NEW_ADHESION))) {
 
             $user->setDateValidation(new \DateTime());
             $user->setEnabled(User::IS_ACTIVE);
@@ -134,7 +123,7 @@ class AdhesionController extends Controller
             $this->em->flush();
             $this->mailService->sendMessage("Validation de votre adhésion", "no-reply@longchamp-roller-team.com", $user->getEmail(), "Votre demande d'adhésion est validé.");
 
-            $this->get('session')->setFlash('success', 'La demande de l\'adhérent a été validé.');
+            $this->get('session')->setFlash('success', 'La demande d\'adhésion a été validé.');
             return $this->redirect($this->generateUrl('adhesion_display'));
         }
         return $this->redirect($this->generateUrl('adhesion_display'));
@@ -149,13 +138,17 @@ class AdhesionController extends Controller
      */
     public function rejectAction(User $user)
     {
-        if($result = $this->em->getRepository('UserBundle:User')->findOneBy(array('isAdhesion' => User::IS_NEW_ADHESION))) {
+        if ($result = $this->em->getRepository('UserBundle:User')->findOneBy(array('isAdhesion' => User::IS_NEW_ADHESION))) {
 
-            //UPDATE USER ??
+            $user->setDateValidation(new \DateTime());
+            $user->setEnabled(User::IS_REJECT_ADHESION);
 
-            $this->mailService->sendMessage("Validation de votre adhésion", "no-reply@longchamp-roller-team.com", $user->getEmail(), "Votre demande d'adhésion a été rejeté.");
+            $this->get('fos_user.user_manager')->updateUser($user, false);
+            $this->em->flush();
 
-            $this->get('session')->setFlash('success', 'La demande de l\'adhérent a été rejeté.');
+            $this->mailService->sendMessage("Rejet de votre demande d'adhésion", "no-reply@longchamp-roller-team.com", $user->getEmail(), "Votre demande d'adhésion a été rejeté.");
+
+            $this->get('session')->setFlash('success', 'La demande d\'adhésion a été rejeté.');
             return $this->redirect($this->generateUrl('adhesion_display'));
         }
         return $this->redirect($this->generateUrl('adhesion_display'));
@@ -172,20 +165,20 @@ class AdhesionController extends Controller
      */
     public function revivalAction(User $user)
     {
-        if($result = $this->em->getRepository('UserBundle:User')->findOneBy(array('isAdhesion' => User::IS_NEW_ADHESION))) {
+        if ($result = $this->em->getRepository('UserBundle:User')->findOneBy(array('isAdhesion' => User::IS_NEW_ADHESION))) {
 
             $currentDate = new \DateTime();
             $dateSubmission = $user->getDateSubmission();
             $interval = $dateSubmission->diff($currentDate, true)->days;
 
-            if($interval > 0) {
+            if ($interval > 0) {
                 $user->setDateLastRevival($currentDate);
                 $this->get('fos_user.user_manager')->updateUser($user, false);
                 $this->em->flush();
 
                 $this->mailService->sendMessage("Valider votre adhésion", "no-reply@longchamp-roller-team.com", $user->getEmail(), "Il manque des informations pour valider votre adhésion.");
 
-                $this->get('session')->setFlash('success', 'Votre message a été envoyé.');
+                $this->get('session')->setFlash('success', 'Votre relance a été envoyé.');
                 return $this->redirect($this->generateUrl('adhesion_display'));
             }
             $this->get('session')->setFlash('error', 'Votre demande de relance doit être supérieur à  la date de la demande.');

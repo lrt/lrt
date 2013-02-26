@@ -35,7 +35,7 @@ class ArticleType extends AbstractType
                 Article::DRAFTS => 'Brouillon',
                 Article::IMMEDIATE => 'Publication immédiate',
             )))
-            ->add('picture',null, array('label' => 'Image', 'required' => false))
+            ->add('picture', null, array('label' => 'Image', 'required' => false))
             ->add('isPublic', null, array('label' => 'Voir sur la page principal ?', 'required' => false))
             ->add('category', 'entity', array(
             'class' => 'Lrt\CMSBundle\Entity\Category',

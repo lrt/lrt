@@ -56,7 +56,7 @@ class PartnerController extends Controller
         $deleteForm = $this->createDeleteForm($partner->getId());
 
         return array(
-            'entity'      => $partner,
+            'entity' => $partner,
             'delete_form' => $deleteForm->createView(),
         );
     }
@@ -71,11 +71,11 @@ class PartnerController extends Controller
     public function newAction()
     {
         $partner = new Partner();
-        $form   = $this->createForm(new PartnerType(), $partner);
+        $form = $this->createForm(new PartnerType(), $partner);
 
         return array(
             'entity' => $partner,
-            'form'   => $form->createView(),
+            'form' => $form->createView(),
         );
     }
 
@@ -89,7 +89,7 @@ class PartnerController extends Controller
      */
     public function createAction(Request $request)
     {
-        $partner  = new Partner();
+        $partner = new Partner();
         $form = $this->createForm(new PartnerType(), $partner);
         $form->bind($request);
 
@@ -102,7 +102,7 @@ class PartnerController extends Controller
 
         return array(
             'entity' => $partner,
-            'form'   => $form->createView(),
+            'form' => $form->createView(),
         );
     }
 
@@ -120,8 +120,8 @@ class PartnerController extends Controller
         $deleteForm = $this->createDeleteForm($partner->getId());
 
         return array(
-            'entity'      => $partner,
-            'edit_form'   => $editForm->createView(),
+            'entity' => $partner,
+            'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         );
     }
@@ -149,8 +149,8 @@ class PartnerController extends Controller
         }
 
         return array(
-            'entity'      => $partner,
-            'edit_form'   => $editForm->createView(),
+            'entity' => $partner,
+            'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         );
     }
@@ -169,8 +169,8 @@ class PartnerController extends Controller
         $form->bind($request);
 
         if ($form->isValid()) {
-           $this->em->remove($partner);
-           $this->em->flush();
+            $this->em->remove($partner);
+            $this->em->flush();
         }
 
         return $this->redirect($this->generateUrl('partner'));
@@ -180,8 +180,7 @@ class PartnerController extends Controller
     {
         return $this->createFormBuilder(array('id' => $id))
             ->add('id', 'hidden')
-            ->getForm()
-        ;
+            ->getForm();
     }
 
     /**
@@ -194,7 +193,7 @@ class PartnerController extends Controller
         $exportPartners = $this->container->get('service.export_partners');
         $csvReadyPartners = $exportPartners->generateCsvReadyDatas();
 
-        if(!is_object($csvReadyPartners)) {
+        if (!is_object($csvReadyPartners)) {
             return $this->get('session')->setFlash('error', 'Impossible d\'exporter la liste des partenaires');
         } else {
             return $csvReadyPartners;

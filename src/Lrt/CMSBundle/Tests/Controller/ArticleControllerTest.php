@@ -13,19 +13,6 @@ use Lrt\SiteBundle\Tests\Controller\LrtWebTestCase;
 
 class ArticleControllerTest extends LrtWebTestCase
 {
-
-    /**
-     * @test
-     * @testdox Accès à la liste des articles
-     * @group article
-     */
-    public function listArticle()
-    {
-        $this->login($this->client, array('user' => 'alexandre'));
-        $this->client->request('GET', '/article');
-        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
-    }
-
     /**
      * @test
      * @testdox Modifier un article dont les données seraient valide

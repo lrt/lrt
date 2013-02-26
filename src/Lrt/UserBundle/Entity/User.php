@@ -27,6 +27,7 @@ class User extends BaseUser
     const IS_NOT_ACTIVE = 0;
     const IS_ACTIVE = 1;
     const IS_NEW_ADHESION = 2;
+    const IS_REJECT_ADHESION = 3;
 
     /**
      * @ORM\Id
@@ -422,7 +423,7 @@ class User extends BaseUser
      */
     public function getFullName()
     {
-        return $this->firstName.' '.$this->lastName;
+        return $this->firstName . ' ' . $this->lastName;
     }
 
     /**
@@ -478,8 +479,9 @@ class User extends BaseUser
         $this->request->removeElement($request);
     }
 
-    public function getStatus() {
-        if($this->enabled === true) {
+    public function getStatus()
+    {
+        if ($this->enabled === true) {
             return 1;
         } else {
             return 0;

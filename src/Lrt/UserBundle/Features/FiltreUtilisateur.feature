@@ -38,13 +38,24 @@ Scénario: Je recherche un utilisateur par son nom
     Alors je devrais voir les lignes suivantes dans le tableau "tListeUsers" :
         | * | * | dubosc | * | * | * | * | * |
 
-#@filtre_user
-#Scénario: Je recherche tous les administrateurs
-#
-#   Lorsque je remplis le texte suivant:
-#       | userbundle_userfiltertype_type |  ROLE_ADMIN  |
-#   Et je presse "Filtrer"
-#   Alors je devrais voir les lignes suivantes dans le tableau "tListeUsers" :
-#       | alexandre | * | * | admin | * | * |
-#   Et je ne devrais pas voir les lignes suivantes dans le tableau "tListeUsers" :
-#       | test | * | * | * | non activé | * |
+@filtre_user
+Scénario: Je filtre la liste des utilisateurs par status (actif)
+
+    Lorsque je remplis le texte suivant:
+        | userbundle_userfiltertype_status |  1  |
+    Et je presse "Filtrer"
+    Alors je devrais voir les lignes suivantes dans le tableau "tListeUsers" :
+        | * | alexandre | seiller | * | * | * | * | * |
+    Et je ne devrais pas voir les lignes suivantes dans le tableau "tListeUsers" :
+        | * | nicolas | durand | * | * | * | * | * |
+
+@filtre_user
+Scénario: Je recherche tous les administrateurs
+
+   Lorsque je remplis le texte suivant:
+       | userbundle_userfiltertype_type |  ROLE_ADMIN  |
+   Et je presse "Filtrer"
+   Alors je devrais voir les lignes suivantes dans le tableau "tListeUsers" :
+       | * | alexandre | seiller | * | * | * | * | * |
+   Et je ne devrais pas voir les lignes suivantes dans le tableau "tListeUsers" :
+       | * | nicolas | durand | * | * | * | * | * |
