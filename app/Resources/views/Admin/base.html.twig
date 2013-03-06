@@ -8,8 +8,9 @@
     {% block stylesheets %}
         <link rel="stylesheet" href="{{ asset('bundles/site/css/bootstrap.min.css') }}" type="text/css" media="screen" />
         <link rel="stylesheet" href="{{ asset('bundles/site/css/bootstrap-responsive.min.css') }}">
-        <link rel="stylesheet" href="{{ asset('bundles/site/css/admin/main.css') }}">
-        <link rel="stylesheet" href="{{ asset('bundles/site/css/admin/red.css') }}">
+        <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Lato:100,300,400,700,900,100italic,300italic,400italic,700italic,900italic">
+        <link rel="stylesheet" href="{{ asset('bundles/site/css/admin/style.css') }}">
+        <!--<link rel="stylesheet" href="{{ asset('bundles/site/css/admin/red.css') }}">-->
         <link rel="stylesheet" href="{{ asset('bundles/site/css/admin/fullcalendar.css') }}">
         <link rel="stylesheet" href="{{ asset('bundles/site/css/admin/uniform.css') }}">
         <link rel="stylesheet" href="{{ asset('bundles/site/css/admin/select2.css') }}">
@@ -22,112 +23,67 @@
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
 </head>
 <body>
-    <div id="header" style="border-bottom: 6px solid #ab1c1c">
-        <h1><a href="{{ path('dashboard') }}">{{ sitename }}</a></h1>
-    </div>
-    <div id="search">
-        <input type="text" placeholder="Search here..."><button type="submit" class="tip-right" data-original-title="Search"><i class="icon-search icon-white"></i></button>
-    </div>
-    <div id="user-nav" class="navbar navbar-inverse">
-        <ul class="nav btn-group" style="width: auto; margin: 0px;">
-            <li class="btn btn-inverse"><a title="" href="#"><i class="icon icon-user"></i> <span class="text">Profile</span></a></li>
-            <li class="btn btn-inverse dropdown" id="menu-messages"><a href="#" data-toggle="dropdown" data-target="#menu-messages" class="dropdown-toggle"><i class="icon icon-envelope"></i> <span class="text">Messages</span> <span class="label label-important">5</span> <b class="caret"></b></a>
-                <ul class="dropdown-menu">
-                    <li><a class="sAdd" title="" href="#">new message</a></li>
-                    <li><a class="sInbox" title="" href="#">inbox</a></li>
-                    <li><a class="sOutbox" title="" href="#">outbox</a></li>
-                    <li><a class="sTrash" title="" href="#">trash</a></li>
-                </ul>
-            </li>
-            <li class="btn btn-inverse"><a title="" href="#"><i class="icon icon-cog"></i> <span class="text">Settings</span></a></li>
-            <li class="btn btn-inverse"><a title="" href="{{ path('fos_user_security_logout') }}"><i class="icon icon-share-alt"></i> <span class="text">Déconnexion</span></a></li>
-        </ul>
-    </div>
-    <div id="sidebar">
-        <a href="#" class="visible-phone"><i class="icon icon-file"></i> Gallery</a>
-        <ul style="display: block;">
-            <li><a href="{{ path('dashboard') }}"><i class="icon icon-home"></i> <span>Dashboard</span></a></li>
-            <li class="submenu">
-                <a href="#"><i class="icon icon-file"></i> <span>Contenu</span></a>
-                <ul>
-                    <li><a href="{{ path('article') }}">Articles</a></li>
-                    <li><a href="{{ path('category') }}">Catégories</a></li>
-                </ul>
-            </li>
-            <li><a href="{{ path('video') }}"><i class="icon icon-film"></i> <span>Vidéos</span></a></li>
-            <li><a href="{{ path('event') }}"><i class="icon icon-calendar"></i> <span>Evènements</span></a></li>
-            <!--<li>
-                <a href=""><i class="icon icon-signal"></i> <span>Stats</span></a>
-            </li>-->
-            <li class="submenu">
-                <a href=""><i class="icon icon-inbox"></i> <span>Association</span></a>
-                <ul>
-                    <li><a href="{{ path('adhesion_display') }}">Adhésion</a></li>
-                    <li><a href="{{ path('partner') }}">Partenaires</a></li>
-                    <!--<li><a href="">Partage de fichiers</a></li>-->
-                </ul>
-            </li>
-            {% if is_granted('ROLE_ADMIN') %}
-            <li class="submenu">
-                <a href=""><i class="icon icon-wrench"></i> <span>Administration</span></a>
-                <ul>
-                    <li><a href="{{ path('user') }}">Utilisateurs</a></li>
-                </ul>
-            </li>
-            {% endif %}
-        </ul>
-    </div>
-    <div id="content">
-        <div id="content-header">
-            <h1>{% block title_page %}{% endblock %}</h1>
-            <div class="btn-group" style="width: auto;">
-                {% block button_actions %}{% endblock %}
-            </div>
+    <div id="in-nav">
+      <div class="container">
+        <div class="row">
+          <div class="span12">
+            <ul class="pull-right">
+              <li><a href="{{ path('fos_user_security_logout') }}"><i class="icon icon-share-alt"></i> Déconnexion</a></li>
+            </ul>
+            <a id="logo" href="{{ path('dashboard') }}">
+              <h4>{{ sitename }}</h4>
+            </a>
+          </div>
         </div>
-        <div id="breadcrumb">
-            <a href="{{ path('dashboard') }}" class="tip-bottom" data-original-title="Page d'accueil"><i class="icon-home"></i> Accueil</a>
-            {% block breadcrumb %}{% endblock %}
+      </div>
+    </div>
+    <div id="in-sub-nav">
+      <div class="container">
+        <div class="row">
+          <div class="span12">
+            <ul>
+              <li><a href="{{ path('dashboard') }}" class="active"><i class="batch home"></i><br>Tableau de bord</a></li>
+              <!--<li><span class="label label-important pull-right">08</span><a href="stream.html"><i class="batch stream"></i><br>Stream</a></li>-->
+              <!--<li><span class="label label-important pull-right">04</span><a href="messages.html"><i class="batch plane"></i><br>Messages</a></li>-->
+              <li><a href="{{ path('event') }}"><i class="batch calendar"></i><br>Calendrier</a></li>
+              <li><a href="{{ path('article') }}"><i class="batch quill"></i><br>Articles</a></li>
+              <li><a href="{{ path('video') }}"><i class="batch forms"></i><br>Vidéos</a></li>
+              <!--<li><a href="faq.html"><i class="batch forms"></i><br>FAQ</a></li>-->
+              <li><a href="{{ path('user') }}"><i class="batch users"></i><br>Adhérents</a></li>
+              <li><a href="{{ path('partner') }}"><i class="batch star"></i><br>Partenaires</a></li>
+              <!--<li><a href="settings.html"><i class="batch settings"></i><br>Configuration</a></li>-->
+            </ul>
+          </div>
         </div>
-        <div class="container-fluid">
-            {% for message in app.session.flashbag.get('error') %}
-                <div class="alert alert-error" style="margin-top:10px">
-                    <button type="button" class="close" data-dismiss="alert">×</button>
-                    {{ message }}
-                </div>
-            {% endfor %}
-            {% for message in app.session.flashbag.get('message') %}
-                <div class="alert alert-info" style="margin-top:10px">
-                    <button type="button" class="close" data-dismiss="alert">×</button>
-                    {{ message }}
-                </div>
-            {% endfor %}
-            {% for message in app.session.flashbag.get('success') %}
-                <div class="alert alert-success" style="margin-top:10px">
-                    <button type="button" class="close" data-dismiss="alert">×</button>
-                    {{ message }}
-                </div>
-            {% endfor %}
-            {% block body %}{% endblock %}
-            <div class="row-fluid">
-                <div class="span12">
-                </div>
-            </div>
-            <div class="row-fluid">
-                <div id="footer" class="span12">
-                    2012 © Unicorn Admin. Brought to you by <a href="https://wrapbootstrap.com/user/diablo9983">diablo9983</a>
+      </div>
+    </div>
+    <div class="page">
+        <div class="page-container">
+            <div class="container">
+                <div class="row">
+                    {% block body %}{% endblock %}
                 </div>
             </div>
         </div>
     </div>
-    <ul class="typeahead dropdown-menu"></ul>
-{% block javascripts %}
-    <script type="text/javascript" src="{{ asset('js/jquery-1.8.2.min.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('bundles/site/js/admin/jquery.ui.custom.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('bundles/site/js/bootstrap.min.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('bundles/site/js/admin/jquery.uniform.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('bundles/site/js/admin/select2.min.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('bundles/site/js/admin/main.js') }}"></script>
-    <script src="{{ asset('bundles/site/js/video.min.js') }}"></script>
-{% endblock %}
+    <footer>
+      <div class="container">
+        <div class="row">
+          <div class="span12">
+            <p class="pull-right">Admin Theme by Nathan Speller</p>
+            <p>© Copyright 2013 FreelanceLeague</p>
+          </div>
+        </div>
+      </div>
+    </footer>
+    {% block javascripts %}
+        <script type="text/javascript" src="{{ asset('js/jquery-1.8.2.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/site/js/admin/jquery.ui.custom.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/site/js/bootstrap.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/site/js/admin/jquery.uniform.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/site/js/admin/select2.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/site/js/admin/main.js') }}"></script>
+        <script src="{{ asset('bundles/site/js/video.min.js') }}"></script>
+    {% endblock %}
 </body>
 </html>

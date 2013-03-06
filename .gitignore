@@ -5,6 +5,7 @@ build/*
 web/bundles/*
 web/uploads/*
 web/rss/*
+nbproject/*
 */nbproject/*
 .idea
 *.php~

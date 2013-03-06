@@ -23,120 +23,105 @@
 {% endblock %}
 
 {% block body %}
-<div class="row-fluid">
-    <div class="span12">
-        <div class="hero-unit" style="padding:10px;background: #FFF;">
-            <form action="{{ path('article') }}" method="get" class="form-inline">
-                {{ form_widget(form.title,{ 'attr': {'placeholder': 'titre'} }) }} {{ form_widget(form.category) }}
-                {{ form_widget(form.status) }} {{ form_widget(form.isPublic) }}
-                {{ form_rest(form) }}
-                <a href="{{ path('article') }}" class="btn btn-small raz-filter" data-href="{{ path('article') }}">
-                    <i class="icon-refresh"></i>
-                     Réinitialiser
-                </a>
-                <button type="submit" class="btn btn-small btn-primary"><i class="icon-filter icon-white"></i>Filtrer</button>
-            </form>
-        </div>
+<div class="span12">
+    <div class="buttons">
+        <a href="{{ path('article_new') }}" class="btn pull-right"><i class="icon-plus"></i> Ajouter un article</a>
     </div>
-</div>
-<div class="row-fluid">
-    <div class="span12">
-        <div class="widget-box">
-            <div class="widget-title">
-                    <span class="icon">
-                        <i class="icon-play-circle"></i>
-                    </span>
-                <h5>Articles</h5>
-                <div class="buttons">
-                    <a href="{{ path('article_new') }}" class="btn btn-success btn-mini"><i class="icon-plus icon-white"></i> Ajouter un article</a>
-                </div>
-            </div>
-            <div class="widget-content">
-                <table class="table table-bordered table-striped tListeArticles">
-                    <thead>
-                        <tr>
-                            <th></th>
-                            <th>Contenu</th>
-                            <th>Date</th>
-                            <th>Rubrique</th>
-                            <th>Active</th>
-                            <th>Visibilité</th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for entity in entities %}
-                        <tr>
-                            <td>
-                                {% if entity.path is not null %}
-                                    <img width="100" height="75" src="{{ asset(entity.path) }}" data-original="{{ asset(entity.path) }}" alt="Prévisualiser" title="Prévisualiser" class="preview img-rounded">
-                                {% else %}
-                                    <img width="100" height="75" src="{{ asset('bundles/admin/img/example_mini.jpg') }}" alt="Prévisualiser" title="Prévisualiser" class="preview img-rounded">
-                                {%  endif %}
-                            </td>
-                            <td>
-                                <div class="space_half">
-                                    <img src="{{ asset('bundles/site/images/page.png') }}" alt="Prévisualiser" title="Prévisualiser" class="preview">
-                                    <a class="title_preview" title="Modifier" href="{{ path('article_edit', { 'id': entity.id }) }}">{{ entity.id }} - <b>{{ entity.title }}</b></a>
-                                </div>
-                                {{ entity.content|raw|truncate(50) }}
-                                ( posté par  <a title="" href="#">{{ entity.user }}</a> )
-                            </td>
-                            <td>{{ entity.dateSubmission|date('d/m/Y h:m') }}</td>
-                            <td>{{ entity.category.name }}</td>
-                            <td>
-                                {% if entity.isValid == 1 %}
-                                    <i class="icon-ok"></i>
-                                {% endif %}
-                            </td>
-                            <td>
-                                {% if entity.isPublic == 1 %}
-                                Public
-                                {% else %}
-                                Privé
-                                {% endif %}
-                            </td>
-                            <td>
-                                <div class="btn-group">
-                                    <a class="btn btn-small dropdown-toggle" data-toggle="dropdown" href="#">
-                                        Action
-                                        <span class="caret"></span>
-                                    </a>
-                                    <ul class="dropdown-menu pull-right">
-                                        <li>
-                                            <a data-toggle="modal" rel="{{ entity.title }}" href="{{ path('article_show', { 'id': entity.id }) }}" class="popin">
-                                                <i class="icon-zoom-in"></i>
-                                                Voir
-                                            </a>
-                                        </li>
-                                        {% if entity.status == 3 %}
-                                        <li>
-                                            <a href="{{ path('article_edit', { 'id': entity.id }) }}">
-                                                <i class="icon-edit"></i>
-                                                Modifier
-                                            </a>
-                                            <a href="{{ path('article_delete', { 'id': entity.id }) }}">
-                                                <i class="icon-trash"></i>
-                                                Corbeille
-                                            </a>
-                                        </li>
-                                        {% endif %}
-                                    </ul>
-                                </div>
-                            </td>
-                        </tr>
-                        {% else %}
-                        <tr>
-                            <td>Aucun article ne correspond à votre recherche</td>
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-                <div class="navigation alternate">
-                    {{ entities.render()|raw }}
-                </div>
-            </div>
-        </div>
+    <h4 class="header">Articles</h4>    
+    <div class="hero-unit" style="padding:10px;background: #FFF;">
+        <form action="{{ path('article') }}" method="get" class="form-inline">
+            {{ form_widget(form.title,{ 'attr': {'placeholder': 'titre'} }) }} {{ form_widget(form.category) }}
+            {{ form_widget(form.status) }} {{ form_widget(form.isPublic) }}
+            {{ form_rest(form) }}
+            <a href="{{ path('article') }}" class="btn btn-small raz-filter" data-href="{{ path('article') }}">
+                <i class="icon-refresh"></i>
+                 Réinitialiser
+            </a>
+            <button type="submit" class="btn btn-small btn-primary"><i class="icon-filter icon-white"></i>Filtrer</button>
+        </form>
+    </div>
+    <table class="table table-striped sortable tListeArticles">
+        <thead>
+            <tr>
+                <th></th>
+                <th>Contenu</th>
+                <th>Date</th>
+                <th>Rubrique</th>
+                <th>Active</th>
+                <th>Visibilité</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for entity in entities %}
+            <tr>
+                <td>
+                    {% if entity.path is not null %}
+                        <img width="100" height="75" src="{{ asset(entity.path) }}" data-original="{{ asset(entity.path) }}" alt="Prévisualiser" title="Prévisualiser" class="preview img-rounded">
+                    {% else %}
+                        <img width="100" height="75" src="{{ asset('bundles/admin/img/example_mini.jpg') }}" alt="Prévisualiser" title="Prévisualiser" class="preview img-rounded">
+                    {%  endif %}
+                </td>
+                <td>
+                    <div class="space_half">
+                        <img src="{{ asset('bundles/site/images/page.png') }}" alt="Prévisualiser" title="Prévisualiser" class="preview">
+                        <a class="title_preview" title="Modifier" href="{{ path('article_edit', { 'id': entity.id }) }}">{{ entity.id }} - <b>{{ entity.title }}</b></a>
+                    </div>
+                    {{ entity.content|raw|truncate(50) }}
+                    ( posté par  <a title="" href="#">{{ entity.user }}</a> )
+                </td>
+                <td>{{ entity.dateSubmission|date('d/m/Y h:m') }}</td>
+                <td>{{ entity.category.name }}</td>
+                <td>
+                    {% if entity.isValid == 1 %}
+                        <i class="icon-ok"></i>
+                    {% endif %}
+                </td>
+                <td>
+                    {% if entity.isPublic == 1 %}
+                    Public
+                    {% else %}
+                    Privé
+                    {% endif %}
+                </td>
+                <td>
+                    <div class="btn-group">
+                        <a class="btn btn-small dropdown-toggle" data-toggle="dropdown" href="#">
+                            Action
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu pull-right">
+                            <li>
+                                <a data-toggle="modal" rel="{{ entity.title }}" href="{{ path('article_show', { 'id': entity.id }) }}" class="popin">
+                                    <i class="icon-zoom-in"></i>
+                                    Voir
+                                </a>
+                            </li>
+                            {% if entity.status == 3 %}
+                            <li>
+                                <a href="{{ path('article_edit', { 'id': entity.id }) }}">
+                                    <i class="icon-edit"></i>
+                                    Modifier
+                                </a>
+                                <a href="{{ path('article_delete', { 'id': entity.id }) }}">
+                                    <i class="icon-trash"></i>
+                                    Corbeille
+                                </a>
+                            </li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                </td>
+            </tr>
+            {% else %}
+            <tr>
+                <td>Aucun article ne correspond à votre recherche</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <div class="navigation alternate">
+        {{ entities.render()|raw }}
     </div>
 </div>
 {% endblock %}

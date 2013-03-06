@@ -9,61 +9,46 @@
 {% endblock %}
 
 {% block body %}
-<div class="row-fluid">
-    <div class="span12">
-        <div class="hero-unit" style="padding:10px;background: #FFF;">
-            <form action="{{ path('video') }}" method="get" class="form-inline">
-                {{ form_widget(form.title,{ 'attr': {'placeholder': 'titre'} }) }}
-                {{ form_widget(form.status) }} {{ form_widget(form.isPublic) }}
-                {{ form_rest(form) }}
-                <a href="{{ path('video') }}" class="btn btn-small raz-filter" data-href="{{ path('video') }}">
-                    <i class="icon-refresh"></i>
-                    Réinitialiser
-                </a>
-                <button type="submit" class="btn btn-small btn-primary"><i class="icon-filter icon-white"></i>Filtrer</button>
-            </form>
+<div class="span12">
+    <div class="buttons">
+        <a id="add-event" data-toggle="modal" href="#modal-add-event" class="btn pull-right"><i class="icon-plus"></i> Ajouter une vidéo</a>
+        <div class="modal hide" id="modal-add-event">
+            {% render "SiteBundle:Video:new" %}
         </div>
     </div>
-</div>
-<div class="row-fluid">
-    <div class="span12">
-        <div class="widget-box">
-            <div class="widget-title">
-                <span class="icon">
-                    <i class="icon-play-circle"></i>
-                </span>
-                <h5>Videos</h5>
-                <div class="buttons">
-                    <a id="add-event" data-toggle="modal" href="#modal-add-event" class="btn btn-success btn-mini"><i class="icon-plus icon-white"></i> Ajouter une vidéo</a>
-                    <div class="modal hide" id="modal-add-event">
-                        {% render "SiteBundle:Video:new" %}
-                    </div>
-                </div>
+    <h4 class="header">Videos</h4>  
+    <div class="hero-unit" style="padding:10px;background: #FFF;">
+        <form action="{{ path('video') }}" method="get" class="form-inline">
+            {{ form_widget(form.title,{ 'attr': {'placeholder': 'titre'} }) }}
+            {{ form_widget(form.status) }} {{ form_widget(form.isPublic) }}
+            {{ form_rest(form) }}
+            <a href="{{ path('video') }}" class="btn btn-small raz-filter" data-href="{{ path('video') }}">
+                <i class="icon-refresh"></i>
+                Réinitialiser
+            </a>
+            <button type="submit" class="btn btn-small btn-primary"><i class="icon-filter icon-white"></i>Filtrer</button>
+        </form>
+    </div>
+    <ul class="thumbnails">
+        {% for entity in entities %}
+        <li class="span2">
+            <a href="#" class="thumbnail">
+                <img width="140" height="140" src="{{ asset('bundles/site/images/video/poster.jpg') }}" alt="{{ entity.title }}">
+            </a>
+            <div class="actions">
+                <a title="{{ entity.title }}" href="{{ path('video_edit', { 'id': entity.id }) }}"><i class="icon-pencil icon-white"></i></a>
+                <a title="{{ entity.title }}" href="{{ path('video_show', { 'id': entity.id }) }}"><i class="icon-search icon-white"></i></a>
             </div>
-            <div class="widget-content">
-                <ul class="thumbnails">
-                    {% for entity in entities %}
-                    <li class="span2">
-                        <a href="#" class="thumbnail">
-                            <img width="140" height="140" src="{{ asset('bundles/site/images/video/poster.jpg') }}" alt="{{ entity.title }}">
-                        </a>
-                        <div class="actions">
-                            <a title="{{ entity.title }}" href="{{ path('video_edit', { 'id': entity.id }) }}"><i class="icon-pencil icon-white"></i></a>
-                            <a title="{{ entity.title }}" href="{{ path('video_show', { 'id': entity.id }) }}"><i class="icon-search icon-white"></i></a>
-                        </div>
-                    </li>
-                    {% endfor %}
-                </ul>
-                <div class="modal hide" id="box">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">×</button>
-                        <h3>Ajouter une vidéo</h3>
-                    </div>
-                    <div class="modal-body">
-                        {% render "SiteBundle:Video:new" %}
-                    </div>
-                </div>
-            </div>
+        </li>
+        {% endfor %}
+    </ul>
+    <div class="modal hide" id="box">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">×</button>
+            <h3>Ajouter une vidéo</h3>
+        </div>
+        <div class="modal-body">
+            {% render "SiteBundle:Video:new" %}
         </div>
     </div>
 </div>
