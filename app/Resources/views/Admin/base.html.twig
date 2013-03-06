@@ -8,7 +8,6 @@
     {% block stylesheets %}
         <link rel="stylesheet" href="{{ asset('bundles/site/css/bootstrap.min.css') }}" type="text/css" media="screen" />
         <link rel="stylesheet" href="{{ asset('bundles/site/css/bootstrap-responsive.min.css') }}">
-        <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Lato:100,300,400,700,900,100italic,300italic,400italic,700italic,900italic">
         <link rel="stylesheet" href="{{ asset('bundles/site/css/admin/style.css') }}">
         <!--<link rel="stylesheet" href="{{ asset('bundles/site/css/admin/red.css') }}">-->
         <link rel="stylesheet" href="{{ asset('bundles/site/css/admin/fullcalendar.css') }}">
@@ -49,7 +48,11 @@
               <li><a href="{{ path('article') }}"><i class="batch quill"></i><br>Articles</a></li>
               <li><a href="{{ path('video') }}"><i class="batch forms"></i><br>Vidéos</a></li>
               <!--<li><a href="faq.html"><i class="batch forms"></i><br>FAQ</a></li>-->
-              <li><a href="{{ path('adhesion_display') }}"><i class="batch users"></i><br>Adhérents</a></li>
+              {% if is_granted('ROLE_ADMIN') %}
+                    <li><a href="{{ path('user') }}"><i class="batch users"></i><br>Utilisateurs</a></li>
+              {% elseif is_granted('ROLE_SUPERVISEUR') %}
+                    <li><a href="{{ path('adhesion_display') }}"><i class="batch users"></i><br>Adhérents</a></li>
+              {% endif %}
               <li><a href="{{ path('partner') }}"><i class="batch star"></i><br>Partenaires</a></li>
               <!--<li><a href="settings.html"><i class="batch settings"></i><br>Configuration</a></li>-->
             </ul>
@@ -61,6 +64,26 @@
         <div class="page-container">
             <div class="container">
                 <div class="row">
+                    <div class="span12">
+                        {% for message in app.session.flashbag.get('error') %}
+                            <div class="alert alert-error">
+                                <button type="button" class="close" data-dismiss="alert">×</button>
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                        {% for message in app.session.flashbag.get('message') %}
+                            <div class="alert">
+                                <button type="button" class="close" data-dismiss="alert">×</button>
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                        {% for message in app.session.flashbag.get('success') %}
+                            <div class="alert alert-success">
+                                <button type="button" class="close" data-dismiss="alert">×</button>
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                    </div>
                     {% block body %}{% endblock %}
                 </div>
             </div>

@@ -20,8 +20,18 @@ class VideoType extends AbstractType
         $builder
             ->add('title', null, array('required' => false, 'label' => 'Titre :'))
             ->add('description', null, array('required' => false, 'label' => 'Description :'))
-            ->add('isPublished', null, array('required' => false, 'label' => 'Publication :'))
-            ->add('isHighlighted', null, array('required' => false, 'label' => 'Mise en avant ?'));
+            ->add('isPublished', 'choice', array(
+            'label' => 'Etat de publication',
+            'choices' => array(
+                '0' => 'Publié',
+                '1' => 'Non publié',
+            )))
+            ->add('isHighlighted', 'choice', array(
+            'label' => 'Mise en avant ?',
+            'choices' => array(
+                '0' => 'Non',
+                '1' => 'Oui',
+            )));
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)

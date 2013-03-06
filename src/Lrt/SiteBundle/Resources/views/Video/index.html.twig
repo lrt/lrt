@@ -32,7 +32,7 @@
     <ul class="thumbnails">
         {% for entity in entities %}
         <li class="span2">
-            <a href="#" class="thumbnail">
+            <a href="{{ path('video_show', { 'id': entity.id }) }}" id="show-video" class="thumbnail">
                 <img width="140" height="140" src="{{ asset('bundles/site/images/video/poster.jpg') }}" alt="{{ entity.title }}">
             </a>
             <div class="actions">

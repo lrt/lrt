@@ -8,8 +8,8 @@ Contexte: Je suis un administrateur et je voudrais relancer une demande d'adhés
     Et je remplis "Mot de passe :" avec "test"
     Et je presse "Connexion"
     Alors je suis "Mon Compte"
-    Et je suis "Adhésion"
-    Alors je devrais voir "Gestion des adhérents"
+    Et je suis "Adhérents"
+    Alors je devrais voir "Adhérents"
 
 @adhesion
 Scénario: Je relance une nouvelle demande d'adhésion

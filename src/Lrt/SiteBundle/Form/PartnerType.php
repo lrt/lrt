@@ -13,7 +13,8 @@ class PartnerType extends AbstractType
         $builder
             ->add('name')
             ->add('description')
-            ->add('website');
+            ->add('website')
+            ->add('picture', null, array('label' => 'Logo', 'required' => false));
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)

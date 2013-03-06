@@ -8,8 +8,8 @@ Contexte: Je suis un administrateur et je voudrais valider une demande d'adhési
     Et je remplis "Mot de passe :" avec "test"
     Et je presse "Connexion"
     Alors je suis "Mon Compte"
-    Et je suis "Adhésion"
-    Alors je devrais voir "Gestion des adhérents"
+    Et je suis "Adhérents"
+    Alors je devrais voir "Adhérents"
 
 @adhesion
 Scénario: Je rejette une nouvelle demande d'adhésion

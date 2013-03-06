@@ -20,5 +20,5 @@ Scénario: Je veux ajouter un article
         | lrt_cmsbundle_articletype_status       | 2            |
         | lrt_cmsbundle_articletype_isPublic     | 1            |
         | lrt_cmsbundle_articletype_category     | 1            |
-    Et j' attache le fichier "README.md" à "lrt_cmsbundle_articletype_picture"
+    Et j' attache le fichier "image.jpeg" à "lrt_cmsbundle_articletype_picture"
     Et je presse "Valider"

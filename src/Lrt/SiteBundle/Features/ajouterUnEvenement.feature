@@ -8,8 +8,8 @@ Lorsque je remplis "username" avec "alexandre"
 Et je remplis "Mot de passe :" avec "test"
 Et je presse "Connexion"
 Alors je suis "Mon Compte"
-Et je suis "Evènements"
-Alors je devrais voir "Evènement"
+Et je suis "Calendrier"
+Alors je devrais voir "Evènements"
 
 @new_event
 Scénario: Je veux ajouter un évènement

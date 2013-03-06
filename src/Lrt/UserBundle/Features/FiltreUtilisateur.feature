@@ -9,7 +9,7 @@ Contexte: Je suis un administrateur qui recherche des utilisateurs
     Et je presse "Connexion"
     Alors je suis "Mon Compte"
     Et je suis "Utilisateurs"
-    Alors je devrais voir "Gestion des utilisateurs"
+    Alors je devrais voir "Utilisateurs"
 
 @filtre_user
 Scénario: Je recherche un utilisateur par son login
