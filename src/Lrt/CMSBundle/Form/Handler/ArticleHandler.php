@@ -31,8 +31,6 @@ class ArticleHandler
                 return true;
             }
         }
-
-        return false;
     }
 
     protected function onSuccess($article)
