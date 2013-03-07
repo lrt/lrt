@@ -84,6 +84,8 @@ unicorn = {
     show_event: function(id,title){
 
         var host = window.location.href;
+        var ldelete = '<a href="'+host.concat(id).concat('/edit')+'" class="btn">Modifier</a>';
+        var ledit = '<a href="'+host.concat(id).concat('/delete')+'" class="btn btn-primary">Supprimer</a>';
 
         $.ajax({
             url: host.concat(id).concat('/show'),
@@ -94,6 +96,7 @@ unicorn = {
             success: function(data) {
                 $('#modal-show-event .modal-header').text(title);
                 $('#modal-show-event .modal-body').html(data);
+                $('#modal-show-event .modal-footer').html(ldelete+ledit);
             }
         });
     },

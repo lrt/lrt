@@ -27,7 +27,9 @@
     <script type="text/javascript" src="{{ asset('bundles/cms/js/plugins/ckeditor/ckeditor.js') }}"></script>
     <script type="text/javascript">
         //<![CDATA[
-        var editor = CKEDITOR.replace( 'lrt_videobundle_videotype[description]' );
+        var editor = CKEDITOR.replace( 'lrt_videobundle_videotype[description]' , {
+            uiColor: '#FAFAFA'
+        });
         //]]>
     </script>
 {% endblock %}

@@ -10,6 +10,7 @@ use Lrt\UserBundle\Entity\User;
  */
 class AdhesionService
 {
+
     /**
      * @DI\Inject("doctrine.orm.entity_manager")
      * @var \Doctrine\ORM\EntityManager
@@ -17,8 +18,8 @@ class AdhesionService
     public $em;
 
     /**
-     * @DI\Inject("lrt.service.mail")
-     * @var \Lrt\NotificationBundle\Service\MailService
+     * @DI\Inject("carma.service.mail")
+     * @var \Lrt\CarmaBundle\Service\MailService
      */
     public $mailService;
 
@@ -42,7 +43,7 @@ class AdhesionService
         $this->em->persist($user);
         $this->em->flush();
 
-        $this->mailService->sendMessage("Validation de votre adhésion", "no-reply@longchamp-roller-team.com", $user->getEmail(), "Votre demande d'adhésion est validé.");
+        $this->mailService->sendMessage($user->getEmail(), "Validation de votre adhésion", "Votre demande d'adhésion est validé.");
     }
 
     /**
@@ -57,7 +58,7 @@ class AdhesionService
         $this->em->persist($user);
         $this->em->flush();
 
-        $this->mailService->sendMessage("Rejet de votre demande d'adhésion", "no-reply@longchamp-roller-team.com", $user->getEmail(), "Votre demande d'adhésion a été rejeté.");
+        $this->mailService->sendMessage($user->getEmail(), "Rejet de votre demande d'adhésion", "Votre demande d'adhésion a été rejeté.");
     }
 
     /**
@@ -75,7 +76,11 @@ class AdhesionService
             $this->em->persist($user);
             $this->em->flush();
 
-            $this->mailService->sendMessage("Valider votre adhésion", "no-reply@longchamp-roller-team.com", $user->getEmail(), "Il manque des informations pour valider votre adhésion.");
+            $this->mailService->sendMessage($user->getEmail(), "Relance demande de validation d'adhésion", "Il manque des informations pour valider votre adhésion.");
+            return true;
         }
+
+        return false;
     }
+
 }

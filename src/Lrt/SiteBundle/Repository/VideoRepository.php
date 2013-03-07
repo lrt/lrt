@@ -4,7 +4,7 @@ namespace Lrt\SiteBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
 use Lrt\UserBundle\Entity\User;
-use Lrt\AdminBundle\Entity\Activity;
+use Lrt\SiteBundle\Entity\Activity;
 
 class VideoRepository extends EntityRepository
 {
@@ -53,10 +53,10 @@ class VideoRepository extends EntityRepository
             $queryStr .= ' AND v.title LIKE :title ';
         }
         if ($status != null && $status != '') {
-            $queryStr .= ' AND v.status LIKE :status ';
+            $queryStr .= ' AND v.isPublished = :status ';
         }
         if ($publish != null && $publish != '') {
-            $queryStr .= ' AND v.isPublic LIKE :publish ';
+            $queryStr .= ' AND v.isPublic = :publish ';
         }
 
         $query = $this->getEntityManager()->createQuery($queryStr);

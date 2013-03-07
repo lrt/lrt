@@ -29,8 +29,8 @@ class DefaultController extends Controller
     public $em;
 
     /**
-     * @DI\Inject("lrt.service.mail")
-     * @var \Lrt\NotificationBundle\Service\MailService
+     * @DI\Inject("carma.service.mail")
+     * @var \Lrt\CarmaBundle\Service\MailService
      */
     public $mailService;
 

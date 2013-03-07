@@ -27,6 +27,12 @@ class UserController extends Controller
      * @var \Doctrine\ORM\EntityManager
      */
     public $em;
+    
+    /**
+     * @DI\Inject("lrt.service.user")
+     * @var \Lrt\UserBundle\Service\UserService
+     */
+    public $userService;
 
     /**
      * Lists all User entities.
@@ -187,11 +193,7 @@ class UserController extends Controller
      */
     public function enabledAction(User $user)
     {
-        $user->setEnabled(User::IS_ACTIVE);
-
-        $this->get('fos_user.user_manager')->updateUser($user, false);
-
-        $this->em->flush();
+        $this->userService->enabled($user);
 
         $this->get('session')->setFlash('success', 'Le compte est activé.');
         return $this->redirect($this->generateUrl('user'));
@@ -206,11 +208,7 @@ class UserController extends Controller
      */
     public function enabledOffAction(User $user)
     {
-        $user->setEnabled(User::IS_NOT_ACTIVE);
-
-        $this->get('fos_user.user_manager')->updateUser($user, false);
-
-        $this->em->flush();
+        $this->userService->enabledOff($user);
 
         $this->get('session')->setFlash('success', 'Le compte est désactivé.');
         return $this->redirect($this->generateUrl('user'));

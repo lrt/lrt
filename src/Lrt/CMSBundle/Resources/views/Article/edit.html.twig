@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block title_page %}
-    Modifier l'article "{{ article.title }}"
+Modifier l'article "{{ article.title }}"
 {% endblock %}
 
 {% block body %}
@@ -21,23 +21,26 @@
             {% form_theme edit_form ':Themes:form.html.twig' %}
             <form action="{{ path('article_update', { 'id': article.id }) }}" method="post" {{ form_enctype(edit_form) }} class="form-horizontal">
                 {{ form_widget(edit_form) }}
-                <div class="form-actions">
-                    <button type="submit" class="btn btn-primary"><i class="icon-check icon-white"></i> Valider</button>
-                    <a href="{{ path('article') }}" class="btn">
-                        <i class="icon-list"></i> Retour à la liste
-                    </a>
-                </div>
-            </form>
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary"><i class="icon-check icon-white"></i> Valider</button>
+                        <a href="{{ path('article') }}" class="btn">
+                            <i class="icon-list"></i> Retour à la liste
+                        </a>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
-</div>
 {% endblock %}
-    
+
 {% block javascripts %} 
    {{ parent() }}
-   <script type="text/javascript">
-       CKEDITOR.replace( 'lrt_cmsbundle_articletype[content]', {
-           uiColor: '#FAFAFA'
-       });
-   </script>    
+    <script type="text/javascript" src="{{ asset('bundles/cms/js/plugins/ckeditor/ckeditor.js') }}"></script>
+    <script type="text/javascript">
+        //<![CDATA[
+        var editor = CKEDITOR.replace('lrt_cmsbundle_articletype[content]', {
+            uiColor: '#FAFAFA'
+        });
+        //]]>   
+        </script>    
 {% endblock %} 

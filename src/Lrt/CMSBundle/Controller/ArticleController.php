@@ -19,8 +19,8 @@ use Symfony\Component\HttpFoundation\Response;
 use JMS\DiExtraBundle\Annotation as DI;
 use JMS\SecurityExtraBundle\Annotation\Secure;
 use Lrt\CMSBundle\Entity\Article;
-use Lrt\CMSBundle\Entity\Content;
 use Lrt\CMSBundle\Form\Handler\ArticleHandler;
+use Lrt\UserBundle\Entity\User;
 
 /**
  * Article controller.
@@ -77,22 +77,16 @@ class ArticleController extends Controller
     /**
      * Lists all Article draft.
      *
-     * @Route("/draft", name="article_draft")
+     * @Route("/{userId}/draft", name="article_draft")
+     * @ParamConverter("user", class="UserBundle:User", options={"id" = "userId"})
      * @Secure(roles="ROLE_ADMIN,ROLE_MEMBER,ROLE_SUPERVISEUR")
-     * @Template("CMSBundle:Article:draft.html.twig")
-     */
-    public function listDraftAction()
-    {
-        $user = $this->sc->getToken()->getUser();
-
-        if ($user) {
-            $articles = $this->em->getRepository('CMSBundle:Article')->getArticlesDraftsByUser($user);
-
-            return array('entities' => $articles, 'nb' => count($articles));
-        } else {
-            throw $this->createNotFoundException('Vous devez être connecté pour accèder à cette page.');
-        }
-    }
+     * @Template("CMSBundle:Article:draft.html.twig")  
+    public function listDraftAction(User $user)
+    {        
+        $articles = $this->em->getRepository('CMSBundle:Article')->getArticlesDraftsByUser($user);
+        
+        return array('entities' => $articles, 'nb' => count($articles));
+    }*/
 
     /**
      * Lists all Article in bin.
@@ -100,13 +94,13 @@ class ArticleController extends Controller
      * @Route("/corbeille", name="article_bin")
      * @Secure(roles="ROLE_ADMIN,ROLE_MEMBER,ROLE_SUPERVISEUR")
      * @Template("CMSBundle:Article:bin.html.twig")
-     */
+     *
     public function listBinAction()
     {
         $articles = $this->em->getRepository('CMSBundle:Article')->getArticlesInBin();
 
         return array('entities' => $articles, 'nb' => count($articles));
-    }
+    }*/
 
     /**
      * Finds and displays a Article entity.
@@ -168,24 +162,18 @@ class ArticleController extends Controller
     {
         $user = $this->sc->getToken()->getUser();
 
-        if ($user) {
+        $article = new Article();
+        $article->setUser($user);
 
-            $article = new Article();
-            $article->setUser($user);
+        $form = $this->createForm($this->container->get('form.cms.article.type'), $article);
+        $formHandler = new ArticleHandler($form, $this->getRequest(), $this->em);
 
-            $form = $this->createForm($this->container->get('form.cms.article.type'), $article);
-            $formHandler = new ArticleHandler($form, $this->getRequest(), $this->em);
+        if ($formHandler->process()) {
 
-            if ($formHandler->process()) {
-
-                return $this->redirect($this->generateUrl('article'));
-            }
-
-            return array('entity' => $article, 'form' => $form->createView());
-
-        } else {
-            throw $this->createNotFoundException('Vous devez être connecté pour accèder à cette page.');
+            return $this->redirect($this->generateUrl('article'));
         }
+
+        return array('entity' => $article, 'form' => $form->createView());
     }
 
     /**
@@ -217,26 +205,19 @@ class ArticleController extends Controller
      */
     public function updateAction(Request $request, Article $article)
     {
-        $user = $this->sc->getToken()->getUser();
+        $form = $this->createForm($this->container->get('form.cms.article.type'), $article);
+        $formHandler = new ArticleHandler($form, $request, $this->em);
 
-        if ($user) {
+        if ($formHandler->process()) {
 
-            $form = $this->createForm($this->container->get('form.cms.article.type'), $article);
-            $formHandler = new ArticleHandler($form, $request, $this->em);
-
-            if ($formHandler->process()) {
-
-                $this->get('session')->setFlash('success', 'Modification de l\'article ' . $article->getTitle() . ' réussi avec succès.');
-                return $this->redirect($this->generateUrl('article_edit', array('id' => $article->getId())));
-            }
-
-            return array(
-                'entity' => $article,
-                'edit_form' => $form->createView(),
-            );
-        } else {
-            throw $this->createNotFoundException('Vous devez être connecté pour accèder à cette page.');
+            $this->get('session')->setFlash('success', 'Modification de l\'article ' . $article->getTitle() . ' réussi avec succès.');
+            return $this->redirect($this->generateUrl('article_edit', array('id' => $article->getId())));
         }
+
+        return array(
+            'entity' => $article,
+            'edit_form' => $form->createView(),
+        );
     }
 
     /**
@@ -249,20 +230,12 @@ class ArticleController extends Controller
      */
     public function deleteAction(Article $article)
     {
-        $user = $this->sc->getToken()->getUser();
+        $article->setStatus(Article::BIN); //corbeille
 
-        if ($user) {
+        $this->em->persist($article);
+        $this->em->flush();
 
-            $article->setStatus(Content::BIN); //corbeille
-
-            $this->em->persist($article);
-            $this->em->flush();
-
-            return $this->redirect($this->generateUrl('article'));
-
-        } else {
-            throw $this->createNotFoundException('Vous devez être connecté pour accèder à cette page.');
-        }
+        return $this->redirect($this->generateUrl('article'));
     }
 
     /**

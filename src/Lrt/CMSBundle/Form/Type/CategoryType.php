@@ -12,18 +12,18 @@ namespace Lrt\CMSBundle\Form\Type;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use JMS\DiExtraBundle\Annotation\Service;
 use JMS\DiExtraBundle\Annotation as DI;
 
 /**
- * @Service("form.cms.categoryType")
+ * @DI\Service("form.cms.categoryType")
  */
 class CategoryType extends AbstractType
 {
+
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name', 'text');
+                ->add('name', 'text');
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)
@@ -37,4 +37,5 @@ class CategoryType extends AbstractType
     {
         return 'lrt_cmsbundle_categorytype';
     }
+
 }

@@ -5,16 +5,21 @@ namespace Lrt\SiteBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use JMS\DiExtraBundle\Annotation as DI;
 
+/**
+ * @DI\Service("form.site.partner.type")
+ */
 class PartnerType extends AbstractType
 {
+
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name')
-            ->add('description')
-            ->add('website')
-            ->add('picture', null, array('label' => 'Logo', 'required' => false));
+                ->add('name')
+                ->add('description')
+                ->add('website')
+                ->add('picture', null, array('label' => 'Logo', 'required' => false));
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)
@@ -28,4 +33,5 @@ class PartnerType extends AbstractType
     {
         return 'lrt_sitebundle_partnertype';
     }
+
 }

@@ -27,8 +27,8 @@ class AdhesionController extends Controller
     public $em;
 
     /**
-     * @DI\Inject("lrt.service.mail")
-     * @var \Lrt\NotificationBundle\Service\MailService
+     * @DI\Inject("carma.service.mail")
+     * @var \Lrt\CarmaBundle\Service\MailService
      */
     public $mailService;
 
@@ -153,23 +153,15 @@ class AdhesionController extends Controller
      */
     public function revivalAction(User $user)
     {
-        $currentDate = new \DateTime();
-        $dateSubmission = $user->getDateSubmission();
-        $interval = $dateSubmission->diff($currentDate, true)->days;
-
-        if ($interval > 0) {
-            $user->setDateLastRevival($currentDate);
-            $this->get('fos_user.user_manager')->updateUser($user, false);
-            $this->em->flush();
-
-            $this->mailService->sendMessage("Valider votre adhésion", "no-reply@longchamp-roller-team.com", $user->getEmail(), "Il manque des informations pour valider votre adhésion.");
-
+        $result = $this->adhesionService->revival($user);
+        
+        if($result == true) {
             $this->get('session')->setFlash('success', 'Votre relance a été envoyé.');
             return $this->redirect($this->generateUrl('adhesion_display'));
+        } else {
+            $this->get('session')->setFlash('error', 'Votre demande de relance doit être supérieur à  la date de la demande.');
+            return $this->redirect($this->generateUrl('adhesion_display'));
         }
-
-        $this->get('session')->setFlash('error', 'Votre demande de relance doit être supérieur à  la date de la demande.');
-        return $this->redirect($this->generateUrl('adhesion_display'));
     }
 
     /**

@@ -6,11 +6,11 @@
 
     <!--
     <parameters>
-        <parameter key="notification.example.class">Lrt\NotificationBundle\Example</parameter>
+        <parameter key="carma.example.class">Lrt\CarmaBundle\Example</parameter>
     </parameters>
 
     <services>
-        <service id="notification.example" class="%notification.example.class%">
+        <service id="carma.example" class="%carma.example.class%">
             <argument type="service" id="service_id" />
             <argument>plain_value</argument>
             <argument>%parameter_name%</argument>

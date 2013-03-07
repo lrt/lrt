@@ -3,6 +3,7 @@
 namespace Lrt\SiteBundle\Service;
 
 use JMS\DiExtraBundle\Annotation as DI;
+use Lrt\SiteBundle\Entity\Event;
 
 /**
  * @DI\Service("service.event")
@@ -19,7 +20,27 @@ class EventService
      * @DI\Inject("kernel")
      */
     public $kernel;
-
+    
+    /**
+     * Mise à jour d'un évènement
+     * @param \Lrt\SiteBundle\Service\Event $event
+     */
+    public function updateEvent(Event $event)
+    {
+        $this->em->persist($event);
+        $this->em->flush();
+    }
+    
+    /**
+     * Mise à jour d'un évènement
+     * @param \Lrt\SiteBundle\Service\Event $event
+     */
+    public function deleteEvent(Event $event)
+    {
+        $this->em->remove($event);
+        $this->em->flush();
+    }
+    
     /**
      * Retourne l'ensemble des évènements sous forme JSON
      */

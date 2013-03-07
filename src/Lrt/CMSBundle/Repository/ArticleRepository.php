@@ -34,7 +34,7 @@ class ArticleRepository extends EntityRepository
      * Retourne la liste des articles d'un utilisateur en mode brouillon
      * @param \Lrt\UserBundle\Entity\User $user
      * @return array
-     */
+     *
     public function getArticlesDraftsByUser(User $user)
     {
         $sql = 'SELECT a FROM CMSBundle:Article a
@@ -48,12 +48,12 @@ class ArticleRepository extends EntityRepository
             ->setParameter('status', Article::DRAFTS);
 
         return $query->getResult();
-    }
+    }*/
 
     /**
      * Retourne la liste des articles dans la corbeille
      * @return array
-     */
+     *
     public function getArticlesInBin()
     {
         $sql = 'SELECT a FROM CMSBundle:Article a
@@ -64,7 +64,7 @@ class ArticleRepository extends EntityRepository
             ->setParameter('status', Article::BIN);
 
         return $query->getResult();
-    }
+    }*/
 
     /**
      * Retourne la liste des articles en attente de validation

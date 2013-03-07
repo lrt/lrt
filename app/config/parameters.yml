@@ -13,3 +13,6 @@ parameters:
 
     locale:            fr
     secret:            ThisTokenIsNotSoSecretChangeIt
+    
+    mailer_sender_address: longchamp-roller-team@laposte.net
+    mailer_sender_name: Longchamp Roller Team

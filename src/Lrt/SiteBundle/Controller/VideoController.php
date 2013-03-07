@@ -15,12 +15,10 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
-use Symfony\Component\HttpFoundation\Response;
 use JMS\DiExtraBundle\Annotation as DI;
 use JMS\SecurityExtraBundle\Annotation\Secure;
 use Lrt\SiteBundle\Entity\Video;
 use Lrt\SiteBundle\Form\Handler\VideoHandler;
-use Lrt\SiteBundle\Form\Type\VideoType;
 
 /**
  * Video controller.
@@ -36,18 +34,16 @@ class VideoController extends Controller
     /** @DI\Inject("doctrine.orm.entity_manager") */
     public $em;
 
-    /** @DI\Inject("form.video.filter.type") */
-    public $videoFilter;
-
     /**
      * Lists all Video entities.
      *
      * @Route("/", name="video")
+     * @Secure(roles="ROLE_ADMIN,ROLE_SUPERVISEUR")
      * @Template()
      */
     public function indexAction(Request $request)
     {
-        $form = $this->createForm($this->videoFilter, array());
+        $form = $this->createForm($this->container->get('form.video.filter.type'), array());
         $form->bind($request);
         $data = $form->getData();
 
@@ -56,7 +52,6 @@ class VideoController extends Controller
             $videos = $this->em->getRepository('SiteBundle:Video')->filter($data['title'], $data['status'], $data['isPublic']);
 
             return array('entities' => $videos, 'form' => $form->createView(), 'nb' => count($videos));
-
         } else {
             return $this->redirect($this->generateUrl('video'));
         }
@@ -86,7 +81,6 @@ class VideoController extends Controller
      */
     public function showAction(Video $video)
     {
-
         return array(
             'entity' => $video,
         );
@@ -96,13 +90,13 @@ class VideoController extends Controller
      * Displays a form to create a new Video entity.
      *
      * @Route("/new", name="video_new")
-     * @Secure(roles="ROLE_ADMIN")
+     * @Secure(roles="ROLE_ADMIN,ROLE_SUPERVISEUR")
      * @Template()
      */
     public function newAction()
     {
         $video = new Video();
-        $form = $this->createForm(new VideoType(), $video);
+        $form = $this->createForm($this->container->get('form.site.video.type'), $video);
 
         return array(
             'entity' => $video,
@@ -114,7 +108,7 @@ class VideoController extends Controller
      * Creates a new Video entity.
      *
      * @Route("/create", name="video_create")
-     * @Secure(roles="ROLE_ADMIN")
+     * @Secure(roles="ROLE_ADMIN,ROLE_SUPERVISEUR")
      * @Method("POST")
      * @Template("SiteBundle:Video:new.html.twig")
      */
@@ -123,26 +117,21 @@ class VideoController extends Controller
 
         $user = $this->sc->getToken()->getUser();
 
-        if (is_object($user)) {
+        $video = new Video();
+        $video->setUser($user);
+        $form = $this->createForm($this->container->get('form.site.video.type'), $video);
+        $formHandler = new VideoHandler($form, $request, $this->em);
 
-            $video = new Video();
-            $video->setUser($user);
-            $form = $this->createForm(new VideoType(), $video);
-            $formHandler = new VideoHandler($form, $request, $this->em);
+        if ($formHandler->process()) {
 
-            if ($formHandler->process()) {
-
-                $this->get('session')->setFlash('success', 'Video ajoutée avec succès.');
-                return $this->redirect($this->generateUrl('video'));
-            }
-
-            return array(
-                'entity' => $video,
-                'form' => $form->createView(),
-            );
-        } else {
-            return new Response('Vous devez être connecté', 404);
+            $this->get('session')->setFlash('success', 'Video ajoutée avec succès.');
+            return $this->redirect($this->generateUrl('video'));
         }
+
+        return array(
+            'entity' => $video,
+            'form' => $form->createView(),
+        );
     }
 
     /**
@@ -150,25 +139,18 @@ class VideoController extends Controller
      *
      * @Route("/{id}/edit", name="video_edit")
      * @ParamConverter("video", class="SiteBundle:Video", options={"id" = "id"})
-     * @Secure(roles="ROLE_ADMIN")
+     * @Secure(roles="ROLE_ADMIN,ROLE_SUPERVISEUR")
      * @Template()
      */
     public function editAction(Video $video)
     {
 
-        $user = $this->sc->getToken()->getUser();
+        $editForm = $this->createForm($this->container->get('form.site.video.type'), $video);
 
-        if (is_object($user)) {
-
-            $editForm = $this->createForm(new VideoType(), $video);
-
-            return array(
-                'entity' => $video,
-                'edit_form' => $editForm->createView(),
-            );
-        } else {
-            return new Response('Vous devez être connecté', 404);
-        }
+        return array(
+            'entity' => $video,
+            'edit_form' => $editForm->createView(),
+        );
     }
 
     /**
@@ -176,34 +158,28 @@ class VideoController extends Controller
      *
      * @Route("/{id}/update", name="video_update")
      * @ParamConverter("video", class="SiteBundle:Video", options={"id" = "id"})
-     * @Secure(roles="ROLE_ADMIN")
+     * @Secure(roles="ROLE_ADMIN,ROLE_SUPERVISEUR")
      * @Method("POST")
      * @Template("SiteBundle:Video:edit.html.twig")
      */
     public function updateAction(Request $request, Video $video)
     {
 
-        $user = $this->sc->getToken()->getUser();
+        $editForm = $this->createForm($this->container->get('form.site.video.type'), $video);
+        $editForm->bind($request);
 
-        if (is_object($user)) {
-
-            $editForm = $this->createForm(new VideoType(), $video);
-            $editForm->bind($request);
-
-            if ($editForm->isValid()) {
-                $this->em->persist($video);
-                $this->em->flush();
-
-                return $this->redirect($this->generateUrl('video_edit', array('id' => $video->getId())));
-            }
-
-            return array(
-                'entity' => $video,
-                'edit_form' => $editForm->createView(),
-            );
-        } else {
-            return new Response('Vous devez être connecté', 404);
+        if ($editForm->isValid()) {
+            $this->em->persist($video);
+            $this->em->flush();
+            
+            $this->get('session')->setFlash('success', 'Modification de la vidéo ' . $video->getTitle() . ' réussi avec succès.');
+            return $this->redirect($this->generateUrl('video_edit', array('id' => $video->getId())));
         }
+
+        return array(
+            'entity' => $video,
+            'edit_form' => $editForm->createView(),
+        );
     }
 
     /**
@@ -211,29 +187,15 @@ class VideoController extends Controller
      *
      * @Route("/{id}/delete", name="video_delete")
      * @ParamConverter("video", class="SiteBundle:Video", options={"id" = "id"})
-     * @Secure(roles="ROLE_ADMIN")
-     * @Method("POST")
+     * @Secure(roles="ROLE_ADMIN,ROLE_SUPERVISEUR")
+     * @Method("GET")
      */
-    public function deleteAction(Request $request, Video $video)
+    public function deleteAction(Video $video)
     {
-
-        $form = $this->createDeleteForm($video->getId());
-        $form->bind($request);
-
-        if ($form->isValid()) {
-
-            $this->em->remove($video);
-            $this->em->flush();
-        }
-
+        $this->em->remove($video);
+        $this->em->flush();
+        
+        $this->get('session')->setFlash('success', 'Video supprimer avec succès.');
         return $this->redirect($this->generateUrl('video'));
     }
-
-    private function createDeleteForm($id)
-    {
-        return $this->createFormBuilder(array('id' => $id))
-            ->add('id', 'hidden')
-            ->getForm();
-    }
-
 }

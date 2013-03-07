@@ -11,7 +11,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use JMS\SecurityExtraBundle\Annotation\Secure;
 use JMS\DiExtraBundle\Annotation as DI;
 use Lrt\SiteBundle\Entity\Partner;
-use Lrt\SiteBundle\Form\PartnerType;
 
 /**
  * Partner controller.
@@ -53,11 +52,8 @@ class PartnerController extends Controller
      */
     public function showAction(Partner $partner)
     {
-        $deleteForm = $this->createDeleteForm($partner->getId());
-
         return array(
             'entity' => $partner,
-            'delete_form' => $deleteForm->createView(),
         );
     }
 
@@ -71,8 +67,8 @@ class PartnerController extends Controller
     public function newAction()
     {
         $partner = new Partner();
-        $form = $this->createForm(new PartnerType(), $partner);
-
+        $form = $this->createForm($this->container->get('form.site.partner.type'), $partner);
+                
         return array(
             'entity' => $partner,
             'form' => $form->createView(),
@@ -90,7 +86,7 @@ class PartnerController extends Controller
     public function createAction(Request $request)
     {
         $partner = new Partner();
-        $form = $this->createForm(new PartnerType(), $partner);
+        $form = $this->createForm($this->container->get('form.site.partner.type'), $partner);
         $form->bind($request);
 
         if ($form->isValid()) {
@@ -116,13 +112,11 @@ class PartnerController extends Controller
      */
     public function editAction(Partner $partner)
     {
-        $editForm = $this->createForm(new PartnerType(), $partner);
-        $deleteForm = $this->createDeleteForm($partner->getId());
-
+        $editForm = $this->createForm($this->container->get('form.site.partner.type'), $partner);
+        
         return array(
             'entity' => $partner,
             'edit_form' => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
         );
     }
 
@@ -137,8 +131,7 @@ class PartnerController extends Controller
      */
     public function updateAction(Request $request, Partner $partner)
     {
-        $deleteForm = $this->createDeleteForm($partner->getId());
-        $editForm = $this->createForm(new PartnerType(), $partner);
+        $editForm = $this->createForm($this->container->get('form.site.partner.type'), $partner);
         $editForm->bind($request);
 
         if ($editForm->isValid()) {
@@ -151,7 +144,6 @@ class PartnerController extends Controller
         return array(
             'entity' => $partner,
             'edit_form' => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
         );
     }
 
@@ -161,26 +153,15 @@ class PartnerController extends Controller
      * @Route("/{id}/delete", name="partner_delete")
      * @Secure(roles="ROLE_ADMIN,ROLE_SUPERVISEUR")
      * @ParamConverter("partner", class="SiteBundle:Partner", options={"id" = "id"})
-     * @Method("POST")
+     * @Method("GET")
      */
-    public function deleteAction(Request $request, Partner $partner)
+    public function deleteAction(Partner $partner)
     {
-        $form = $this->createDeleteForm($partner->getId());
-        $form->bind($request);
-
-        if ($form->isValid()) {
-            $this->em->remove($partner);
-            $this->em->flush();
-        }
-
+        $this->em->remove($partner);
+        $this->em->flush();
+        
+        $this->get('session')->setFlash('success', 'Partenaire retirer de la liste avec succès.');
         return $this->redirect($this->generateUrl('partner'));
-    }
-
-    private function createDeleteForm($id)
-    {
-        return $this->createFormBuilder(array('id' => $id))
-            ->add('id', 'hidden')
-            ->getForm();
     }
 
     /**

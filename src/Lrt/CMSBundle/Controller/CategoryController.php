@@ -73,19 +73,13 @@ class CategoryController extends Controller
      */
     public function newAction()
     {
-        $user = $this->sc->getToken()->getUser();
+        $entity = new Category();
+        $form = $this->createForm(new CategoryType(), $entity);
 
-        if (is_object($user)) {
-            $entity = new Category();
-            $form = $this->createForm(new CategoryType(), $entity);
-
-            return array(
-                'entity' => $entity,
-                'form' => $form->createView(),
-            );
-        } else {
-            return new Response('Vous devez être connecté', 404);
-        }
+        return array(
+            'entity' => $entity,
+            'form' => $form->createView(),
+        );
     }
 
     /**
@@ -98,29 +92,22 @@ class CategoryController extends Controller
      */
     public function createAction(Request $request)
     {
+        $entity = new Category();
+        $form = $this->createForm(new CategoryType(), $entity);
+        $form->bind($request);
 
-        $user = $this->sc->getToken()->getUser();
+        if ($form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($entity);
+            $em->flush();
 
-        if (is_object($user)) {
-            $entity = new Category();
-            $form = $this->createForm(new CategoryType(), $entity);
-            $form->bind($request);
-
-            if ($form->isValid()) {
-                $em = $this->getDoctrine()->getManager();
-                $em->persist($entity);
-                $em->flush();
-
-                return $this->redirect($this->generateUrl('category_show', array('id' => $entity->getId())));
-            }
-
-            return array(
-                'entity' => $entity,
-                'form' => $form->createView(),
-            );
-        } else {
-            return new Response('Vous devez être connecté', 404);
+            return $this->redirect($this->generateUrl('category_show', array('id' => $entity->getId())));
         }
+
+        return array(
+            'entity' => $entity,
+            'form' => $form->createView(),
+        );
     }
 
     /**
@@ -133,19 +120,12 @@ class CategoryController extends Controller
      */
     public function editAction(Category $category)
     {
-        $user = $this->sc->getToken()->getUser();
+        $editForm = $this->createForm(new CategoryType(), $category);
 
-        if (is_object($user)) {
-
-            $editForm = $this->createForm(new CategoryType(), $category);
-
-            return array(
-                'entity' => $category,
-                'edit_form' => $editForm->createView(),
-            );
-        } else {
-            return new Response('Vous devez être connecté', 404);
-        }
+        return array(
+            'entity' => $category,
+            'edit_form' => $editForm->createView(),
+        );
     }
 
     /**
@@ -159,27 +139,20 @@ class CategoryController extends Controller
      */
     public function updateAction(Request $request, Category $category)
     {
-        $user = $this->sc->getToken()->getUser();
+        $editForm = $this->createForm(new CategoryType(), $category);
+        $editForm->bind($request);
 
-        if (is_object($user)) {
+        if ($editForm->isValid()) {
+            $this->em->persist($category);
+            $this->em->flush();
 
-            $editForm = $this->createForm(new CategoryType(), $category);
-            $editForm->bind($request);
-
-            if ($editForm->isValid()) {
-                $this->em->persist($category);
-                $this->em->flush();
-
-                return $this->redirect($this->generateUrl('category_edit', array('id' => $category->getId())));
-            }
-
-            return array(
-                'entity' => $category,
-                'edit_form' => $editForm->createView(),
-            );
-        } else {
-            return new Response('Vous devez être connecté', 404);
+            return $this->redirect($this->generateUrl('category_edit', array('id' => $category->getId())));
         }
+
+        return array(
+            'entity' => $category,
+            'edit_form' => $editForm->createView(),
+        );
     }
 
     /**
@@ -192,22 +165,16 @@ class CategoryController extends Controller
      */
     public function deleteAction(Request $request, Category $category)
     {
-        $user = $this->sc->getToken()->getUser();
+        $form = $this->createDeleteForm($category->getId());
+        $form->bind($request);
 
-        if (is_object($user)) {
-            $form = $this->createDeleteForm($category->getId());
-            $form->bind($request);
+        if ($form->isValid()) {
 
-            if ($form->isValid()) {
-
-                $this->em->remove($category);
-                $this->em->flush();
-            }
-
-            return $this->redirect($this->generateUrl('category'));
-        } else {
-            return new Response('Vous devez être connecté', 404);
+            $this->em->remove($category);
+            $this->em->flush();
         }
+
+        return $this->redirect($this->generateUrl('category'));
     }
 
     private function createDeleteForm($id)

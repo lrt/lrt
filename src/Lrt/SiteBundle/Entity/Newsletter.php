@@ -36,16 +36,6 @@ class Newsletter
     }
 
     /**
-     * Set email
-     *
-     * @param $email
-     */
-    public function setEmail($email)
-    {
-        $this->email = $email;
-    }
-
-    /**
      * Get email
      *
      * @return string
