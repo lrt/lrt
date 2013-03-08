@@ -17,7 +17,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use JMS\DiExtraBundle\Annotation as DI;
-use Lrt\SiteBundle\Form\Type\EnquiryType;
 use Lrt\SiteBundle\Entity\Enquiry;
 
 class DefaultController extends Controller
@@ -107,10 +106,8 @@ class DefaultController extends Controller
 
         if ($request->isXmlHttpRequest()) {
             $form->bind($request);
-            if ($form->isValid()) {
-                $this->mailService->sendMessage($enquiry->getSubject(), $enquiry->getEmail(), "alexandre.seiller92@gmail.com", $enquiry->getBody());
-            }
 
+            $this->mailService->sendMessage($enquiry->getSubject(), $enquiry->getEmail(), "alexandre.seiller92@gmail.com", $enquiry->getBody());
             $this->get('session')->setFlash('error', 'Votre email n\'a pas été envoyé.');
         }
 

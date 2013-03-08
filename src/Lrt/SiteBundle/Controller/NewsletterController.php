@@ -38,15 +38,13 @@ class NewsletterController extends Controller
 
         if ($request->isXmlHttpRequest()) {
             $form->bind($request);
-            if ($form->isValid()) {
-                $findEmail = $this->em->getRepository("SiteBundle:Newsletter")->findOneBy(array('email' => $newsletter->getEmail()));
-                if (!$findEmail) {
-                    $newsletter->setEmail($newsletter->getEmail());
-                    $this->em->persist($newsletter);
-                    $this->em->flush();
+            $findEmail = $this->em->getRepository("SiteBundle:Newsletter")->findOneBy(array('email' => $newsletter->getEmail()));
+            if (!$findEmail) {
+                $newsletter->setEmail($newsletter->getEmail());
+                $this->em->persist($newsletter);
+                $this->em->flush();
 
-                    $this->mailService->sendMessage("Newsletter", "no-reply@longchamp-roller-team.com", "longchamp-roller-team@laposte.net", "Test");
-                }
+                $this->mailService->sendMessage("Newsletter", "no-reply@longchamp-roller-team.com", "longchamp-roller-team@laposte.net", "Test");
             }
         }
         return array(
