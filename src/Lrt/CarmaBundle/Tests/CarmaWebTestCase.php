@@ -35,12 +35,9 @@ abstract class CarmaWebTestCase extends WebTestCase
 
     protected function setup()
     {
-        parent::setup();
-        $this->client = static::createClient();
+        $this->client = static::createClient(array('environment' => 'test'));
         $this->client->followRedirects();
-        $this->kern = $this->client->getKernel();
-        $this->container = $this->client->getContainer();
-        $this->em = $this->container->get('doctrine.orm.entity_manager');
+        $this->em = $this->client->getContainer()->get('doctrine')->getEntityManager();
     }
 
     /**
@@ -50,14 +47,16 @@ abstract class CarmaWebTestCase extends WebTestCase
      * @param string $password
      * @return Client
      */
-    protected function login($username, $password = 'test')
+    protected function login(Client $client, $user)
     {
-        $crawler = $this->client->request('GET', '/login');
+        $client->followRedirects();
+
+        $crawler = $client->request('GET', '/login');
 
         $form = $crawler->selectButton('_submit')->form();
 
-        $form['_username'] = $username;
-        $form['_password'] = $password;
+        $form['_username'] = $user['user'];
+        $form['_password'] = 'test';
 
         $this->client->submit($form);
 
