@@ -53,13 +53,7 @@
                 <button type="button" class="close" data-dismiss="modal">×</button>
                 <h3>Ajouter un évènement</h3>
             </div>
-            <div class="modal-body">
-                {% render "SiteBundle:Event:new" %}
-            </div>
-            <div class="modal-footer">
-                <a href="#" class="btn" data-dismiss="modal">Annuler</a>
-                <a href="#" id="add-event-submit" class="btn btn-primary">Ajouter</a>
-            </div>
+            {% render "SiteBundle:Event:new" %}
         </div>
         <div class="modal hide" id="modal-show-event">
             <div class="modal-header"></div>
@@ -70,88 +64,18 @@
     <h4 class="header">Evènements</h4>
 </div>
 <div id="events" class="span4">
-    <h4>Upcoming</h4>
-    <div class="event">
-      <div class="date success">
-        <h1>14</h1>
-        <h4>NOV</h4>
-      </div>
-      <h4>Sprint 4</h4>
-      <p>2pm @ Convention Center<br>122 Meyran Ave, Pittsburgh PA</p>
-    </div>
-    <div class="event">
-      <div class="date danger">
-        <h1>11</h1>
-        <h4>NOV</h4>
-      </div>
-      <h4>Meetup Group</h4>
-      <p>2pm @ Convention Center<br>122 Meyran Ave, Pittsburgh PA</p>
-    </div>
-    <div class="event">
-      <div class="date warning">
-        <h1>03</h1>
-        <h4>NOV</h4>
-      </div>
-      <h4>Dinner Party</h4>
-      <p>2pm @ Convention Center<br>122 Meyran Ave, Pittsburgh PA</p>
-    </div>
-    <div class="event">
-      <div class="date">
-        <h1>27</h1>
-        <h4>OCT</h4>
-      </div>
-      <h4>Sprint 3</h4>
-      <p>2pm @ Convention Center<br>122 Meyran Ave, Pittsburgh PA</p>
-    </div>
-    <div class="event">
-      <div class="date">
-        <h1>20</h1>
-        <h4>OCT</h4>
-      </div>
-      <h4>Birthday Party</h4>
-      <p>2pm @ Convention Center<br>122 Meyran Ave, Pittsburgh PA</p>
-    </div>
-    <div class="event">
-      <div class="date success">
-        <h1>14</h1>
-        <h4>OCT</h4>
-      </div>
-      <h4>Sprint 4</h4>
-      <p>2pm @ Convention Center<br>122 Meyran Ave, Pittsburgh PA</p>
-    </div>
-    <div class="event">
-      <div class="date danger">
-        <h1>11</h1>
-        <h4>OCT</h4>
-      </div>
-      <h4>Meetup Group</h4>
-      <p>2pm @ Convention Center<br>122 Meyran Ave, Pittsburgh PA</p>
-    </div>
-    <div class="event">
-      <div class="date warning">
-        <h1>03</h1>
-        <h4>OCT</h4>
-      </div>
-      <h4>Dinner Party</h4>
-      <p>2pm @ Convention Center<br>122 Meyran Ave, Pittsburgh PA</p>
-    </div>
-    <div class="event">
-      <div class="date">
-        <h1>27</h1>
-        <h4>SEP</h4>
-      </div>
-      <h4>Sprint 3</h4>
-      <p>2pm @ Convention Center<br>122 Meyran Ave, Pittsburgh PA</p>
-    </div>
-    <div class="event">
-      <div class="date">
-        <h1>20</h1>
-        <h4>SEP</h4>
-      </div>
-      <h4>Birthday Party</h4>
-      <p>2pm @ Convention Center<br>122 Meyran Ave, Pittsburgh PA</p>
-    </div>
-    <p class="load-more"> <a href="">Load More</a></p>
+    <h4>A venir</h4>
+    {% for e in events %}
+        <div class="event">
+            <div class="date success">
+                <h1>{{ e.dateDeb|date('d') }}</h1>
+                <h4>{{ e.dateDeb|date('M') }}</h4>
+            </div>
+            <h4>{{ e.title }}</h4>
+            <p>{{ e.place }}<br>{{ e.website }}</p>
+        </div>
+    {% endfor %}
+    <p class="load-more"> <a href="#">Voir plus de résultats</a></p>
 </div>
 <div class="span8">
     <div id="fullcalendar"></div>

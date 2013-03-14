@@ -45,8 +45,9 @@ class DefaultController extends Controller
     public function indexAction()
     {
         $articles = $this->em->getRepository('CMSBundle:Article')->getLatestArticles(5);
+        $videos = $this->em->getRepository('SiteBundle:Video')->getLatestVideos(4);
 
-        return array('articles' => $articles);
+        return array('articles' => $articles, 'videos' => $videos);
     }
 
     /**
@@ -55,7 +56,7 @@ class DefaultController extends Controller
      */
     public function dashboardAction()
     {
-        $articles = $this->em->getRepository('CMSBundle:Article')->getLatestArticles(3);
+        $articles = $this->em->getRepository('CMSBundle:Article')->getLatestArticles(5);
 
         return array('articles' => $articles);
     }
@@ -86,6 +87,23 @@ class DefaultController extends Controller
     public function showAction($page)
     {
         $template = sprintf("SiteBundle:Page:%s.html.twig", $page);
+
+        try {
+            $response = $this->render($template);
+            return $response;
+        } catch (\Exception $e) {
+            return new Response("Aucune page ne correspond à votre demande.", 404);
+        }
+    }
+    
+        /**
+     * @Route("/evenement/{page}", name="show_event_page")
+     * @Cache(smaxage="600")
+     * @Template()
+     */
+    public function showPageEventAction($page)
+    {
+        $template = sprintf("SiteBundle:PageEvent:%s.html.twig", $page);
 
         try {
             $response = $this->render($template);

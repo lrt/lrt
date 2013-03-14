@@ -60,6 +60,8 @@ class UserRepository extends EntityRepository
         
         if ($status != null && $status != '') {
             $queryStr.= ' AND u.enabled = :status ';
+        } else {
+            $queryStr.= ' AND u.enabled = ' .User::IS_ACTIVE ;
         }
 
         $query = $this->getEntityManager()->createQuery($queryStr);

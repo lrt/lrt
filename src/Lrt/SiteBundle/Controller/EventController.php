@@ -42,8 +42,10 @@ class EventController extends Controller
     public function indexAction()
     {
         $this->eventService->getEvents();
+        
+        $events = $this->em->getRepository('SiteBundle:Event')->findAll();
 
-        return array();
+        return array('events' => $events);
     }
 
     /**

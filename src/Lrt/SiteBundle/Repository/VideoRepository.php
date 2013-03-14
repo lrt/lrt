@@ -40,6 +40,25 @@ class VideoRepository extends EntityRepository
 
         return $query->getResult();
     }
+    
+    /**
+     * Retourne la liste des vidéos
+     * @param integer $limit
+     * @return array
+     */
+    public function getLatestVideos($limit)
+    {
+        $qb = $this->createQueryBuilder('v')
+            ->select('v');
+            /*->where('v.isValid = ?1')
+            ->setParameter(1, Activity::IS_VALIDATED);*/
+
+        if (!is_null($limit)) {
+            $qb->setMaxResults($limit);
+        }
+
+        return $qb->getQuery()->getArrayResult();
+    }
 
     /**
      * Filtre sur les vidéos

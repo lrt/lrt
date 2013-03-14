@@ -105,67 +105,28 @@
                 </div>
             </div>
         </div>
-        <h3>Latest Projects</h3>
+        <h3>Dernières vidéos</h3>
         <div class="row-fluid margin-bottom-30">
-            <div class="span3 zoomer">
-                <div class="work">
-                    <a class="fancybox-button" rel="fancybox-button" title="Project #1" href="{{ asset('bundles/site/images/themes/work/work1.jpg') }}">
-                        <div class="overlay-zoom">
-                            <img src="{{ asset('bundles/site/images/themes/work/work1.jpg') }}" class="" alt="project 1">
-                            <div class="zoom-icon"></div>
-                        </div>
-                    </a>
-                    <a href="project.html" class="details">
-                        <div><b>Project #1.</b></div>
-                        Sit amet, consectetur adipisicing.
-                    </a>
+            {% for v in videos %}
+                <div class="span3 zoomer">
+                    <div class="work">
+                        <a class="fancybox-button" rel="fancybox-button" title="Project #1" href="{{ asset('bundles/site/images/themes/work/work1.jpg') }}">
+                            <div class="overlay-zoom">
+                                <img src="{{ asset('bundles/site/images/video/poster.jpg') }}" class="" alt="project 1">
+                                <div class="zoom-icon"></div>
+                            </div>
+                        </a>
+                        <a href="project.html" class="details">
+                            <div><b>{{ v.title }}</b></div>
+                            {{ v.description }}
+                        </a>
+                    </div>
                 </div>
-            </div>
-            <div class="margin-top-5 visible-phone"></div>
-            <div class="span3 zoomer">
-                <div class="work">
-                    <a class="fancybox-button" rel="fancybox-button" title="Project #2" href="{{ asset('bundles/site/images/themes/work/work1.jpg') }}">
-                        <div class="overlay-zoom">
-                            <img src="{{ asset('bundles/site/images/themes/work/work1.jpg') }}" class="" alt="project 2">
-                            <div class="zoom-icon"></div>
-                        </div>
-                    </a>
-                    <a href="project.html" class="details">
-                        <div><b>Project #2.</b></div>
-                        Sit amet, consectetur adipisicing.
-                    </a>
-                </div>
-            </div>
-            <div class="margin-top-5 visible-phone"></div>
-            <div class="span3 zoomer">
-                <div class="work">
-                    <a class="fancybox-button" rel="fancybox-button" title="Project #3" href="{{ asset('bundles/site/images/themes/work/work1.jpg') }}">
-                        <div class="overlay-zoom">
-                            <img src="{{ asset('bundles/site/images/themes/work/work1.jpg') }}" class="" alt="project 3">
-                            <div class="zoom-icon"></div>
-                        </div>
-                    </a>
-                    <a href="project.html" class="details">
-                        <div><b>Project #3.</b></div>
-                        Sit amet, consectetur adipisicing.
-                    </a>
-                </div>
-            </div>
-            <div class="margin-top-5 visible-phone"></div>
-            <div class="span3 zoomer">
-                <div class="work">
-                    <a class="fancybox-button" rel="fancybox-button" title="Project #4" href="{{ asset('bundles/site/images/themes/work/work1.jpg') }}">
-                        <div class="overlay-zoom">
-                            <img src="{{ asset('bundles/site/images/themes/work/work1.jpg') }}" class="" alt="project 4">
-                            <div class="zoom-icon"></div>
-                        </div>
-                    </a>
-                    <a href="project.html" class="details">
-                        <div><b>Project #4.</b></div>
-                        Sit amet, consectetur adipisicing.
-                    </a>
-                </div>
-            </div>
+                {% if loop.last %}
+                {% else %}
+                    <div class="margin-top-5 visible-phone"></div>
+                {% endif %}
+            {% endfor %}
         </div>
         <div class="row-fluid">
             <div class="span12">
