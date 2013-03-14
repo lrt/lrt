@@ -137,8 +137,11 @@ class ArticleController extends Controller
      */
     public function viewAction(Article $article)
     {
+        $categories = $this->em->getRepository('CMSBundle:Category')->findAll();
+        
         return array(
-            'article' => $article
+            'article' => $article,
+            'categories' => $categories
         );
     }
 
