@@ -12,14 +12,7 @@ use Behat\Gherkin\Node\PyStringNode,
 use Symfony\Component\HttpKernel\KernelInterface;
 use Behat\MinkExtension\Context\MinkContext;
 use Behat\Mink\Exception\ExpectationException;
-use Lrt\SiteBundle\Features\Context\FeatureGlobal;
-
-//
-// Require 3rd-party libraries here:
-//
-//   require_once 'PHPUnit/Autoload.php';
-//   require_once 'PHPUnit/Framework/Assert/Functions.php';
-//
+use Lrt\CarmaBundle\Features\Context\FeatureGlobal;
 
 /**
  * Features context.

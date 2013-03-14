@@ -58,21 +58,6 @@ class VideoController extends Controller
     }
 
     /**
-     * Lists all Video entities.
-     *
-     * @Route("/list", name="video_index")
-     * @Template()
-     */
-    public function listAction()
-    {
-        $videos = $this->em->getRepository('SiteBundle:Video')->findAll();
-
-        return array(
-            'videos' => $videos,
-        );
-    }
-
-    /**
      * Finds and displays a Video entity.
      *
      * @Route("/{id}/show", name="video_show")

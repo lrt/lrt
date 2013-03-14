@@ -1,0 +1,13 @@
+{% for a in articles %}
+    <div class="row-fluid {% if loop.index is divisibleby(2) %}margin-top-10{% endif %}">
+        <div class="span4">
+            <a href="{{ path('article_view', { 'id': a.id }) }}">
+                <img alt="" class="media-object img-rounded" src="{{ asset('bundles/site/images/no_picture.png') }}">
+            </a>
+        </div>
+        <div class="span8">
+            {{ a.content | truncate(100) | raw }}
+            <br><a href="{{ path('article_view', { 'id': a.id }) }}" class="">Lire la suite</a>
+        </div>
+    </div>
+{% endfor %}

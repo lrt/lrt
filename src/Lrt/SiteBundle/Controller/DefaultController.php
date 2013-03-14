@@ -66,15 +66,16 @@ class DefaultController extends Controller
      */
     public function blogAction(Request $request)
     {
-        $articles = $this->em->getRepository('CMSBundle:Article')->findAll();
-
+        $activities = $this->em->getRepository('SiteBundle:Activity')->getArticlesVideos();
+        $categories = $this->em->getRepository('CMSBundle:Category')->findAll();
+                
         $page = $request->query->get('page', 1);
         $pagination = $this->paginator->paginate(
-            $articles, $page, $this->container->getParameter('knp_limit_per_page')
+            $activities, $page, $this->container->getParameter('knp_limit_per_page')
         );
         $arrayPagination = compact('pagination');
 
-        return array('articles' => $arrayPagination['pagination']);
+        return array('activities' => $arrayPagination['pagination'], 'categories' => $categories);
     }
 
     /**

@@ -5,7 +5,7 @@ Contexte: Je suis un utilisateur et je voudrais voir mon profil
 
   Soit je suis sur "login"
   Lorsque je remplis "username" avec "alexandre"
-  Et je remplis "Mot de passe :" avec "test"
+  Et je remplis "password" avec "test"
   Et je presse "Connexion"
   Et je ne devrais pas voir "Exception detected!"
 

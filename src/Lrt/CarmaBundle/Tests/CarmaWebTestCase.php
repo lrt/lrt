@@ -35,9 +35,11 @@ abstract class CarmaWebTestCase extends WebTestCase
 
     protected function setup()
     {
+        parent::setup();
         $this->client = static::createClient(array('environment' => 'test'));
         $this->client->followRedirects();
-        $this->em = $this->client->getContainer()->get('doctrine')->getEntityManager();
+        $this->container = $this->client->getContainer();
+        $this->em = $this->container->get('doctrine.orm.entity_manager');
     }
 
     /**

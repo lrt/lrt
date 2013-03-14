@@ -149,4 +149,19 @@ class Activity
     {
         return $this->user;
     }
+    
+    public function typeName()
+    {
+        switch ($this->whoAmI()) {
+            case 'Lrt\CMSBundle\Entity\Article': return 'Article';
+            case 'Lrt\SiteBundle\Entity\Video': return 'Video';
+            case 'Lrt\SiteBundle\Entity\Partner': return 'Partner';
+            case 'Lrt\SiteBundle\Entity\Event': return 'Event';
+        }
+    }
+    
+    public function whoAmI()
+    {
+        return get_class($this);
+    }
 }

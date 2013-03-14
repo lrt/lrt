@@ -73,6 +73,17 @@ class ArticleController extends Controller
             return $this->redirect($this->generateUrl('article'));
         }
     }
+    
+    /**
+     * Lists all Article entities on home
+     * @Template("CMSBundle:Article:lastArticle.html.twig")  
+     */
+    public function lastArticleAction()
+    {
+        $articles = $this->em->getRepository('CMSBundle:Article')->getLatestArticles(2);
+        
+        return array('articles' => $articles);
+    }
 
     /**
      * Lists all Article draft.
