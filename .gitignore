@@ -3,7 +3,8 @@ app/logs/*
 app/spool/*
 build/*
 web/bundles/*
-web/uploads/*
+web/uploads/articles/*
+web/uploads/videos/*
 web/rss/*
 nbproject/*
 */nbproject/*
