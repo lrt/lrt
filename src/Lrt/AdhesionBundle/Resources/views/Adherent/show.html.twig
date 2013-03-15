@@ -1,0 +1,62 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+<div id="page">
+    <div class="container">
+        <h2>Récapitulatif de votre demande d'adhésion</h2>
+    </div>
+</div>
+<div id="body">
+    <div class="container">
+        <div class="row-fluid">
+            <div class="span8">
+                <img src="{{ asset('bundles/site/images/themes/slider/image2.png') }}">
+            </div>
+            <div class="span4 adhesion form-horizontal">
+                <div class="control-group">
+                    Nom
+                    <div class="controls">
+                    {{ adherent.firstName }} {{ adherent.lastName }}
+                    </div>
+                </div>
+                <div class="control-group">
+                    Adresse
+                    <div class="controls">
+                        {{ adherent.address }}
+                    </div>
+                </div>
+                <div class="control-group">
+                    <div class="controls">
+                        {{ adherent.zipCode }} {{ adherent.city }}
+                    </div>
+                </div>
+                <div class="control-group">
+                    Date de naissance
+                    <div class="controls">
+                        {{ adherent.birthday|date('d/m/Y') }}
+                        <span class="help-inline">01/01/2000</span>
+                    </div>
+                </div>
+                <div class="control-group">
+                    Sexe
+                    <div class="controls">
+                        {{ adherent.gender }}
+                    </div>
+                </div>
+                <div class="control-group">
+                    Numéro de téléphone mobile
+                    <div class="controls">
+                        {{ adherent.phone }}
+                    </div>
+                </div>
+                <div class="control-group">
+                    Votre adresse e-mail actuelle
+                    <div class="controls">
+                        {{ adherent.email }}
+                    </div>
+                </div>
+            </div>
+         </div>
+    </div>
+</div>
+{%  endblock %}

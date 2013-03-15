@@ -26,8 +26,6 @@ class User extends BaseUser
 {
     const IS_NOT_ACTIVE = 0;
     const IS_ACTIVE = 1;
-    const IS_NEW_ADHESION = 2;
-    const IS_REJECT_ADHESION = 3;
 
     /**
      * @ORM\Id
@@ -37,82 +35,11 @@ class User extends BaseUser
     protected $id;
 
     /**
-     * @ORM\Column(name="firstName", type="string")
-     * @Assert\NotBlank()
-     */
-    protected $firstName;
-
-    /**
-     * @ORM\Column(name="lastName", type="string")
-     * @Assert\NotBlank()
-     */
-    protected $lastName;
-
-    /**
-     * @var \DateTime $birthday
+     * @var \DateTime $date_created
      *
-     * @ORM\Column(name="birthday", type="date", nullable=true)
+     * @ORM\Column(name="date_created", type="datetime")
      */
-    protected $birthday;
-
-    /**
-     * @ORM\Column(name="gender", type="string", nullable=true)
-     * @Assert\NotBlank()
-     */
-    protected $gender;
-
-    /**
-     * @ORM\Column(name="phone", type="string", nullable=true)
-     * @Assert\Regex(
-     *      pattern="/^(0[1-9][-.\s]?(\d{2}[-.\s]?){3}\d{2})$/",
-     *      message="Ce numéro de téléphone n'est pas valide, il doit avoir les indicatifs 01 à 06 et 08 et il doit y avoir un .- ou un espace entre deux chiffres."
-     * )
-     */
-    protected $phone;
-
-    /**
-     * @ORM\Column(name="address", type="string", nullable=true)
-     * @Assert\NotBlank()
-     */
-    protected $address;
-
-    /**
-     * @ORM\Column(name="city", type="string", nullable=true)
-     * @Assert\NotBlank()
-     */
-    protected $city;
-
-    /**
-     * @ORM\Column(name="zipCode", type="string", nullable=true)
-     * @Assert\NotBlank()
-     */
-    protected $zipCode;
-
-    /**
-     * @var \DateTime $date_validation
-     *
-     * @ORM\Column(name="date_validation", type="datetime", nullable=true)
-     */
-    protected $dateValidation;
-
-    /**
-     * @var \DateTime $date_last_revival
-     *
-     * @ORM\Column(name="date_last_revival", type="datetime", nullable=true)
-     */
-    protected $dateLastRevival;
-
-    /**
-     * @var \DateTime $date_submission
-     *
-     * @ORM\Column(name="date_submission", type="datetime")
-     */
-    protected $dateSubmission;
-
-    /**
-     * @ORM\Column(name="is_adhesion", type="integer")
-     */
-    protected $isAdhesion;
+    protected $dateCreated;
 
     /**
      * @var string
@@ -172,238 +99,6 @@ class User extends BaseUser
         return $this->id;
     }
 
-    /**
-     * Set firstName
-     *
-     * @param string $firstName
-     */
-    public function setFirstName($firstName)
-    {
-        $this->firstName = $firstName;
-    }
-
-    /**
-     * Get firstName
-     *
-     * @return string
-     */
-    public function getFirstName()
-    {
-        return $this->firstName;
-    }
-
-    /**
-     * Set lastName
-     *
-     * @param $lastName
-     */
-    public function setLastName($lastName)
-    {
-        $this->lastName = $lastName;
-    }
-
-    /**
-     * Get lastName
-     *
-     * @return string
-     */
-    public function getLastName()
-    {
-        return $this->lastName;
-    }
-
-    /**
-     * Set date_validation
-     *
-     * @param \DateTime $dateValidation
-     * @return User
-     */
-    public function setDateValidation($dateValidation)
-    {
-        $this->dateValidation = $dateValidation;
-
-        return $this;
-    }
-
-    /**
-     * Set date_submission
-     *
-     * @param \DateTime $dateSubmission
-     * @return User
-     */
-    public function setDateSubmission($dateSubmission)
-    {
-        $this->dateSubmission = $dateSubmission;
-
-        return $this;
-    }
-
-    /**
-     * Get date_submission
-     *
-     * @return \DateTime
-     */
-    public function getDateSubmission()
-    {
-        return $this->dateSubmission;
-    }
-
-    /**
-     * Set $date_last_revival
-     *
-     * @param \DateTime $dateLastRevival
-     * @return User
-     */
-    public function setDateLastRevival($dateLastRevival)
-    {
-        $this->dateLastRevival = $dateLastRevival;
-
-        return $this;
-    }
-
-    /**
-     * Get $date_last_revival
-     *
-     * @return \DateTime
-     */
-    public function getDateLastRevival()
-    {
-        return $this->dateLastRevival;
-    }
-
-    /**
-     * Get birthday
-     *
-     * @return \DateTime
-     */
-    public function getBirthday()
-    {
-        return $this->birthday;
-    }
-
-    /**
-     * Set birthday
-     *
-     * @param \DateTime $birthday
-     * @return User
-     */
-    public function setBirthday($birthday)
-    {
-        $this->birthday = $birthday;
-
-        return $this;
-    }
-
-    /**
-     * Set gender
-     *
-     * @param $gender
-     */
-    public function setGender($gender)
-    {
-        $this->gender = $gender;
-    }
-
-    /**
-     * Get gender
-     *
-     * @return string
-     */
-    public function getGender()
-    {
-        return $this->gender;
-    }
-
-    /**
-     * Set address
-     *
-     * @param $address
-     */
-    public function setAddress($address)
-    {
-        $this->address = $address;
-    }
-
-    /**
-     * Get address
-     *
-     * @return string
-     */
-    public function getAddress()
-    {
-        return $this->address;
-    }
-
-    /**
-     * Set city
-     *
-     * @param $city
-     */
-    public function setCity($city)
-    {
-        $this->city = $city;
-    }
-
-    /**
-     * Get city
-     *
-     * @return string
-     */
-    public function getCity()
-    {
-        return $this->city;
-    }
-
-    /**
-     * Set zipCode
-     *
-     * @param $zipCode
-     */
-    public function setZipCode($zipCode)
-    {
-        $this->zipCode = $zipCode;
-    }
-
-    /**
-     * Get zipCode
-     *
-     * @return string
-     */
-    public function getZipCode()
-    {
-        return $this->zipCode;
-    }
-
-    /**
-     * Set phone
-     *
-     * @param $phone
-     */
-    public function setPhone($phone)
-    {
-        $this->phone = $phone;
-    }
-
-    /**
-     * Get phone
-     *
-     * @return string
-     */
-    public function getPhone()
-    {
-        return $this->phone;
-    }
-
-    /**
-     * Get date_validation
-     *
-     * @return \DateTime
-     */
-    public function getDateValidation()
-    {
-        return $this->dateValidation;
-    }
-
     public function getPlainPassword()
     {
         return $this->plainPassword;
@@ -415,15 +110,28 @@ class User extends BaseUser
 
         return $this;
     }
+    
+    /**
+     * Set date_created
+     *
+     * @param \DateTime $dateCreated
+     * @return User
+     */
+    public function setDateSubmission($dateCreated)
+    {
+        $this->dateCreated = $dateCreated;
+
+        return $this;
+    }
 
     /**
-     * Get fullName
+     * Get date_created
      *
-     * @return string
+     * @return \DateTime
      */
-    public function getFullName()
+    public function getDateCreated()
     {
-        return $this->firstName . ' ' . $this->lastName;
+        return $this->dateCreated;
     }
 
     /**
@@ -434,26 +142,6 @@ class User extends BaseUser
     public function getRequest()
     {
         return $this->request;
-    }
-
-    /**
-     * Set is_adhesion
-     *
-     * @param integer $isAdhesion
-     */
-    public function setIsAdhesion($isAdhesion)
-    {
-        $this->isAdhesion = $isAdhesion;
-    }
-
-    /**
-     * Get is_adhesion
-     *
-     * @return integer
-     */
-    public function getIsAdhesion()
-    {
-        return $this->isAdhesion;
     }
 
     /**
@@ -541,10 +229,5 @@ class User extends BaseUser
         }
 
         return 'inconnu';
-    }
-
-    public function getReferenceUser()
-    {
-        return 'M' . $this->dateValidation->format('Ymd') . $this->id;
     }
 }

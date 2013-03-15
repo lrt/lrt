@@ -26,6 +26,7 @@ class CategoryControllerTest extends LrtWebTestCase
         $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
     }
 
+    
     /**
      * @test
      * @testdox Création d'une nouvelle catégorie après avoir appuyer sur "valider" on renvoie un message.

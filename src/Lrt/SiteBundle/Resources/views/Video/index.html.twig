@@ -32,12 +32,12 @@
     <ul class="thumbnails">
         {% for entity in entities %}
         <li class="span2">
-            <a href="{{ path('video_show', { 'id': entity.id }) }}" id="show-video" class="thumbnail">
+            <a title="{{ entity.title }}" href="{{ path('video_show', { 'id': entity.id }) }}" id="show-video" class="thumbnail popinVideo">
                 <img width="140" height="140" src="{{ asset('bundles/site/images/video/poster.jpg') }}" alt="{{ entity.title }}">
             </a>
             <div class="actions">
                 <a title="{{ entity.title }}" href="{{ path('video_edit', { 'id': entity.id }) }}"><i class="icon-pencil icon-white"></i></a>
-                <a title="{{ entity.title }}" href="{{ path('video_show', { 'id': entity.id }) }}"><i class="icon-search icon-white"></i></a>
+                <a class="popinVideo" title="{{ entity.title }}" href="{{ path('video_show', { 'id': entity.id }) }}"><i class="icon-search icon-white"></i></a>
             </div>
         </li>
         {% endfor %}
@@ -51,5 +51,12 @@
             {% render "SiteBundle:Video:new" %}
         </div>
     </div>
+    <div class="modal hide" id="modal-show-video">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        </div>
+        <div class="modal-body"></div>
+        <div class="modal-footer"><a href="{{ path('video') }}" class="btn">Annuler</a></div>
+    </div> 
 </div>
 {% endblock %}

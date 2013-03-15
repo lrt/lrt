@@ -65,14 +65,11 @@ fos_user:
     db_driver: orm # other valid values are 'mongodb', 'couchdb' and 'propel'
     firewall_name: main
     user_class: Lrt\UserBundle\Entity\User
-    resetting:
-          form:
-            type: lrt_user_resetting
-            handler: lrt_user_resetting_handler
-    change_password:
-          form:
-            type: lrt_user_change_password
-            handler: lrt_user_change_password_handler
+    group:
+        group_class: Lrt\UserBundle\Entity\Group
+    from_email:
+        address: "%mailer_sender_address%"
+        sender_name: "%mailer_sender_name%"
 
 
 # Doctrine Configuration
@@ -110,7 +107,7 @@ knp_paginator:
         page_name: page
         sort_field_name: sort
         sort_direction_name: direction
-        distinct: true
+        distinct: false
     template:
         pagination: KnpPaginatorBundle:Pagination:sliding.html.twig
         sortable: KnpPaginatorBundle:Pagination:sortable_link.html.twig

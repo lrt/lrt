@@ -28,7 +28,6 @@ $(function(){
 
     $('#formContact').ajaxForm();
     $('#formNewsletter').ajaxForm();
-    $('#formAdhesion').ajaxForm();
 });
 
 //POPIN
@@ -49,7 +48,25 @@ $('.popin').click(function(e) {
     });
 });
 
-$('.clients-carousel').flexslider({
+$('.popinVideo').click(function(e) {
+    e.preventDefault();
+    var title = $(this).attr('title');
+    var url = $(this).attr('href');
+      
+    $.ajax({
+        url: url,
+        type: 'get',
+        beforeSend: function() {
+            $('#modal-show-video').modal('show');
+        },
+        success: function(data) {
+            $('#modal-show-video .modal-header').text(title);
+            $('#modal-show-video .modal-body').html(data);
+        }
+    });
+});
+
+/*$('.clients-carousel').flexslider({
     animation: "slide",
     easing: "swing",
     animationLoop: true,
@@ -60,6 +77,6 @@ $('.clients-carousel').flexslider({
     controlNav: false,
     directionNav: false,
     move: 2
-});
+});*/
 
 

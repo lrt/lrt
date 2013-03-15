@@ -1,27 +1,2 @@
 parameters:
 #    user.example.class: Lrt\UserBundle\Example
-
-services:
-    lrt_user_resetting:
-        class: Lrt\UserBundle\Form\Type\LrtResettingFormType
-        arguments: [%fos_user.model.user.class%]
-        tags:
-            - { name: form.type, alias: lrt_user_resetting }
-            
-    lrt_user_resetting_handler:
-        class: Lrt\UserBundle\Form\Handler\ResettingFormHandler
-        arguments: ["@fos_user.resetting.form", "@request", "@fos_user.user_manager", "@fos_user.mailer", "@fos_user.util.token_generator"]
-        scope: request
-        public: false
-
-    lrt_user_change_password:
-            class: Lrt\UserBundle\Form\Type\LrtChangePasswordFormType
-            arguments: [%fos_user.model.user.class%]
-            tags:
-                - { name: form.type, alias: lrt_user_change_password }
-
-    lrt_user_change_password_handler:
-        class: Lrt\UserBundle\Form\Handler\ChangePasswordFormHandler
-        arguments: ["@fos_user.change_password.form", "@request", "@fos_user.user_manager", "@fos_user.mailer", "@fos_user.util.token_generator"]
-        scope: request
-        public: false

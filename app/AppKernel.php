@@ -29,6 +29,7 @@ class AppKernel extends Kernel
             new Lrt\UserBundle\UserBundle(),
             new Lrt\CMSBundle\CMSBundle(),
             new Lrt\CarmaBundle\CarmaBundle(),
+            new Lrt\AdhesionBundle\AdhesionBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

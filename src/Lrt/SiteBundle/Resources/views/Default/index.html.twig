@@ -110,15 +110,14 @@
             {% for v in videos %}
                 <div class="span3 zoomer">
                     <div class="work">
-                        <a class="fancybox-button" rel="fancybox-button" title="Project #1" href="{{ asset('bundles/site/images/themes/work/work1.jpg') }}">
+                        <a class="fancybox-button popinVideo" rel="fancybox-button" title="{{ v.title }}" href="{{ path('video_show', { 'id': v.id }) }}">
                             <div class="overlay-zoom">
                                 <img src="{{ asset('bundles/site/images/video/poster.jpg') }}" class="" alt="project 1">
                                 <div class="zoom-icon"></div>
                             </div>
                         </a>
-                        <a href="project.html" class="details">
+                        <a title="{{ v.title }}" href="{{ path('video_show', { 'id': v.id }) }}" class="details popinVideo">
                             <div><b>{{ v.title }}</b></div>
-                            {{ v.description }}
                         </a>
                     </div>
                 </div>
@@ -127,6 +126,13 @@
                     <div class="margin-top-5 visible-phone"></div>
                 {% endif %}
             {% endfor %}
+            <div class="modal hide" id="modal-show-video">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                </div>
+                <div class="modal-body"></div>
+                <div class="modal-footer"><a href="{{ path('home') }}" class="btn">Annuler</a></div>
+            </div>        
         </div>
         <div class="row-fluid">
             <div class="span12">

@@ -14,26 +14,6 @@ use Lrt\UserBundle\Entity\User;
 
 class UserRepository extends EntityRepository
 {
-
-    /**
-     * Liste les nouvelles adhésion
-     * @return array
-     */
-    public function getAdhesion()
-    {
-        $qb = $this->createQueryBuilder('u')
-            ->where('u.isAdhesion = :isAdhesion')
-            ->orWhere('u.enabled = :isEnabled')
-            ->orderBy('u.lastName')
-            ->setParameter('isAdhesion', User::IS_NEW_ADHESION)
-            ->setParameter('isEnabled', User::IS_ACTIVE)
-        ;
-
-        $query = $qb->getQuery();
-
-        return $query->getResult();
-    }
-
     /**
      * Filtre sur la liste des utilisateurs
      */

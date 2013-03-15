@@ -125,4 +125,22 @@ $(document).ready(function(){
         var cwidth = $('#content-header .btn-group').width();
         $('#content-header .btn-group').css({width:cwidth,'margin-left':'-' + uwidth / 2 + 'px'});
     }
+    
+    $('.popinVideo').click(function(e) {
+        e.preventDefault();
+        var title = $(this).attr('title');
+        var url = $(this).attr('href');
+      
+        $.ajax({
+            url: url,
+            type: 'get',
+            beforeSend: function() {
+                $('#modal-show-video').modal('show');
+            },
+            success: function(data) {
+                $('#modal-show-video .modal-header').text(title);
+                $('#modal-show-video .modal-body').html(data);
+            }
+        });
+    });
 });

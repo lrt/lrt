@@ -1,3 +1,8 @@
+adhesion:
+    resource: "@AdhesionBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
 cms:
     resource: "@CMSBundle/Controller/"
     type:     annotation

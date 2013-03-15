@@ -52,6 +52,8 @@
     </div><!-- /container -->
 </div><!-- /header -->
 
+{% include ':Themes:messages.html.twig' %}
+
 {% block body %}{% endblock %}
 
 <div id="footer">
@@ -83,12 +85,12 @@
             </div>
             <div class="span3">
                 {% render "SiteBundle:Newsletter:subscribe" %}
-                <h4>Nous rejoindre</h4>
+                <!--<h4>Nous rejoindre</h4>
                 <p>
                     <a href="#" class="iconify"><i class="icon-google-plus"></i></a>
                     <a href="#" class="iconify"><i class="icon-twitter"></i></a>
                     <a href="#" class="iconify"><i class="icon-facebook"></i></a>
-                </p>
+                </p>-->
             </div>
         </div><!-- /row-fluid -->
         <div class="row-fluid visible-phone">
@@ -122,8 +124,8 @@
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script src="{{ asset('bundles/site/js/bootstrap.min.js') }}"></script>
 <script src="http://connect.facebook.net/en_US/all.js#xfbml=1&appId=296297797115446"></script>
-<script src="{{ asset('bundles/site/js/themes/jquery.fancybox.pack.js') }}"></script>
-<script src="{{ asset('bundles/site/js/themes/jquery.flexslider-min.js') }}"></script>
+<!--<script src="{{ asset('bundles/site/js/themes/jquery.fancybox.pack.js') }}"></script>
+<script src="{{ asset('bundles/site/js/themes/jquery.flexslider-min.js') }}"></script>-->
 <script src="{{ asset('bundles/site/js/themes/app.js') }}"></script>
 <script src="{{ asset('bundles/site/js/common.js') }}"></script>
 <script src="{{ asset('bundles/site/js/video.min.js') }}"></script>
