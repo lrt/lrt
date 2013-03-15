@@ -107,7 +107,7 @@
                         <li><a title="Blog" href="{{ path('blog') }}">Blog</a></li>
                         <li><a title="Contact" href="{{ path('contact') }}">Contact</a></li>
                         {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-                            <li><a href="{{ path('user_profile_show', { 'id': app.user.id }) }}">Mon compte</a></li>
+                            <li><a href="{{ path('dashboard') }}">Mon compte</a></li>
                         {%  else %}
                             <li><a href="{{ path('fos_user_security_login') }}">Mon compte</a></li>
                         {% endif %}
