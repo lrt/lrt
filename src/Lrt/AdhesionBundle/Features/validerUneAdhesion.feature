@@ -14,6 +14,6 @@ Contexte: Je suis un administrateur et je voudrais valider une demande d'adhési
 @adhesion
 Scénario: Je rejette une nouvelle demande d'adhésion
     Et je devrais voir les lignes suivantes dans le tableau "tListeUsers" :
-        | brigitte | durand | brigitte.durand@gmail.com | * | * | * |
+        | * | brigitte | durand | brigitte.durand@gmail.com | * | * | * |
     Soit je clique sur le lien "Valider" contenu dans la ligne "3" du tableau "tListeUsers"
     Alors je devrais voir "La demande d'adhésion a été validé."

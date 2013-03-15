@@ -62,8 +62,6 @@ class DefaultControllerTest extends CarmaWebTestCase
      */
     public function contactTest()
     {
-        $this->login($this->client, array('user' => 'alexandre'));
-
         $crawler = $this->client->request('GET', '/contact');
 
         $form = $crawler->selectButton('Envoyer')->form(array(
@@ -75,6 +73,8 @@ class DefaultControllerTest extends CarmaWebTestCase
 
         $this->client->submit($form);
         $crawler = $this->client->getCrawler();
+        
+        $this->assertTrue($crawler->filter('html:contains("Votre email a été envoyé.")')->count() > 0);
     }
 
 }

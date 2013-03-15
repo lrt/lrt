@@ -25,8 +25,6 @@ $(function(){
             });
         }
     });
-
-    $('#formContact').ajaxForm();
     $('#formNewsletter').ajaxForm();
 });
 

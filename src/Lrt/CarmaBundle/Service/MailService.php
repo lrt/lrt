@@ -40,7 +40,7 @@ class MailService
     {
         return $this->container->getParameter('mailer_sender_name');
     }
-
+    
     /**
      * Envoi de mail
      *

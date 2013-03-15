@@ -26,12 +26,9 @@ class DefaultController extends Controller
      * @var \Doctrine\ORM\EntityManager
      */
     public $em;
-
-    /**
-     * @DI\Inject("carma.service.mail")
-     * @var \Lrt\CarmaBundle\Service\MailService
-     */
-    public $mailService;
+    
+    /** @DI\Inject("mailer") */
+    public $mailer;
 
     /**
      * @DI\Inject("knp_paginator")
@@ -116,22 +113,37 @@ class DefaultController extends Controller
     /**
      * @Route("/contact", name="contact")
      * @Template("SiteBundle:Page:contact.html.twig")
-     * @Method({"GET", "POST"})
      */
     public function contactActon(Request $request)
     {
         $enquiry = new Enquiry();
         $form = $this->createForm($this->container->get('form.site.contact.type'), $enquiry);
-
-        if ($request->isXmlHttpRequest()) {
+                
+        if($request->getMethod() == 'POST') {
             $form->bind($request);
-
-            $this->mailService->sendMessage($enquiry->getSubject(), $enquiry->getEmail(), "alexandre.seiller92@gmail.com", $enquiry->getBody());
-            $this->get('session')->setFlash('error', 'Votre email n\'a pas été envoyé.');
+                        
+            if($form->isValid()) {
+                $this->sendMessage($enquiry->getEmail() , $enquiry->getSubject(), $enquiry->getBody());
+                $this->get('session')->getFlashBag()->add('success', 'Votre email a été envoyé.');
+                return $this->redirect($this->generateUrl('contact'));
+            }
         }
 
         return $this->render('SiteBundle:Page:contact.html.twig', array(
             'form' => $form->createView()
         ));
+    }
+    
+    private function sendMessage($from, $subject, $body)
+    {
+        $mail = \Swift_Message::newInstance();
+        $mail
+                ->setFrom($from)
+                ->setTo(array($this->container->getParameter('mailer_sender_address') => $this->container->getParameter('mailer_sender_name')))
+                ->setSubject($subject)
+                ->setBody($body)
+                ->setContentType('text/html');
+        $failures = null;
+        $this->mailer->send($mail, $failures);
     }
 }
