@@ -133,7 +133,7 @@ class AdherentController extends Controller
         $this->em->persist($adherent);
         $this->em->flush();
         
-        $this->mailService->sendMessage("no-reply@longchamp-roller-team.com", "Nouvelle adhésion", "Une nouvelle adhésion vient d'être effectué sur le site.");
+        $this->mailService->sendMessage("longchamp-roller-team@laposte.net", "Nouvelle adhésion", "Une nouvelle adhésion vient d'être effectué sur le site.");
 
         $this->get('session')->getFlashBag()->add('success', 'Votre demande a bien été enregistré');
         return $this->redirect($this->generateUrl('user_adhesion_show', array('id' => $adherent->getId())));
