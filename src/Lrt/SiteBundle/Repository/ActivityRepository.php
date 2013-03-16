@@ -15,7 +15,8 @@ class ActivityRepository extends EntityRepository
         $qb->select('a')
                 ->from('SiteBundle:Activity', 'a')
                 ->where('a INSTANCE OF CMSBundle:Article')
-                ->orWhere('a INSTANCE OF SiteBundle:Video');
+                ->orWhere('a INSTANCE OF SiteBundle:Video')
+                ->orderBy('a.dateSubmission');
         
         return $qb;
     }

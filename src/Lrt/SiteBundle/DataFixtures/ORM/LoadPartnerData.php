@@ -15,11 +15,11 @@ class LoadPartnerData extends AbstractFixture implements OrderedFixtureInterface
 
         $user = $this->getReference('alexandre1');
 
-        $this->newPartner('Synergie','description de l\'entreprise','http://www.monsite.fr',$user);
-        $this->newPartner('RS2P','description de l\'entreprise','http://www.monsite.fr',$user);
+        $this->newPartner('Synergie','description de l\'entreprise','http://www.synergie.fr',$user);
+        $this->newPartner('RS2P','description de l\'entreprise','http://www.cabinet-iena.com',$user);
         $this->newPartner('IENA','description de l\'entreprise','http://www.monsite.fr',$user);
-        $this->newPartner('Groupe Matis','description de l\'entreprise','http://www.monsite.fr',$user);
-        $this->newPartner('Groupe Arcade','description de l\'entreprise','http://www.monsite.fr',$user);
+        $this->newPartner('Groupe Matis','description de l\'entreprise','http://www.matis-group.com',$user);
+        $this->newPartner('Groupe Arcade','description de l\'entreprise','http://www.arcade-groupe.com',$user);
     }
 
     protected function newPartner($name,$description,$website,$user)
