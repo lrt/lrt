@@ -12,12 +12,15 @@ $loader = new ApcClassLoader('sf2', $loader);
 $loader->register(true);
 */
 
-var_dump($_SERVER);
-
 require_once __DIR__.'/../app/AppKernel.php';
 //require_once __DIR__.'/../app/AppCache.php';
 
-$kernel = new AppKernel('prod', false);
+if($_SERVER["SERVER_NAME"] == 'preprod.longchamp-roller-team.com') {
+    $kernel = new AppKernel('prod', false);
+} else {
+    $kernel = new AppKernel('prod', false);
+}
+
 $kernel->loadClassCache();
 //$kernel = new AppCache($kernel);
 $request = Request::createFromGlobals();
