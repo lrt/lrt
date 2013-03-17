@@ -9,10 +9,6 @@
         <link rel="stylesheet" href="{{ asset('bundles/site/css/bootstrap.min.css') }}" type="text/css" media="screen" />
         <link rel="stylesheet" href="{{ asset('bundles/site/css/bootstrap-responsive.min.css') }}">
         <link rel="stylesheet" href="{{ asset('bundles/site/css/admin/style.css') }}">
-        <!--<link rel="stylesheet" href="{{ asset('bundles/site/css/admin/red.css') }}">-->
-        <link rel="stylesheet" href="{{ asset('bundles/site/css/admin/fullcalendar.css') }}">
-        <link rel="stylesheet" href="{{ asset('bundles/site/css/admin/uniform.css') }}">
-        <link rel="stylesheet" href="{{ asset('bundles/site/css/admin/select2.css') }}">
         <link href="{{ asset('bundles/site/css/themes/video-js.min.css') }}" rel="stylesheet">
     {% endblock %}
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
@@ -42,19 +38,15 @@
           <div class="span12">
             <ul>
               <li><a href="{{ path('dashboard') }}" class="active"><i class="batch home"></i><br>Tableau de bord</a></li>
-              <!--<li><span class="label label-important pull-right">08</span><a href="stream.html"><i class="batch stream"></i><br>Stream</a></li>-->
-              <!--<li><span class="label label-important pull-right">04</span><a href="messages.html"><i class="batch plane"></i><br>Messages</a></li>-->
               <li><a href="{{ path('event') }}"><i class="batch calendar"></i><br>Calendrier</a></li>
               <li><a href="{{ path('article') }}"><i class="batch quill"></i><br>Articles</a></li>
               <li><a href="{{ path('video') }}"><i class="batch forms"></i><br>Vidéos</a></li>
-              <!--<li><a href="faq.html"><i class="batch forms"></i><br>FAQ</a></li>-->
               {% if is_granted('ROLE_ADMIN') %}
                     <li><a href="{{ path('user') }}"><i class="batch users"></i><br>Utilisateurs</a></li>
               {% elseif is_granted('ROLE_SUPERVISEUR') %}
                     <li><a href="{{ path('adhesion_display') }}"><i class="batch users"></i><br>Adhérents</a></li>
               {% endif %}
               <li><a href="{{ path('partner') }}"><i class="batch star"></i><br>Partenaires</a></li>
-              <!--<li><a href="settings.html"><i class="batch settings"></i><br>Configuration</a></li>-->
             </ul>
           </div>
         </div>
