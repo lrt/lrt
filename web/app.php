@@ -12,7 +12,7 @@ $loader = new ApcClassLoader('sf2', $loader);
 $loader->register(true);
 */
 
-var_dump($_SERVER['REMOTE_HOST']);
+var_dump($_SERVER);
 
 require_once __DIR__.'/../app/AppKernel.php';
 //require_once __DIR__.'/../app/AppCache.php';
