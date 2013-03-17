@@ -12,6 +12,8 @@ $loader = new ApcClassLoader('sf2', $loader);
 $loader->register(true);
 */
 
+var_dump($_SERVER['SERVER_HOST']);
+
 require_once __DIR__.'/../app/AppKernel.php';
 //require_once __DIR__.'/../app/AppCache.php';
 
