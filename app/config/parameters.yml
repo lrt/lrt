@@ -7,13 +7,13 @@ parameters:
     database_password: J@AGKFXz_.vn
 
     mailer_transport:  smtp
-    mailer_host:       smtp.laposte.net
-    mailer_user:       longchamp-roller-team
-    mailer_password:   synergie
-    mailer_auth_mode:  login
+    mailer_host:       mail.longchamp-roller-team.com
+    mailer_user:       webmaster@longchamp-roller-team.com
+    mailer_password:   synergie92
+    mailer_port:       26
 
     locale:            fr
     secret:            ThisTokenIsNotSoSecretChangeIt
     
-    mailer_sender_address: longchamp-roller-team@laposte.net
+    mailer_sender_address: webmaster@longchamp-roller-team.com
     mailer_sender_name: Longchamp Roller Team
