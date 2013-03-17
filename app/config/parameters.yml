@@ -7,9 +7,10 @@ parameters:
     database_password: J@AGKFXz_.vn
 
     mailer_transport:  smtp
-    mailer_host:       laposte.net
+    mailer_host:       smtp.laposte.net
     mailer_user:       longchamp-roller-team
     mailer_password:   synergie
+    mailer_auth_mode:  login
 
     locale:            fr
     secret:            ThisTokenIsNotSoSecretChangeIt
