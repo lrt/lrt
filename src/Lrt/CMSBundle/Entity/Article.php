@@ -194,7 +194,7 @@ class Article extends Activity
     protected function getUploadRootDir()
     {
         // the absolute directory path where uploaded documents should be saved
-        return $this->getTmpUploadRootDir() . $this->getId() . "/";
+        return $this->getTmpUploadRootDir();
     }
 
     protected function getTmpUploadRootDir()
@@ -218,12 +218,10 @@ class Article extends Activity
         if (null === $this->picture) {
             return;
         }
-        if (!$this->id) {
-            $this->picture->move($this->getTmpUploadRootDir(), $this->picture->getClientOriginalName());
-        } else {
-            $this->picture->move($this->getUploadRootDir(), $this->picture->getClientOriginalName());
-        }
-        $this->setPath($this->getUploadDir() . '/' . $this->getId() . '/' . $this->picture->getClientOriginalName());
+
+        $this->picture->move($this->getUploadRootDir(), $this->picture->getClientOriginalName());
+
+        $this->setPath($this->getUploadDir() . '/' . $this->picture->getClientOriginalName());
         $this->setPicture($this->picture->getClientOriginalName());
 
     }
@@ -240,7 +238,7 @@ class Article extends Activity
             mkdir($this->getUploadRootDir());
         }
         copy($this->getTmpUploadRootDir() . $this->picture, $this->getFullPicturePath());
-        @unlink($this->getTmpUploadRootDir() . $this->picture);
+        //@unlink($this->getTmpUploadRootDir() . $this->picture);
     }
 
     /**

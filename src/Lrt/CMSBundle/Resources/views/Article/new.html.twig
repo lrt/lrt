@@ -1,9 +1,5 @@
 {% extends ':Admin:base.html.twig' %}
 
-{% block breadcrumb %}
-<li class="active">Ajouter un article</li>
-{% endblock %}
-
 {% block box_title %}
    Ajouter un article
 {% endblock %}
@@ -26,10 +22,10 @@
 
 {% block javascripts %}
     {{ parent() }}
+    <script type="text/javascript" src="{{ asset('bundles/site/js/wysihtml5-0.3.0.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/site/js/bootstrap-wysihtml5.js') }}"></script>
     <script type="text/javascript">
-        //<![CDATA[
-        var editor = CKEDITOR.replace( 'lrt_cmsbundle_articletype_[content]' );
-        //]]>
+        $('#lrt_cmsbundle_articletype_content').wysihtml5();
     </script>
 {% endblock %}
    
