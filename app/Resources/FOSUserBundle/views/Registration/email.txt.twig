@@ -1,0 +1,29 @@
+{% block subject %}
+    {% autoescape false %}
+        {{ 'registration.email.subject'|trans({}, 'FOSUserBundle') }}
+    {% endautoescape %}
+{% endblock %}
+{% block body_text %}
+    {% autoescape false %}
+        {{ 'registration.email.message'|trans({'%username%': user.username, '%confirmationUrl%': confirmationUrl}, 'FOSUserBundle') }}
+    {% endautoescape %}
+{% endblock %}
+{% block body_html %}
+    {% autoescape false %}
+        <p>
+            Bonjour,
+        </p>
+        <p>
+            Vous venez de créer un compte sur le site <strong>Extranet Filière</strong> pour bénéficier d'un ou plusieurs services personnalisés.
+        </p>
+        <p>
+            <a href="{{ confirmationUrl }}">Merci de cliquer sur ce lien</a> afin de valider l' adresse email indiquée lors de votre inscription.
+        </p>
+            En cliquant sur ce lien, vous activerez votre compte et pourrez bénéficier de l'ensemble de nos services gratuits.
+        <p>
+            Merci de votre confiance et de votre fidélité.<br/> 
+            Bonne journée,<br/>
+            L'équipe d'<strong>Extranet Filière</strong>.
+        </p>
+    {% endautoescape %}
+{% endblock %}

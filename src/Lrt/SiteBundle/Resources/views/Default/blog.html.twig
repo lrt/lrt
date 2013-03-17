@@ -1,0 +1,92 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+    <div id="body">
+        <div class="container">
+            <div class="row-fluid blog">
+                <div class="span9">
+                    {% for a in activities %}
+                    <div class="row-fluid">
+                        <div class="span3">
+                            <div class="date">
+                                <div class="published">
+                                    <div class="day pull-left">{{ a.dateSubmission|date('d') }}</div>
+                                    <div class="month pull-right">{{ a.dateSubmission|date('M Y') }}</div>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </div>
+                            <div class="author">
+                                {#par {{ a.user.firstName }} {{ a.user.lastName }}#}
+                            </div>
+                            <div class="tags">
+                                {% if a.typeName == 'Article' %}
+                                    <i class="icon-tags"></i>
+                                    <span class="label"><a href="">{{ a.category.name }}</a></span>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="span9">
+                                <h3>{{ a.title }}</h3>
+                            {% if a.typeName == 'Article' %}
+                                <p>
+                                    {% if a.path is not null %}
+                                        <img src="{{ asset(a.path) }}" data-original="{{ asset(a.path) }}" alt="{{ a.title }}" />
+                                    {% else %}
+                                        <img src="{{ asset('bundles/site/images/no_picture.png') }}" data-original="{{ asset('bundles/site/images/no_picture.png') }}" alt="{{ a.title }}" />
+                                    {%  endif %}
+                                </p>
+                                <p>{{ a.content | truncate(350) | raw }}</p>
+                                <p>
+                                    <a class="btn pull-right" href="{{ path('article_view', { 'id': a.id }) }}">Lire la suite ...</a>
+                                </p>
+                            {% elseif a.typeName == 'Video' %}
+                                <video width="640" height="380" class="video-js vjs-default-skin" preload="auto" poster="{{ asset('bundles/site/images/video/poster.jpg') }}" controls="controls" data-setup="{}">
+                                    <source src="{{ a.path }}" type="video/mp4">
+                                    <!--<source src="http://www.html5rocks.com/en/tutorials/video/basics/Chrome_ImF.webm" type='video/webm; codecs="vp8, vorbis"' />
+                                    <source src="http://www.html5rocks.com/en/tutorials/video/basics/Chrome_ImF.ogv" type='video/ogg; codecs="theora, vorbis"' />-->
+                                    <object type="application/x-shockwave-flash" width="640" height="380" data="{{ a.path }}">
+                                        <param name="movie" value="{{ a.path }}" />
+                                        <param name="wmode" value="transparent" />
+                                        <!--[if lte IE 6 ]>
+                                        <embed src="{{ a.path }}" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="1000" height="368"></embed>
+                                        <![endif]-->
+                                        <p>Vous n'avez pas de navigateur moderne, ni flash d'installé sur Internet Explorer... suivez les liens ci-dessous pour télécharger les vidéos.</p>
+                                    </object>
+                                </video>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <hr class="solid">
+                    {% endfor %}
+
+                    <div class="pagination pagination-centered row-fluid margin-top-10">
+                        {{ activities.render()|raw }}
+                    </div>
+                </div>
+                <div class="span3">
+                    <h3 class="">Catégories</h3>
+                    <div class="clearfix bottom-20 margin-top-10">
+                        <ul class="nav nav-list">
+                            <li class="active bold"><a href="#"><i class="icon-chevron-left"></i> Accueil</a></li>
+                            {% for c in categories %}
+                                <li><a href="#"><i class="icon-chevron-left"></i> {{ c.name }}</a></li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    <hr class="dashed">
+                    <h3>Nous suivre sur Facebook</h3>
+                    <div class="fb-like-box" data-href="http://www.facebook.com/pages/Longchamp-Roller-Team/355637923045" data-width="292" data-show-faces="true" data-stream="false" data-header="false"></div>
+                    <hr class="dashed">
+                    <h3>Nos partenaires</h3>
+                    <img alt="Cabinet IENA" style="cursor: pointer;" onclick="window.open('http://www.cabinet-iena.com');" width="100" height="100" src="{{ asset('uploads/partners/logos/iena.jpg') }}">
+                    <img alt="Matis Group" style="cursor: pointer;" onclick="window.open('http://www.matis-group.com/');" width="100" height="100" src="{{ asset('uploads/partners/logos/logo-matis.png') }}">
+                    <img alt="Arcade Groupe" style="cursor: pointer;" onclick="window.open('http://www.arcade-groupe.com/');" width="100" height="100" src="{{ asset('uploads/partners/logos/groupe_arcade.gif') }}">
+                    <img alt="Synergie" style="cursor: pointer;" onclick="window.open('http://www.synergie.fr/');" width="100" height="100" src="{{ asset('uploads/partners/logos/synergie.jpg') }}">
+                    <hr class="dashed">
+                    <h3>Ligne droite sur votre mobile</h3>
+                    <img src="{{ asset('uploads/partners/logos/ligne_droite_qrcode.JPG') }}">
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

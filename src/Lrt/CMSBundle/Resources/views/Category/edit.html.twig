@@ -1,0 +1,25 @@
+{% extends 'AdminBundle:Themes:box.html.twig' %}
+
+{% block box_title %}
+    Modifier la catégorie
+{% endblock %}
+
+{% block box_content %}
+    {% form_theme edit_form 'AdminBundle:Themes:form.html.twig' %}
+    <form action="{{ path('category_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>
+        {{ form_widget(edit_form) }}
+        <p>
+            <button type="submit">Edit</button>
+        </p>
+    </form>
+{% endblock %}
+
+{% block box_button %}
+    <ul class="record_actions">
+        <li>
+            <a href="{{ path('category') }}">
+                Back to the list
+            </a>
+        </li>
+    </ul>
+{% endblock %}

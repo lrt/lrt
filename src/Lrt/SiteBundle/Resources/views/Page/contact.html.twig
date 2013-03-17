@@ -1,0 +1,55 @@
+{% extends '::base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('bundles/site/css/leaflet.css') }}" />
+    <!--[if lte IE 8]><link rel="stylesheet" href="{{ asset('bundles/site/css/leaflet.ie.css') }}" /><![endif]-->
+{% endblock %}
+
+{% block body %}
+    <div id="body">
+        <div class="container">
+            <div class="row-fluid">
+                <div class="span3">
+                    <h3>Nous contacter par mail</h3>
+                    <p><strong>Longchamp Roller Team</strong></p>
+                    <p><i class="icon-envelope"></i><a href="mailto:info@creativo.com" class=""> longchamp-roller-team@laposte.net</a></p>
+                    <!--<div class="clearfix">
+                        <a href="#" class="iconify"><i class="icon-twitter"></i></a>
+                        <a href="#" class="iconify"><i class="icon-facebook"></i></a>
+                    </div>-->
+                </div>
+                <div class="span4">
+                    <h3>Formulaire de contact</h3>
+                    <div id="result"></div>
+                    <form id="formContact" action="{{ path('contact') }}" method="post" {{ form_enctype(form) }} class="contact-form">
+                        {{ form_widget(form) }}
+                        {{ form_rest(form) }}
+                        <button type="submit" class="btn btn-danger">Envoyer</button>
+                    </form>
+                </div>
+                <div class="span5">
+                    <h3>Nous retrouver à Longchamp</h3>
+                    <div class="img-polaroid">
+                        <div id="map" style="height: 300px;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('bundles/site/js/leaflet.js') }}"></script>
+    <script>
+        var map = L.map('map').setView([48.8592759, 2.2293226], 13);
+                
+        L.tileLayer('http://{s}.tile.cloudmade.com/BC9A493B41014CAABB98F0471D759707/997/256/{z}/{x}/{y}.png', {
+                maxZoom: 18,
+                attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors.'
+        }).addTo(map);
+        
+        L.marker([48.8592759, 2.2293226]).addTo(map);
+    </script>
+{% endblock %}

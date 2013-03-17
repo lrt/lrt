@@ -1,0 +1,93 @@
+{% extends '::admin.html.twig' %}
+
+{% block breadcrumb %}
+    <li>
+        <a href="{{ path('article') }}">Articles</a> <span class="divider">/</span>
+    </li>
+    <li class="active">All</li>
+{% endblock %}
+
+{% block menu %}
+    <li class="nav-header">Article</li>
+    <li><a href="{{ path('article_new') }}">Ajouter</a></li>
+    <li><a href="{{ path('article') }}">Liste des articles</a></li>
+    <li><a href="#">Article(s) en attente</a></li>
+    <li class="active"><a href="{{ path('article_draft') }}">Brouillons</a></li>
+    <li><a href="{{ path('category') }}">Rubrique</a></li>
+    <li><a href="{{ path('article_bin') }}">Corbeille</a></li>
+{% endblock %}
+
+{% block body %}
+    <div class="box">
+        <h4 class="box-header round-top">
+            Brouillon ({% if nb is defined %}{{ nb }}{% endif %})
+            <a class="box-btn" title="close">
+                <i class="icon-remove"></i>
+            </a>
+            <a class="box-btn" title="toggle">
+                <i class="icon-minus"></i>
+            </a>
+            <a class="box-btn" title="#box-config-modal" data-toggle="modal" title="config">
+                <i class="icon-cog"></i>
+            </a>
+        </h4>
+        <div class="box-container-toggle">
+            <div class="box-content">
+                <table class="table table-striped tListeArticles">
+                    <thead>
+                    <tr>
+                        <th></th>
+                        <th>Contenu</th>
+                        <th>Date</th>
+                        <th>Rubrique</th>
+                        <th>Visibilité</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for entity in entities %}
+                        <tr>
+                            <td><img width="100" height="55" src="{{ asset('bundles/site/images/no_picture.png') }}" alt=""></td>
+                            <td>
+                                <div class="space_half">
+                                    <img src="{{ asset('bundles/site/images/page.png') }}" alt="Prévisualiser" title="Prévisualiser" class="preview">
+                                    <a class="title_preview" title="Modifier" href="{{ path('article_edit', { 'id': entity.id }) }}">{{ entity.id }} - <b>{{ entity.title }}</b></a>
+                                </div>
+                                {{ entity.content|raw|truncate(50) }}
+                                ( posté par  <a title="" href="#">{{ entity.user }}</a> )
+                            </td>
+                            <td>{{ entity.dateSubmission|date('d/m/Y h:m') }}</td>
+                            <td>{{ entity.category.name }}</td>
+                            <td>
+                                {% if entity.isPublic == 1 %}
+                                    Public
+                                {% else %}
+                                    Privé
+                                {% endif %}
+                            </td>
+                            <td>
+                                <a data-toggle="modal" rel="{{ entity.title }}" href="{{ path('article_show', { 'id': entity.id }) }}" class="btn btn-small btn-success popin">
+                                    <i class="icon-zoom-in icon-white"></i>
+                                    Voir
+                                </a>
+                                <a href="{{ path('article_edit', { 'id': entity.id }) }}" class="btn btn-small btn-info">
+                                    <i class="icon-edit icon-white"></i>
+                                    Modifier
+                                </a>
+                                <a href="{{ path('article_edit', { 'id': entity.id }) }}" class="btn btn-small btn-danger">
+                                    <i class="icon-trash icon-white"></i>
+                                    Supprimer
+                                </a>
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td>Aucun article ne correspond à votre recherche</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}

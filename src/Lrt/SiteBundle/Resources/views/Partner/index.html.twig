@@ -1,0 +1,102 @@
+{% extends ':Admin:base.html.twig' %}
+
+{% block title_page %}
+    Liste des partenaires
+{% endblock %}
+
+{% block breadcrumb %}
+    <a class="current" href="{{ path('partner') }}">Partenaires</a>
+{% endblock %}
+
+{% block button_actions %}
+    <a href="{{ path('export_partner') }}" class="btn btn-large tip-bottom" data-original-title="Export file"><i class="icon-download-alt"></i></a>
+{% endblock %}
+
+{% block page_header %}
+    <div class="row-fluid" style="border-bottom: 1px solid #eeeeee;margin-bottom: 18px;">
+        <div class="span8 m-botton-group">
+            <h3>Liste des partenaires</h3>
+        </div>
+        <div class="span4">
+            <div class="btn-group pull-right">
+                <a class="btn btn-danger" href="{{ path('partner_new') }}">
+                    Ajouter un partenaire
+                </a>
+                <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+                    <i class="icon-cog"></i>
+                    <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a data-toggle="modal" href="{{ path('export_partner') }}"><i class="icon-download-alt"></i> Exporter la liste</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block body %}
+<div class="span12">
+    <div class="buttons">
+        <a data-toggle="modal" rel="Ajouter un partenaire" href="#modal-add-partner" class="btn pull-right popin"><i class="icon-plus"></i> Ajouter un partenaire</a>
+        <div class="modal hide" id="modal-add-partner">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">×</button>
+                <h3>Ajouter un partenaire</h3>
+            </div>
+            {% render "SiteBundle:Partner:new" %}
+        </div>
+    </div>
+    <h4 class="header">Partenaires</h4>
+    <table id="flip-scroll" class="table table-bordered table-striped tListePartners">
+        <thead>
+            <tr>
+                <th>Nom</th>
+                <th>Description</th>
+                <th>Site internet</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr>
+                <td>{{ entity.name }}</td>
+                <td>{{ entity.description }}</td>
+                <td>{{ entity.website }}</td>
+                <td>
+                    <div class="btn-group">
+                        <a class="btn btn-small dropdown-toggle" data-toggle="dropdown" href="#">
+                            Action
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu pull-right">
+                            <li>
+                                <a data-toggle="modal" rel="{{ entity.name }}" href="{{ path('partner_show', { 'id': entity.id }) }}" class="popin">
+                                    <i class="icon-zoom-in"></i>
+                                    Voir
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ path('partner_edit', { 'id': entity.id }) }}">
+                                    <i class="icon-edit"></i>
+                                    Modifier
+                                </a>
+                                <a href="{{ path('partner_delete', { 'id': entity.id }) }}">
+                                    <i class="icon-trash"></i>
+                                    Corbeille
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
+        
+{% block javascripts %}
+    {{ parent() }}
+{% endblock %}

@@ -1,0 +1,86 @@
+#page-wrapper {
+    width: 1000px;
+    margin: auto;
+    position: relative;
+    /*padding-top: 146px;*/
+}
+
+#featured {
+    background: black;
+    height: 368px;
+    position: relative;
+    /*top: 140px;*/
+    z-index: 20;
+    width: 1000px;
+    margin: 0 auto;
+    border-top: 3px solid #D8162B;
+}
+
+#footer {
+    border-top: 5px solid #e1472f;
+}
+#footer {
+    overflow: hidden;
+    clear: both;
+    background: #323232;
+    color: #969595;
+    padding-top: 40px;
+    margin: 0 auto;
+}
+#bottomfooter {
+    height: 42px;
+    line-height: 42px;
+    position: relative;
+    overflow: hidden;
+    clear: both;
+    margin-top: 40px;
+    background: #252525;
+}
+@media only screen and (min-width: 1281px) {
+    .one-fourth, .one-half, .two-third, .one-third, .three-fourth, .one-sixth, .five-sixth {
+        position: relative;
+        margin-right: 20px;
+        float: left;
+    }
+}
+@media only screen and (min-width: 1281px) {
+    .one-half {
+        width: 550px;
+    }
+}
+#topfooter {
+    padding: 0;
+    margin: 0;
+}
+@media only screen and (min-width: 1281px) {
+    .centered-wrapper, .title-bg, .title-wrapper, .title-content {
+        width: 1120px;
+    }
+}
+.centered-wrapper {
+    width: 940px;
+    margin: 0 auto;
+}
+
+/*ARTICLE*/
+#content .date {font-size: 11px;margin: 2px 0 10px;color: #BDBDBD;}
+#content h1 {font-family: 'BebasNeue';}
+h1 {font-size: 34px;margin-bottom: 5px;margin-top: 10px;}
+h1 a {color: black;text-decoration: none;}
+#content .headline {font-size: 17px;margin-bottom: 15px;margin-top: 15px;font-family: 'Georgia';font-style: italic;font-weight: normal;line-height: 24px;}
+#content .text {line-height: 19px;margin-bottom: 15px;-moz-column-width: 285px;-moz-column-gap: 35px;-webkit-column-width: 285px;-webkit-column-gap: 35px;}
+#share {margin-top: 30px;margin-bottom: 30px;}
+
+/*CALENDRIER*/
+#content h2 {font-size: 41px;font-family: 'BebasNeue';font-style: normal;text-transform: uppercase;width: 600px;line-height: 50px;margin-bottom: 10px;margin-top:10px;}
+#content .view-calendar ul {margin: 0;width: 960px;list-style-type: none;padding: 1px 0 0 1px;overflow: hidden;}
+#content .view-calendar ul li.month {background: #CF2D34;font-family: 'BebasNeue';text-transform: uppercase;color: white;font-size: 35px;word-wrap: break-word;line-height: 35px;padding: 5px;width: 126px;height: 125px;}
+#content .view-calendar ul li {float: left;width: 136px;height: 135px;margin-right: 1px;background: white;margin-bottom: 1px;padding-right: 0;}
+#content .view-calendar ul li a {text-decoration: none;color: black;}
+#content .view-calendar ul li.old .flag {color: #A2A2A2;opacity: 0.4;filter: alpha(opacity=40);}
+#content .view-calendar ul li.old .days {color: #A2A2A2;opacity: 0.4;filter: alpha(opacity=40);}
+#content .view-calendar ul li .days {padding: 7px;width: 70px;font-family: 'BebasNeue';text-transform: uppercase;font-size: 21px;float: left;margin-top: 5px;}
+#content .view-calendar ul li.old .title {color: #A2A2A2;opacity: 0.4;filter: alpha(opacity=40);}
+#content .view-calendar ul li .title {font-family: 'BebasNeue';text-transform: uppercase;font-size: 21px;clear: left;padding: 5px;}
+#content .view-calendar ul li .on {background: #E8E8E8 url(/sites/all/themes/leopardtrek/images/calendar-more.png) no-repeat 90% 95%;}
+#content .view-calendar ul li .calendar {height: 135px;width: 136px;background: #E8E8E8;}

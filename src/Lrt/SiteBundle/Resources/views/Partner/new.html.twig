@@ -1,0 +1,10 @@
+{% form_theme form ':Themes:form.html.twig' %}
+<form action="{{ path('partner_create') }}" method="post" {{ form_enctype(form) }} class="form-horizontal">
+    <div class="modal-body">
+        {{ form_widget(form) }}
+    </div>
+    <div class="modal-footer">
+        <a href="{{ path('partner') }}" class="btn" data-dismiss="modal"><i class="icon-list"></i> Retour à la liste</a>
+        <button id="add-event-submit" type="submit" class="btn btn-primary"><i class="icon-check icon-white"></i> Valider</button>
+    </div>
+</form>

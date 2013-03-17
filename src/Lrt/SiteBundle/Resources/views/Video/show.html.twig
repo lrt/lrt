@@ -1,0 +1,17 @@
+{% extends '::base_ajax.html.twig' %}
+
+{% block body %}
+<video width="100%" height="300" class="video-js vjs-default-skin" preload="auto" poster="{{ asset('bundles/site/images/video/poster.jpg') }}" controls="controls" data-setup="{}">
+    <source src="{{ entity.path }}" type="video/mp4">
+    <!--<source src="http://www.html5rocks.com/en/tutorials/video/basics/Chrome_ImF.webm" type='video/webm; codecs="vp8, vorbis"' />
+    <source src="http://www.html5rocks.com/en/tutorials/video/basics/Chrome_ImF.ogv" type='video/ogg; codecs="theora, vorbis"' />-->
+    <object type="application/x-shockwave-flash" width="100%" height="300" data="{{ entity.path }}">
+        <param name="movie" value="{{ entity.path }}" />
+        <param name="wmode" value="transparent" />
+        <!--[if lte IE 6 ]>
+        <embed src="{{ entity.path }}" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="1000" height="368"></embed>
+        <![endif]-->
+        <p>Vous n'avez pas de navigateur moderne, ni flash d'installé sur Internet Explorer... suivez les liens ci-dessous pour télécharger les vidéos.</p>
+    </object>
+</video>
+{% endblock %}

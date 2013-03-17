@@ -1,0 +1,19 @@
+parameters:
+    database_driver:   pdo_mysql
+    database_host:     localhost
+    database_port:     ~
+    database_name:     longcha1_db
+    database_user:     longcha1_root
+    database_password: J@AGKFXz_.vn
+
+    mailer_transport:  smtp
+    mailer_host:       smtp.laposte.net
+    mailer_user:       longchamp-roller-team
+    mailer_password:   synergie
+    mailer_auth_mode:  login
+
+    locale:            fr
+    secret:            ThisTokenIsNotSoSecretChangeIt
+    
+    mailer_sender_address: longchamp-roller-team@laposte.net
+    mailer_sender_name: Longchamp Roller Team

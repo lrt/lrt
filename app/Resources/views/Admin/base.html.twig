@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% block title %}{{ sitename }}{% endblock %}</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Site web du Longchamp Roller Team">
+    {% block stylesheets %}
+        <link rel="stylesheet" href="{{ asset('bundles/site/css/bootstrap.min.css') }}" type="text/css" media="screen" />
+        <link rel="stylesheet" href="{{ asset('bundles/site/css/bootstrap-responsive.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('bundles/site/css/admin/style.css') }}">
+        <!--<link rel="stylesheet" href="{{ asset('bundles/site/css/admin/red.css') }}">-->
+        <link rel="stylesheet" href="{{ asset('bundles/site/css/admin/fullcalendar.css') }}">
+        <link rel="stylesheet" href="{{ asset('bundles/site/css/admin/uniform.css') }}">
+        <link rel="stylesheet" href="{{ asset('bundles/site/css/admin/select2.css') }}">
+        <link href="{{ asset('bundles/site/css/themes/video-js.min.css') }}" rel="stylesheet">
+    {% endblock %}
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+    <script src="{{ asset('web/js/html5.js') }}"></script>
+    <![endif]-->
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+</head>
+<body>
+    <div id="in-nav">
+      <div class="container">
+        <div class="row">
+          <div class="span12">
+            <ul class="pull-right">
+              <li><a href="{{ path('fos_user_security_logout') }}"><i class="icon icon-share-alt"></i> Déconnexion</a></li>
+            </ul>
+            <a id="logo" href="{{ path('dashboard') }}">
+              <h4>{{ sitename }}</h4>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="in-sub-nav">
+      <div class="container">
+        <div class="row">
+          <div class="span12">
+            <ul>
+              <li><a href="{{ path('dashboard') }}" class="active"><i class="batch home"></i><br>Tableau de bord</a></li>
+              <!--<li><span class="label label-important pull-right">08</span><a href="stream.html"><i class="batch stream"></i><br>Stream</a></li>-->
+              <!--<li><span class="label label-important pull-right">04</span><a href="messages.html"><i class="batch plane"></i><br>Messages</a></li>-->
+              <li><a href="{{ path('event') }}"><i class="batch calendar"></i><br>Calendrier</a></li>
+              <li><a href="{{ path('article') }}"><i class="batch quill"></i><br>Articles</a></li>
+              <li><a href="{{ path('video') }}"><i class="batch forms"></i><br>Vidéos</a></li>
+              <!--<li><a href="faq.html"><i class="batch forms"></i><br>FAQ</a></li>-->
+              {% if is_granted('ROLE_ADMIN') %}
+                    <li><a href="{{ path('user') }}"><i class="batch users"></i><br>Utilisateurs</a></li>
+              {% elseif is_granted('ROLE_SUPERVISEUR') %}
+                    <li><a href="{{ path('adhesion_display') }}"><i class="batch users"></i><br>Adhérents</a></li>
+              {% endif %}
+              <li><a href="{{ path('partner') }}"><i class="batch star"></i><br>Partenaires</a></li>
+              <!--<li><a href="settings.html"><i class="batch settings"></i><br>Configuration</a></li>-->
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="page">
+        <div class="page-container">
+            <div class="container">
+                <div class="row">
+                    <div class="span12">
+                        {% for message in app.session.flashbag.get('error') %}
+                            <div class="alert alert-error">
+                                <button type="button" class="close" data-dismiss="alert">×</button>
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                        {% for message in app.session.flashbag.get('message') %}
+                            <div class="alert">
+                                <button type="button" class="close" data-dismiss="alert">×</button>
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                        {% for message in app.session.flashbag.get('success') %}
+                            <div class="alert alert-success">
+                                <button type="button" class="close" data-dismiss="alert">×</button>
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                    </div>
+                    {% block body %}{% endblock %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer>
+      <div class="container">
+        <div class="row">
+          <div class="span12">
+            <p class="pull-right">Admin Theme by Nathan Speller</p>
+            <p>© Copyright 2013 {{ sitename }}</p>
+          </div>
+        </div>
+      </div>
+    </footer>
+    {% block javascripts %}
+        <script type="text/javascript" src="{{ asset('js/jquery-1.8.2.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/site/js/admin/jquery.ui.custom.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/site/js/bootstrap.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/site/js/admin/jquery.uniform.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/site/js/admin/select2.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/site/js/admin/main.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/cms/js/plugins/ckeditor/ckeditor.js') }}"></script>
+        <script src="{{ asset('bundles/site/js/video.min.js') }}"></script>
+    {% endblock %}
+</body>
+</html>

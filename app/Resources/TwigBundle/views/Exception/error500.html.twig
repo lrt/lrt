@@ -1,0 +1,17 @@
+{% extends '::admin.html.twig' %}
+
+{% block body %}
+    <h1>
+        <br />
+        Une erreur c'est produite lors de l'execution de votre demande ! <br /><br /><br /><br />
+        Merci de prévenir le service informatique avec les informations suivantes :
+    </h1>
+    <hr />
+    <br /><br />
+    <div>
+        <strong>{{ status_code }}</strong> {{ status_text }} - {{ exception.class|abbr_class }}
+    </div>
+    <div>
+        {{ exception.message|e|replace({"\n": '<br />'})|format_file_from_text }}
+    </div>
+{% endblock %}

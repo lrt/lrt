@@ -1,0 +1,14 @@
+entity:
+    article:
+        title: Titre
+        content: Contenu
+        status: Statut
+        public: Publique
+form:
+    article:
+        title: Ajouter un article
+        add: Ajouter
+    status:
+        immediate: "Publication immédiate"
+        drafts: "Brouillon"
+        bin: "Corbeille"

@@ -1,0 +1,59 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+    <div id="page">
+        <div class="container">
+            <div class="row-fluid">
+                <div class="span8">
+                    <h2>Vous êtes adhérent ?</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="body">
+        <div class="container">
+            <div class="row-fluid">
+                <div class="span8">
+                    <img src="{{ asset('bundles/site/images/themes/slider/image2.png') }}">
+                </div>
+                <div class="span4 adhesion">
+                    {% if error %}
+                        <div class="alert alert-error">{{ error|trans({}, 'FOSUserBundle') }}</div>
+                    {% endif %}
+                    <form action="{{ path("fos_user_security_check") }}" method="post" class="form-signin">
+                        <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+
+                        <div class="control-group">
+                            <label class="control-label" for="username">Nom d'utilisateur</label>
+                            <div class="controls">
+                                <div class="input-prepend">
+                                    <span class="add-on"><i class="icon-user"></i></span>
+                                    <input type="text" id="username" name="_username" value="{{ last_username }}" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label" for="password">{{ 'security.login.password'|trans({}, 'FOSUserBundle') }}</label>
+                            <div class="controls">
+                                <div class="input-prepend">
+                                    <span class="add-on"><i class="icon-lock"></i></span>
+                                    <input type="password" id="password" name="_password" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <div class="controls">
+                                <label for="remember_me">
+                                    {{ 'security.login.remember_me'|trans({}, 'FOSUserBundle') }}
+                                    <input type="checkbox" id="remember_me" name="_remember_me" value="on" />
+                                </label>
+                                <input class="btn btn-danger" type="submit" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans({}, 'FOSUserBundle') }}" />
+                                <a href="{{ path('adhesion_new') }}" class="btn btn-primary"><i class="icon-check icon-white"></i> Devenir adhérent</a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

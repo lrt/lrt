@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project name="LRT" basedir="." default="ci">
+    <property name="builddir" value="${ws}build" />
+    <target name="clean">
+        <delete dir="${builddir}" />
+    </target>
+	
+    <target name="prepare" depends="clean">
+        <mkdir dir="${builddir}" />
+        <mkdir dir="${builddir}/logs" />
+        <mkdir dir="${builddir}/logs/coverage" />
+        <mkdir dir="${builddir}/logs/features" />
+        <mkdir dir="${builddir}/docs" />
+        <phingcall target="bundles" />
+        <phingcall target="updateDatabase" />
+    </target>
+	
+    <target name="bundles">
+        <mkdir dir="${builddir}/logs/features/UserBundle" />
+    </target>    
+        
+    <target name="ci" depends="prepare" >
+        <phingcall target="phpunit-cover" />
+        <phingcall target="codesniffer" />
+        <phingcall target="pmd" />
+        <phingcall target="cpd" />
+        <phingcall target="pdepend" />
+    </target>
+    <target name="updateDatabase">
+        <exec command="chmod -R g+w app/cache"/>
+        <exec command="chmod -R a+x vendor"/>
+        <exec command="php app/console cache:clear --env=test --no-debug"/>
+        <exec command="php app/console doctrine:database:drop -n --force"/>
+        <exec command="php app/console doctrine:database:create -n --env=test"/>
+        <exec command="php app/console doctrine:schema:update --force --env=test"/>
+        <exec command="php app/console doctrine:schema:update --force"/>
+        <exec command="php app/console doctrine:fixtures:load --env=test -n"/>
+    </target>
+    <target name="phpunit-cover">      
+        <exec command="phpunit -c app" dir="${ws}"/>
+    </target>
+    <target name="codesniffer">
+        <exec command="phpcs --report=checkstyle --standard=ruleset.xml ${project.basedir}/src > ${builddir}/logs/checkstyle.xml" escape="false" />     
+    </target>
+    <target name="pmd">
+    		<exec command="phpmd src/ xml codesize,unusedcode --reportfile ${builddir}/logs/pmd.xml" />    
+    </target>
+    <target name="cpd">
+        <exec command="phpcpd --min-lines 5 --min-tokens 5 --log-pmd ${builddir}/logs/pmd-cpd.xml src/" />
+    </target>
+    <target name="pdepend">
+        <exec command="pdepend --jdepend-xml=${builddir}/logs/jdepend.xml src/" />
+    </target>    
+</project>

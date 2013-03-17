@@ -1,0 +1,104 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+<div id="hero">
+        <div class="container">
+            <div class="row-fluid animated fadeInUp">
+                <div class="span12">
+                    <div id="home-carousel" class="carousel slide">
+                        <div class="carousel-inner">
+                            <!--slide-->
+                            {% for a in articles %}
+                                <div class="{% if loop.first %}active{% endif %} item">
+                                    <div class="row-fluid">
+                                        <div class="span1"></div>
+                                        <div class="span6 animated  rotateInDownLeft">
+                                            <img src="{{ asset('bundles/site/images/themes/slider/image1.png')}}" alt=""/>
+                                        </div>
+                                        <div class="span4 animated rotateInUpRight block">
+                                            <h3>{{ a.title  }}</h3>
+                                            <p>
+                                                {{ a.content|truncate(232)  }}
+                                            </p>
+                                            <a class="btn btn-danger" href="{{ path('article_view', { 'id': a.id }) }}">Lire la suite</a>
+                                        </div>
+                                        <div class="span1"></div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                        <a class="carousel-control left" href="#home-carousel" data-slide="prev">&lsaquo;</a>
+                        <a class="carousel-control right" href="#home-carousel" data-slide="next">&rsaquo;</a>
+                    </div>
+                </div>
+            </div>
+        </div><!--/home-carousel-->
+    </div><!--/container-->
+</div><!-- /hero -->
+<div id="body">
+    <div class="container">
+        <div class="row-fluid margin-top-20 margin-bottom-20">
+            <div class="span12">
+                <div class="heading">
+                    <h2>Challenge IDF 2013 "Piste de la Muette - Paris 16ème"</h2>
+                    <p>
+                        <i>
+                            L’association Longchamp Roller Team vous invite à participer à la 1ère édition du « Challenge piste de la Muette » le Dimanche 23 Juin 2013. Cette étape fera partie du challenge Ile de France Piste 2013, de la catégorie poussin à vétérane ou sur l’heure roller ouverte à tous.
+                        </i>
+                    </p>
+                    <p align="right">
+                        <a class="btn btn-danger shake" href="{{ path('show_page', { 'page': 'challenge-idf-competition-muette-2013' }) }}">Plus d'informations</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="row-fluid margin-bottom-5">
+            <div class="span12 center">
+                <img src="{{ asset('bundles/site/images/themes/lineshadow.png') }}">
+            </div>
+        </div>
+        <h3>Dernières vidéos</h3>
+        <div class="row-fluid margin-top-30 margin-bottom-30">
+            {% for v in videos %}
+                <div class="span3 zoomer">
+                    <div class="work">
+                        <a class="fancybox-button popinVideo" rel="fancybox-button" title="{{ v.title }}" href="{{ path('video_show', { 'id': v.id }) }}">
+                            <div class="overlay-zoom">
+                                <img src="{{ asset('bundles/site/images/video/poster.jpg') }}" class="" alt="project 1">
+                                <div class="zoom-icon"></div>
+                            </div>
+                        </a>
+                        <a title="{{ v.title }}" href="{{ path('video_show', { 'id': v.id }) }}" class="details popinVideo">
+                            <div><b>{{ v.title }}</b></div>
+                        </a>
+                    </div>
+                </div>
+                {% if loop.last %}
+                {% else %}
+                    <div class="margin-top-5 visible-phone"></div>
+                {% endif %}
+            {% endfor %}
+            <div class="modal hide" id="modal-show-video">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                </div>
+                <div class="modal-body"></div>
+                <div class="modal-footer"><a href="{{ path('home') }}" class="btn">Annuler</a></div>
+            </div>        
+        </div>
+        <div class="row-fluid">
+            <div class="span12">
+                <div class="clients-carousel">
+                    <ul class="slides clients">
+                        <li><img src="{{ asset('bundles/site/images/themes/clients/1.png') }}" alt=""/></li>
+                        <li><img src="{{ asset('bundles/site/images/themes/clients/1.png') }}" alt=""/></li>
+                        <li><img src="{{ asset('bundles/site/images/themes/clients/1.png') }}" alt=""/></li>
+                        <li><img src="{{ asset('bundles/site/images/themes/clients/1.png') }}" alt=""/></li>
+                        <li><img src="{{ asset('bundles/site/images/themes/clients/1.png') }}" alt=""/></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

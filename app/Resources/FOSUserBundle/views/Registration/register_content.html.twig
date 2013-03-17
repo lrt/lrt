@@ -1,0 +1,13 @@
+<form action="{{ path('fos_user_registration_register') }}" {{ form_enctype(formUser) }} method="POST" class="fos_user_registration_register">
+    <legend style="margin-bottom:14px;font-weight:bold;">Utilisateur</legend>
+    <div style="margin-bottom:14px;">
+        {{ form_widget(formUser) }}
+    </div>
+    <legend style="margin-bottom:14px;font-weight:bold;">Société</legend>
+    <div style="margin-bottom:14px;">
+        {{ form_widget(formCompany) }}
+    </div>
+    <div>
+        <input class="btn" type="submit" value="{{ 'registration.submit'|trans({}, 'FOSUserBundle') }}" />
+    </div>
+</form>
