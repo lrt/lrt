@@ -26,6 +26,7 @@ use Lrt\CMSBundle\Form\Type\CategoryType;
  */
 class CategoryController extends Controller
 {
+
     /**
      * @DI\Inject("doctrine.orm.entity_manager")
      * @var \Doctrine\ORM\EntityManager
@@ -180,7 +181,8 @@ class CategoryController extends Controller
     private function createDeleteForm($id)
     {
         return $this->createFormBuilder(array('id' => $id))
-            ->add('id', 'hidden')
-            ->getForm();
+                        ->add('id', 'hidden')
+                        ->getForm();
     }
+
 }

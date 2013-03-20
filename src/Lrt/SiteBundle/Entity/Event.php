@@ -12,6 +12,7 @@ use Lrt\SiteBundle\Entity\Activity;
  */
 class Event extends Activity
 {
+
     /**
      * @ORM\Column(name="date_deb", type="datetime")
      */
@@ -139,4 +140,5 @@ class Event extends Activity
     {
         return $this->description;
     }
+
 }

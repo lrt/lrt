@@ -18,6 +18,7 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Activity
 {
+
     const IS_NOT_VALIDATED = 0;
     const IS_VALIDATED = 1;
 
@@ -149,7 +150,7 @@ class Activity
     {
         return $this->user;
     }
-    
+
     public function typeName()
     {
         switch ($this->whoAmI()) {
@@ -159,9 +160,10 @@ class Activity
             case 'Lrt\SiteBundle\Entity\Event': return 'Event';
         }
     }
-    
+
     public function whoAmI()
     {
         return get_class($this);
     }
+
 }

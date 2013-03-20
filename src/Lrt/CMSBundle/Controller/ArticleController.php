@@ -29,6 +29,7 @@ use Lrt\UserBundle\Entity\User;
  */
 class ArticleController extends Controller
 {
+
     /**
      * @DI\Inject("doctrine.orm.entity_manager")
      * @var \Doctrine\ORM\EntityManager
@@ -62,18 +63,17 @@ class ArticleController extends Controller
 
             $page = $request->query->get('page', 1);
             $pagination = $this->paginator->paginate(
-                $articles, $page, $this->container->getParameter('knp_limit_per_page')
+                    $articles, $page, $this->container->getParameter('knp_limit_per_page')
             );
 
             $arrayPagination = compact('pagination');
 
             return array('entities' => $arrayPagination['pagination'], 'form' => $form->createView(), 'nb' => count($articles));
-
         } else {
             return $this->redirect($this->generateUrl('article'));
         }
     }
-    
+
     /**
      * Lists all Article entities on home
      * @Template("CMSBundle:Article:lastArticle.html.twig")  
@@ -81,7 +81,7 @@ class ArticleController extends Controller
     public function lastArticleAction()
     {
         $articles = $this->em->getRepository('CMSBundle:Article')->getLatestArticles(2);
-        
+
         return array('articles' => $articles);
     }
 
@@ -92,13 +92,12 @@ class ArticleController extends Controller
      * @ParamConverter("user", class="UserBundle:User", options={"id" = "userId"})
      * @Secure(roles="ROLE_ADMIN,ROLE_MEMBER,ROLE_SUPERVISEUR")
      * @Template("CMSBundle:Article:draft.html.twig")  
-    public function listDraftAction(User $user)
-    {        
-        $articles = $this->em->getRepository('CMSBundle:Article')->getArticlesDraftsByUser($user);
-        
-        return array('entities' => $articles, 'nb' => count($articles));
-    }*/
+      public function listDraftAction(User $user)
+      {
+      $articles = $this->em->getRepository('CMSBundle:Article')->getArticlesDraftsByUser($user);
 
+      return array('entities' => $articles, 'nb' => count($articles));
+      } */
     /**
      * Lists all Article in bin.
      *
@@ -106,12 +105,12 @@ class ArticleController extends Controller
      * @Secure(roles="ROLE_ADMIN,ROLE_MEMBER,ROLE_SUPERVISEUR")
      * @Template("CMSBundle:Article:bin.html.twig")
      *
-    public function listBinAction()
-    {
-        $articles = $this->em->getRepository('CMSBundle:Article')->getArticlesInBin();
+      public function listBinAction()
+      {
+      $articles = $this->em->getRepository('CMSBundle:Article')->getArticlesInBin();
 
-        return array('entities' => $articles, 'nb' => count($articles));
-    }*/
+      return array('entities' => $articles, 'nb' => count($articles));
+      } */
 
     /**
      * Finds and displays a Article entity.
@@ -138,7 +137,7 @@ class ArticleController extends Controller
     public function viewAction(Article $article)
     {
         $categories = $this->em->getRepository('CMSBundle:Category')->findAll();
-        
+
         return array(
             'article' => $article,
             'categories' => $categories
@@ -224,7 +223,7 @@ class ArticleController extends Controller
 
         if ($formHandler->process()) {
 
-            $this->get('session')->setFlash('success', 'Modification de l\'article ' . $article->getTitle() . ' réussi avec succès.');
+            $this->get('session')->setFlash('success', 'Modification de l\'article '.$article->getTitle().' réussi avec succès.');
             return $this->redirect($this->generateUrl('article_edit', array('id' => $article->getId())));
         }
 
@@ -268,4 +267,5 @@ class ArticleController extends Controller
             return $csvReadyArticles;
         }
     }
+
 }

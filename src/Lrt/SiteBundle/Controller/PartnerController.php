@@ -19,6 +19,7 @@ use Lrt\SiteBundle\Entity\Partner;
  */
 class PartnerController extends Controller
 {
+
     /**
      * @DI\Inject("doctrine.orm.entity_manager")
      * @var \Doctrine\ORM\EntityManager
@@ -68,7 +69,7 @@ class PartnerController extends Controller
     {
         $partner = new Partner();
         $form = $this->createForm($this->container->get('form.site.partner.type'), $partner);
-                
+
         return array(
             'entity' => $partner,
             'form' => $form->createView(),
@@ -113,7 +114,7 @@ class PartnerController extends Controller
     public function editAction(Partner $partner)
     {
         $editForm = $this->createForm($this->container->get('form.site.partner.type'), $partner);
-        
+
         return array(
             'entity' => $partner,
             'edit_form' => $editForm->createView(),
@@ -159,7 +160,7 @@ class PartnerController extends Controller
     {
         $this->em->remove($partner);
         $this->em->flush();
-        
+
         $this->get('session')->setFlash('success', 'Partenaire retirer de la liste avec succès.');
         return $this->redirect($this->generateUrl('partner'));
     }
@@ -180,4 +181,5 @@ class PartnerController extends Controller
             return $csvReadyPartners;
         }
     }
+
 }

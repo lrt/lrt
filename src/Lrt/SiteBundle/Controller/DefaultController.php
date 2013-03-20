@@ -21,12 +21,13 @@ use Lrt\SiteBundle\Entity\Enquiry;
 
 class DefaultController extends Controller
 {
+
     /**
      * @DI\Inject("doctrine.orm.entity_manager")
      * @var \Doctrine\ORM\EntityManager
      */
     public $em;
-    
+
     /** @DI\Inject("mailer") */
     public $mailer;
 
@@ -66,10 +67,10 @@ class DefaultController extends Controller
     {
         $activities = $this->em->getRepository('SiteBundle:Activity')->getArticlesVideos();
         $categories = $this->em->getRepository('CMSBundle:Category')->findAll();
-                
+
         $page = $request->query->get('page', 1);
         $pagination = $this->paginator->paginate(
-            $activities, $page, $this->container->getParameter('knp_limit_per_page')
+                $activities, $page, $this->container->getParameter('knp_limit_per_page')
         );
         $arrayPagination = compact('pagination');
 
@@ -92,8 +93,8 @@ class DefaultController extends Controller
             return new Response("Aucune page ne correspond à votre demande.", 404);
         }
     }
-    
-        /**
+
+    /**
      * @Route("/evenement/{page}", name="show_event_page")
      * @Cache(smaxage="600")
      * @Template()
@@ -118,22 +119,22 @@ class DefaultController extends Controller
     {
         $enquiry = new Enquiry();
         $form = $this->createForm($this->container->get('form.site.contact.type'), $enquiry);
-                
-        if($request->getMethod() == 'POST') {
+
+        if ($request->getMethod() == 'POST') {
             $form->bind($request);
-                        
-            if($form->isValid()) {
-                $this->sendMessage($enquiry->getEmail() , $enquiry->getSubject(), $enquiry->getBody());
+
+            if ($form->isValid()) {
+                $this->sendMessage($enquiry->getEmail(), $enquiry->getSubject(), $enquiry->getBody());
                 $this->get('session')->getFlashBag()->add('success', 'Votre email a été envoyé.');
                 return $this->redirect($this->generateUrl('contact'));
             }
         }
 
         return $this->render('SiteBundle:Page:contact.html.twig', array(
-            'form' => $form->createView()
+                    'form' => $form->createView()
         ));
     }
-    
+
     private function sendMessage($from, $subject, $body)
     {
         $mail = \Swift_Message::newInstance();
@@ -146,4 +147,5 @@ class DefaultController extends Controller
         $failures = null;
         $this->mailer->send($mail, $failures);
     }
+
 }

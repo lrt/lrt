@@ -14,6 +14,7 @@ use Lrt\SiteBundle\Entity\Newsletter;
 
 class NewsletterController extends Controller
 {
+
     /**
      * @DI\Inject("doctrine.orm.entity_manager")
      * @var \Doctrine\ORM\EntityManager
@@ -52,4 +53,5 @@ class NewsletterController extends Controller
             'form_newsletter' => $form->createView(),
         );
     }
+
 }

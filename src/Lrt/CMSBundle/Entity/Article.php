@@ -20,6 +20,7 @@ use Lrt\SiteBundle\Entity\Activity;
  */
 class Article extends Activity
 {
+
     const DRAFTS = 2;
     const IMMEDIATE = 3;
     const BIN = 4;
@@ -57,7 +58,6 @@ class Article extends Activity
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     protected $path;
-
 
     /**
      * Set content
@@ -159,7 +159,7 @@ class Article extends Activity
         return $this->picture;
     }
 
-    /**UPLOAD IMAGE*/
+    /*     * UPLOAD IMAGE */
 
     /**
      * Set path
@@ -183,12 +183,12 @@ class Article extends Activity
 
     public function getFullPicturePath()
     {
-        return null === $this->picture ? null : $this->getUploadRootDir() . $this->picture;
+        return null === $this->picture ? null : $this->getUploadRootDir().$this->picture;
     }
 
     public function getWebPath()
     {
-        return null === $this->picture ? null : $this->getUploadDir() . '/' . $this->picture;
+        return null === $this->picture ? null : $this->getUploadDir().'/'.$this->picture;
     }
 
     protected function getUploadRootDir()
@@ -200,7 +200,7 @@ class Article extends Activity
     protected function getTmpUploadRootDir()
     {
         // the absolute directory path where uploaded documents should be saved
-        return __DIR__ . '/../../../../web/uploads/articles/';
+        return __DIR__.'/../../../../web/uploads/articles/';
     }
 
     protected function getUploadDir()
@@ -221,9 +221,8 @@ class Article extends Activity
 
         $this->picture->move($this->getUploadRootDir(), $this->picture->getClientOriginalName());
 
-        $this->setPath($this->getUploadDir() . '/' . $this->picture->getClientOriginalName());
+        $this->setPath($this->getUploadDir().'/'.$this->picture->getClientOriginalName());
         $this->setPicture($this->picture->getClientOriginalName());
-
     }
 
     /**
@@ -237,7 +236,7 @@ class Article extends Activity
         if (!is_dir($this->getUploadRootDir())) {
             mkdir($this->getUploadRootDir());
         }
-        copy($this->getTmpUploadRootDir() . $this->picture, $this->getFullPicturePath());
+        copy($this->getTmpUploadRootDir().$this->picture, $this->getFullPicturePath());
         //@unlink($this->getTmpUploadRootDir() . $this->picture);
     }
 
@@ -249,4 +248,5 @@ class Article extends Activity
         @unlink($this->getFullPicturePath());
         //rmdir($this->getUploadRootDir());
     }
+
 }

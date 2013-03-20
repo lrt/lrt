@@ -24,22 +24,22 @@ class VideoFilterType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('title', null, array('required' => false, 'label' => 'Titre :'))
-            ->add('status', 'choice', array(
-            'required' => false,
-            'label' => 'Statut :',
-            'empty_value' => 'Etat de publication',
-            'choices' => array(
-                '0' => 'Publié',
-                '1' => 'Non publié',
+                ->add('status', 'choice', array(
+                    'required' => false,
+                    'label' => 'Statut :',
+                    'empty_value' => 'Etat de publication',
+                    'choices' => array(
+                        '0' => 'Publié',
+                        '1' => 'Non publié',
             )))
-            ->add('isPublic', 'choice', array(
-            'required' => false,
-            'label' => 'Visibilité :',
-            'empty_value' => 'Restrictions',
-            'choices' => array(
-                '0' => 'Privé',
-                '1' => 'Public',
-            )));
+                ->add('isPublic', 'choice', array(
+                    'required' => false,
+                    'label' => 'Visibilité :',
+                    'empty_value' => 'Restrictions',
+                    'choices' => array(
+                        '0' => 'Privé',
+                        '1' => 'Public',
+        )));
     }
 
     public function getName()
@@ -53,4 +53,5 @@ class VideoFilterType extends AbstractType
             'csrf_protection' => false
         ));
     }
+
 }

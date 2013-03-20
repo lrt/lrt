@@ -8,6 +8,7 @@ use Lrt\SiteBundle\Entity\Activity;
 
 class VideoRepository extends EntityRepository
 {
+
     /**
      * Retourne la liste des vidéos d'un contributeur
      * @param \Lrt\UserBundle\Entity\User $user
@@ -20,7 +21,7 @@ class VideoRepository extends EntityRepository
                 WHERE v.user = :user ';
 
         $query = $this->getEntityManager()->createQuery($sql)
-            ->setParameter('user', $user);
+                ->setParameter('user', $user);
 
         return $query->getResult();
     }
@@ -36,11 +37,11 @@ class VideoRepository extends EntityRepository
                 AND v.isValid = :valid';
 
         $query = $this->getEntityManager()->createQuery($sql)
-            ->setParameter('valid', Activity::IS_NOT_VALIDATED);
+                ->setParameter('valid', Activity::IS_NOT_VALIDATED);
 
         return $query->getResult();
     }
-    
+
     /**
      * Retourne la liste des vidéos
      * @param integer $limit
@@ -49,9 +50,9 @@ class VideoRepository extends EntityRepository
     public function getLatestVideos($limit)
     {
         $qb = $this->createQueryBuilder('v')
-            ->select('v');
-            /*->where('v.isValid = ?1')
-            ->setParameter(1, Activity::IS_VALIDATED);*/
+                ->select('v');
+        /* ->where('v.isValid = ?1')
+          ->setParameter(1, Activity::IS_VALIDATED); */
 
         if (!is_null($limit)) {
             $qb->setMaxResults($limit);
@@ -81,16 +82,17 @@ class VideoRepository extends EntityRepository
         $query = $this->getEntityManager()->createQuery($queryStr);
 
         if ($title != null && $title != '') {
-            $query->setParameter('title', '%' . $title . '%');
+            $query->setParameter('title', '%'.$title.'%');
         }
         if ($status != null && $status != '') {
-            $query->setParameter('status', '%' . $status . '%');
+            $query->setParameter('status', '%'.$status.'%');
         }
         if ($publish != null && $publish != '') {
-            $query->setParameter('publish', '%' . $publish . '%');
+            $query->setParameter('publish', '%'.$publish.'%');
         }
 
         return $query->getResult();
     }
+
 }
 

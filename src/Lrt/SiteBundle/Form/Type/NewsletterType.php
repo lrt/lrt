@@ -12,6 +12,7 @@ use JMS\DiExtraBundle\Annotation as DI;
  */
 class NewsletterType extends AbstractType
 {
+
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('email', 'email', array(
@@ -28,4 +29,5 @@ class NewsletterType extends AbstractType
     {
         return 'newsletter';
     }
+
 }

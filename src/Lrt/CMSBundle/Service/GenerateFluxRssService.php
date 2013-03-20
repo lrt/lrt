@@ -10,6 +10,7 @@ use JMS\DiExtraBundle\Annotation as DI;
  */
 class GenerateFluxRssService
 {
+
     /**
      * @DI\Inject("kernel")
      */
@@ -25,20 +26,21 @@ class GenerateFluxRssService
 
         foreach ($datas as $data) {
             $xml .= '<item>';
-            $xml .= '<title>' . $data->getTitle() . '</title>';
-            $xml .= '<link>' . $data->getTitle() . '</link>';
-            $xml .= '<pubDate>' . $data->getDateSubmission()->format('Ymd') . ' GMT</pubDate>';
-            $xml .= '<description>' . $data->getContent() . '</description>';
+            $xml .= '<title>'.$data->getTitle().'</title>';
+            $xml .= '<link>'.$data->getTitle().'</link>';
+            $xml .= '<pubDate>'.$data->getDateSubmission()->format('Ymd').' GMT</pubDate>';
+            $xml .= '<description>'.$data->getContent().'</description>';
             $xml .= '</item>';
         }
 
         $xml .= '</channel>';
         $xml .= '</rss>';
 
-        $fp = fopen($this->kernel->getRootDir() . '/../web/rss/' . 'flux.xml', 'w+');
+        $fp = fopen($this->kernel->getRootDir().'/../web/rss/'.'flux.xml', 'w+');
         fputs($fp, $xml);
         fclose($fp);
 
         return true;
     }
+
 }
