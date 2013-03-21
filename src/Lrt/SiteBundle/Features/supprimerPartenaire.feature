@@ -7,9 +7,8 @@ Contexte: Je souhaite retirer de la liste un partenaire
     Lorsque je remplis "username" avec "julien"
     Et je remplis "password" avec "test"
     Et je presse "Connexion"
-    Alors je suis "Mon Compte"
-    Et je suis "Partenaires"
-    Alors je devrais voir "Partenaires"
+    Alors je suis "Partenaires"
+    Et je devrais voir "Partenaires"
 
 @partner
 Scénario: Je veux retirer un partenaire

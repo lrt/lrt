@@ -7,9 +7,8 @@ Contexte: Je suis un administrateur qui veut ajouter un article
     Lorsque je remplis "username" avec "alexandre"
     Et je remplis "password" avec "test"
     Et je presse "Connexion"
-    Alors je suis "Mon Compte"
-    Et je suis "Articles"
-    Alors je devrais voir "Articles"
+    Alors je suis "Articles"
+    Et je devrais voir "Articles"
 
 @new_article
 Scénario: Je veux ajouter un article

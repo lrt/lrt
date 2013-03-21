@@ -7,8 +7,7 @@ Contexte: Je suis un administrateur et je voudrais valider une demande d'adhési
     Lorsque je remplis "username" avec "julien"
     Et je remplis "password" avec "test"
     Et je presse "Connexion"
-    Alors je suis "Mon Compte"
-    Et je suis "Adhérents"
+    Alors je suis "Adhérents"
     Alors je devrais voir "Adhérents"
 
 @adhesion

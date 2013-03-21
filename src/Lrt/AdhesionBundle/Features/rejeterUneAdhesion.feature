@@ -7,9 +7,8 @@ Contexte: Je suis un administrateur et je voudrais rejeter une demande d'adhési
     Lorsque je remplis "username" avec "julien"
     Et je remplis "password" avec "test"
     Et je presse "Connexion"
-    Alors je suis "Mon Compte"
-    Et je suis "Adhérents"
-    Alors je devrais voir "Adhérents"
+    Alors je suis "Adhérents"
+    Et je devrais voir "Adhérents"
 
 @adhesion
 Scénario: Je rejette une nouvelle demande d'adhésion
