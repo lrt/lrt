@@ -147,7 +147,7 @@ class ArticleController extends Controller
     /**
      * Displays a form to create a new Article entity.
      *
-     * @Route("/nouveau", name="article_new")
+     * @Route("/new", name="article_new")
      * @Secure(roles="ROLE_ADMIN,ROLE_MEMBER,ROLE_SUPERVISEUR")
      * @Template()
      */
@@ -193,7 +193,7 @@ class ArticleController extends Controller
     /**
      * Displays a form to edit an existing Article entity.
      *
-     * @Route("/{id}/edition", name="article_edit", requirements={"id" = "\d+"})
+     * @Route("/{id}/edit", name="article_edit", requirements={"id" = "\d+"})
      * @ParamConverter("article", class="CMSBundle:Article", options={"id" = "id"})
      * @Secure(roles="ROLE_ADMIN,ROLE_MEMBER,ROLE_SUPERVISEUR")
      * @Template()

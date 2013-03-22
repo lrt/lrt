@@ -18,7 +18,7 @@ class ArticleControllerTest extends LrtWebTestCase
      * @testdox Modifier un article dont les données seraient valide
      * @group article
      */
-    public function editArticleValid()
+    /*public function editArticleValid()
     {
         $this->login($this->client, array('user' => 'alexandre'));
         $this->em = $this->client->getContainer()->get('doctrine')->getEntityManager();
@@ -37,7 +37,7 @@ class ArticleControllerTest extends LrtWebTestCase
         $test = $articleRepository->findOneBy(array('title' => 'Nouveau Site'));
 
         $this->assertNotEmpty($test);
-    }
+    }*/
 
     /**
      * @test

@@ -32,7 +32,7 @@ class CategoryControllerTest extends LrtWebTestCase
      * @testdox Création d'une nouvelle catégorie après avoir appuyer sur "valider" on renvoie un message.
      * @group cat
      */
-    public function addCategory()
+    /*public function addCategory()
     {
         $this->login($this->client, array('user' => 'alexandre'));
         $crawler = $this->client->request('GET', '/category/new');
@@ -46,7 +46,7 @@ class CategoryControllerTest extends LrtWebTestCase
         $categoryRepository = $this->em->getRepository('CMSBundle:Category');
         $category = $categoryRepository->findOneBy(array('name' => 'Nouvelle catégorie'));
         $this->assertNotEmpty($category);
-    }
+    }*/
 
     /**
      * @test
