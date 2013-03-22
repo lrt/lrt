@@ -16,15 +16,6 @@ var App = function() {
 
 			jQuery('.tooltips').tooltip();	
 			jQuery('.popovers').popover();
-
-			jQuery(".fancybox-button").fancybox({
-				prevEffect		: 'none',
-				nextEffect		: 'none',
-				closeBtn		: true,
-				helpers		: {
-					title	: { type : 'inside' }
-				}
-			});
 			
 			//fix html5 placeholder attribute for ie7 & ie8
 			if (jQuery.browser.msie && jQuery.browser.version.substr(0,1) < 9) { // ie7&ie8

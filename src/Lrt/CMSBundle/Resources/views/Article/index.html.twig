@@ -67,7 +67,7 @@
                         <img src="{{ asset('bundles/site/images/page.png') }}" alt="Prévisualiser" title="Prévisualiser" class="preview">
                         <a class="title_preview" title="Modifier" href="{{ path('article_edit', { 'id': entity.id }) }}">{{ entity.id }} - <b>{{ entity.title }}</b></a>
                     </div>
-                    {{ entity.content | raw |truncate(50) }}
+                    {{ entity.content | truncate(50) | raw }}
                     ( posté par  <a title="" href="#">{{ entity.user }}</a> )
                 </td>
                 <td>{{ entity.dateSubmission|date('d/m/Y h:m') }}</td>

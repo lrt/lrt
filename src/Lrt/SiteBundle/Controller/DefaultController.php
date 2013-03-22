@@ -49,7 +49,7 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("/dashboard", name="dashboard")
+     * @Route("/tableau-de-bord", name="dashboard")
      * @Template("SiteBundle:Admin:dashboard.html.twig")
      */
     public function dashboardAction()

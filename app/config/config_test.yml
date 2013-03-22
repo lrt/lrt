@@ -12,6 +12,10 @@ web_profiler:
 
 swiftmailer:
     disable_delivery: true
+    host:      localhost
+    username:  null
+    password:  null
+    port:      25
 
 doctrine:
     dbal:

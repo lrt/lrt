@@ -126,7 +126,13 @@ class UserController extends Controller
         $form->bind($request);
 
         if ($form->isValid()) {
-
+            
+            /* $user->setUsername(strtolower($user->getFirstName() . '' . $user->getLastName()));
+            $user->setPlainPassword("test");
+            $encoder = new MessageDigestPasswordEncoder('sha512');
+            $password = $encoder->encodePassword('test', $user->getSalt());
+            $user->setPassword($password); */
+            
             $this->em->persist($user);
             $this->em->flush();
 
