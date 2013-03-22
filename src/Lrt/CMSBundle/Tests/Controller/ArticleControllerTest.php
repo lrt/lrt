@@ -49,7 +49,7 @@ class ArticleControllerTest extends LrtWebTestCase
         $this->login($this->client, array('user' => 'alexandre'));
         $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
         $this->client->request('GET', '/article/99999999/edit');
-        $this->assertEquals(404, $this->client->getResponse()->getStatusCode());
+        $this->assertEquals(40  4, $this->client->getResponse()->getStatusCode());
     }
 
     /**
@@ -62,17 +62,5 @@ class ArticleControllerTest extends LrtWebTestCase
         $this->login($this->client, array('user' => 'alexandre'));
         $this->client->request('GET', '/article/99999999/show');
         $this->assertEquals(404, $this->client->getResponse()->getStatusCode());
-    }
-
-    /**
-     * @test
-     * @testdox L'article que l'on veut afficher existe alors on retourne 200.
-     * @group article
-     */
-    public function showWithknownArticleReturns200()
-    {
-        $this->login($this->client, array('user' => 'alexandre'));
-        $this->client->request('GET', '/article/1/show');
-        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
     }
 }
