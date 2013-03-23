@@ -16,7 +16,7 @@ class AdhesionType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-                ->add('licence', 'text', array('label' => 'Numéro de licence', 'attr' => array('class' => 'span8', 'placeholder' => 'facultatif')))
+                ->add('licence', 'text', array('required' => false, 'label' => 'Numéro de licence', 'attr' => array('class' => 'span8', 'placeholder' => 'facultatif')))
                 ->add('firstName', 'text', array('label' => 'Prénom', 'attr' => array('class' => 'span4', 'placeholder' => 'Prénom')))
                 ->add('lastName', 'text', array('label' => 'Nom*', 'attr' => array('class' => 'span4', 'placeholder' => 'Nom')))
                 ->add('birthday', 'genemu_jquerydate', array(

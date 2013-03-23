@@ -420,9 +420,9 @@ class Adherent
         return $this->dateLastRevival;
     }
 
-    public function getReferenceUser()
+    public function getMatricule()
     {
-        return 'M'.$this->dateValidation->format('Ymd').$this->id;
+        return 'ADH'.$this->dateValidation->format('Ymd').$this->id;
     }
 
 }
