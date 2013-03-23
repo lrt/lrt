@@ -16,7 +16,7 @@ var App = function() {
 
 			jQuery('.tooltips').tooltip();	
 			jQuery('.popovers').popover();
-			
+
 			//fix html5 placeholder attribute for ie7 & ie8
 			if (jQuery.browser.msie && jQuery.browser.version.substr(0,1) < 9) { // ie7&ie8
 				jQuery('input[placeholder], textarea[placeholder]').each(function(){          

@@ -23,12 +23,53 @@ class AdhesionService
      */
     public $mailService;
 
+    /** @DI\Inject("service_container") */
+    public $container;
+
+    /** @DI\Inject("translator") */
+    public $tr;
+
     /**
      * Retourne la liste des nouveaux adhérents
      */
     public function getAdherents()
     {
         return $this->em->getRepository('AdhesionBundle:Adherent')->getAdherents();
+    }
+
+    /**
+     * Nouvelle une demande d'adhésion
+     * @param \Lrt\AdhesionBundle\Entity\Adherent $adherent
+     */
+    public function newAdhesion(Adherent $adherent)
+    {
+        $adherent->setIsValid(Adherent::IS_NOT_ACTIVE);
+        $adherent->setDateSubmission(new \DateTime());
+
+        $this->em->persist($adherent);
+        $this->em->flush();
+
+        $messageAdherent = $this->tr->trans('adhesion.email.new.message', array(
+            '%username%' => $adherent->getFullName(),
+            '%numAdhesion%' => $adherent->getMatricule()));
+
+        $messageAdmin = $this->tr->trans('adhesion.email.new.admin.message', array(
+            '%username%' => $adherent->getFullName(),
+            '%numAdhesion%' => $adherent->getMatricule()));
+
+        //Send to adherent
+        $this->mailService->sendMessage(
+                $adherent->getEmail(),
+                $this->tr->trans('adhesion.email.new.subject'),
+                $messageAdherent);
+
+        //Send to LRT
+        $this->mailService->sendMessage(
+                $this->container->getParameter('mailer_sender_address'),
+                $this->tr->trans('adhesion.email.new.admin.subject'),
+                $messageAdmin);
+
+        return $adherent;
     }
 
     /**
@@ -40,10 +81,27 @@ class AdhesionService
         $adherent->setDateValidation(new \DateTime());
         $adherent->setIsValid(Adherent::IS_ACTIVE);
 
+        /* $user->setUsername(strtolower($user->getFirstName() . '' . $user->getLastName()));
+          $user->setPlainPassword("test");
+          $encoder = new MessageDigestPasswordEncoder('sha512');
+          $password = $encoder->encodePassword('test', $user->getSalt());
+          $user->setPassword($password); */
+
+        $message = $this->tr->trans('adhesion.email.accept.message', array(
+            '%username%' => $adherent->getFullName(),
+            '%dateDebutAdhesion%' => $this->container->getParameter('app.adhesion.debut'),
+            '%dateFinAdhesion%' => $this->container->getParameter('app.adhesion.fin')
+        ));
+
         $this->em->persist($adherent);
         $this->em->flush();
 
-        $this->mailService->sendMessage($adherent->getEmail(), "Validation de votre adhésion", "Votre demande d'adhésion est validé.");
+        $this->mailService->sendMessage(
+            $adherent->getEmail(),
+            $this->tr->trans('adhesion.email.accept.subject'),
+            $message);
+
+        return $adherent;
     }
 
     /**
@@ -58,7 +116,17 @@ class AdhesionService
         $this->em->persist($adherent);
         $this->em->flush();
 
-        $this->mailService->sendMessage($adherent->getEmail(), "Rejet de votre demande d'adhésion", "Votre demande d'adhésion a été rejeté.");
+        $message = $this->tr->trans('adhesion.email.reject.message', array(
+            '%username%' => $adherent->getFullName(),
+        ));
+
+        $this->mailService->sendMessage(
+            $adherent->getEmail(),
+            $this->tr->trans('adhesion.email.reject.subject'),
+            $message
+        );
+
+        return $adherent;
     }
 
     /**
@@ -76,7 +144,14 @@ class AdhesionService
             $this->em->persist($adherent);
             $this->em->flush();
 
-            $this->mailService->sendMessage($adherent->getEmail(), "Relance demande de validation d'adhésion", "Il manque des informations pour valider votre adhésion.");
+            $message = $this->tr->trans('adhesion.email.revival.message', array(
+                '%username%' => $adherent->getFullName(),
+            ));
+
+            $this->mailService->sendMessage(
+                    $adherent->getEmail(),
+                    $this->tr->trans('adhesion.email.revival.subject'), $message);
+
             return true;
         }
 

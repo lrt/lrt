@@ -50,9 +50,8 @@ class VideoRepository extends EntityRepository
     public function getLatestVideos($limit)
     {
         $qb = $this->createQueryBuilder('v')
-                ->select('v');
-        /* ->where('v.isValid = ?1')
-          ->setParameter(1, Activity::IS_VALIDATED); */
+                ->select('v')
+                ->orderBy('v.dateSubmission', 'DESC');
 
         if (!is_null($limit)) {
             $qb->setMaxResults($limit);

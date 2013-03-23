@@ -73,3 +73,23 @@ Scénario: Je crée une nouvelle demande d'adhésion et modifie une donnée
     
     Alors je suis "Confirmer"
     Alors je devrais voir "Votre demande a bien été enregistré"
+
+
+@adhesion
+Scénario: Je crée une nouvelle demande d'adhésion
+    Lorsque je remplis le texte suivant:
+        | adhesion_firstName   | Steven                      |
+        | adhesion_lastName    | LeGalois                    |
+        | adhesion_address     | 78 rue des champs           |
+        | adhesion_zipCode     | 75010                       |
+        | adhesion_city        | Paris                       |
+        | adhesion_birthday    | 18/09/1989                  |
+        | adhesion_gender      | m                           |
+        | adhesion_phone       | 0651134425                  |
+        | adhesion_email       | steven.legalois@hotmail.com |
+    Et je presse "Valider"
+    Alors je devrais voir "Modifier"
+    Et je devrais voir "Confirmer"
+
+    Alors je suis "Confirmer"
+    Alors je devrais voir "Votre demande a bien été enregistré"

@@ -1,0 +1,61 @@
+adhesion:
+    email:
+        new:
+            subject: Bienvenue sur Longchamp Roller Team !
+            message: |
+                Bonjour %username% !
+
+                Nous avions bien reçu votre demande d'adhésion n° %numAdhesion% .
+
+                Merci d'envoyer votre chèque de cotisation à l'adresse suivante :
+
+                Longchamp Roller Team
+                Adresse
+                Code Postal Ville
+
+                Lorsque votre inscription sera validé, nous vous renverrons un mail avec vos identifiants.
+
+                Cordialement,
+                Longchamp Roller Team.
+
+            admin:
+                subject: Nouvelle demande d'adhésion
+                message: |
+                    Bonjour !
+
+                    La demande d'adhésion n°%numAdhesion% de %username% est en attente de validation de votre part.
+
+                    Cordialement,
+                    Longchamp Roller Team.
+
+        accept:
+            subject: Votre adhésion à l'association Longchamp Roller Team
+            message: |
+                Bonjour %username% !
+
+                Nous avons le plaisir de vous confirmez votre adhésion au sein de l'association Longchamp Roller Team.
+
+                La période d'adhésion est du %dateDebutAdhesion% au %dateFinAdhesion%.
+
+                Cordialement,
+                Longchamp Roller Team.
+
+        reject:
+            subject: Votre adhésion à l'association Longchamp Roller Team
+            message: |
+                Bonjour %username% !
+
+                Votre adhésion au sein de l'association Longchamp Roller Team à été rejeter.
+
+                Cordialement,
+                Longchamp Roller Team.
+
+        revival:
+            subject: Votre adhésion à l'association Longchamp Roller Team
+            message: |
+                Bonjour %username% !
+
+                Merci de fournir les documents obligatoires (licence, chèque de cotisation) pour valider votre adhésion.
+
+                Cordialement,
+                Longchamp Roller Team.

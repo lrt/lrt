@@ -125,7 +125,7 @@ class DefaultController extends Controller
 
             if ($form->isValid()) {
                 $this->sendMessage($enquiry->getEmail(), $enquiry->getSubject(), $enquiry->getBody());
-                $this->get('session')->getFlashBag()->add('success', 'Votre email a été envoyé.');
+                $this->get('session')->getFlashBag()->add('success', 'Votre message a été envoyé.');
                 return $this->redirect($this->generateUrl('contact'));
             }
         }

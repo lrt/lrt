@@ -17,7 +17,7 @@ class ActivityRepository extends EntityRepository
                 ->from('SiteBundle:Activity', 'a')
                 ->where('a INSTANCE OF CMSBundle:Article')
                 ->orWhere('a INSTANCE OF SiteBundle:Video')
-                ->orderBy('a.dateSubmission');
+                ->orderBy('a.dateSubmission', 'DESC');
 
         return $qb;
     }

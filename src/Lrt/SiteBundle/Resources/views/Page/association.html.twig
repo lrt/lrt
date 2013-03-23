@@ -1,17 +1,94 @@
 {% extends '::base.html.twig' %}
 
 {% block body %}
-    <div id="timeline-embed"></div>
-{% endblock %}
+    <div id="body">
+        <div class="container">
+            <h3>Qui sommes-nous ?</h3>
+            <div class="row-fluid">
+                <div class="span6">
+                    <p>
+                        L’association LONGCHAMP ROLLER TEAM a été créée le 13 février 2010 à l’initiative de passionnés de roller de vitesse.
+                    </p>
+                    <p>
+                        L’association a pour objet, en France et à l’étranger, de participer, par l’intermédiaire de ses membres, à toutes manifestations sportives liées au roller de vitesse à titre de loisir ou en compétition ainsi que d’organiser toutes manifestations liées au roller de vitesse.
+                    </p>
+                    <p>
+                        Durant la première année, l'association se fait une place dans le domaine des courses d'endurance en remportant le Challenge du Centre et en terminant troisième des 24 heures du Mans dans la catégorie "endurance".
+                    </p>
+                    <p>
+                        En 2011, l'association s’est affiliée à la Fédération Française de Roller Sports (FFRS) et a remporté la médaille d’argent des 24h de Calafat en Espagne, concrétisant ainsi sa première expérience à l’international.
+                    </p>
+                    <p>
+                        En 2012, l’association a poursuivi son développement en terminant à une très honorable dixième place au classement scratch des 24 heures du Mans Roller et en participant à la Coupe de France des Marathons en tant qu’équipe officielle.
+                    </p>
+                    <p>
+                        Le développement de l’activité à l’international s’est accentué en 2012 avec la participation au mythique marathon roller de Berlin et à la dernière épreuve de la World Inline Cup de Jeonju en Corée du Sud.
+                    </p>
+                    <h4>Les moyens à disposition pour fonctionner</h4>
+                    <p>
+                        Les patineurs du Longchamp Roller Team profitent bénéficient des infrastructures suivantes :
+                    <ul>
+                        <li>Une piste de 200 m</li>
+                        <li>Un circuit routier autour de l’Hippodrome de Longchamp</li>
+                    </ul>
+                    </p>
+                    <h4>Chiffres clés sur le club (courses par équipes)</h4>
+                    <ul>
+                        <li>Vainqueur du Challenge du Centre 2010 </li>
+                        <li>3e aux 24h du Mans 2010 dans la catégorie « Endurance » (5 patineurs maximum)</li>
+                        <li>10e aux 24h du Mans 2012 dans la catégorie « Prestige » (10 patineurs maximum)</li>
+                        <li>2e du général des 24h de Calafat 2011</li>
+                    </ul>
+                    <p>
+                        <a href="{{ path('contact') }}" class="btn pull-right"><i class="icon-phone"></i>Nous contacter !</a>
+                    </p>
+                </div>
+                <div class="span6">
+                    <div class="img-polaroid">
+                        <video width="100%" height="300" class="video-js vjs-default-skin" preload="auto" poster="{{ asset('bundles/site/images/video/poster.jpg') }}" controls="controls" data-setup="{}">
+                            <source src="http://video.longchamp-roller-team.com/longchamp_roller_team_@_cor%C3%A9e_du_sud_640x360.mp4" type="video/mp4">
+                            <!--<source src="http://www.html5rocks.com/en/tutorials/video/basics/Chrome_ImF.webm" type='video/webm; codecs="vp8, vorbis"' />
+                            <source src="http://www.html5rocks.com/en/tutorials/video/basics/Chrome_ImF.ogv" type='video/ogg; codecs="theora, vorbis"' />-->
+                            <object type="application/x-shockwave-flash" width="100%" height="300" data="http://video.longchamp-roller-team.com/longchamp_roller_team_@_cor%C3%A9e_du_sud_640x360.mp4">
+                                <param name="movie" value="http://video.longchamp-roller-team.com/longchamp_roller_team_@_cor%C3%A9e_du_sud_640x360.mp4" />
+                                <param name="wmode" value="transparent" />
+                                <!--[if lte IE 6 ]>
+                                <embed src="http://video.longchamp-roller-team.com/longchamp_roller_team_@_cor%C3%A9e_du_sud_640x360.mp4" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="1000" height="368"></embed>
+                                <![endif]-->
+                                <p>Vous n'avez pas de navigateur moderne, ni flash d'installé sur Internet Explorer... suivez les liens ci-dessous pour télécharger les vidéos.</p>
+                            </object>
+                        </video>
+                        <small>Marathon en corée du sud 2012.</small>
+                    </div>
+                </div>
+            </div>
+            <hr class="solid">
+            <h3>Membre du bureau</h3>
+            <div class="row-fluid">
+                <div class="span3">
+                    <h4 class="function">
+                        Julien Morelle, Président.
+                    </h4>
+                    <img src="{{ asset('bundles/site/images/themes/photo.jpg') }}" class="img-circle" alt="">
+                </div>
+                <hr class="dashed visible-phone">
+                <div class="span3">
+                    <h4 class="function">Jérémy Dubosc, Secrétaire.</h4>
+                    <img src="{{ asset('bundles/site/images/themes/photo.jpg') }}" class="img-circle" alt="">
+                </div>
+                <hr class="dashed visible-phone">
+                <div class="span3">
+                    <h4 class="function">Lydie Dubosc, Trésorière.</h4>
+                    <img src="{{ asset('bundles/site/images/themes/photo.jpg') }}" class="img-circle" alt="">
+                </div>
+                <hr class="dashed visible-phone">
+                <div class="span3">
+                    <h4 class="function">Alexandre Seiller, Webmaster.</h4>
+                    <img src="{{ asset('bundles/site/images/themes/photo.jpg') }}" class="img-circle" alt="">
+                </div>
+            </div>
 
-{% block javascripts %}
-    {{ parent() }}
-    <script type="text/javascript">
-        var timeline_config = {
-            width: "100%",
-            height: "100%",
-            source: '{{ asset('bundles/site/data/data.json') }}'
-        }
-    </script>
-    <script type="text/javascript" src="{{ asset('bundles/site/js/timeline-embed.js') }}"></script>
-{% endblock%}
+        </div>
+
+    </div>
+{% endblock %}

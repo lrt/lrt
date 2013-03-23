@@ -422,7 +422,12 @@ class Adherent
 
     public function getMatricule()
     {
-        return 'ADH'.$this->dateValidation->format('Ymd').$this->id;
+        return 'ADH'.$this->dateSubmission->format('Ymd').$this->id;
+    }
+
+    public function getFullName()
+    {
+        return $this->firstName.' '.$this->lastName;
     }
 
 }

@@ -122,21 +122,9 @@ class AdherentController extends Controller
     {
         $adherent = unserialize($this->get('session')->get('newAdhesion'));
 
-        /* $user->setUsername(strtolower($user->getFirstName() . '' . $user->getLastName()));
-          $user->setPlainPassword("test");
-          $encoder = new MessageDigestPasswordEncoder('sha512');
-          $password = $encoder->encodePassword('test', $user->getSalt());
-          $user->setPassword($password); */
+        $adherent = $this->adhesionService->newAdhesion($adherent);
 
-        $adherent->setIsValid(Adherent::IS_NOT_ACTIVE);
-        $adherent->setDateSubmission(new \DateTime());
-
-        $this->em->persist($adherent);
-        $this->em->flush();
-
-        $this->mailService->sendMessage("longchamp-roller-team@laposte.net", "Nouvelle adhésion", "Une nouvelle adhésion vient d'être effectué sur le site.");
-
-        $this->get('session')->getFlashBag()->add('success', 'Votre demande a bien été enregistré');
+        $this->get('session')->getFlashBag()->add('success', 'Votre demande a bien été enregistré.');
         return $this->redirect($this->generateUrl('user_adhesion_show', array('id' => $adherent->getId())));
     }
 

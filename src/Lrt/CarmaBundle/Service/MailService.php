@@ -27,6 +27,11 @@ class MailService
     public $transport;
 
     /**
+     * @DI\Inject("twig")
+     */
+    public $twig;
+
+    /**
      * Retourne l'adresse utilisee pour l'envoi de mail
      *
      * @return string
@@ -55,8 +60,12 @@ class MailService
      * @param boolean $cli
      * @return array
      */
-    public function sendMessage($to, $subject, $body, $cli = false)
+    public function sendMessage($to, $subject, $message, $cli = false)
     {
+        $template = 'CarmaBundle:Mail:template.html.twig';
+
+        $body = $this->twig->render($template, array('message' => $message));
+
         $mail = \Swift_Message::newInstance();
         $mail
                 ->setFrom(array($this->getSenderAddress() => $this->getSenderName()))

@@ -11,10 +11,9 @@ namespace Lrt\CMSBundle\Tests\Repository;
 
 use Lrt\SiteBundle\Tests\Controller\LrtWebTestCase;
 
-class ArticleRepositoryTest extends LrtWebTestCase {
+class ArticleRepositoryTest extends LrtWebTestCase
+{
 
-    const LIMIT = 5;
-    
     /**
      * @test
      * @testdox Recupère la liste des derniers articles avec une limite définie
@@ -22,10 +21,10 @@ class ArticleRepositoryTest extends LrtWebTestCase {
      */
     public function getLatestArticlesWithLimit() {
 
-        $rpArticle = $this->em->getRepository('CMSBundle:Article')->getLatestArticles(self::LIMIT);
+        $rpArticle = $this->em->getRepository('CMSBundle:Article')->getLatestArticles(5);
         
         $this->assertNotEmpty($rpArticle);
-        $this->assertEquals(self::LIMIT, count($rpArticle));
+        $this->assertEquals(2, count($rpArticle));
     }
     
     /**
