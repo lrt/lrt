@@ -156,8 +156,8 @@ class VideoController extends Controller
         if ($editForm->isValid()) {
             $this->em->persist($video);
             $this->em->flush();
-            
-            $this->get('session')->setFlash('success', 'Modification de la vidéo ' . $video->getTitle() . ' réussi avec succès.');
+
+            $this->get('session')->setFlash('success', 'Modification de la vidéo '.$video->getTitle().' réussi avec succès.');
             return $this->redirect($this->generateUrl('video_edit', array('id' => $video->getId())));
         }
 
@@ -179,8 +179,9 @@ class VideoController extends Controller
     {
         $this->em->remove($video);
         $this->em->flush();
-        
+
         $this->get('session')->setFlash('success', 'Video supprimer avec succès.');
         return $this->redirect($this->generateUrl('video'));
     }
+
 }

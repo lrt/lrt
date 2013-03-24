@@ -3,7 +3,6 @@
 namespace Lrt\AdhesionBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
@@ -14,18 +13,19 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  */
 class Adherent
 {
+
     const IS_NOT_ACTIVE = 0;
-    const IS_ACTIVE     = 1;
-    const IS_REJECT     = 2;
-    const IS_REVIVAL    = 3;
-    
+    const IS_ACTIVE = 1;
+    const IS_REJECT = 2;
+    const IS_REVIVAL = 3;
+
     /**
      * @ORM\Id
      * @ORM\Column(type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
-    
+
     /**
      * @ORM\Column(name="firstName", type="string")
      * @Assert\NotBlank()
@@ -37,21 +37,21 @@ class Adherent
      * @Assert\NotBlank()
      */
     protected $lastName;
-    
+
     /**
      * @var string
      * @ORM\Column(name="email", type="string")
      * @Assert\Regex("/^[A-Za-z0-9._%-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/")
      */
     protected $email;
-    
+
     /**
      * @var \DateTime $date_validation
      *
      * @ORM\Column(name="licence", type="integer", nullable=true)
      */
     protected $licence;
-    
+
     /**
      * @var \DateTime $birthday
      *
@@ -91,21 +91,21 @@ class Adherent
      * @Assert\NotBlank()
      */
     protected $zipCode;
-    
+
     /**
      * @var \DateTime $date_validation
      *
      * @ORM\Column(name="date_validation", type="datetime", nullable=true)
      */
     protected $dateValidation;
-    
+
     /**
      * @var \DateTime $date_last_revival
      *
      * @ORM\Column(name="date_last_revival", type="datetime", nullable=true)
      */
     protected $dateLastRevival;
-    
+
     /**
      * @var \DateTime $date_submission
      *
@@ -117,7 +117,7 @@ class Adherent
      * @ORM\Column(name="is_valid", type="integer")
      */
     protected $isValid;
-    
+
     /**
      * Get id
      *
@@ -127,7 +127,7 @@ class Adherent
     {
         return $this->id;
     }
-    
+
     /**
      * Set firstName
      *
@@ -167,7 +167,7 @@ class Adherent
     {
         return $this->lastName;
     }
-    
+
     /**
      * Set licence
      *
@@ -187,7 +187,7 @@ class Adherent
     {
         return $this->licence;
     }
-    
+
     /**
      * Set email
      *
@@ -207,7 +207,7 @@ class Adherent
     {
         return $this->email;
     }
-    
+
     /**
      * Get birthday
      *
@@ -230,7 +230,7 @@ class Adherent
 
         return $this;
     }
-    
+
     /**
      * Set gender
      *
@@ -330,7 +330,7 @@ class Adherent
     {
         return $this->phone;
     }
-   
+
     /**
      * Set date_validation
      *
@@ -343,7 +343,7 @@ class Adherent
 
         return $this;
     }
-    
+
     /**
      * Get date_validation
      *
@@ -389,7 +389,7 @@ class Adherent
 
         return $this;
     }
-    
+
     /**
      * Set is_valid
      *
@@ -409,7 +409,7 @@ class Adherent
     {
         return $this->isValid;
     }
-    
+
     /**
      * Get $date_last_revival
      *
@@ -419,10 +419,16 @@ class Adherent
     {
         return $this->dateLastRevival;
     }
-    
-    public function getReferenceUser()
+
+    public function getMatricule()
     {
-        return 'M' . $this->dateValidation->format('Ymd') . $this->id;
+        return 'ADH'.$this->dateSubmission->format('Ymd').$this->id;
     }
+
+    public function getFullName()
+    {
+        return $this->firstName.' '.$this->lastName;
+    }
+
 }
 

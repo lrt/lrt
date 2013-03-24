@@ -74,7 +74,7 @@ class DefaultControllerTest extends CarmaWebTestCase
         $this->client->submit($form);
         $crawler = $this->client->getCrawler();
         
-        $this->assertTrue($crawler->filter('html:contains("Votre email a été envoyé.")')->count() > 0);
+        $this->assertTrue($crawler->filter('html:contains("Votre message a été envoyé.")')->count() > 0);
     }
 
 }

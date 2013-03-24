@@ -32,7 +32,7 @@ class Enquiry
     {
         return $this->name;
     }
-    
+
     /**
      * Set name
      *
@@ -42,12 +42,12 @@ class Enquiry
     {
         $this->name = $name;
     }
-    
+
     public function getEmail()
     {
         return $this->email;
     }
-    
+
     /**
      * Set email
      *
@@ -62,7 +62,7 @@ class Enquiry
     {
         return $this->subject;
     }
-    
+
     /**
      * Set subject
      *
@@ -77,7 +77,7 @@ class Enquiry
     {
         return $this->body;
     }
-    
+
     /**
      * Set body
      *
@@ -87,4 +87,5 @@ class Enquiry
     {
         $this->body = $body;
     }
+
 }

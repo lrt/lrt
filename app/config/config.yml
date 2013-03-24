@@ -4,6 +4,7 @@ imports:
 
 parameters:
     date_format: d/m/Y
+    app.site.url: http://longchamp-roller-team.com
     app.site.name: "Longchamp Roller Team"
     app.site.webmaster.email: alexandre.seiller92@gmail.com
     app.social.facebook: http://www.facebook.com/pages/Longchamp-Roller-Team/355637923045
@@ -33,6 +34,7 @@ twig:
     debug:            "%kernel.debug%"
     strict_variables: "%kernel.debug%"
     globals:
+      baseUrl: %app.site.url%
       sitename: %app.site.name%
       socialFacebook: %app.social.facebook%
       socialTwitter: %app.social.twitter%

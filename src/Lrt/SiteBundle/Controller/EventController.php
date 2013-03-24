@@ -42,7 +42,7 @@ class EventController extends Controller
     public function indexAction()
     {
         $this->eventService->getEvents();
-        
+
         $events = $this->em->getRepository('SiteBundle:Event')->findAll();
 
         return array('events' => $events);
@@ -97,7 +97,7 @@ class EventController extends Controller
 
         if ($form->isValid()) {
             $this->eventService->updateEvent($event);
-            
+
             $this->get('session')->setFlash('success', 'Evènement ajouté avec succès.');
             return $this->redirect($this->generateUrl('event'));
         }
@@ -143,7 +143,7 @@ class EventController extends Controller
         if ($editForm->isValid()) {
             $this->eventService->updateEvent($event);
 
-            $this->get('session')->setFlash('success', 'Modification de l\'évènement ' . $event->getTitle() . ' réussi avec succès.');
+            $this->get('session')->setFlash('success', 'Modification de l\'évènement '.$event->getTitle().' réussi avec succès.');
             return $this->redirect($this->generateUrl('event_edit', array('id' => $event->getId())));
         }
 

@@ -7,9 +7,8 @@ Contexte: Je suis un administrateur qui recherche des utilisateurs
     Lorsque je remplis "username" avec "alexandre"
     Et je remplis "password" avec "test"
     Et je presse "Connexion"
-    Alors je suis "Mon Compte"
-    Et je suis "Utilisateurs"
-    Alors je devrais voir "Utilisateurs"
+    Alors je suis "Utilisateurs"
+    Et je devrais voir "Utilisateurs"
 
 #@filtre_user
 #Scénario: Je recherche un utilisateur par son login

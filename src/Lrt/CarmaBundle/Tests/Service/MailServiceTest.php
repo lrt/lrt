@@ -11,7 +11,7 @@ class MailServiceTest extends CarmaWebTestCase
      * @test
      * @group grdf_carma
      * @group grdf_carma_service
-     * @group grdf_carma_service_mail
+     * @group service_mail
      *
      * @expectedException \Swift_RfcComplianceException
      */
@@ -25,7 +25,7 @@ class MailServiceTest extends CarmaWebTestCase
      * @test
      * @group grdf_carma
      * @group grdf_carma_service
-     * @group grdf_carma_service_mail
+     * @group service_mail
      */
     public function testSendMessage()
     {

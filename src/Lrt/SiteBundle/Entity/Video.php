@@ -17,6 +17,7 @@ use Lrt\SiteBundle\Entity\Activity;
  */
 class Video extends Activity
 {
+
     /**
      * @ORM\Column(type="text")
      */
@@ -126,4 +127,5 @@ class Video extends Activity
     {
         return $this->path;
     }
+
 }

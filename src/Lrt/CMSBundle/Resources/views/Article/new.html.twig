@@ -1,13 +1,5 @@
 {% extends ':Admin:base.html.twig' %}
 
-{% block breadcrumb %}
-<li class="active">Ajouter un article</li>
-{% endblock %}
-
-{% block box_title %}
-   Ajouter un article
-{% endblock %}
-
 {% block body %}
 <div class="span12">
     <h4 class="header">Ajouter un article</h4>
@@ -23,13 +15,18 @@
     </form>
 </div>
 {% endblock %}
-
-{% block javascripts %}
-    {{ parent() }}
+   
+{% block javascripts %} 
+   {{ parent() }}
+    <script type="text/javascript" src="{{ asset('bundles/cms/js/plugins/ckeditor/ckeditor.js') }}"></script>
     <script type="text/javascript">
+        $('#lrt_cmsbundle_articletype_content').removeAttr('required');
         //<![CDATA[
-        var editor = CKEDITOR.replace( 'lrt_cmsbundle_articletype_[content]' );
-        //]]>
-    </script>
-{% endblock %}
+        var editor = CKEDITOR.replace('lrt_cmsbundle_articletype[content]', {
+            uiColor: '#FAFAFA'
+        });
+        //]]>   
+    </script>    
+{% endblock %}    
+
    

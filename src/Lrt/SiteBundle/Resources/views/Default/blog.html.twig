@@ -29,11 +29,13 @@
                                 <h3>{{ a.title }}</h3>
                             {% if a.typeName == 'Article' %}
                                 <p>
+                                    <a title="{{ a.title }}" href="{{ path('article_view', { 'id': a.id }) }}">
                                     {% if a.path is not null %}
                                         <img src="{{ asset(a.path) }}" data-original="{{ asset(a.path) }}" alt="{{ a.title }}" />
                                     {% else %}
                                         <img src="{{ asset('bundles/site/images/no_picture.png') }}" data-original="{{ asset('bundles/site/images/no_picture.png') }}" alt="{{ a.title }}" />
                                     {%  endif %}
+                                    </a>
                                 </p>
                                 <p>{{ a.content | truncate(350) | raw }}</p>
                                 <p>

@@ -20,6 +20,16 @@ class MailService
 
     /** @DI\Inject("mailer") */
     public $mailer;
+    
+    /**
+    * @DI\Inject("swiftmailer.transport.real") 
+    */
+    public $transport;
+
+    /**
+     * @DI\Inject("twig")
+     */
+    public $twig;
 
     /**
      * Retourne l'adresse utilisee pour l'envoi de mail
@@ -50,8 +60,12 @@ class MailService
      * @param boolean $cli
      * @return array
      */
-    public function sendMessage($to, $subject, $body, $cli = false)
+    public function sendMessage($to, $subject, $message, $cli = false)
     {
+        $template = 'CarmaBundle:Mail:template.html.twig';
+
+        $body = $this->twig->render($template, array('message' => $message));
+
         $mail = \Swift_Message::newInstance();
         $mail
                 ->setFrom(array($this->getSenderAddress() => $this->getSenderName()))
@@ -59,17 +73,23 @@ class MailService
                 ->setSubject($subject)
                 ->setBody($body)
                 ->setContentType('text/html');
+        
         $failures = null;
         $this->mailer->send($mail, $failures);
+        
+        //SPOOL
+        $spool = $this->mailer->getTransport()->getSpool();
+        $spool->flushQueue($this->transport);
+        
         //Flush manuel pour un envoi en mode cli
         if ($cli) {
             $transport = $this->mailer->getTransport();
             if ($transport instanceof \Swift_Transport_SpoolTransport) {
                 $spool = $transport->getSpool();
-                $spool->flushQueue($this->container->get('swiftmailer.transport.real'));
+                $spool->flushQueue($this->transport);
             }
         }
-        //Retour
+        
         return $failures;
     }
 

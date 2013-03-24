@@ -18,7 +18,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Entity
  * @ORM\Table(name="article_cat")
  * @UniqueEntity(fields="name", message="Une catégorie existe déjà avec ce nom.")
- **/
+ * */
 class Category
 {
 
@@ -105,4 +105,5 @@ class Category
     {
         $this->categories->removeElement($categories);
     }
+
 }

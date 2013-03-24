@@ -11,12 +11,13 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class GenerateFluxRssCommand extends ContainerAwareCommand
 {
+
     private $entityManager;
 
     protected function configure()
     {
         $this->setName('cms:generate:rss')
-            ->setDescription('Lance le script pour générer le flux RSS');
+                ->setDescription('Lance le script pour générer le flux RSS');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
@@ -34,4 +35,5 @@ class GenerateFluxRssCommand extends ContainerAwareCommand
             $output->writeln('Echec de l\'operation');
         }
     }
+
 }

@@ -10,6 +10,7 @@ use Lrt\SiteBundle\Entity\Event;
  */
 class EventService
 {
+
     /**
      * @DI\Inject("doctrine.orm.entity_manager")
      * @var \Doctrine\ORM\EntityManager
@@ -20,7 +21,7 @@ class EventService
      * @DI\Inject("kernel")
      */
     public $kernel;
-    
+
     /**
      * Mise à jour d'un évènement
      * @param \Lrt\SiteBundle\Service\Event $event
@@ -30,7 +31,7 @@ class EventService
         $this->em->persist($event);
         $this->em->flush();
     }
-    
+
     /**
      * Mise à jour d'un évènement
      * @param \Lrt\SiteBundle\Service\Event $event
@@ -40,7 +41,7 @@ class EventService
         $this->em->remove($event);
         $this->em->flush();
     }
-    
+
     /**
      * Retourne l'ensemble des évènements sous forme JSON
      */
@@ -50,13 +51,12 @@ class EventService
 
         $data_source = array();
 
-        foreach($events as $event)
-        {
+        foreach ($events as $event) {
             array_push($data_source, array(
-                'id'    => $event->getId(),
+                'id' => $event->getId(),
                 'title' => $event->getTitle(),
                 'start' => $event->getDateDeb()->format('Y-m-d'),
-                'end'   => $event->getDateEnd()->format('Y-m-d'),
+                'end' => $event->getDateEnd()->format('Y-m-d'),
             ));
         }
 
@@ -68,4 +68,5 @@ class EventService
 
         return true;
     }
+
 }

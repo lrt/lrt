@@ -12,6 +12,7 @@ use Lrt\SiteBundle\Entity\Activity;
  */
 class Partner extends Activity
 {
+
     /**
      * @var string $name
      *
@@ -35,7 +36,7 @@ class Partner extends Activity
      * @Assert\Url(message="Vous devez saisir une adresse de site correct.")
      */
     protected $website;
-    
+
     /**
      * @Assert\File(maxSize="6000000",mimeTypes= {"image/jpeg","image/gif","image/png"},mimeTypesMessage= "Format de fichier non valide")
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -115,7 +116,7 @@ class Partner extends Activity
     {
         return $this->website;
     }
-    
+
     /**
      * Set picture
      *
@@ -136,7 +137,7 @@ class Partner extends Activity
         return $this->picture;
     }
 
-    /**UPLOAD IMAGE*/
+    /*     * UPLOAD IMAGE */
 
     /**
      * Set path
@@ -160,24 +161,24 @@ class Partner extends Activity
 
     public function getFullPicturePath()
     {
-        return null === $this->picture ? null : $this->getUploadRootDir() . $this->picture;
+        return null === $this->picture ? null : $this->getUploadRootDir().$this->picture;
     }
 
     public function getWebPath()
     {
-        return null === $this->picture ? null : $this->getUploadDir() . '/' . $this->picture;
+        return null === $this->picture ? null : $this->getUploadDir().'/'.$this->picture;
     }
 
     protected function getUploadRootDir()
     {
         // the absolute directory path where uploaded documents should be saved
-        return $this->getTmpUploadRootDir() . $this->getId() . "/";
+        return $this->getTmpUploadRootDir().$this->getId()."/";
     }
 
     protected function getTmpUploadRootDir()
     {
         // the absolute directory path where uploaded documents should be saved
-        return __DIR__ . '/../../../../web/uploads/partners/';
+        return __DIR__.'/../../../../web/uploads/partners/';
     }
 
     protected function getUploadDir()
@@ -200,9 +201,8 @@ class Partner extends Activity
         } else {
             $this->picture->move($this->getUploadRootDir(), $this->picture->getClientOriginalName());
         }
-        $this->setPath($this->getUploadDir() . '/' . $this->getId() . '/' . $this->picture->getClientOriginalName());
+        $this->setPath($this->getUploadDir().'/'.$this->getId().'/'.$this->picture->getClientOriginalName());
         $this->setPicture($this->picture->getClientOriginalName());
-
     }
 
     /**
@@ -216,8 +216,8 @@ class Partner extends Activity
         if (!is_dir($this->getUploadRootDir())) {
             mkdir($this->getUploadRootDir());
         }
-        copy($this->getTmpUploadRootDir() . $this->picture, $this->getFullPicturePath());
-        @unlink($this->getTmpUploadRootDir() . $this->picture);
+        copy($this->getTmpUploadRootDir().$this->picture, $this->getFullPicturePath());
+        @unlink($this->getTmpUploadRootDir().$this->picture);
     }
 
     /**
@@ -228,4 +228,5 @@ class Partner extends Activity
         @unlink($this->getFullPicturePath());
         //rmdir($this->getUploadRootDir());
     }
+
 }

@@ -11,6 +11,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class Newsletter
 {
+
     /**
      * @ORM\Id
      * @ORM\Column(type="integer")
@@ -44,4 +45,5 @@ class Newsletter
     {
         return $this->email;
     }
+
 }
