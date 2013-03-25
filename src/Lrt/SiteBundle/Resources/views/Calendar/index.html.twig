@@ -1,0 +1,45 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+ <div id="body">
+    <div class="container">
+        <div class="row-fluid">
+            <div class="span9">
+                <h2>Calendrier saison 2013</h2>
+                <div class="view-calendar">
+                    <ul>
+                        {% for month in events|keys %}
+                        <li class="month">{{ month }}</li>
+                        {% for event in events[month] %}
+                        <li>
+                            <div class="calendar">
+                                <div class="infos">
+                                    <div class="days">{{ event['day'] }}</div>
+                                </div>
+                                <div class="title">
+                                    {{ event['name'] }}
+                                </div>
+                            </div>
+                        </li>
+                        {% endfor %}
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+            <div class="span3">
+                <h3>Nous suivre sur Facebook</h3>
+                <div class="fb-like-box" data-href="http://www.facebook.com/pages/Longchamp-Roller-Team/355637923045" data-width="292" data-show-faces="true" data-stream="false" data-header="false"></div>
+                <hr class="dashed">
+                <h3>Nos partenaires</h3>
+                <img alt="Cabinet IENA" style="cursor: pointer;" onclick="window.open('http://www.cabinet-iena.com');" width="100" height="100" src="{{ asset('uploads/partners/logos/iena.jpg') }}">
+                <img alt="Matis Group" style="cursor: pointer;" onclick="window.open('http://www.matis-group.com/');" width="100" height="100" src="{{ asset('uploads/partners/logos/logo-matis.png') }}">
+                <img alt="Arcade Groupe" style="cursor: pointer;" onclick="window.open('http://www.arcade-groupe.com/');" width="100" height="100" src="{{ asset('uploads/partners/logos/groupe_arcade.gif') }}">
+                <img alt="Synergie" style="cursor: pointer;" onclick="window.open('http://www.synergie.fr/');" width="100" height="100" src="{{ asset('uploads/partners/logos/synergie.jpg') }}">
+                <hr class="dashed">
+                <h3>Ligne droite sur votre mobile</h3>
+                <img src="{{ asset('uploads/partners/logos/ligne_droite_qrcode.JPG') }}">
+            </div>
+        </div>
+    </div>
+ </div>
+{% endblock %}

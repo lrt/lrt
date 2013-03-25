@@ -20,7 +20,6 @@ class ActivityRepository extends EntityRepository
                 ->orderBy('a.dateSubmission', 'DESC');
 
         return $qb;
-    }
-
+    }    
 }
 

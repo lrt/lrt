@@ -14,9 +14,7 @@ class LoadArticleData extends AbstractFixture implements OrderedFixtureInterface
     {
         $this->manager = $manager;
 
-        $user = $this->getReference('alexandre1');
         $user2 = $this->getReference('julien1');
-
         $category = $this->getReference('category1');
 
         $this->newArticle($category, 'Interview de jérémy et philippe sur le Marathon de Paris 2013', $user2, '<p class="p1"><span class="s1"><b>A</b></span> deux semaines de l&#39;&eacute;dition 2013 du marathon de Paris en course &agrave; pied, les deux pensionnaires du Longchamp Roller Team, J&eacute;r&eacute;my DUBOSC et Philippe CABON, se sont pr&ecirc;t&eacute;s au jeu de l&#39;interview et nous font part de leur approche de cette &eacute;preuve mythique &agrave; laquelle ils participeront. Souhaitons leur d&#39;atteindre leurs objectifs.</p>
@@ -56,6 +54,14 @@ class LoadArticleData extends AbstractFixture implements OrderedFixtureInterface
 <p class="p3"><b style="line-height: 1.6em;">Jeremy :</b><span style="line-height: 1.6em;"> Un grand merci &agrave; tous mes amis et famille&nbsp;</span><span style="line-height: 1.6em;">qui me soutiennent depuis plusieurs semaines dans ma pr&eacute;paration&nbsp;</span><span style="line-height: 1.6em;">en esp&eacute;rant leur faire honneur, alors rendez-vous le 7 Avril 2013 pour conclure.</span></p>
 
 <p class="p1"><b>Philippe :</b> Ravi de me confronter &agrave; ce nouveau challenge et de le faire&nbsp;<span style="line-height: 1.6em;">avec Jeremy (enfin presque parce on devrait pas beaucoup se voir !)&quot;</span></p>', Activity::IS_VALIDATED, new \DateTime('22-03-2013'));
+    
+        $this->newArticle($category, 'Les 3 pistes', $user2, '<p>Le week-end prochain aura lieu la 27&egrave;me &eacute;dition de l&#39;&eacute;preuve internationale &quot;LES 3 PISTES&quot; qui se d&eacute;roule sur 3 &eacute;tapes (Pibrac, Valence d&#39;Agen et Gujan Mestras). La formation LONGCHAMP ROLLER TEAM alignera pour l&#39;occasion 3 patineurs dans la cat&eacute;gorie nationale (Baptiste CHATAIGNIER, J&eacute;r&eacute;my DUBOSC et Julien MORELLE).</p>
+
+<p>L&#39;organisateur annonce l&#39;inscription de 800 patineurs parmi lesquels on pourra retrouver, outre les principaux clubs fran&ccedil;ais, &nbsp;des formations internationales prestigieuses (Etats Unis, Allemagne, Espagne, Portugal, Italie, Colombie, V&eacute;n&eacute;zuela...).</p>
+
+<p>Les courses seront &agrave; suivre en direct sur <a href="http://www.3pistes.com" target="_blank">www.3pistes.com</a></p>
+', Activity::IS_VALIDATED, new \DateTime('25-03-2013'));
+        
     }
 
     protected function newArticle($category, $title, $user, $content, $valid, $date)

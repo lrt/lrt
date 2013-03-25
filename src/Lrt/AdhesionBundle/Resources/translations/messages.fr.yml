@@ -7,11 +7,11 @@ adhesion:
 
                 Nous avions bien reçu votre demande d'adhésion n° %numAdhesion% .
 
-                Merci d'envoyer votre chèque de cotisation à l'adresse suivante :
+                Merci d'envoyer la copie de votre certificat médical de moins de 3 mois accompagné d'un chèque de cotisation d'un montant de 110€ à l'ordre de Longchamp Roller Team à l'adresse suivante :
 
                 Longchamp Roller Team
-                Adresse
-                Code Postal Ville
+                22 rue de Pologne
+                78100 Saint-Germain en Laye
 
                 Lorsque votre inscription sera validé, nous vous renverrons un mail avec vos identifiants.
 
@@ -55,7 +55,7 @@ adhesion:
             message: |
                 Bonjour %username% !
 
-                Merci de fournir les documents obligatoires (licence, chèque de cotisation) pour valider votre adhésion.
+                Merci de fournir les documents obligatoires (certificat médical, chèque de cotisation) pour valider votre adhésion.
 
                 Cordialement,
                 Longchamp Roller Team.

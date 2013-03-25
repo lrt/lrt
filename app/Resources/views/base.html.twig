@@ -13,7 +13,6 @@
     <link href="{{ asset('bundles/site/css/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ asset('bundles/site/css/themes/style.css') }}" rel="stylesheet">
     <link href="{{ asset('bundles/site/css/themes/video-js.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('bundles/site/css/themes/jquery.fancybox.css') }}" rel="stylesheet">
     {% endblock %}
 </head>
 <body>
@@ -37,9 +36,10 @@
                         <div class="nav-collapse collapse">
                             <ul class="nav">
                                 <li class="active"><a href="{{ path('home') }}">Accueil</a></li>
-                                <li><a href="{{ path('show_page', { 'page': 'association' }) }}">L'association</a></li>
-                                <li><a href="{{ path('blog') }}">Blog</a></li>
-                                <li><a href="{{ path('contact') }}">Contact</a></li>
+                                <li><a title="Accueil" href="{{ path('show_page', { 'page': 'association' }) }}">L'association</a></li>
+                                <li><a title="L'association" href="{{ path('calendar') }}">Calendrier</a></li>
+                                <li><a title="Blog" href="{{ path('blog') }}">Blog</a></li>
+                                <li><a title="Calendrier" href="{{ path('contact') }}">Contact</a></li>
                                 {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
                                     <li><a title="Mon Compte" href="{{ path('dashboard') }}">Mon compte</a></li>
                                 {%  else %}
@@ -87,12 +87,6 @@
             </div>
             <div class="span3">
                 {% render "SiteBundle:Newsletter:subscribe" %}
-                <!--<h4>Nous rejoindre</h4>
-                <p>
-                    <a href="#" class="iconify"><i class="icon-google-plus"></i></a>
-                    <a href="#" class="iconify"><i class="icon-twitter"></i></a>
-                    <a href="#" class="iconify"><i class="icon-facebook"></i></a>
-                </p>-->
             </div>
         </div><!-- /row-fluid -->
         <div class="row-fluid visible-phone">
@@ -105,8 +99,9 @@
                 <div id="quick-menu" class="span6 pull-right">
                     <ul class="menu white pull-right">
                         <li><a title="Accueil" href="{{ path('home') }}">Accueil</a></li>
-                        <li><a title="L'association" href="{{ path('show_page', { 'page': 'about' }) }}">L'association</a></li>
+                        <li><a title="L'association" href="{{ path('show_page', { 'page': 'association' }) }}">L'association</a></li>
                         <li><a title="Blog" href="{{ path('blog') }}">Blog</a></li>
+                        <li><a title="Calendrier" href="{{ path('calendar') }}">Calendrier</a></li>
                         <li><a title="Contact" href="{{ path('contact') }}">Contact</a></li>
                         {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
                             <li><a href="{{ path('dashboard') }}">Mon compte</a></li>
@@ -116,7 +111,7 @@
                     </ul>
                 </div><!-- /quick-menu -->
                 <div id="copyright" class="span6 pull-left">
-                    &copy; 2013 {{ sitename }}. All Rights Reserved.
+                    &copy; 2013 {{ sitename }}. All Rights Reserved. - <a href="{{ asset('') }}">Mentions légales</a>
                 </div><!-- /copyright -->
                 <script>
                     var _gaq=[['_setAccount','UA-21476589-1'],['_trackPageview']];

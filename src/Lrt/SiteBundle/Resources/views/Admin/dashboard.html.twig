@@ -9,21 +9,20 @@
     <h4>Dashboard</h4>
     <div class="sidebar">
       <ul class="col-nav span3">
-        <li><a href="#bookmarks" data-toggle="collapse" class="accordion-toggle"><span class="label label-inverse pull-right">3 </span>Bookmarks</a></li>
-        <li id="bookmarks" class="collapse">
+        <li>
+            <a href="#profile" data-toggle="collapse" class="accordion-toggle">
+                <i class="pull-right icon-user"></i> </span>Profil</a>
+            </a>
+        </li>
+        <li id="profile" class="collapse">
           <ul>
-            <li><a href="#"> <i class="pull-right icon-plane"></i>Flights</a><a href="#"> <i class="pull-right icon-fire"></i>Fires</a><a href="#"> <i class="pull-right icon-comment"></i>Comments</a></li>
+            <li>
+                <a href="{{ path('fos_user_profile_show') }}"> <i class="pull-right"></i>Voir</a>
+                <a href="{{ path('fos_user_profile_edit') }}"> <i class="pull-right"></i>Modifier</a>
+                <a href="{{ path('fos_user_change_password') }}"> <i class="pull-right"></i>Nouveau mot de passe</a>
+            </li>
           </ul>
         </li>
-        <li><a href="#metrics" data-toggle="collapse" class="accordion-toggle"> <span class="label label-inverse pull-right">2</span>Metrics</a></li>
-        <li id="metrics" class="collapse">
-          <ul>
-            <li><a href="#"> <i class="pull-right icon-signal"></i>Stats</a><a href="#"> <i class="pull-right icon-fire"></i>Fires</a></li>
-          </ul>
-        </li>
-        <li><a href="#"> <i class="pull-right icon-cog"></i>Settings</a></li>
-        <li><a href="#"> <i class="pull-right icon-star"></i>Extra</a></li>
-        <li><a href="/profile.html"><i class="pull-right icon-user"></i>Profile</a></li>
       </ul>
     </div>
 </div>
@@ -57,7 +56,7 @@
           </div>
         </div>
       </div>
-      <div class="row-fluid">
+      <!--<div class="row-fluid">
         <div class="span6">
           <div class="widget">
             <table style="width:100%">
@@ -124,7 +123,7 @@
             </tbody></table>
           </div>
         </div>
-      </div>
+      </div>-->
       <hr>
       <div class="row-fluid">
         <div class="span6">
@@ -141,7 +140,7 @@
                 {% for a in articles %}
                     <tr>
                         <td>{{ a.title }}</td>
-                        <td><a href="{{ a.title }}"><i class="icon-eye-open"></i></a></td>
+                        <td><a title="{{ a.title }}" href="{{ path('article_edit', { 'id': a.id }) }}"><i class="icon-eye-open"></i></a></td>
                     </tr>
                 {% endfor %}
               </tbody>

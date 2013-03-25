@@ -7,7 +7,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Lrt\SiteBundle\Entity\Activity;
 
 /**
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Lrt\SiteBundle\Repository\EventRepository")
  * @ORM\Table(name="event")
  */
 class Event extends Activity

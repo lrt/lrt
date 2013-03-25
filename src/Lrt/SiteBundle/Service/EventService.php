@@ -68,5 +68,37 @@ class EventService
 
         return true;
     }
+    
+    public function getCompetitionBySeason()
+    {
+        $result = $this->em->getRepository('SiteBundle:Event')->getEvents();
+                
+        $events = array();
+        
+         if(!empty($result))
+         {
+             foreach ($result as $field)
+             {
+                 $month = $field['dateDeb']->format('m');
+                 $month_array = array('01' => 'Janvier','02' => 'Février','03' => 'Mars',
+                                     '04' => 'Avril','05' => 'Mai','06' => 'Juin',
+                                     '07' => 'Juillet','08' => 'Aout',
+                                     '09' => 'Septembre','10' => 'Octobre',
+                                     '11' => 'Novembre','12' => 'Décembre',);
+                 
+                if(array_key_exists($month, $month_array))
+                {
+                    $month_name =   $month_array[$month];
+
+                    $calendar[$month_name][] = array('day' => $field['dateDeb']->format('d'),
+                                                     'name' => $field['title']);
+                }
+             }
+             
+             $events = &$calendar;
+         }
+         
+         return $events;
+    }
 
 }
