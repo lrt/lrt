@@ -31,6 +31,19 @@ class EventController extends Controller
      * @var \Lrt\SiteBundle\Service\EventService
      */
     public $eventService;
+    
+    /**
+     * Calendar
+     *
+     * @Route("/calendrier", name="calendar")
+     * @Template()
+     */
+    public function calendarAction()
+    {
+        $events = $this->eventService->getCompetitionBySeason();
+
+        return $this->render('SiteBundle:Calendar:index.html.twig', array('events' => $events));
+    }
 
     /**
      * Lists all Event entities.

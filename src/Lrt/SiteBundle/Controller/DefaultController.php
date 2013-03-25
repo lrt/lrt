@@ -32,9 +32,18 @@ class DefaultController extends Controller
     public $mailer;
 
     /**
+     * @DI\Inject("carma.service.mail")
+     * @var \Lrt\CarmaBundle\Service\MailService
+     */
+    public $mailService;
+
+    /**
      * @DI\Inject("knp_paginator")
      */
     public $paginator;
+    
+    /** @DI\Inject("translator") */
+    public $tr;
 
     /**
      * @Route("/", name="home")
@@ -146,6 +155,105 @@ class DefaultController extends Controller
                 ->setContentType('text/html');
         $failures = null;
         $this->mailer->send($mail, $failures);
+    }
+
+    /**
+     * @Route("/inscription-competition-muette-2013", name="competition_muette")
+     * @Template("SiteBundle:PageEvent:competition-muette.html.twig")
+     */
+    public function competitionMuetteAction(Request $request)
+    {
+        $form = $this->createFormBuilder()
+                ->add('licence', 'text', array('required' => false, 'label' => 'N°licence', 'attr' => array('class' => 'span4', 'placeholder' => 'facultatif')))
+                ->add('firstName', 'text', array('label' => 'Prénom', 'attr' => array('class' => 'span4', 'placeholder' => 'Prénom')))
+                ->add('lastName', 'text', array('label' => 'Nom', 'attr' => array('class' => 'span4', 'placeholder' => 'Nom')))
+                ->add('birthday', 'genemu_jquerydate', array(
+                    'widget' => 'single_text',
+                    'label' => 'Date de naissance* ',
+                    'format' => 'dd/MM/yyyy',
+                    'attr' => array('class' => 'datepicker')
+                ))
+                ->add('address', 'text', array('label' => 'Adresse*', 'attr' => array('class' => 'span8')))
+                ->add('city', 'text', array(
+                    'label' => 'Nom',
+                    'attr' => array('class' => 'span4', 'placeholder' => 'Ville')))
+                ->add('zipCode', 'text', array(
+                    'label' => 'Nom',
+                    'max_length' => '5',
+                    'attr' => array('class' => 'span4', 'placeholder' => 'Code Postal')))
+                ->add('gender', 'choice', array(
+                    'label' => 'Sexe*',
+                    'empty_value' => 'Je suis un/une ...',
+                    'choices' => array('f' => 'Femme', 'm' => 'Homme'),
+                    'required' => false,
+                    'attr' => array('class' => 'span8')
+                ))
+                ->add('phone', 'text', array(
+                    'label' => 'Numéro de téléphone mobile*',
+                    'max_length' => '10',
+                    'attr' => array('class' => 'span8')))
+                ->add('email', 'email', array(
+                    'label' => 'Votre adresse e-mail actuelle*',
+                    'attr' => array('class' => 'span8')))
+                ->getForm();
+
+        if ($request->isMethod('POST')) {
+            $form->bind($request);
+
+            if ($form->isValid()) {
+                
+                $competiteur = $form->getData();
+                
+                $fullName = $competiteur['firstName'].' '.$competiteur['lastName'];
+                $infosCompetiteur = $this->getInfos($competiteur);
+
+                $messageCompetiteur = $this->tr->trans('inscription.email.new.message', array(
+                    '%username%' => $fullName,
+                    '%data%' => $infosCompetiteur));
+
+                $messageAdmin = $this->tr->trans('inscription.email.new.admin.message', array(
+                    '%username%' => $fullName,
+                    '%data%' => $infosCompetiteur));
+                
+                //Send to adherent
+                $this->mailService->sendMessage(
+                        $competiteur['email'],
+                        $this->tr->trans('inscription.email.new.subject'),
+                        $messageCompetiteur);
+
+                //Send to LRT
+                $this->mailService->sendMessage(
+                        $this->container->getParameter('mailer_sender_address'),
+                        $this->tr->trans('inscription.email.new.admin.subject'),
+                        $messageAdmin);
+                
+                $this->get('session')->getFlashBag()->add('success', 'Votre inscription a bien été prise en compte. A bientot');
+                return $this->redirect($this->generateUrl('show_page', array('page' => 'challenge-idf-competition-muette-2013')));
+            }
+        }
+
+        return array('form' => $form->createView());
+    }
+
+    private function getInfos(array $competitor)
+    {
+        $fullName = $competitor['lastName'].' '.$competitor['firstName'];
+
+        if($competitor['gender'] == 'm') {
+            $string  = "<p>Monsieur ".$fullName."</p><br/>";
+        } else {
+            $string  = "<p>Madame ".$fullName."</p><br/>";
+        }
+
+        $string .= "
+                    <p>Numéro de licence :".$competitor['licence']."</p><br/>
+                    <p>Date de naissance :".$competitor['birthday']->format('d/m/Y')."</p><br/>
+                    <p>Adresse :".$competitor['address'].' '.$competitor['zipCode'].' '.$competitor['city']. "</p><br/>
+                    <p>Téléphone :".$competitor['phone']."</p><br/>
+                    <p>Email : ".$competitor['email']."</p><br/>
+                  ";
+
+        return $string;
     }
 
 }

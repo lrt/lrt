@@ -540,6 +540,58 @@ hr.solid.thin {
     margin-top: 0px !important;
   }
 }
+
+/*----------------------------------------------------------------------------------------------------------*/
+/*-----------------------------------Calendar front------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------*/
+.view-calendar ul {
+    margin: 0;
+    list-style-type: none;
+    padding: 1px 0 0 1px;
+    overflow: hidden;
+ }
+ .view-calendar ul li {
+    float: left;
+    width: 136px;
+    height: 135px;
+    margin-right: 1px;
+    background: white;
+    margin-bottom: 1px;
+    padding-right: 0;
+}
+.view-calendar ul li.month {
+    background: #CF2D34;
+    font-family: @font-family-EngschriftDIND;
+    text-transform: uppercase;
+    color: white;
+    font-size: 35px;
+    word-wrap: break-word;
+    line-height: 35px;
+    padding: 5px;
+    width: 126px;
+    height: 125px;
+}
+.view-calendar ul li .calendar {
+    height: 135px;
+    width: 136px;
+    background: #E8E8E8;
+}
+.view-calendar ul li .days {
+    padding: 7px;
+    width: 70px;
+    font-family: @font-family-EngschriftDIND;
+    text-transform: uppercase;
+    font-size: 21px;
+    float: left;
+    margin-top: 5px;
+}
+.view-calendar ul li .title {
+    font-family: @font-family-EngschriftDIND;
+    text-transform: uppercase;
+    font-size: 21px;
+    clear: left;
+    padding: 5px;
+}
 /*----------------------------------------------------------------------------------------------------------*/
 /*-----------------------------------Other------------------------------------------------------------------*/
 /*----------------------------------------------------------------------------------------------------------*/
@@ -605,3 +657,4 @@ a.top:hover {color: #fff; border-bottom: 2px #fff dotted; text-decoration: none}
     -webkit-filter: grayscale(0);
   }
 }
+

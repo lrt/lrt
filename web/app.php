@@ -16,7 +16,7 @@ require_once __DIR__.'/../app/AppKernel.php';
 //require_once __DIR__.'/../app/AppCache.php';
 
 if($_SERVER["SERVER_NAME"] == 'preprod.longchamp-roller-team.com') {
-    $kernel = new AppKernel('prod', false);
+    $kernel = new AppKernel('preprod', false);
 } else {
     $kernel = new AppKernel('prod', false);
 }

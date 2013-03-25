@@ -15,7 +15,7 @@ parameters:
     locale:            fr
     secret:            ThisTokenIsNotSoSecretChangeIt
     
-    mailer_sender_address: webmaster@longchamp-roller-team.com
+    mailer_sender_address: no-reply@longchamp-roller-team.com
     mailer_sender_name: Longchamp Roller Team
 
     cdn_server_video: http://video.longchamp-roller-team.com

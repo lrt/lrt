@@ -22,7 +22,8 @@ class ArticleRepository extends EntityRepository
                 ->select('a.id, a.title, a.content, c.name as category_name, a.path')
                 ->join('a.category', 'c')
                 ->where('a.status = ?1')
-                ->setParameter(1, Article::IMMEDIATE);
+                ->setParameter(1, Article::IMMEDIATE)
+                ->orderBy('a.dateSubmission', 'DESC');
 
         if (!is_null($limit)) {
             $qb->setMaxResults($limit);

@@ -1,0 +1,29 @@
+inscription:
+    email:
+        new:
+            subject: Inscription "Challenge IDF 2013 "Piste de la Muette - Paris 16ème"
+            message: |
+                Bonjour %username% !
+
+                Nous avions bien reçu votre demande d'inscription pour le Challenge IDF 2013 "Piste de la Muette - Paris 16ème" qui aura lieu le 23 Juin 2013 à partir de 9h.
+
+                Voici vos informations :
+
+                %data%
+
+                Cordialement,
+                Longchamp Roller Team.
+
+            admin:
+                subject: Nouvelle inscription pour le Challenge IDF 2013 "Piste de la Muette - Paris 16ème"
+                message: |
+                    Bonjour !
+
+                    Une nouvelle inscription pour Challenge IDF 2013 "Piste de la Muette - Paris 16ème".
+
+                    Voici les informations :
+
+                    %data%
+
+                    Cordialement,
+                    Longchamp Roller Team.

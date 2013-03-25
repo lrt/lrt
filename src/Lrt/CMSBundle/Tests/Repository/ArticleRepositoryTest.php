@@ -24,7 +24,7 @@ class ArticleRepositoryTest extends LrtWebTestCase
         $rpArticle = $this->em->getRepository('CMSBundle:Article')->getLatestArticles(5);
         
         $this->assertNotEmpty($rpArticle);
-        $this->assertEquals(2, count($rpArticle));
+        $this->assertEquals(3, count($rpArticle));
     }
     
     /**
