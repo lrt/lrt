@@ -2,7 +2,11 @@
     <div class="row-fluid {% if loop.index is divisibleby(2) %}margin-top-10{% endif %}">
         <div class="span4">
             <a href="{{ path('article_view', { 'id': a.id }) }}">
-                <img alt="" class="media-object img-rounded" src="{{ asset('bundles/site/images/no_picture.png') }}">
+                {% if a.path is not null %}
+                    <img alt="" class="media-object img-rounded" src="{{ asset(a.path) }}">
+                {% else %}
+                    <img alt="" class="media-object img-rounded" src="{{ asset('bundles/site/images/no_picture.png') }}">
+                {% endif %}
             </a>
         </div>
         <div class="span8">
