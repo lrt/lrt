@@ -43,14 +43,14 @@
                                 </p>
                             {% elseif a.typeName == 'Video' %}
                                 <video width="640" height="380" class="video-js vjs-default-skin" preload="auto" poster="{{ asset('bundles/site/images/video/poster.jpg') }}" controls="controls" data-setup="{}">
-                                    <source src="{{ a.path }}" type="video/mp4">
-                                    <source src="{{ a.path }}" type='video/webm; codecs="vp8, vorbis"' />
-                                    <source src="{{ a.path }}" type='video/ogg; codecs="theora, vorbis"' />
+                                    <source src="{{ a.path }}.mp4" type="video/mp4">
+                                    <source src="{{ a.path }}.webm" type='video/webm; codecs="vp8, vorbis"' />
+                                    <source src="{{ a.path }}.ogv" type='video/ogg; codecs="theora, vorbis"' />
                                     <object type="application/x-shockwave-flash" width="640" height="380" data="{{ a.path }}">
-                                        <param name="movie" value="{{ a.path }}" />
+                                        <param name="movie" value="{{ a.path }}.mp4" />
                                         <param name="wmode" value="transparent" />
                                         <!--[if lte IE 6 ]>
-                                        <embed src="{{ a.path }}" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="1000" height="368"></embed>
+                                        <embed src="{{ a.path }}.mp4" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="1000" height="368"></embed>
                                         <![endif]-->
                                         <p>Vous n'avez pas de navigateur moderne, ni flash d'installé sur Internet Explorer... suivez les liens ci-dessous pour télécharger les vidéos.</p>
                                     </object>
