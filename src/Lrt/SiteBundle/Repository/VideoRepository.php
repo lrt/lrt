@@ -43,6 +43,23 @@ class VideoRepository extends EntityRepository
     }
 
     /**
+     * Retourne la liste des vidéos mise en avant
+     * @return array
+     */
+    public function getVideosIsHighlighted()
+    {
+        $qb = $this->createQueryBuilder('v')
+                ->select('v')
+                ->where('v.isHighlighted  = :isHighlighted')
+                ->orderBy('v.dateSubmission', 'DESC')
+                    ->setParameter('isHighlighted', 1);
+        
+        $qb->setMaxResults(4);
+
+        return $qb->getQuery()->getArrayResult();
+    }
+
+    /**
      * Retourne la liste des vidéos
      * @param integer $limit
      * @return array

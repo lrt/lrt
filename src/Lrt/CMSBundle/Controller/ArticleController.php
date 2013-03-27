@@ -19,6 +19,7 @@ use Symfony\Component\HttpFoundation\Response;
 use JMS\DiExtraBundle\Annotation as DI;
 use JMS\SecurityExtraBundle\Annotation\Secure;
 use Lrt\CMSBundle\Entity\Article;
+use Lrt\CMSBundle\Entity\Category;
 use Lrt\CMSBundle\Form\Handler\ArticleHandler;
 use Lrt\UserBundle\Entity\User;
 
@@ -162,7 +163,33 @@ class ArticleController extends Controller
             'form' => $form->createView(),
         );
     }
-
+    
+     /**
+     * Creates a new Article entity.
+     *
+     * @Route("/categorie/{name}", name="article_by_category")
+     * @ParamConverter("category", class="CMSBundle:Category", options={"name" = "name"})
+     * @Template()
+     */
+    public function showArticleByCategoryAction(Category $category, Request $request)
+    {
+        $categoryName = $category->getName();
+        $articles = $this->em->getRepository('CMSBundle:Article')->getArticlesByCategory($categoryName);
+        
+        if(count($articles) > 0) {
+            
+            $page = $request->query->get('page', 1);
+            $pagination = $this->paginator->paginate(
+                $articles, $page, $this->container->getParameter('knp_limit_per_page')
+            );
+            $arrayPagination = compact('pagination');
+            
+            return array('articles' => $arrayPagination['pagination']);
+        }
+        
+        return $this->redirect($this->generateUrl('blog'));
+    }
+    
     /**
      * Creates a new Article entity.
      *

@@ -52,7 +52,7 @@ class DefaultController extends Controller
     public function indexAction()
     {
         $articles = $this->em->getRepository('CMSBundle:Article')->getLatestArticles(5);
-        $videos = $this->em->getRepository('SiteBundle:Video')->getLatestVideos(4);
+        $videos = $this->em->getRepository('SiteBundle:Video')->getVideosIsHighlighted();
 
         return array('articles' => $articles, 'videos' => $videos);
     }
