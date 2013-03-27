@@ -91,8 +91,9 @@ class ArticleRepository extends EntityRepository
     public function getArticlesByCategory($categoryName)
     {
         $qb = $this->createQueryBuilder('a')
-                ->select('a.id, a.title, a.content, c.name as category_name')
+                ->select('a.id, a.title, a.content, c.name as category_name, a.dateSubmission, u.username, a.path')
                 ->join('a.category', 'c')
+                ->join('a.user', 'u')
                 ->where('c.name = ?1')
                 ->setParameter(1, $categoryName);
 

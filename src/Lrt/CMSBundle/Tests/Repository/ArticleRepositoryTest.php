@@ -16,38 +16,27 @@ class ArticleRepositoryTest extends LrtWebTestCase
 
     /**
      * @test
-     * @testdox Recupère la liste des derniers articles avec une limite définie
+     * @testdox Recupère la liste des articles d'une catégorie
      * @group art
      */
-    public function getLatestArticlesWithLimit() {
-
-        $rpArticle = $this->em->getRepository('CMSBundle:Article')->getLatestArticles(5);
-        
-        $this->assertNotEmpty($rpArticle);
-        $this->assertEquals(3, count($rpArticle));
-    }
-    
-    /**
-    * @test
-    * @testdox Recupère la liste des articles d'une catégorie
-    * @group art
-    */
-    public function getArticlesByCategoryReturnArray() {
+    public function getArticlesByCategoryReturnArray()
+    {
 
         $rpCategory = $this->em->getRepository('CMSBundle:Category')->findOneBy(array('name' => 'Actualité'));
-        
+
         $result = $this->em->getRepository('CMSBundle:Article')->getArticlesByCategory($rpCategory->getName());
         $this->assertNotNull($result);
         $this->assertTrue(is_array($result));
         $this->assertNotEquals(0, count($result));
     }
-    
+
     /**
-    * @test
-    * @testdox Recupère la liste des articles d'un utilisateur (auteur)
-    * @group art
-    */
-    public function getArticlesByUserReturnArray() {
+     * @test
+     * @testdox Recupère la liste des articles d'un utilisateur (auteur)
+     * @group art
+     */
+    public function getArticlesByUserReturnArray()
+    {
 
         $user = $this->em->getRepository('UserBundle:User')->findOneBy(array('username' => 'alexandre'));
 
@@ -62,11 +51,13 @@ class ArticleRepositoryTest extends LrtWebTestCase
      * @testdox Recupère la liste des articles en attente de validation
      * @group art
      */
-    public function getArticlesNotValidatedTest() {
+    public function getArticlesNotValidatedTest()
+    {
 
         $result = $this->em->getRepository('CMSBundle:Article')->getArticlesNotValidated();
         $this->assertNotNull($result);
         $this->assertTrue(is_array($result));
         $this->assertNotEquals(0, count($result));
     }
+
 }

@@ -34,6 +34,13 @@ class Video extends Activity
     protected $isHighlighted;
 
     /**
+     * @var string $vignette
+     *
+     * @ORM\Column(name="vignette", type="string", length=125, nullable=true)
+     */
+    protected $vignette;
+
+    /**
      * @var string $description
      *
      * @ORM\Column(name="path_video", type="string", length=125, nullable=true)
@@ -46,6 +53,7 @@ class Video extends Activity
         $this->setIsHighlighted(0);
         $this->setDateSubmission(new \DateTime());
         $this->setIsValid(0);
+        $this->setVignette('images/video/poster.jpg');
     }
 
     /**
@@ -127,5 +135,24 @@ class Video extends Activity
     {
         return $this->path;
     }
+    
+    /**
+     * Set vignette
+     *
+     * @param string $vignette
+     */
+    public function setVignette($vignette)
+    {
+        $this->vignette = $vignette;
+    }
 
+    /**
+     * Get vignette
+     *
+     * @return string
+     */
+    public function getVignette()
+    {
+        return $this->vignette;
+    }
 }

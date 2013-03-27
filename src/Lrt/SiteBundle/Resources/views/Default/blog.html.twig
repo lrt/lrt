@@ -21,7 +21,7 @@
                             <div class="tags">
                                 {% if a.typeName == 'Article' %}
                                     <i class="icon-tags"></i>
-                                    <span class="label"><a href="">{{ a.category.name }}</a></span>
+                                    <span class="label"><a href="{{ path('article_by_category', { 'name': a.category.name }) }}">{{ a.category.name }}</a></span>
                                 {% endif %}
                             </div>
                         </div>
@@ -71,7 +71,7 @@
                         <ul class="nav nav-list">
                             <li class="active bold"><a href="#"><i class="icon-chevron-left"></i> Accueil</a></li>
                             {% for c in categories %}
-                                <li><a href="#"><i class="icon-chevron-left"></i> {{ c.name }}</a></li>
+                                <li><a href="{{ path('article_by_category', { 'name': c.name }) }}"><i class="icon-chevron-left"></i> {{ c.name }}</a></li>
                             {% endfor %}
                         </ul>
                     </div>
