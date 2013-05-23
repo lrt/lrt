@@ -21,10 +21,7 @@ class ArticleRepositoryTest extends LrtWebTestCase
      */
     public function getArticlesByCategoryReturnArray()
     {
-
-        $rpCategory = $this->em->getRepository('CMSBundle:Category')->findOneBy(array('name' => 'Actualité'));
-
-        $result = $this->em->getRepository('CMSBundle:Article')->getArticlesByCategory($rpCategory->getName());
+        $result = $this->em->getRepository('CMSBundle:Article')->getArticlesByCategory('Actualité');
         $this->assertNotNull($result);
         $this->assertTrue(is_array($result));
         $this->assertNotEquals(0, count($result));
