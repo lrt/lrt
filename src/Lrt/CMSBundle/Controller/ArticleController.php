@@ -1,12 +1,5 @@
 <?php
 
-/**
- * @category Controller
- * @author   Alexandre Seiller <alexandre.seiller92@gmail.com>
- * @license  http://www.gnu.org/copyleft/gpl.html GNU General Public License
- * @link     http://longchamp-roller-team.com
- */
-
 namespace Lrt\CMSBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
@@ -85,33 +78,6 @@ class ArticleController extends Controller
 
         return array('articles' => $articles);
     }
-
-    /**
-     * Lists all Article draft.
-     *
-     * @Route("/{userId}/draft", name="article_draft")
-     * @ParamConverter("user", class="UserBundle:User", options={"id" = "userId"})
-     * @Secure(roles="ROLE_ADMIN,ROLE_MEMBER,ROLE_SUPERVISEUR")
-     * @Template("CMSBundle:Article:draft.html.twig")  
-      public function listDraftAction(User $user)
-      {
-      $articles = $this->em->getRepository('CMSBundle:Article')->getArticlesDraftsByUser($user);
-
-      return array('entities' => $articles, 'nb' => count($articles));
-      } */
-    /**
-     * Lists all Article in bin.
-     *
-     * @Route("/corbeille", name="article_bin")
-     * @Secure(roles="ROLE_ADMIN,ROLE_MEMBER,ROLE_SUPERVISEUR")
-     * @Template("CMSBundle:Article:bin.html.twig")
-     *
-      public function listBinAction()
-      {
-      $articles = $this->em->getRepository('CMSBundle:Article')->getArticlesInBin();
-
-      return array('entities' => $articles, 'nb' => count($articles));
-      } */
 
     /**
      * Finds and displays a Article entity.

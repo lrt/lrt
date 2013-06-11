@@ -112,5 +112,5 @@ knp_paginator:
         sort_direction_name: direction
         distinct: false
     template:
-        pagination: KnpPaginatorBundle:Pagination:sliding.html.twig
+        pagination: CarmaBundle:Pagination:sliding.html.twig
         sortable: KnpPaginatorBundle:Pagination:sortable_link.html.twig
